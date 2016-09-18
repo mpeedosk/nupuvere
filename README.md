@@ -16,3 +16,9 @@ MIT License
 
 See LICENSE for details.
 
+##Authors
+Martin Liba
+Alo Vals
+Martin Peedosk
+Helbe-Laura Nikitkina
+
