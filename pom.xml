@@ -7,18 +7,6 @@
     <groupId>com.nupuvere</groupId>
     <artifactId>nupuvere</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 
     <properties>
@@ -26,8 +14,6 @@
         <spark.version>2.5</spark.version>
         <thymeleaf.version>2.3</thymeleaf.version>
         <slf4j.version>1.7.21</slf4j.version>
-
-
     </properties>
 
     <dependencies>
@@ -58,7 +44,7 @@
     </dependencies>
 
 
-    <!--<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -71,6 +57,24 @@
             </plugin>
 
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <mainClass>com.nupuvere.App</mainClass>
+                    <arguments>
+                    </arguments>
+                </configuration>
+            </plugin>
+
+<!--            <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <executions>
                     <execution>
@@ -87,11 +91,11 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>App</mainClass>
+                            <mainClass>com.nupuvere.App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
-    </build>-->
+    </build>
 </project>

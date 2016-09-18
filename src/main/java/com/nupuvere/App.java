@@ -1,4 +1,4 @@
-/**
+package com.nupuvere; /**
  * Created by Martin on 18.09.2016.
  */
 import static spark.Spark.*;
