@@ -22,3 +22,4 @@ See LICENSE for details.
 - Martin Peedosk
 - Helbe-Laura Nikitkina
 
+##currently working on 1st iteration: https://github.com/mpeedosk/nupuvere/wiki/1st-iteration
