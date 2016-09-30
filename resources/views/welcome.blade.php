@@ -24,9 +24,11 @@
 </head>
 <body>
 
+<H1> Hello World! </H1>
+
 
 <!-- Twitter Bootstrap -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Material Design for Bootstrap -->
 <script src={{asset('js/material.js')}}></script>
 <script src={{asset('js/ripples.min.js')}}></script>
