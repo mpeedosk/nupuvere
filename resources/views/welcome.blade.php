@@ -25,7 +25,7 @@
 <body>
 
 <H1> Hello World! </H1>
-
+<H2> CI working </H2>
 
 <!-- Twitter Bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
