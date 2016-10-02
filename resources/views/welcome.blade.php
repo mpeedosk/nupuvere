@@ -17,10 +17,6 @@
     <!-- Jquery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-    <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" type="text/css" href="{{asset('css/ripples.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-material-design.css')}}">
-
 </head>
 <body>
 
@@ -29,11 +25,5 @@
 
 <!-- Twitter Bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- Material Design for Bootstrap -->
-<script src={{asset('js/material.js')}}></script>
-<script src={{asset('js/ripples.min.js')}}></script>
-<script>
-    $.material.init();
-</script>
 </body>
 </html>
