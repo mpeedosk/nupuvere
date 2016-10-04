@@ -18,3 +18,11 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/avastajad', function(){
+    return view('list');
+});
+
+Route::get('/ulesanne', function(){
+    return view('exercise');
+});

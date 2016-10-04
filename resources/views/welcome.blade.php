@@ -1,29 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+@extends('layouts.main')
+@section('title', 'Nupuvere')
 
-    <!-- Material Design fonts -->
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@section('content')
+    <div id="slideshow" class="margin-vert-30">
+        <div class="container no-padding">
+            <div class="row">
+                <!-- Carousel Slideshow -->
+                <div id="carousel-example" class="carousel slide" data-ride="carousel">
+                    <!-- Carousel Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example" data-slide-to="0"></li>
+                        <li data-target="#carousel-example" data-slide-to="1"></li>
+                        <li data-target="#carousel-example" data-slide-to="2" class="active"></li>
+                        <li data-target="#carousel-example" data-slide-to="3"></li>
+                        <li data-target="#carousel-example" data-slide-to="4"></li>
+                    </ol>
 
-    <!-- Jquery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-
-</head>
-<body>
-
-<H1> Hello World! </H1>
-<H2> CI working </H2>
-
-<!-- Twitter Bootstrap -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-</html>
+                    <div class="clearfix"></div>
+                    <!-- End Carousel Indicators -->
+                    <!-- Carousel Images -->
+                    <div class="carousel-inner">
+                        <div class="item">
+                            <img src="img/slideshow/slide1.jpg">
+                        </div>
+                        <div class="item">
+                            <img src="img/slideshow/slide2.jpg">
+                        </div>
+                        <div class="item active">
+                            <img src="img/slideshow/slide3.jpg">
+                        </div>
+                        <div class="item">
+                            <img src="img/slideshow/slide4.jpg">
+                        </div>
+                        <div class="item">
+                            <img src="img/slideshow/slide4.jpg">
+                        </div>
+                    </div>
+                    <!-- End Carousel Images -->
+                    <!-- Carousel Controls -->
+                    <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                    <!-- End Carousel Controls -->
+                </div>
+                <!-- End Carousel Slideshow -->
+            </div>
+        </div>
+    </div>
+@endsection
