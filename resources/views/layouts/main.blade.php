@@ -13,25 +13,45 @@
     <link href="favicon.ico" rel="shortcut icon">
 
 
+
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
 
+
+    @if (App::isLocal())
+        <!-- Bootstrap Material Design -->
+            <link rel="stylesheet" type="text/css" href="{{asset('css/material/bootstrap-material-design.css')}}">
+            <link rel="stylesheet" type="text/css" href="{{asset('css/material/ripples.css')}}">
+
+
+            <!-- Template CSS -->
+            <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+            <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
+            <link rel="stylesheet" href="{{asset('css/main.css')}}">
+            <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    @else
     <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/bootstrap-material-design.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/ripples.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/bootstrap-material-design.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/ripples.css')}}">
 
 
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
-    <link rel="stylesheet" href="{{secure_asset('css/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
-    <link rel="stylesheet" href="{{secure_asset('css/responsive.css')}}">
+        <!-- Template CSS -->
+        <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
+        <link rel="stylesheet" href="{{secure_asset('css/font-awesome.css')}}">
+        <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
+        <link rel="stylesheet" href="{{secure_asset('css/responsive.css')}}">
+    @endif
+
+
+
 
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
 
 </head>
 <body>
+
+
 
 <div id="body-bg">
     <!-- Phone/Email -->
@@ -69,29 +89,13 @@
 
 </div>
 
-<!-- JS -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-{{--<script type="text/javascript" src="{{secure_asset('js/jquery.min.js')}}"></script>--}}
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-{{--<script type="text/javascript" src="{{secure_asset('js/bootstrap.min.js')}}"></script>--}}
-<!-- Isotope - Portfolio Sorting -->
-{{--<script type="text/javascript" src="{{secure_asset('js/jquery.isotope.js')}}"></script>--}}
-<!-- Mobile Menu - Slicknav -->
-{{--<script type="text/javascript" src="{{secure_asset('js/jquery.slicknav.js')}}"></script>--}}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 
-<script type="text/javascript" src="{{secure_asset('js/material/material.min.js')}}"></script>
-<script type="text/javascript" src="{{secure_asset('js/material/ripples.min.js')}}"></script>
-
-<!-- Animate on Scroll-->
-{{--<script type="text/javascript" src="{{secure_asset('js/jquery.visible.js')}}" charset="utf-8"></script>--}}
-{{--<!-- Slimbox2-->--}}
-{{--<script type="text/javascript" src="{{secure_asset('js/slimbox2.js')}}" charset="utf-8"></script>--}}
-{{--<!-- Modernizr -->--}}
-<script src="{{secure_asset('js/modernizr.custom.js')}}" type="text/javascript"></script>
-<script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
-
-
+<script type="text/javascript" src="{{'//js/modernizr.custom.js'}}" ></script>
+<script type="text/javascript" src="{{'//js/scripts.js'}}"></script>
 </body>
 </html>
