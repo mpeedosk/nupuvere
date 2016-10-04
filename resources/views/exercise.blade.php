@@ -46,10 +46,10 @@
                 <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
-                            <label class="ex-text-area text-left no-margin" disabled>Ülesanne 2</label>
+                            <H2 class="text-left no-margin">Ülesanne 2</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
-                            <div class="ex-text-area">
+                            <div class="ex-text-area font-size-md">
                                 <div class="padding-10" align="left">
                                     Retseptis oli öeldud, et antud kogustega tuleb hea ja õige paksusega kook, kui
                                     kasutada küpsetusplaati mõõtmetega 20cm x 28cm. Kertu tahtis teha sama paksu kooki,
@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-2 margin-50-lg">
                     <button type="button" class="btn btn-success btn-default btn-lg">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                     </button>

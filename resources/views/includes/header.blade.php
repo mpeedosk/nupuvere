@@ -1,12 +1,12 @@
-<div id="header ">
+<div id="header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 padding-vert-5 hidden-xs no-padding-lg">
+            <div class="col-sm-5 padding-vert-5 hidden-xs no-padding-left-lg">
 
                 <!-- Logo -->
                 <div class="logo">
                     <a href="/" title="">
-                        <img src="img/logo.png" width="80%" height="80%" alt="Logo"/>
+                        <img  src="{{asset('img/logo.png')}}" alt="Logo"/>
                     </a>
                 </div>
             </div>

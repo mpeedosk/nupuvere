@@ -110,7 +110,7 @@ $(function () {
 
 // Mobile Menu
     $(function(){
-        $('#hornavmenu').slicknav();
+        $('#navmenu').slicknav();
         $( "div.slicknav_menu" ).addClass( "hidden-lg hidden-md" );
     });
 
