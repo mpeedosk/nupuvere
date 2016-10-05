@@ -46,15 +46,12 @@
                 <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
-                            <H2 class="text-left no-margin">Ülesanne 2</H2>
+                            <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
                                 <div class="padding-10" align="left">
-                                    Retseptis oli öeldud, et antud kogustega tuleb hea ja õige paksusega kook, kui
-                                    kasutada küpsetusplaati mõõtmetega 20cm x 28cm. Kertu tahtis teha sama paksu kooki,
-                                    aga tema küpsetusplaat oli mõõtmetega 24cm x 35cm. Mitu grammi peab Kertu taignasse
-                                    võid panema, kui retseptis on öeldud, et võid tuleb panna 150 grammi?
+                                    {!! $exercise -> content !!}
                                 </div>
                             </div>
                         </div>
@@ -67,7 +64,7 @@
                                         class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">Nimekiri
                                 </button>
                                 <button type="button"
-                                        class="btn btn-raised btn-green btn-default fix-margin-right pull-right">Vasta
+                                        class="btn btn-raised btn-green btn-default fix-margin-right pull-right" disabled>Vasta
                                 </button>
                                 <button type="button" class="btn btn-raised btn-bronze btn-default pull-right">Edasi
                                 </button>
@@ -77,10 +74,11 @@
                 </div>
 
                 <div class="col-md-2 margin-50-lg">
-                    <button type="button" class="btn btn-success btn-default btn-lg">
+                    <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal" data-target="#hint-dialog">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                     </button>
-                    <button type="button" class="btn btn-danger btn-default">
+
+                    <button type="button" class="btn btn-danger btn-default" data-toggle="modal" data-target="#confirm-dialog" data-backdrop="static" data-keyboard="false">
                         <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
                     </button>
                     <p class="font-size-sm">
@@ -92,4 +90,45 @@
             </div>
         </div>
     </div>
+
+    <div id="hint-dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content  panel panel-primary">
+                <div class="panel-heading">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <h4 class="panel-title">Vihjed</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{$exercise -> hint}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirm-dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content  panel panel-warning">
+                <div class="panel-heading">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-alert" aria-hidden="true"></span>
+                    <h4 class="panel-title">Vastus</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Kui vaatate vastuse ära, siis ei ole võimalik enam selle ülesande eest punkte saada.</p>
+                    <p>Olete kindel, et tahate seda teha?</p>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
+                    <button id="showAnswer" type="button" class="btn btn-danger btn-raised" data-dismiss="modal" onclick="showAnswer()">Näita vastust</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

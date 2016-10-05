@@ -22,7 +22,9 @@ class CreateExercisesTable extends Migration
             $table->integer('type')->unsigned();
             $table->string('hint');
 
-            $table->json('answers');
+//            $table->json('answers');
+
+            $table->string('answer');
 
             $table->integer('category_id')->unsigned()->index();
             $table->integer('age_group')->unsigned();

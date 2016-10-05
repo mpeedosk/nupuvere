@@ -32,6 +32,8 @@ html {
 }
 
 body {
+    /* bootstrap modal-open fix*/
+    padding-right: 0 !important;
     line-height: 1.7em;
     font-family: Roboto Condensed;
     font-size: 14px;
@@ -825,6 +827,7 @@ body {
 }
 
 #nav ul#navmenu {
+    cursor: pointer;
     display: inline-block;
     margin: 0 0 -6px;
     padding: 0px;
@@ -2158,4 +2161,15 @@ td a {
     100% {
         transform: rotateY(360deg);
     }
+}
+
+/* Bootstrap override*/
+.modal-img{
+    float: left;
+    font-size: 30px;
+    margin-top: -5px;
+    margin-right: 10px;
+}
+.modal-footer {
+    text-align: center;
 }

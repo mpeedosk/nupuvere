@@ -4,7 +4,7 @@
             <div class="col-md-10 no-padding">
                 <ul id="navmenu" class="nav navbar-nav">
                     <li>
-                        <span class="fa-home ">Matemaatika</span>
+                        <span >Matemaatika</span>
                         <ul>
                             <li>
                                 <div>
@@ -29,7 +29,7 @@
                         </ul>
                     </li>
                     <li>
-                        <span class="fa-gears ">Füüsika</span>
+                        <span>Füüsika</span>
                         <ul>
                             <li>
                                 <div>
@@ -54,7 +54,7 @@
                         </ul>
                     </li>
                     <li>
-                        <span class="fa-copy ">Keemia</span>
+                        <span >Keemia</span>
                         <ul>
                             <li>
                                 <div>
@@ -79,7 +79,7 @@
                         </ul>
                     </li>
                     <li>
-                        <span class="fa-home ">Bioloogia</span>
+                        <span >Bioloogia</span>
                         <ul>
                             <li>
                                 <div>
@@ -104,7 +104,7 @@
                         </ul>
                     </li>
                     <li>
-                        <span class="fa-home ">Geograafia</span>
+                        <span >Geograafia</span>
                         <ul>
                             <li>
                                 <div>
@@ -130,7 +130,7 @@
                     </li>
 
                     <li>
-                        <span class="fa-home">Ajalugu</span>
+                        <span>Ajalugu</span>
                         <ul>
                             <li>
                                 <div>

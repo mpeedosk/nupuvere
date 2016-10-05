@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 
@@ -33,7 +34,10 @@ class PagesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function exercise(){
-        return view ('exercise');
+        $users = DB::table('users')->get();
+        $exercise = DB::table('exercises')->first();
+        //return $ex-> title;
+        return view ('exercise')->withExercise($exercise);
     }
 
 

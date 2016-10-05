@@ -15,25 +15,17 @@
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
-
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
 @if (App::isLocal())
-    <!-- Bootstrap Material Design -->
-        <link rel="stylesheet" type="text/css" href="{{asset('css/material/bootstrap-material-design.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('css/material/ripples.css')}}">
-
-
         <!-- Template CSS -->
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{asset('css/main.css')}}">
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 @else
-    <!-- Bootstrap Material Design -->
-        <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/bootstrap-material-design.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{secure_asset('css/material/ripples.css')}}">
-
-
         <!-- Template CSS -->
         <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/font-awesome.css')}}">
