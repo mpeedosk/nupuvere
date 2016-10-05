@@ -46,12 +46,16 @@
                 <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
-                            <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
+                            {{--<H2 class="text-left no-margin">{{$exercise -> title}}</H2>--}}
+                            <H2 class="text-left no-margin">Ülesanne 2</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
                                 <div class="padding-10" align="left">
-                                    {!! $exercise -> content !!}
+                                    <p>
+                                        Retseptis oli öeldud, et antud kogustega tuleb hea ja õige paksusega kook, kui kasutada küpsetusplaati mõõtmetega 20cm x 28cm. Kertu tahtis teha sama paksu kooki, aga tema küpsetusplaat oli mõõtmetega 24cm x 35cm. Mitu grammi peab Kertu taignasse võid panema, kui retseptis on öeldud, et võid tuleb panna 150 grammi?
+                                    </p>
+                                    {{--{!! $exercise -> content !!}--}}
                                 </div>
                             </div>
                         </div>
@@ -101,7 +105,10 @@
                     <h4 class="panel-title">Vihjed</h4>
                 </div>
                 <div class="modal-body">
-                    <p>{{$exercise -> hint}}</p>
+                    {{--<p>{{$exercise -> hint}}</p>--}}
+                    <p>https://www.wikiwand.com/et/Matemaatika
+
+                        2. klassi õpik, lehekülg 62</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
