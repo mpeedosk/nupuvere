@@ -23,11 +23,11 @@ class CreateUsersTable extends Migration
             $table->integer('role')->unsigned();
 
             $table->integer('points');
-            $table->json('solved');
-            $table->json('attempted');
+//            $table->json('solved');
+//            $table->json('attempted');
 
 
-//            $table->rememberToken();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

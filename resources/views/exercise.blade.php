@@ -46,21 +46,27 @@
                 <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
-                            {{--<H2 class="text-left no-margin">{{$exercise -> title}}</H2>--}}
-                            <H2 class="text-left no-margin">Ülesanne 2</H2>
+                            <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
                                 <div class="padding-10" align="left">
+                                    {!! $exercise -> content !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div id="solution" class="col-md-12 animate fadeInRightBig animated" style="display: none;">
+                            <div class="ex-text-area font-size-md " style=" border: 2px solid #2196f3;  margin-top: 0;">
+                                <div class="padding-10" align="left">
                                     <p>
-                                        Retseptis oli öeldud, et antud kogustega tuleb hea ja õige paksusega kook, kui kasutada küpsetusplaati mõõtmetega 20cm x 28cm. Kertu tahtis teha sama paksu kooki, aga tema küpsetusplaat oli mõõtmetega 24cm x 35cm. Mitu grammi peab Kertu taignasse võid panema, kui retseptis on öeldud, et võid tuleb panna 150 grammi?
+                                        Retseptis antud küpsetusplaadi pindala on 20·28=560 cm2. Kertu küpsetusplaadi pindala oli 24·35=840 cm2. Seega plaadi pindala oli 840:560=1,5 korda suurem. Sama paksu koogi tegemiseks tuli järelikult ka tainast teha 1,5 korda rohkem. Et retsepti kohaselt oli vaja panna 150 grammi võid, siis Kertul tuli võid panna 1,5·150 = 225 grammi
                                     </p>
                                     {{--{!! $exercise -> content !!}--}}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <input class="ex-text-area no-margin" placeholder="Sisestage vastus">
+                            <input id="answer" class="ex-text-area no-margin" placeholder="Sisestage vastus">
                         </div>
                         <div class="col-md-12">
                             <div class="row">
@@ -68,7 +74,11 @@
                                         class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">Nimekiri
                                 </button>
                                 <button type="button"
-                                        class="btn btn-raised btn-green btn-default fix-margin-right pull-right" disabled>Vasta
+                                        class="btn btn-raised btn-green btn-default fix-margin-right pull-right"
+                                        @if(Auth::guest() )
+                                            disabled
+                                        @endif
+                                        >Vasta
                                 </button>
                                 <button type="button" class="btn btn-raised btn-bronze btn-default pull-right">Edasi
                                 </button>
@@ -105,10 +115,7 @@
                     <h4 class="panel-title">Vihjed</h4>
                 </div>
                 <div class="modal-body">
-                    {{--<p>{{$exercise -> hint}}</p>--}}
-                    <p>https://www.wikiwand.com/et/Matemaatika
-
-                        2. klassi õpik, lehekülg 62</p>
+                    <p>{{$exercise -> hint}}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>

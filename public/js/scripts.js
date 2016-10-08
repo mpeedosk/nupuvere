@@ -142,5 +142,11 @@ $(window).on('resize', centerModals);
 
 // user has chosen to see the answer
 function showAnswer() {
-    alert("delete");
+    console.log("display");
+    document.getElementById('solution').style.display = "block";
+    var inputfield = document.getElementById('answer');
+    inputfield.disabled = true;
+    inputfield.value = "vastus";
+
+
 }

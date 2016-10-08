@@ -35,10 +35,10 @@ class PagesController extends Controller
      */
     public function exercise(){
 //        $users = DB::table('users')->get();
-//        $exercise = DB::table('exercises')->first();
-        //return $ex-> title;
-//        return view ('exercise')->withExercise($exercise);
-        return view ('exercise');
+        $exercise = DB::table('exercises')->first();
+//        return $ex-> title;
+        return view ('exercise')->withExercise($exercise);
+//        return view ('exercise');
     }
 
 
