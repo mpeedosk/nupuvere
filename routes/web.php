@@ -13,8 +13,10 @@
 
 Auth::routes();
 
+Route::get('/home', 'PagesController@back');
+
 Route::get('/', 'PagesController@index');
 
-Route::get('/avastajad', 'PagesController@explorer');
+Route::get('/{category}/{age_group}', 'ExerciseController@index');
 
-Route::get('/ulesanne', 'PagesController@exercise');
+Route::get('/{category}/{age_group}/{difficulty}/{ex_id}', 'ExerciseController@exercise');

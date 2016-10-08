@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Category;
+use App\Exercise;
 use App\Http\Requests;
+use Illuminate\Support\Facades\DB;
 
 class ExerciseController extends Controller
 {
@@ -13,11 +15,29 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($category, $age_group )
     {
-        //
+        $age_int  = Exercise::getAgeIntFromName($age_group);
+        $category_ID = DB::table('categories')->where('name',$category)->pluck('id');
+
+        $easyList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 1] ])->get();
+        $mediumList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 2] ])->get();
+        $hardList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 3] ])->get();
+        return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList, 'mediumEx' => $mediumList, 'hardEx' => $hardList]);
     }
 
+
+
+    public function exercise($category, $age_group, $difficulty, $ex_id){
+        $category_ID = DB::table('categories')->where('name',$category)->pluck('id');
+        $age_int  = Exercise::getAgeIntFromName($age_group);
+        $difficulty_int =Exercise::getDifficultyIntFromName($difficulty);
+        $exercise = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->first();
+
+        $exercise_list = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->get();
+
+        return view ('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list, 'difficulty' => $difficulty,'category'=> $category, 'age_group' => $age_group]);
+    }
     /**
      * Show the form for creating a new resource.
      *

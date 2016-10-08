@@ -19,15 +19,10 @@ class PagesController extends Controller
         return view('home');
     }
 
-    /**
-     * Display the agegroup exercises.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function explorer(){
-        return view ('list');
+    public function back()
+    {
+            return redirect()->back();
     }
-
     /**
      * Display the homepage.
      *

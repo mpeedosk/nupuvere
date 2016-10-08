@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <h3 class="margin-bottom-10"> Tegijad </h3>
                 <div class="sponsors">
-                    <img class="spin" src="img/partnerid.png" alt="Logo"/>
+                    <img class="spin" src="/img/partnerid.png" alt="Logo"/>
                 </div>
             </div>
             <!-- End Disclaimer -->

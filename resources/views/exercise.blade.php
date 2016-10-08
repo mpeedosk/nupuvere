@@ -9,36 +9,13 @@
                 <div class="col-md-3 visible-lg">
                     <table class="table table-striped table-hover ">
                         <thead>
-                        <tr>
-                            <th class="text-center">Kerge</th>
-                        </tr>
                         </thead>
                         <tbody>
-                        <tr class="info">
-                            <td>Ülesanne 1</td>
-                        </tr>
-                        <tr class="info">
-                            <td><a href="ulesanne">Ülesanne 2</a></td>
-                        </tr>
-                        <tr class="info">
-                            <td>Ülesanne 3</td>
-
-                        </tr>
-                        <tr class="success">
-                            <td>Ülesanne 4</td>
-
-                        </tr>
-                        <tr class="info">
-                            <td>Ülesanne 5</td>
-
-                        </tr>
-                        <tr class="success">
-                            <td>Ülesanne 6</td>
-
-                        </tr>
-                        <tr class="success">
-                            <td>Ülesanne 7</td>
-                        </tr>
+                        @foreach($exercises as $exercise)
+                            <tr class="info">
+                                <td><a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$exercise -> id}}">{{$exercise -> title}}</a></td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
