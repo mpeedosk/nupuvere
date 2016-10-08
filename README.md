@@ -12,18 +12,21 @@
 3. Go to the root directory `cd nupuvere`
 
 ### Setting up the database _(we're using "nupuvere" as the default name)_
-4. Copy and rename the .env.example to .env
+4. Open the .env.example file in notepad
 5. In the .env file, set up the following:
     * DB_USERNAME set this to your mysql username
     * DB_PASSWORD set this to your mysql password
-6. Back in cmd execute `mysql -u root -p` and enter your mysql password
+6. Save the file as .env
+7. Back in cmd execute `mysql -u root -p` and enter your mysql password
     * execute `create database nupuvere;`
-    * to exit mysql cmd type `\q`
+    * execute `use nupuvere;`
+    * to exit mysql cmd type `quit;`
 
 ### Installing the project
-7. install the dependencies `composer install`
-8. populate the database `php artisan migrate --seed`
-9. Open in your browser `http://localhost:8000`
+8. Install the dependencies `composer install`
+9. Populate the database `php artisan migrate --seed`
+10. Launch the website `php artisan serve`
+11. Open in your browser `http://localhost:8000`
 
 ###
 * You can log in with the username `user` and password `parool`
