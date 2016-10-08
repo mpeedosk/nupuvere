@@ -66,21 +66,21 @@
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <input id="answer" class="ex-text-area no-margin" placeholder="Sisestage vastus">
+                            <input id="answer-input" class="ex-text-area no-margin" placeholder="Sisestage vastus">
                         </div>
                         <div class="col-md-12">
                             <div class="row">
                                 <button type="button"
                                         class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">Nimekiri
                                 </button>
-                                <button type="button"
+                                <button id="answer-btn" type="button"
                                         class="btn btn-raised btn-green btn-default fix-margin-right pull-right"
                                         @if(Auth::guest() )
                                             disabled
                                         @endif
                                         >Vasta
                                 </button>
-                                <button type="button" class="btn btn-raised btn-bronze btn-default pull-right">Edasi
+                                <button  type="button" class="btn btn-raised btn-bronze btn-default pull-right">Edasi
                                 </button>
                             </div>
                         </div>

@@ -144,9 +144,9 @@ $(window).on('resize', centerModals);
 function showAnswer() {
     console.log("display");
     document.getElementById('solution').style.display = "block";
-    var inputfield = document.getElementById('answer');
+    var inputfield = document.getElementById('answer-input');
     inputfield.disabled = true;
-    inputfield.value = "vastus";
-
+    inputfield.value = "225g";
+    document.getElementById('answer-btn').disabled=true;
 
 }
