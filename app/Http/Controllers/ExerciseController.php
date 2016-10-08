@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
 use App\Exercise;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
@@ -18,8 +17,7 @@ class ExerciseController extends Controller
     public function index($category, $age_group )
     {
         $age_int  = Exercise::getAgeIntFromName($age_group);
-        $category_ID = DB::table('categories')->where('name',$category)->pluck('id');
-
+        $category_ID = DB::table('categories')->where('name',$category)->pluck('id')->first();
         $easyList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 1] ])->get();
         $mediumList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 2] ])->get();
         $hardList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 3] ])->get();
@@ -32,6 +30,8 @@ class ExerciseController extends Controller
         $category_ID = DB::table('categories')->where('name',$category)->pluck('id');
         $age_int  = Exercise::getAgeIntFromName($age_group);
         $difficulty_int =Exercise::getDifficultyIntFromName($difficulty);
+
+        /* kui ID järgi teha query, siis oleks palju lühem*/
         $exercise = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->first();
 
         $exercise_list = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->get();

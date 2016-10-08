@@ -69,7 +69,7 @@
                             <tr class="info">
                                 <td><a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{$exercise -> title}}</a></td>
                             </tr>
-                        @endforeach 
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
