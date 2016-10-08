@@ -32,8 +32,7 @@ class ExerciseController extends Controller
         $difficulty_int =Exercise::getDifficultyIntFromName($difficulty);
 
         /* kui ID järgi teha query, siis oleks palju lühem*/
-        $exercise = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->first();
-
+        $exercise = DB::table('exercises')->where('id', $ex_id)->first();
         $exercise_list = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->get();
 
         return view ('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list, 'difficulty' => $difficulty,'category'=> $category, 'age_group' => $age_group]);

@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('title', 'Ülesanne 2')
-
 @section('content')
     <div class="content margin-vert-30">
         <div class="container">
@@ -11,9 +10,9 @@
                         <thead>
                         </thead>
                         <tbody>
-                        @foreach($exercises as $exercise)
+                        @foreach($exercises as $ex)
                             <tr class="info">
-                                <td><a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$exercise -> id}}">{{$exercise -> title}}</a></td>
+                                <td><a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}">{{$ex -> title}}</a></td>
                             </tr>
                         @endforeach
                         </tbody>
