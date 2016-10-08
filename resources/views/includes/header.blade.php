@@ -65,7 +65,7 @@
                                             </button>
                                         </div>
                                         <div class="col-md-6">
-                                            <a class="btn btn-sm btn-primary pull-right" href="register">Loo konto</a>
+                                            <a class="btn btn-sm btn-primary pull-right" href="/register">Loo konto</a>
                                         </div>
                                     </div>
 

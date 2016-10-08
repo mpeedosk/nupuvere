@@ -2197,6 +2197,9 @@ td a {
 .table td{
     border: 1px solid #9a9292;
 }
+.active{
+    background-color: lightsteelblue !important;
+}
 
 /* custom stuff */
 .user-bar{
