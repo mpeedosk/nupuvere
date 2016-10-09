@@ -17,7 +17,7 @@
     * DB_USERNAME set this to your mysql username (default is root)
     * DB_PASSWORD set this to your mysql password
 6. Save the file as .env
-7. Back in cmd execute `mysql -u root -p` and enter your mysql password
+7. Back in cmd execute `mysql -u root -p` and enter your mysql password, or use the MySQL command line client
     * execute `create database nupuvere;`
     * execute `use nupuvere;`
     * to exit mysql cmd type `quit;`
