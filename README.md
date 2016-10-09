@@ -14,7 +14,7 @@
 ### Setting up the database _(we're using "nupuvere" as the default name)_
 4. Open the .env.example file in notepad
 5. In the file, set up the following:
-    * DB_USERNAME set this to your mysql username
+    * DB_USERNAME set this to your mysql username (default is root)
     * DB_PASSWORD set this to your mysql password
 6. Save the file as .env
 7. Back in cmd execute `mysql -u root -p` and enter your mysql password
