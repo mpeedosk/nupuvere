@@ -6,14 +6,14 @@
 ## Project setup
 
 ### Clone the repository
-1. Go to the directory where you want to clone the project
-2. Open cmd
-2. Clone the repository `git clone https://github.com/mpeedosk/nupuvere.git`
-3. Go to the root directory `cd nupuvere`
+1. Open cmd
+2. Go to the directory where you want to clone the project
+3. Clone the repository `git clone https://github.com/mpeedosk/nupuvere.git`
+4. Go to the root directory `cd nupuvere`
 
 ### Setting up the database _(we're using "nupuvere" as the default name)_
 4. Open the .env.example file in notepad
-5. In the .env file, set up the following:
+5. In the file, set up the following:
     * DB_USERNAME set this to your mysql username
     * DB_PASSWORD set this to your mysql password
 6. Save the file as .env
