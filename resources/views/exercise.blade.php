@@ -10,13 +10,13 @@
                         <thead>
                         </thead>
                         <tbody>
-                        <?php $next = false ?>
+                        <?php $next = false; ?>
                         @foreach($exercises as $ex)
                             @if($next)
-                                <?php $next_id = $ex->id?>
+                                <?php $next_id = $ex->id; $next =false;?>
                             @endif
                             <tr class="info">
-                                <td @if ($ex->id == $exercise->id) class="active" {{$next = true}}@endif>
+                                <td @if ($ex->id == $exercise->id) class="active" <?php $next = true;?> @endif>
                                     <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}">{{$ex -> title}}</a>
                                 </td>
                             </tr>
