@@ -12,7 +12,7 @@
             {{--</ul>--}}
             <div class="row text-center">
 
-                <div class="col-md-4">
+                <div class="col-sm-4">
 
                     <H1> Lihtne</H1>
                     @if (Auth::guest() )
@@ -43,7 +43,7 @@
                         @endforeach
                     @endif
                 </div>
-                <div class="col-md-4">
+                <div class="col-sm-4">
                     <div class="vertical-lines">
                         <H1> Keskmine</H1>
                         @if (Auth::guest() )
@@ -77,7 +77,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-sm-4">
                     <H1> Raske</H1>
 
                     @if(Auth::guest())

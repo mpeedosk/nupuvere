@@ -114,6 +114,8 @@ $(document).ready(function(){
     $(function(){
         $('#navmenu').slicknav();
         $( "div.slicknav_menu" ).addClass( "hidden-lg hidden-md" );
+        $('.slicknav_menu').prepend('<a href="/" title=""><img class="logo-menu padding-5" src="/img/logo.png" alt="Logo"/></a>');
+
     });
 
 // Material design
@@ -122,6 +124,7 @@ $.material.init();
 
 // Vertically center modals
 var modalVerticalCenterClass = ".modal";
+
 function centerModals($element) {
     var $modals;
     if ($element.length) {

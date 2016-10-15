@@ -21,6 +21,7 @@
                     @endforeach
 
                 </div>
+
                 <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
@@ -47,13 +48,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12">
-                            <input id="answer-input" class="ex-text-area no-margin" placeholder="Sisestage vastus">
+                        <div class="col-xs-12">
+                                @include('exercises.'.$type)
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-xs-12">
                             <div class="row">
                                 <a href="/{{$category}}/{{$age_group}}"
-                                   class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">Nimekiri
+                                   class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">
+                                    <span class="hidden-xs">Nimekiri</span>
+                                    <span class="visible-xs">&larr;</span>
                                 </a>
                                 <button id="answer-btn" type="button"
                                         class="btn btn-raised btn-green btn-default fix-margin-right pull-right"
@@ -63,7 +66,10 @@
                                 >Vasta
                                 </button>
                                 <a href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
-                                   class="btn btn-raised btn-bronze btn-default pull-right">Edasi</a>
+                                   class="btn btn-raised btn-bronze btn-default pull-right">
+                                    <span class="hidden-xs">Edasi</span>
+                                    <span class="visible-xs">&rarr;</span>
+                                </a>
                             </div>
                         </div>
                     </div>

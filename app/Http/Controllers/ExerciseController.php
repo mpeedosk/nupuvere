@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exercise;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
@@ -34,11 +35,11 @@ class ExerciseController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $p_easy = $this->calculateProgress('lihtne', $user_id);
+        $p_easy = $this->calculateProgress('lihtne', $user_id, $category, $age_group );
 
-        $p_med = $this->calculateProgress('keskmine', $user_id);
+        $p_med = $this->calculateProgress('keskmine', $user_id,$category, $age_group );
 
-        $p_hard = $this->calculateProgress('raske', $user_id);
+        $p_hard = $this->calculateProgress('raske', $user_id, $category, $age_group );
 
 
         $solved = DB::table('users_to_exercise')
@@ -56,13 +57,13 @@ class ExerciseController extends Controller
      * Calcualte the current progress based on the difficulty and user
      * @param difficulty - difficulty of the exercise
      * @param user_id - the ID of currently authenticated user
-     * @return int - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
+     * @return Float - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
      */
-    private function calculateProgress($difficulty, $user_id)
+    private function calculateProgress($difficulty, $user_id, $category, $age_group )
     {
         $solved_easy = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id], ['difficulty', $difficulty]])
+            ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group]])
             ->count();
         $all_easy = DB::table('exercises')->where('difficulty', $difficulty)->count();
 
@@ -82,7 +83,24 @@ class ExerciseController extends Controller
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
             ->get();
 
-        return view('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list,
+        $type = "";
+
+        switch ($exercise->type){
+            case Exercise::TEXTUAL:
+                $type = "textual";
+                break;
+            case Exercise::MULTIPLE_ONE:
+                $type = "multipleone";
+                break;
+            case Exercise::MULTIPLE_MANY:
+                $type = "multiplemany";
+                break;
+            case Exercise::ORDERING:
+                $type = "ordering";
+                break;
+        }
+
+        return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
             'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group]);
     }
 

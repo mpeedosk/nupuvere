@@ -63,6 +63,45 @@ class ExerciseTableSeeder extends Seeder
             'difficulty' => 'raske',
             'solved' => 0,
             'attempted' => 120
+        ],[
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'title' => 'Ülesanne 5',
+            'content' => 'Üks õige variant',
+            'hint' => 'no hint for you',
+            'type' => 2,
+            'answer' => 'one',
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'raske',
+            'solved' => 0,
+            'attempted' => 0
+        ],[
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'title' => 'Mitu õiget varianti',
+            'content' => 'Multiple choice with many correct',
+            'hint' => 'no hint for you',
+            'type' => 3,
+            'answer' => 'one',
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'keskmine',
+            'solved' => 0,
+            'attempted' => 0
+        ],[
+            'created_at' => date("Y-m-d H:i:s"),
+            'updated_at' => date("Y-m-d H:i:s"),
+            'title' => 'Ülesanne 7',
+            'content' => 'Järjestamine',
+            'hint' => 'no hint for you',
+            'type' => 4,
+            'answer' => 'one',
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'keskmine',
+            'solved' => 0,
+            'attempted' => 0
         ]]);
     }
 }

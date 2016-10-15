@@ -2266,3 +2266,8 @@ td a {
         border-right: 1px solid #ccc;
     }
 }
+
+.logo-menu{
+    max-width: 200px;
+    padding: 5px;
+}
