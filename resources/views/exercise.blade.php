@@ -1,28 +1,25 @@
 @extends('layouts.main')
-@section('title', 'Ülesanne 2')
+@section('title', $exercise->title)
 @section('content')
     <div class="content margin-vert-30">
         <div class="container">
             <div class="row text-center">
 
-                <div class="col-md-3 visible-lg">
-                    <table class="table table-striped table-hover ">
-                        <thead>
-                        </thead>
-                        <tbody>
-                        <?php $next = false; ?>
-                        @foreach($exercises as $ex)
-                            @if($next)
-                                <?php $next_id = $ex->id; $next =false;?>
-                            @endif
-                            <tr class="info">
-                                <td @if ($ex->id == $exercise->id) class="active" <?php $next = true;?> @endif>
-                                    <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}">{{$ex -> title}}</a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                <div class="col-md-3 visible-lg visible-md">
+                    <?php $next = false; ?>
+                    @foreach($exercises as $ex)
+                        @if($next)
+                            <?php $next_id = $ex->id; $next = false;?>
+                        @endif
+                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}" class="btn center-block btn-not-solved">
+                                {{$ex -> title}}
+                                @if ($ex->id == $exercise->id)
+                                    <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                                    <?php $next = true;?>
+                                @endif
+                            </a>
+                    @endforeach
+
                 </div>
                 <div class="col-md-7">
                     <div class="row">

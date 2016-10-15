@@ -19,9 +19,9 @@ class ExerciseTableSeeder extends Seeder
             'hint' => 'https://www.wikiwand.com/et/Matemaatika 2. \n klassi õpik, lehekülg 62',
             'type' => 1,
             'answer' => '225g',
-            'category_id' => DB::table('categories')->where('name','matemaatika')->pluck('id')->first(),
-            'age_group' => 1,
-            'difficulty' => 1,
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'lihtne',
             'solved' => 0,
             'attempted' => 120
         ],[
@@ -32,9 +32,9 @@ class ExerciseTableSeeder extends Seeder
             'hint' => 'Aadul ja Beedul on kokku 7 õpikut',
             'type' => 1,
             'answer' => 'Aadul on kotis 6 õpikut.',
-            'category_id' => DB::table('categories')->where('name','matemaatika')->pluck('id')->first(),
-            'age_group' => 1,
-            'difficulty' => 1,
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'lihtne',
             'solved' => 0,
             'attempted' => 120
         ],[
@@ -45,9 +45,9 @@ class ExerciseTableSeeder extends Seeder
             'hint' => 'Aadul ja Beedul on kokku 7 õpikut',
             'type' => 1,
             'answer' => 'Aadul on kotis 6 õpikut.',
-            'category_id' => DB::table('categories')->where('name','matemaatika')->pluck('id')->first(),
-            'age_group' => 1,
-            'difficulty' => 2,
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'keskmine',
             'solved' => 0,
             'attempted' => 120
         ],[
@@ -58,9 +58,9 @@ class ExerciseTableSeeder extends Seeder
             'hint' => 'Kahekohalise arvu saab esitada kui 10x+y',
             'type' => 1,
             'answer' => 'See kahekohaline arv on 49.',
-            'category_id' => DB::table('categories')->where('name','matemaatika')->pluck('id')->first(),
-            'age_group' => 1,
-            'difficulty' => 3,
+            'category' => 'matemaatika',
+            'age_group' => 'avastaja',
+            'difficulty' => 'raske',
             'solved' => 0,
             'attempted' => 120
         ]]);

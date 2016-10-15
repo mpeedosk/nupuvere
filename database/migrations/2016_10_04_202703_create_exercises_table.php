@@ -26,9 +26,10 @@ class CreateExercisesTable extends Migration
 
             $table->string('answer');
 
-            $table->integer('category_id')->unsigned()->index();
-            $table->integer('age_group')->unsigned();
-            $table->integer('difficulty')->unsigned();
+            $table->string('category');
+            $table->foreign('category')->references('name')->on('categories');
+            $table->string('age_group');
+            $table->string('difficulty');
 
             $table->integer('solved')->unsigned();
             $table->integer('attempted')->unsigned();

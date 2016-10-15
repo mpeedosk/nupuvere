@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Exercise;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 
@@ -16,26 +16,72 @@ class ExerciseController extends Controller
      */
     public function index($category, $age_group )
     {
-        $age_int  = Exercise::getAgeIntFromName($age_group);
-        $category_ID = DB::table('categories')->where('name',$category)->pluck('id')->first();
-        $easyList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 1] ])->get();
-        $mediumList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 2] ])->get();
-        $hardList = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', 3] ])->get();
-        return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList, 'mediumEx' => $mediumList, 'hardEx' => $hardList]);
+
+        $easyList = DB::table('exercises')
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne'] ])
+            ->get();
+        $mediumList = DB::table('exercises')
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine'] ])
+            ->get();
+        $hardList = DB::table('exercises')
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske'] ])
+            ->get();
+
+        if (Auth::guest()) {
+            return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList,
+                'mediumEx' => $mediumList, 'hardEx' => $hardList]);
+        }
+
+        $user_id = Auth::user()->id;
+
+        /* calculate the progress for easy exercises*/
+        $solved_easy = DB::table('users_to_exercise')
+            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
+            ->where([['user_id', $user_id],['difficulty', 'lihtne']])
+            ->count();
+        $all_easy = DB::table('exercises')->where('difficulty', 'lihtne')->count();
+        $p_easy = $solved_easy/$all_easy * 100;
+
+        $solved_med = DB::table('users_to_exercise')
+            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
+            ->where([['user_id', $user_id],['difficulty', 'keskmine']])
+            ->count();
+        $all_med = DB::table('exercises')->where('difficulty', 'keskmine')->count();
+        $p_med = $solved_med/$all_med * 100;
+
+        $solved_hard = DB::table('users_to_exercise')
+            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
+            ->where([['user_id', $user_id],['difficulty', 'raske']])
+            ->count();
+        $all_hard = DB::table('exercises')->where('difficulty', 'raske')->count();
+        $p_hard = $solved_hard/$all_hard * 100;
+
+
+
+        $solved = DB::table('users_to_exercise')
+            ->where('user_id', $user_id)
+            ->pluck('ex_id')
+            ->toArray();
+
+        return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList,
+            'mediumEx' => $mediumList, 'hardEx' => $hardList, 'solved' => $solved,
+            'p_easy' => $p_easy,'p_med' => $p_med,'p_hard' => $p_hard]);
+
     }
 
 
 
     public function exercise($category, $age_group, $difficulty, $ex_id){
-        $category_ID = DB::table('categories')->where('name',$category)->pluck('id');
-        $age_int  = Exercise::getAgeIntFromName($age_group);
-        $difficulty_int =Exercise::getDifficultyIntFromName($difficulty);
-
         /* kui ID järgi teha query, siis oleks palju lühem*/
-        $exercise = DB::table('exercises')->where('id', $ex_id)->first();
-        $exercise_list = DB::table('exercises')->where([['category_id', $category_ID], ['age_group', $age_int], ['difficulty', $difficulty_int] ])->get();
+        $exercise = DB::table('exercises')
+            ->where('id', $ex_id)
+            ->first();
+        $exercise_list = DB::table('exercises')
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty] ])
+            ->get();
 
-        return view ('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list, 'difficulty' => $difficulty,'category'=> $category, 'age_group' => $age_group]);
+        return view ('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list,
+            'difficulty' => $difficulty,'category'=> $category, 'age_group' => $age_group]);
     }
     /**
      * Show the form for creating a new resource.
