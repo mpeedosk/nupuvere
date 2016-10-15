@@ -14,48 +14,31 @@ class ExerciseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($category, $age_group )
+    public function index($category, $age_group)
     {
 
         $easyList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne'] ])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne']])
             ->get();
         $mediumList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine'] ])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine']])
             ->get();
         $hardList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske'] ])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske']])
             ->get();
 
         if (Auth::guest()) {
-            return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList,
+            return view('list', ['category' => $category, 'age_group' => $age_group, 'easyEx' => $easyList,
                 'mediumEx' => $mediumList, 'hardEx' => $hardList]);
         }
 
         $user_id = Auth::user()->id;
 
-        /* calculate the progress for easy exercises*/
-        $solved_easy = DB::table('users_to_exercise')
-            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id],['difficulty', 'lihtne']])
-            ->count();
-        $all_easy = DB::table('exercises')->where('difficulty', 'lihtne')->count();
-        $p_easy = $solved_easy/$all_easy * 100;
+        $p_easy = $this->calculateProgress('lihtne', $user_id);
 
-        $solved_med = DB::table('users_to_exercise')
-            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id],['difficulty', 'keskmine']])
-            ->count();
-        $all_med = DB::table('exercises')->where('difficulty', 'keskmine')->count();
-        $p_med = $solved_med/$all_med * 100;
+        $p_med = $this->calculateProgress('keskmine', $user_id);
 
-        $solved_hard = DB::table('users_to_exercise')
-            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id],['difficulty', 'raske']])
-            ->count();
-        $all_hard = DB::table('exercises')->where('difficulty', 'raske')->count();
-        $p_hard = $solved_hard/$all_hard * 100;
-
+        $p_hard = $this->calculateProgress('raske', $user_id);
 
 
         $solved = DB::table('users_to_exercise')
@@ -63,26 +46,46 @@ class ExerciseController extends Controller
             ->pluck('ex_id')
             ->toArray();
 
-        return view ('list' , ['category'=> $category, 'age_group' => $age_group, 'easyEx' => $easyList,
+        return view('list', ['category' => $category, 'age_group' => $age_group, 'easyEx' => $easyList,
             'mediumEx' => $mediumList, 'hardEx' => $hardList, 'solved' => $solved,
-            'p_easy' => $p_easy,'p_med' => $p_med,'p_hard' => $p_hard]);
+            'p_easy' => $p_easy, 'p_med' => $p_med, 'p_hard' => $p_hard]);
 
     }
 
+    /**
+     * Calcualte the current progress based on the difficulty and user
+     * @param difficulty - difficulty of the exercise
+     * @param user_id - the ID of currently authenticated user
+     * @return int - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
+     */
+    private function calculateProgress($difficulty, $user_id)
+    {
+        $solved_easy = DB::table('users_to_exercise')
+            ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
+            ->where([['user_id', $user_id], ['difficulty', $difficulty]])
+            ->count();
+        $all_easy = DB::table('exercises')->where('difficulty', $difficulty)->count();
 
+        if ($all_easy != 0)
+            return $solved_easy / $all_easy * 100;
 
-    public function exercise($category, $age_group, $difficulty, $ex_id){
+        return 0;
+    }
+
+    public function exercise($category, $age_group, $difficulty, $ex_id)
+    {
         /* kui ID järgi teha query, siis oleks palju lühem*/
         $exercise = DB::table('exercises')
             ->where('id', $ex_id)
             ->first();
         $exercise_list = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty] ])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
             ->get();
 
-        return view ('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list,
-            'difficulty' => $difficulty,'category'=> $category, 'age_group' => $age_group]);
+        return view('exercise', ['exercise' => $exercise, 'exercises' => $exercise_list,
+            'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -96,7 +99,7 @@ class ExerciseController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -107,7 +110,7 @@ class ExerciseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -118,7 +121,7 @@ class ExerciseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -129,8 +132,8 @@ class ExerciseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -141,7 +144,7 @@ class ExerciseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

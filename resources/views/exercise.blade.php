@@ -123,7 +123,7 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
-                    <button id="showAnswer" type="button" class="btn btn-danger btn-raised" data-dismiss="modal"
+                    <button id="showAnswer" type="button" class="btn btn-danger btn-raised pull-right" data-dismiss="modal"
                             onclick="showAnswer()">Näita vastust
                     </button>
                 </div>

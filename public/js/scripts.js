@@ -35,6 +35,7 @@ $(window).load(function() {
 });*/
 
 /* Image Hover  - Add hover class on hover */
+/*
 $(document).ready(function(){
     if (Modernizr.touch) {
         // show the close overlay button
@@ -64,9 +65,10 @@ $(document).ready(function(){
         });
     }
 });
+*/
 
 // thumbs animations
-$(function () {
+/*$(function () {
     
     $(".thumbs-gallery i").animate({
              opacity: 0
@@ -106,7 +108,7 @@ $(function () {
       }
    );
 
-});
+});*/
 
 // Mobile Menu
     $(function(){

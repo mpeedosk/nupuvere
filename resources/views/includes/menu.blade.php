@@ -6,10 +6,10 @@
                     @foreach(App\Category::getCategories() as $category )
                         <li>
                             <span >{{$category->name}}</span>
-                            <ul>
+                            <ul class="nav-tabs">
                                 <li>
                                     <div>
-                                        <a href="/{{mb_strtolower($category->name)}}/avastaja">Avastajad <i class="pull-right">(.. - 2.kl)</i></a>
+                                        <a class="" href="/{{mb_strtolower($category->name)}}/avastaja">Avastajad <i class="pull-right">(.. - 2.kl)</i></a>
                                     </div>
                                 </li>
                                 <li>
