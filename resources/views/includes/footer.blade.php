@@ -1,17 +1,13 @@
-<div id="base">
-    <div class="container padding-vert-30" style="background: rgba(49, 49, 49, 0.10)">
-        <div class="row">
+<footer>
+    <div class="container">
+        <div class="row ">
             <!-- Disclaimer -->
-            <div class="col-md-8">
-                <h3 class="margin-bottom-10"> Tegijad </h3>
-                <div class="sponsors">
-                    <img src="/img/partnerid.png" alt="Logo"/>
-                </div>
+            <div class="col-md-9">
+                <img class="sponsors" src="/img/partnerid.png" alt="Logo"/>
             </div>
             <!-- End Disclaimer -->
             <!-- Contact Details -->
-            <div class="col-md-4 margin-bottom-20">
-                <h3 class="margin-bottom-10">Kontakt</h3>
+            <div class="col-md-3 margin-bottom-20">
                 <p>
                     <span class="fa-phone">Telephone:</span>1-800-123-4567
                     <br>
@@ -25,4 +21,4 @@
             <!-- End Contact Details -->
         </div>
     </div>
-</div>
+</footer>

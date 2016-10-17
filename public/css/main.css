@@ -27,15 +27,23 @@ TABLE OF CONTENTS
 /*-----------------------------------------------------------------------------------*/
 /* Basic */
 /*-----------------------------------------------------------------------------------*/
+
+* {
+    margin: 0;
+}
+
 html {
     overflow-y: scroll;
+    height: 100%;
 }
 
 body {
     /* bootstrap modal-open fix*/
     padding-right: 0 !important;
+
+    height: 100%;
     line-height: 1.7em;
-    font-family: Roboto Condensed;
+    font-family: Roboto Condensed, serif;
     font-size: 14px;
     font-weight: 400;
     background-color: #f0f0f0;
@@ -64,6 +72,7 @@ body {
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Header */
@@ -142,8 +151,35 @@ body {
     border-color: rgba(255, 255, 255, 0.4);
 }
 
+footer, .push {
+    height: 122px; /* '.push' must be the same height as 'footer' */
+}
+
+.sponsors{
+    max-height: 122px;
+}
+/*
+.fTab {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 1em;
+    background-color: gray;
+
+    -webkit-transition: bottom 0.5s;
+    transition: bottom 0.5s;
+}
+
+.fTab.active {
+    bottom: 122px;
+}
+
+.fTab.active + footer {
+    max-height: 122px;
+}*/
+
 /* Footer Menu */
-#footer {
+/*#footer {
     background: rgba(0, 0, 0, 0.85);
     color: #bbb;
     color: rgba(255, 255, 255, 0.5);
@@ -175,11 +211,11 @@ body {
     color: #ffffff;
 }
 
-/* Copyright */
+!* Copyright *!
 #copyright p {
     padding: 0;
     margin: 0;
-}
+}*/
 
 /*-----------------------------------------------------------------------------------*/
 /* Utility Classes */

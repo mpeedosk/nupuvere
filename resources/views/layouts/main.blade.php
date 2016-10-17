@@ -10,23 +10,25 @@
     <title>@yield('title')</title>
 
     <!-- Favicon -->
-    {{--<link href="favicon.ico" rel="shortcut icon">--}}
+{{--<link href="favicon.ico" rel="shortcut icon">--}}
 
 
-    <!-- Bootstrap Core CSS -->
+<!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <!-- Bootstrap Material Design -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
 @if (App::isLocal())
-        <!-- Template CSS -->
+    <!-- Template CSS -->
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{asset('css/main.css')}}">
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 @else
-        <!-- Template CSS -->
+    <!-- Template CSS -->
         <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
@@ -43,41 +45,22 @@
 <body>
 
 
-<div id="body-bg">
-    <!-- Phone/Email -->
-{{--    <div id="pre-header" class="background-gray-lighter">
-        <div class="container no-padding">
-            <div class="row">
-                <div class="col-sm-6 padding-vert-5">
-                    <strong>Phone:</strong>&nbsp;1-800-123-4567
-                </div>
-                <div class="col-sm-6 text-right padding-vert-5">
-                    <strong>Email:</strong>&nbsp;info@joomla51.com
-                </div>
-            </div>
-        </div>
-    </div>--}}
-<!-- End Phone/Email -->
-    <!-- Header -->
-@include('includes.header')
-<!-- End Header -->
-    <!-- Top Menu -->
+{{--<div id="body-bg">--}}
+        <!-- Header -->
+    @include('includes.header')
+    <!-- End Header -->
+        <!-- Top Menu -->
 
-@include('includes.menu')
+    @include('includes.menu')
+    <!-- End Top Menu -->
 
-
-<!-- End Top Menu -->
-    <!-- === END HEADER === -->
-    <!-- === BEGIN CONTENT === -->
-
-@yield('content')
-
-<!-- === END CONTENT === -->
-    <!-- === BEGIN FOOTER === -->
-
-    @include('includes.footer')
-
-</div>
+        <!-- === END HEADER === -->
+        <!-- === BEGIN CONTENT === -->
+    @yield('content')
+    <!-- === END CONTENT === -->
+        {{--<div class="push"></div>--}}
+        <!-- === BEGIN FOOTER === -->
+{{--</div>--}}
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript"

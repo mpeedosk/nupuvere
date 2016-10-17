@@ -153,5 +153,4 @@ function showAnswer() {
     inputfield.disabled = true;
     inputfield.value = "225g";
     document.getElementById('answer-btn').disabled=true;
-
 }
