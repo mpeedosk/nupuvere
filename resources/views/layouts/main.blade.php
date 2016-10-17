@@ -44,23 +44,18 @@
 </head>
 <body>
 
+<!-- Header -->
+@include('includes.header')
+<!-- End Header -->
+<!-- Top Menu -->
 
-{{--<div id="body-bg">--}}
-        <!-- Header -->
-    @include('includes.header')
-    <!-- End Header -->
-        <!-- Top Menu -->
+@include('includes.menu')
+<!-- End Top Menu -->
 
-    @include('includes.menu')
-    <!-- End Top Menu -->
-
-        <!-- === END HEADER === -->
-        <!-- === BEGIN CONTENT === -->
-    @yield('content')
-    <!-- === END CONTENT === -->
-        {{--<div class="push"></div>--}}
-        <!-- === BEGIN FOOTER === -->
-{{--</div>--}}
+<!-- === END HEADER === -->
+<!-- === BEGIN CONTENT === -->
+@yield('content')
+<!-- === END CONTENT === -->
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript"
