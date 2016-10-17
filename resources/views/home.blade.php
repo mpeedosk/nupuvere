@@ -35,7 +35,7 @@
                             <img src="img/slideshow/slide4.jpg" alt="slide4">
                         </div>
                         <div class="item">
-                            <img src="img/slideshow/slide4.jpg" alt="slide5">
+                            <img src="img/slideshow/slide5.jpg" alt="slide5">
                         </div>
                     </div>
                     <!-- End Carousel Images -->
