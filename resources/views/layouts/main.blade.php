@@ -19,26 +19,27 @@
     {{--<link rel="stylesheet"--}}
           {{--href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">--}}
 
-    <link rel="stylesheet"
-          href="{{asset('css/bootstrap-material-design.css')}}">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
+
 
 @if (App::isLocal())
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
         <link rel="stylesheet" href="{{asset('css/main.css')}}">
-
+        <link rel="stylesheet" href="{{asset('css/bootstrap-material-design.css')}}">
 @else
     <!-- Template CSS -->
         <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/responsive.css')}}">
+        <link rel="stylesheet" href="{{secure_asset('css/bootstrap-material-design.css')}}">
+
 @endif
 
 
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
 <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
