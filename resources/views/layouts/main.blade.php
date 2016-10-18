@@ -18,14 +18,16 @@
     <!-- Bootstrap Material Design -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
+{{--
+    <link rel="stylesheet"
+          href="{{asset('css/bootstrap-material-design.css')}}">--}}
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
 @if (App::isLocal())
-    <!-- Template CSS -->
+        <link rel="stylesheet" href="{{asset('css/main.css')}}">
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
-        <link rel="stylesheet" href="{{asset('css/main.css')}}">
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
 @else
     <!-- Template CSS -->
@@ -36,14 +38,18 @@
 @endif
 
 
+    <style>
+        body{
+            background: #000000 url("{{asset('img/asp.png')}}");
+        }
+    </style>
 
 
 <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
 
 </head>
-<body>
-
+<body id="body-bg" >
 <!-- Header -->
 @include('includes.header')
 <!-- End Header -->
@@ -87,6 +93,5 @@
     <script type="text/javascript" src="{{secure_asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
 @endif
-
 </body>
 </html>

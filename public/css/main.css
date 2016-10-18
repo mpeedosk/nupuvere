@@ -40,20 +40,55 @@ body {
     font-family: Roboto Condensed, serif;
     font-size: 14px;
     font-weight: 400;
-    background-color: #f0f0f0;
-    color: #656565;
+    color: #eee;
+    /*background-color: #f0f0f0;*/
+    /*color: #656565;*/
 }
 
-#body-bg {
-    background-attachment: fixed;
-    background-clip: border-box;
-    background-color: #f0f0f0;
+/*#body-bg {*/
+
+/*    background-color: #fff;
+    background-image:
+            linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+            linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 2em;*/
+
+    /*background: #016a5f url("../img/asp.png");*/
+    /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+
+    /*
+    background:
+            linear-gradient(135deg, #b5cedf 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
+            linear-gradient(225deg, #b5cedf 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
+    background-color:#b5cedf;
+    background-size: 64px 128px;
+
+    */
+
+   /* -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    -o-text-overflow: clip;
+    text-overflow: clip;
+    background: -webkit-linear-gradient(0deg, rgba(0,0,0,0) 79px, rgb(171,206,212) 79px, rgb(171,206,212) 81px, rgba(0,0,0,0) 81px), -webkit-linear-gradient(90deg, rgb(238,238,238) 0.1em, rgba(0,0,0,0) 0.1em), rgb(255, 255, 255);
+    background: -moz-linear-gradient(90deg, rgba(0,0,0,0) 79px, rgb(171,206,212) 79px, rgb(171,206,212) 81px, rgba(0,0,0,0) 81px), -moz-linear-gradient(0deg, rgb(238,238,238) 0.1em, rgba(0,0,0,0) 0.1em), rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(0,0,0,0) 79px, rgb(171,206,212) 79px, rgb(171,206,212) 81px, rgba(0,0,0,0) 81px), linear-gradient(0deg, rgb(238,238,238) 0.1em, rgba(0,0,0,0) 0.1em), rgb(255, 255, 255);
+    -webkit-background-origin: padding-box;
     background-origin: padding-box;
-    background-position: 50% 0;
-    background-repeat: no-repeat;
-    background-size: cover !important;
-    position: relative;
-}
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+
+    -webkit-background-size: 100% 2em;
+    background-size: 100% 2em;*/
+/*}*/
+
+/*.content-bg{
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    background-color: #EEEEEE;
+}*/
 
 .container {
     max-width: 1080px;
@@ -1280,7 +1315,8 @@ h2 {
     font-weight: 300;
     line-height: 1em;
     margin: 0 0 10px;
-    color: #555555;
+    /*color: #555555;*/
+    color: #EEEEEE;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 32px;
 }
@@ -1405,31 +1441,6 @@ ul.menu ul {
     margin-top: -4px;
     padding-bottom: 5px;
     margin-bottom: 0px;
-}
-
-ul.tick,
-ul.plus,
-ul.star {
-    padding-left: 20px;
-}
-
-.tick,
-ul.plus li,
-ul.star li {
-    list-style: none outside none;
-    padding: 4px 22px;
-}
-
-.tick {
-    background: url("../img/typo/tick.png") no-repeat scroll left center transparent;
-}
-
-ul.plus li {
-    background: url("../img/typo/plus.png") no-repeat scroll left center transparent;
-}
-
-ul.star li {
-    background: url("../img/typo/star.png") no-repeat scroll left center transparent;
 }
 
 .label {
@@ -2055,7 +2066,8 @@ td a {
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.42857143;
-    color: #313131;
+    /*color: #313131;*/
+    color: #EEEEEE;
     border: 1px solid #313131;
     border-radius: 2px;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);

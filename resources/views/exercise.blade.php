@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
 @section('content')
-    <div class="content margin-vert-30">
+    <div class="margin-vert-30">
         <div class="container">
             <div class="row text-center">
 
@@ -22,7 +22,7 @@
 
                 </div>
 
-                <div class="col-md-7">
+                <div class="col-md-7 content-bg">
                     <div class="row">
                         <div class="ex-title col-md-12 animate fadeInRight animated">
                             <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
