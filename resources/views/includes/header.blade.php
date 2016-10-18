@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="logo">
                     <a href="/" title="">
-                        <img src="{{asset('img/logo.png')}}" alt="Logo"/>
+                        <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif" alt="Logo"/>
                     </a>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding-lg">
                         @if (Auth::guest() )
-                            <form class="login-page" role="form" method="POST" action="{{ url('/login') }}">
+                            <form class="login-page" role="form" method="POST" action="@if (App::isLocal()) {{ url('/login') }} @else{{ secure_url('/login') }} @endif ">
                                 {{ csrf_field() }}
                                 <div class="row inputs">
                                     <div class="col-md-4">
@@ -75,7 +75,7 @@
 
                         @elseif(Auth::user()->isSuperAdmin())
                             <H1>SuperAdmin</H1>
-                            <form style="padding-right: 29px" id="logout-form" action="{{ url('/logout') }}"
+                            <form style="padding-right: 29px" id="logout-form" action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
                                 <div class="row text-center">
                                     <div class="bottom-border user-bar pull-right" style="padding-top: 10px;">
@@ -100,7 +100,7 @@
                             </form>
                         @elseif(Auth::user()->isAdmin())
                             <H1>Admin</H1>
-                            <form style="padding-right: 29px" id="logout-form" action="{{ url('/logout') }}"
+                            <form style="padding-right: 29px" id="logout-form" action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
                                 <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
                                             </button>
@@ -109,7 +109,7 @@
                         @else
 
 
-                            <form style="padding-right: 29px" id="logout-form" action="{{ url('/logout') }}"
+                            <form style="padding-right: 29px" id="logout-form" action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
                                 <div class="row text-center">
                                     <div class="bottom-border user-bar pull-right" style="width: 80%; padding-top: 10px;">
