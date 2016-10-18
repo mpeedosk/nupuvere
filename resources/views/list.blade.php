@@ -5,11 +5,6 @@
 @section('content')
     <div class="content margin-vert-30">
         <div class="container">
-            {{--<ul class="breadcrumb" style="margin-bottom: 5px; margin-top: -20px; background: none">--}}
-            {{--<li><a href="javascript:void(0)">{{$cate}}</a></li>--}}
-            {{--<li class="active">{{$group}}</li>--}}
-            {{--<li class="active">{{$cat_id}}</li>--}}
-            {{--</ul>--}}
             <div class="row text-center">
 
                 <div class="col-sm-4">
@@ -18,7 +13,7 @@
                     @if (Auth::guest() )
                         @foreach($easyEx as $exercise)
                             <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                               class="btn center-block btn-indigo">{{$exercise -> title}}</a>
+                               class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
                         @endforeach
                     @else
                         <div class="progress">
