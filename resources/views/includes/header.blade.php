@@ -82,7 +82,7 @@
 
 
                                         <div class="col-xs-4" >
-                                            <span class="fa fa-trophy fa-3x" aria-hidden="true"></span>
+                                            <span class="points-icon fa fa-trophy" aria-hidden="true"></span>
                                             <span class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
@@ -115,7 +115,7 @@
                                     <div class="bottom-border user-bar pull-right" style="width: 80%; padding-top: 10px;">
 
                                         <div class="col-xs-4" >
-                                            <span class="fa fa-trophy points-icon" aria-hidden="true"></span>
+                                            <span><i id="points-icon" class="fa fa-trophy" aria-hidden="true"></i></span>
                                             <span class="points">{{Auth::user() -> points }}</span>
                                         </div>
 

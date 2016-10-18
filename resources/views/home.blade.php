@@ -5,7 +5,7 @@
 
 @section('content')
     <div id="slideshow" class="margin-vert-30">
-        <div class="container no-padding">
+        <div class="container bottom-border">
             <div class="row">
                 <!-- Carousel Slideshow -->
                 <div id="carousel-example" class="carousel slide" data-ride="carousel">

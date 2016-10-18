@@ -25,10 +25,11 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
 @if (App::isLocal())
-        <link rel="stylesheet" href="{{asset('css/main.css')}}">
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
         <link rel="stylesheet" href="{{asset('css/font-awesome.css')}}">
         <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+        <link rel="stylesheet" href="{{asset('css/main.css')}}">
+
 @else
     <!-- Template CSS -->
         <link rel="stylesheet" href="{{secure_asset('css/animate.css')}}">
