@@ -82,7 +82,7 @@
 
 
                                         <div class="col-xs-4" >
-                                            <span class="points-icon fa fa-trophy" aria-hidden="true"></span>
+                                            <span class="fa fa-trophy fa-3x" aria-hidden="true"></span>
                                             <span class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
@@ -114,9 +114,8 @@
                                 <div class="row text-center">
                                     <div class="bottom-border user-bar pull-right" style="width: 80%; padding-top: 10px;">
 
-
                                         <div class="col-xs-4" >
-                                            <span class="points-icon fa fa-trophy" aria-hidden="true"></span>
+                                            <span class="fa fa-trophy points-icon" aria-hidden="true"></span>
                                             <span class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
@@ -142,7 +141,7 @@
                                     <div class="input-group">
                                         <input type="text" id="search" placeholder="Otsi..." class="form-control">
                                         <span class="input-group-btn">
-                                    <button class="btn btn-aqua btn-xs" type="submit"><i
+                                    <button class="btn btn-primary btn-raised btn-xs" type="submit"><i
                                                 class="glyphicon glyphicon-search"></i></button></span>
                                     </div>
                                 </div>

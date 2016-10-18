@@ -16,11 +16,11 @@
 <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <!-- Bootstrap Material Design -->
+    {{--<link rel="stylesheet"--}}
+          {{--href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">--}}
+
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">
-{{--
-    <link rel="stylesheet"
-          href="{{asset('css/bootstrap-material-design.css')}}">--}}
+          href="{{asset('css/bootstrap-material-design.css')}}">
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/ripples.css">
 
@@ -37,12 +37,6 @@
         <link rel="stylesheet" href="{{secure_asset('css/responsive.css')}}">
 @endif
 
-
-    <style>
-        body{
-            background: #000000 url("{{asset('img/asp.png')}}");
-        }
-    </style>
 
 
 <!-- Google Fonts-->

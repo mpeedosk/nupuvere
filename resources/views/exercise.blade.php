@@ -59,14 +59,14 @@
                                     <span class="visible-xs">&larr;</span>
                                 </a>
                                 <button id="answer-btn" type="button"
-                                        class="btn btn-raised btn-green btn-default fix-margin-right pull-right"
+                                        class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
                                         @if(Auth::guest() )
                                         disabled
                                         @endif
                                 >Vasta
                                 </button>
                                 <a href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
-                                   class="btn btn-raised btn-bronze btn-default pull-right">
+                                   class="btn btn-raised btn-aqua pull-right">
                                     <span class="hidden-xs">Edasi</span>
                                     <span class="visible-xs">&rarr;</span>
                                 </a>
