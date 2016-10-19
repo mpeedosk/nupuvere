@@ -68,6 +68,7 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
 @if (App::isLocal())
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/Sortable.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
 @else
     <!-- JS -->

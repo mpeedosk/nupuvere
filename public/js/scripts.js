@@ -121,8 +121,11 @@ $(document).ready(function(){
 // Material design
 $.material.init();
 
+// Initialize bootstrap tooltip
+$('[data-toggle="popover"]').popover();
 
 // Vertically center modals
+
 var modalVerticalCenterClass = ".modal";
 
 function centerModals($element) {
@@ -146,11 +149,48 @@ $(modalVerticalCenterClass).on('show.bs.modal', function(e) {
 $(window).on('resize', centerModals);
 
 // user has chosen to see the answer
-function showAnswer() {
-    console.log("display");
+function showAnswer($id) {
+    console.log($id);
     document.getElementById('solution').style.display = "block";
     var inputfield = document.getElementById('answer-input');
     inputfield.disabled = true;
     inputfield.value = "225g";
     document.getElementById('answer-btn').disabled=true;
 }
+
+// initialize sortable
+var el = document.getElementById('draggable');
+// var sortable = Sortable.create(el);
+
+Sortable.create(el, {
+    animation: 150
+});
+
+// User has chosen to submit the exercise answer
+function submitAnswer($id, $type) {
+    console.log($id);
+    console.log($type);
+    var string = "";
+    switch ($type){
+        case 1 : alert(document.getElementById("answer-input").value); break;
+        case 2 : alert(document.querySelector('input[name = "answer"]:checked').value); break;
+        case 3 :
+            var answers = document.querySelectorAll('input[name = "answer"]:checked');
+            for(var i = 0; i < answers.length; i++){
+                string += answers[i].value + ", "
+            }
+            alert(string);
+            break;
+        case 4 :
+            var listElements = document.getElementsByClassName("drag-item");
+            for(var i = 0; i < listElements.length; i++) {
+                string += listElements[i].innerHTML;
+            }
+            alert(string);
+            break;
+    }
+}
+
+
+
+

@@ -73,6 +73,13 @@ class ExerciseController extends Controller
         return 0;
     }
 
+
+    /**
+     * Return the corresponding exercise view with the correct content
+     * @param difficulty - difficulty of the exercise
+     * @param user_id - the ID of currently authenticated user
+     * @return Float - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
+     */
     public function exercise($category, $age_group, $difficulty, $ex_id)
     {
         /* kui ID järgi teha query, siis oleks palju lühem*/
@@ -84,6 +91,10 @@ class ExerciseController extends Controller
             ->get();
 
         $type = "";
+        $answers = DB::table('answers')
+            ->where('ex_id', $ex_id)
+            ->orderBy('order','asc')
+            ->pluck('content');
 
         switch ($exercise->type){
             case Exercise::TEXTUAL:
@@ -101,7 +112,7 @@ class ExerciseController extends Controller
         }
 
         return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
-            'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group]);
+            'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group]);
     }
 
     /**

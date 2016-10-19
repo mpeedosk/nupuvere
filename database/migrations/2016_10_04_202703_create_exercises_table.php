@@ -17,14 +17,12 @@ class CreateExercisesTable extends Migration
             $table->increments('id');
             $table->timestamps();
 
-            $table->string('title');
+            $table->string('title')->unique();
             $table->text('content');
             $table->integer('type')->unsigned();
-            $table->string('hint');
+            $table->text('hint');
 
-//            $table->json('answers');
-
-            $table->string('answer');
+            $table->text('solution');
 
             $table->string('category');
             $table->foreign('category')->references('name')->on('categories');

@@ -3,7 +3,7 @@
 @section('content')
     <div class="margin-vert-30">
         <div class="container">
-            <div class="row text-center">
+            <div class="row">
 
                 <div class="col-md-3 visible-lg visible-md">
                     <?php $next = false; ?>
@@ -11,13 +11,14 @@
                         @if($next)
                             <?php $next_id = $ex->id; $next = false;?>
                         @endif
-                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}" class="btn center-block btn-not-solved">
-                                {{$ex -> title}}
-                                @if ($ex->id == $exercise->id)
-                                    <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
-                                    <?php $next = true;?>
-                                @endif
-                            </a>
+                        <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                           class="btn center-block btn-not-solved">
+                            {{$ex -> title}}
+                            @if ($ex->id == $exercise->id)
+                                <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                                <?php $next = true;?>
+                            @endif
+                        </a>
                     @endforeach
 
                 </div>
@@ -49,7 +50,7 @@
                             </div>
                         </div>
                         <div class="col-xs-12">
-                                @include('exercises.'.$type)
+                            @include('exercises.'.$type)
                         </div>
                         <div class="col-xs-12">
                             <div class="row">
@@ -57,15 +58,23 @@
                                    class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">
                                     <span class="hidden-xs">Nimekiri</span>
                                     <span class="visible-xs">&larr;</span>
+
                                 </a>
-                                <button id="answer-btn" type="button"
-                                        class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
-                                        @if(Auth::guest() )
-                                        disabled
-                                        @endif
-                                >Vasta
-                                </button>
+
+                                @if(Auth::guest() )
+                                    <span class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                          data-placement="bottom"
+                                          disabled data-toggle="popover" data-content="Vastamsieks peate sisse logima!">Vasta</span>
+                                @else
+                                    <button id="submit-answer" type="button"
+                                            class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                            onclick="submitAnswer({{$exercise -> id}}, {{$exercise -> type}})">
+                                        Vasta
+                                    </button>
+                                @endif
+
                                 <a href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
+                                   style="margin-right: 20px"
                                    class="btn btn-raised btn-aqua pull-right">
                                     <span class="hidden-xs">Edasi</span>
                                     <span class="visible-xs">&rarr;</span>
@@ -75,16 +84,18 @@
                     </div>
                 </div>
 
-                <div class="col-md-2 margin-50-lg">
+                <div class="col-md-2 margin-50-lg text-center">
                     <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
                             data-target="#hint-dialog">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                     </button>
 
-                    <button type="button" class="btn btn-danger btn-default" data-toggle="modal"
-                            data-target="#confirm-dialog" data-backdrop="static" data-keyboard="false">
-                        <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
-                    </button>
+                    @if(!Auth::guest() )
+                        <button type="button" class="btn btn-danger btn-default" data-toggle="modal"
+                                data-target="#confirm-dialog" data-backdrop="static" data-keyboard="false">
+                            <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
+                        </button>
+                    @endif
                     <p class="font-size-sm">
                         Koostanud Ahhaa
                     </p>
@@ -129,8 +140,9 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
-                    <button id="showAnswer" type="button" class="btn btn-danger btn-raised pull-right" data-dismiss="modal"
-                            onclick="showAnswer()">Näita vastust
+                    <button id="showAnswer" type="button" class="btn btn-danger btn-raised pull-right"
+                            data-dismiss="modal"
+                            onclick="showAnswer({{$exercise -> id}})">Näita vastust
                     </button>
                 </div>
             </div>
