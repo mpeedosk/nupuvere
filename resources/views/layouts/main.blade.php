@@ -66,9 +66,12 @@
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/material.min.js"></script>
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/js/ripples.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.4.2/Sortable.min.js"></script>
+
+
 @if (App::isLocal())
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/Sortable.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
 @else
     <!-- JS -->
@@ -89,5 +92,6 @@
     <script type="text/javascript" src="{{secure_asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
 @endif
+
 </body>
 </html>
