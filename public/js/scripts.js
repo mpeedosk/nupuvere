@@ -163,7 +163,8 @@ var el = document.getElementById('draggable');
 // var sortable = Sortable.create(el);
 
 Sortable.create(el, {
-    animation: 150
+    animation: 150,
+    draggable: ".drag-item"
 });
 
 // User has chosen to submit the exercise answer

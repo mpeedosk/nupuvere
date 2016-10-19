@@ -1761,6 +1761,26 @@ a.slicknav_item [class*=" fa-"] {
     -ms-user-select: none;
     user-select: none;
 }
+
+.drag-item-label{
+    display: inline-block;
+    /*background-color: rgba(83, 105, 255, 0.11);*/
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.36);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.09);
+    border-radius: 2px;
+    position: relative;
+    padding: 8px 10px;
+    margin: 10px 1px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1.42857143;
+    text-align: center;
+    clear: left;
+    float: left;
+}
+
 .sortable-ghost { opacity: 0; }
 
 /*-----------------------------------------------------------------------------------*/
