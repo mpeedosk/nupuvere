@@ -1,7 +1,7 @@
 <div class="drag-numbers" style="display: inline-block; margin-left: 20px">
     @foreach(range(1, count($answers)) as $number)
         <label class="drag-item-label">
-            {{$number}}
+            {{$number}}.
         </label>
     @endforeach
 </div>

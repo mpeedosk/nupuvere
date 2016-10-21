@@ -1369,6 +1369,10 @@ a {
     transition: color 0.15s ease-in;
 }
 
+p {
+    margin: 0px 0 0px;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -1386,9 +1390,9 @@ a:focus {
     text-decoration: none;
 }
 
-p {
-    margin-bottom: 16px;
-}
+/*p {*/
+    /*margin-bottom: 16px;*/
+/*}*/
 
 hr {
     background: url("../img/hr.png") no-repeat scroll 50% 0 transparent;
@@ -1755,7 +1759,7 @@ a.slicknav_item [class*=" fa-"] {
     vertical-align: middle;
     clear: left;
     float: left;
-
+    white-space: nowrap;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -2120,6 +2124,7 @@ td a {
 }
 
 .ex-text-area {
+    background-color: #f0f8ff;
     margin: 23px 0 20px;
     display: block;
     width: 100%;
@@ -2281,7 +2286,6 @@ td a {
 }
 
 .active {
-    background-color: lightsteelblue !important;
 }
 
 .text-icon {

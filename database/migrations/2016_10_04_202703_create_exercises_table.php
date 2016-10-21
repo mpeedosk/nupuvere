@@ -22,7 +22,7 @@ class CreateExercisesTable extends Migration
             $table->integer('type')->unsigned();
             $table->text('hint');
 
-            $table->text('solution');
+            $table->text('solution')->nullable();
 
             $table->string('category');
             $table->foreign('category')->references('name')->on('categories');

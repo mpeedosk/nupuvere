@@ -37,18 +37,15 @@ class ExerciseController extends Controller
 
         $p_easy = $this->calculateProgress('lihtne', $user_id, $category, $age_group );
 
-        $p_med = $this->calculateProgress('keskmine', $user_id,$category, $age_group );
+        $p_med = $this->calculateProgress('keskmine', $user_id, $category, $age_group );
 
         $p_hard = $this->calculateProgress('raske', $user_id, $category, $age_group );
 
 
-        $solved = DB::table('users_to_exercise')
-            ->where('user_id', $user_id)
-            ->pluck('ex_id')
-            ->toArray();
+
 
         return view('list', ['category' => $category, 'age_group' => $age_group, 'easyEx' => $easyList,
-            'mediumEx' => $mediumList, 'hardEx' => $hardList, 'solved' => $solved,
+            'mediumEx' => $mediumList, 'hardEx' => $hardList, 'solved' => Auth::user()->getSolvedEx(),
             'p_easy' => $p_easy, 'p_med' => $p_med, 'p_hard' => $p_hard]);
 
     }
@@ -63,7 +60,7 @@ class ExerciseController extends Controller
     {
         $solved_easy = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group]])
+            ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group], ['users_to_exercise.solved', True]])
             ->count();
         $all_easy = DB::table('exercises')->where('difficulty', $difficulty)->count();
 
@@ -93,8 +90,9 @@ class ExerciseController extends Controller
         $type = "";
         $answers = DB::table('answers')
             ->where('ex_id', $ex_id)
-            ->orderBy('order','asc')
-            ->pluck('content');
+            ->pluck('content')
+            ->toArray();
+        shuffle($answers);
 
         switch ($exercise->type){
             case Exercise::TEXTUAL:
@@ -112,7 +110,8 @@ class ExerciseController extends Controller
         }
 
         return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
-            'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group]);
+            'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
+            'solved' => Auth::user()->getSolvedEx()]);
     }
 
     /**

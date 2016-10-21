@@ -20,7 +20,6 @@
                             <div class="progress-bar progress-bar-success" role="progressbar"
                                  aria-valuenow="{{$p_easy}}"
                                  aria-valuemin="0" aria-valuemax="100" style="width: {{$p_easy}}%">
-                                <span class="sr-only">40% Complete (success)</span>
                             </div>
                         </div>
 
@@ -50,10 +49,9 @@
                             @endforeach
                         @else
                             <div class="progress">
-                                <div class="progress-bar " role="progressbar"
+                                <div class="progress-bar progress-bar-warning" role="progressbar"
                                      aria-valuenow="{{$p_med}}"
                                      aria-valuemin="0" aria-valuemax="100" style="width: {{$p_med}}%">
-                                    <span class="sr-only">20% Complete</span>
                                 </div>
                             </div>
 
@@ -82,10 +80,9 @@
                         @endforeach
                     @else
                         <div class="progress">
-                            <div class="progress-bar progress-bar-violet" role="progressbar"
+                            <div class="progress-bar progress-bar-danger" role="progressbar"
                                  aria-valuenow="{{$p_hard}}"
                                  aria-valuemin="0" aria-valuemax="100" style="width: {{$p_hard}}%">
-                                <span class="sr-only">60% Complete (warning)</span>
                             </div>
                         </div>
 

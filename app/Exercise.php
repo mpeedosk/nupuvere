@@ -10,6 +10,9 @@ class Exercise extends Model
     const MULTIPLE_ONE     = 2;
     const MULTIPLE_MANY    = 3;
     const ORDERING         = 4;
+
+    const POINTS_PER_EX = 1;
+
     /**
      * @return array
      */

@@ -11,15 +11,23 @@
                         @if($next)
                             <?php $next_id = $ex->id; $next = false;?>
                         @endif
-                        <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
-                           class="btn center-block btn-not-solved">
-                            {{$ex -> title}}
-                            @if ($ex->id == $exercise->id)
+                        @if ($ex->id == $exercise->id)
+                            <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                               class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                {{$ex -> title}}
+
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                                 <?php $next = true;?>
-                            @endif
-                        </a>
+                            </a>
+                         @else
+                                <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                                   class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                    {{$ex -> title}}
+                                </a>
+                        @endif
+
                     @endforeach
+
 
                 </div>
 
@@ -36,51 +44,49 @@
                             </div>
                         </div>
                         <div id="solution" class="col-md-12 animate fadeInRightBig animated" style="display: none;">
-                            <div class="ex-text-area font-size-md " style=" border: 2px solid #2196f3;  margin-top: 0;">
+                            <div class="ex-text-area font-size-md " style=" border: 2px solid #000;  margin-top: 0;">
                                 <div class="padding-10" align="left">
-                                    <p>
-                                        Retseptis antud küpsetusplaadi pindala on 20·28=560 cm2. Kertu küpsetusplaadi
-                                        pindala oli 24·35=840 cm2. Seega plaadi pindala oli 840:560=1,5 korda suurem.
-                                        Sama paksu koogi tegemiseks tuli järelikult ka tainast teha 1,5 korda rohkem. Et
-                                        retsepti kohaselt oli vaja panna 150 grammi võid, siis Kertul tuli võid panna
-                                        1,5·150 = 225 grammi
-                                    </p>
-                                    {{--{!! $exercise -> content !!}--}}
+                                    <p id="solution-text"></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xs-12">
-                            @include('exercises.'.$type)
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <a href="/{{$category}}/{{$age_group}}"
-                                   class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">
-                                    <span class="hidden-xs">Nimekiri</span>
-                                    <span class="visible-xs">&larr;</span>
-
-                                </a>
-
-                                @if(Auth::guest() )
-                                    <span class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
-                                          data-placement="bottom"
-                                          disabled data-toggle="popover" data-content="Vastamsieks peate sisse logima!">Vasta</span>
-                                @else
-                                    <button id="submit-answer" type="button"
-                                            class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
-                                            onclick="submitAnswer({{$exercise -> id}}, {{$exercise -> type}})">
-                                        Vasta
-                                    </button>
-                                @endif
-
-                                <a href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
-                                   style="margin-right: 20px"
-                                   class="btn btn-raised btn-aqua pull-right">
-                                    <span class="hidden-xs">Edasi</span>
-                                    <span class="visible-xs">&rarr;</span>
-                                </a>
+                        <form role="form" method="POST" action="{{ url('/exercise/check/'.$exercise-> id)}}">
+                            <div class="col-xs-12">
+                                @include('exercises.'.$type)
                             </div>
-                        </div>
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <a href="/{{$category}}/{{$age_group}}"
+                                       class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">
+                                        <span class="hidden-xs">Nimekiri</span>
+                                        <span class="visible-xs">&larr;</span>
+
+                                    </a>
+
+                                    @if(Auth::guest() )
+                                        <span class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                              disabled
+                                              onclick="loginRequired()">Vasta</span>
+                                    @else
+                                        {{ csrf_field() }}
+                                        <button id="submit-answer" type="submit"
+                                                class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
+                                            Vasta
+                                        </button>
+                                    @endif
+
+                                    <a id="next-ex"
+                                       href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
+                                       style="margin-right: 20px"
+                                       class="btn btn-raised btn-aqua pull-right">
+                                        <span class="hidden-xs">Edasi</span>
+                                        <span class="visible-xs">&rarr;</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
 
@@ -127,7 +133,7 @@
 
     <div id="confirm-dialog" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">
-            <div class="modal-content  panel panel-warning">
+            <div class="modal-content  panel panel-danger">
                 <div class="panel-heading">
 
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -148,5 +154,27 @@
             </div>
         </div>
     </div>
+
+
+    <div id="wrong-answer" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content panel panel-warning">
+                <div class="panel-heading">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    <h4 class="panel-title">Vale vastus</h4>
+                </div>
+                <div class="modal-body font-size-md text-center">
+                    <p>Kahjuks ei ole see vastus õige.</p>
+                    <p>Võite aga uuesti proovida!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 @endsection

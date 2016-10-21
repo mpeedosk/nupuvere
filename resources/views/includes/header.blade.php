@@ -83,7 +83,7 @@
 
                                         <div class="col-xs-4" >
                                             <span class="points-icon fa fa-trophy" aria-hidden="true"></span>
-                                            <span class="points">{{Auth::user() -> points }}</span>
+                                            <span id="user-points" class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
                                         <div class="col-xs-4">
@@ -107,8 +107,6 @@
                                             {{ csrf_field() }}
                             </form>
                         @else
-
-
                             <form style="padding-right: 29px" id="logout-form" action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
                                 <div class="row text-center">
@@ -116,7 +114,7 @@
 
                                         <div class="col-xs-4" >
                                             <span><i id="points-icon" class="fa fa-trophy" aria-hidden="true"></i></span>
-                                            <span class="points">{{Auth::user() -> points }}</span>
+                                            <span id="user-points" class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
                                         <div class="col-xs-4">

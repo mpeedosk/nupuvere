@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -40,6 +42,13 @@ class User extends Authenticatable
         if ($this->role == User::SUPERADMIN)
             return true;
         return false;
+    }
+
+    public function getSolvedEx(){
+        return DB::table('users_to_exercise')
+            ->where([['user_id', $this->id],['solved', true]])
+            ->pluck('ex_id')
+            ->toArray();
     }
 
 }
