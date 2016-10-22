@@ -49,7 +49,7 @@
                             @endforeach
                         @else
                             <div class="progress">
-                                <div class="progress-bar progress-bar-warning" role="progressbar"
+                                <div class="progress-bar progress-bar-success" role="progressbar"
                                      aria-valuenow="{{$p_med}}"
                                      aria-valuemin="0" aria-valuemax="100" style="width: {{$p_med}}%">
                                 </div>
@@ -80,7 +80,7 @@
                         @endforeach
                     @else
                         <div class="progress">
-                            <div class="progress-bar progress-bar-danger" role="progressbar"
+                            <div class="progress-bar progress-bar-violet" role="progressbar"
                                  aria-valuenow="{{$p_hard}}"
                                  aria-valuemin="0" aria-valuemax="100" style="width: {{$p_hard}}%">
                             </div>

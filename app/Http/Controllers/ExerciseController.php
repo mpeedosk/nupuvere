@@ -108,10 +108,14 @@ class ExerciseController extends Controller
                 $type = "ordering";
                 break;
         }
+        if (Auth::guest())
+            return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
+                'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
+                'solved' => []]);
 
         return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
-            'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
-            'solved' => Auth::user()->getSolvedEx()]);
+                'answers'=> $answers,'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
+                'solved' => Auth::user()->getSolvedEx()]);
     }
 
     /**

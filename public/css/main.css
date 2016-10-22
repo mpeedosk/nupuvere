@@ -280,6 +280,7 @@ footer, .push {
     color: #649f2b !important;
 }
 
+
 .color-green[class^="fa-"]:before,
 .color-green[class*=" fa-"]:before {
     color: #649f2b;
@@ -839,6 +840,11 @@ footer, .push {
     text-transform: none;
 }
 
+.btn-not-solved:hover, .btn-solved:hover{
+    box-shadow: 0 0 1px 1px #313131;
+}
+
+
 /*-----------------------------------------------------------------------------------*/
 /* Top Menu - nav */
 /*-----------------------------------------------------------------------------------*/
@@ -1373,19 +1379,10 @@ p {
     margin: 0px 0 0px;
 }
 
-a:hover {
-    text-decoration: none;
-}
-
-a:focus,
-li:focus {
-    outline: 0;
-}
-
 a,
-a:hover,
 a:active,
-a:focus {
+a:focus,
+a:hover {
     outline: 0;
     text-decoration: none;
 }
@@ -1786,6 +1783,11 @@ a.slicknav_item [class*=" fa-"] {
 }
 
 .sortable-ghost { opacity: 0; }
+
+.correct-answer{
+    border: none !important;
+    box-shadow: 0 0 5px 2px #4ba44f !important;
+}
 
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */

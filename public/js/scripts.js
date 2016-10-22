@@ -163,13 +163,72 @@ $(modalVerticalCenterClass).on('show.bs.modal', function (e) {
 $(window).on('resize', centerModals);
 
 // user has chosen to see the answer
-function showAnswer($id) {
-    console.log($id);
-    var inputfield = document.getElementById('answer-input');
-    document.getElementById('solution').style.display = "block";
-    inputfield.disabled = true;
-    inputfield.value = "225g";
-    document.getElementById('answer-btn').disabled = true;
+function showAnswer(id, type) {
+    console.log(id);
+
+    $.ajax({
+        url: "/exercise/show/" + id,
+        type: "post",
+        dataType: "JSON",
+        data: {
+            '_token': $('input[name="_token"]').val(),
+        },
+        success: function (data) {
+            toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.').css("width","400px");
+
+            var answers = JSON.parse(data.answers);
+
+            switch (type) {
+                case 1 :
+                    answers.push(document.getElementById("answer-input").value.trim());
+                    var inputfield = document.getElementById('answer-input');
+                    inputfield.disabled = true;
+                    inputfield.value = answers[0];
+                    inputfield.className += " correct-answer";
+                    break;
+                case 2 :
+                    var listElements = document.querySelectorAll('input[name = "answer"]');
+                    for (var i = 0; i < listElements.length; i++) {
+                        listElements[i].disabled = true;
+                        if (listElements[i].value == answers[0]) {
+                            listElements[i].checked = true;
+                            listElements[i].parentNode.parentNode.className += " correct-answer";
+                        } else
+                            listElements[i].checked = false;
+                    }
+                    break;
+                case 3 :
+                    var listElements = document.querySelectorAll('input[name = "answer"]');
+                    for (var i = 0; i < listElements.length; i++) {
+                        listElements[i].disabled = true;
+                        if(answers.indexOf(listElements[i].value) >=0 ){
+                            listElements[i].checked = true;
+                        }else{
+                            listElements[i].checked = false;
+                        }
+                    }
+                    break;
+                case 4 :
+                    var listElements = document.getElementsByClassName("drag-item");
+                    for (var i = 0; i < answers.length; i++) {
+                        listElements[i].innerText = answers[i];
+                        listElements[i].className = "drag-item";
+                    }
+                    break;
+            }
+            if (data.solution != null) {
+                document.getElementById('solution-text').innerText = data.solution;
+                document.getElementById('solution').style.display = "block";
+            }
+            document.getElementById('submit-answer').disabled = true;
+
+        },
+        error: function (xhr) {
+            toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
+        }
+    });
+
+
 }
 
 function loginRequired() {
@@ -204,6 +263,8 @@ function submitAnswer(event, id, type) {
             for (var i = 0; i < listElements.length; i++) {
                 answers.push(listElements[i].innerHTML.trim());
             }
+            document.getElementById("draggable").id = "not-draggable";
+
             break;
     }
 
@@ -223,7 +284,7 @@ function submitAnswer(event, id, type) {
         success: function (data) {
             if (data.response) {
                 toastr.success('Te vastasite õigesti!');
-                if(data.solution != null){
+                if (data.solution != null) {
                     document.getElementById('solution-text').innerText = data.solution;
                     document.getElementById('solution').style.display = "block";
                 }
@@ -243,7 +304,7 @@ function submitAnswer(event, id, type) {
             }
         },
         error: function (xhr) {
-            toastr.error('Viga ühendusega (kood ' + xhr.status + ")");
+            toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
         }
     });
 
@@ -257,7 +318,7 @@ var el = document.getElementById('draggable');
 if (el != null) {
     Sortable.create(el, {
         animation: 150,
-        draggable: ".drag-item"
+        draggable: ".drag"
     });
 }
 

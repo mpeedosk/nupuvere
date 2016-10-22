@@ -7,7 +7,7 @@
 </div>
 <div id="draggable" class="drag-panel" style="display: inline-block;">
     @foreach($answers as $answer)
-        <div class="drag-item">
+        <div class="drag-item drag">
             {{$answer}}
         </div>
     @endforeach

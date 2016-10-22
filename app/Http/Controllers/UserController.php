@@ -69,9 +69,34 @@ class UserController extends Controller
     }
 
 
-    public function viewAnswer(Request $request, $ex_id)
+    public function showAnswer(Request $request, $ex_id)
     {
+        $user_id = Auth::user()->id;
 
+        $exercise = DB::table('exercises')
+            ->where('id', $ex_id)
+            ->first();
+
+        $answers = DB::table('answers')
+            ->where([['ex_id', $ex_id], ['is_correct', True]])
+            ->orderBy('order', 'asc')
+            ->pluck('content');
+
+        $correct_answers = json_encode($answers, true);
+
+        $user_exercise = $this->bindUserToExercise($user_id, $ex_id);
+
+        DB::table('users_to_exercise')
+            ->where([['user_id', $user_id], ['ex_id', $ex_id]])
+            ->update(['seen_answer' => True]);
+
+        if ($request->ajax()) {
+            return [
+                'answers' => $correct_answers,
+                'solution' => $exercise->solution,
+            ];
+        }
+        return redirect()->refresh();
     }
 
     private function hasCorrect($answers, $user_answer)
@@ -138,26 +163,14 @@ class UserController extends Controller
                 ->where('id', $ex_id)
                 ->increment('solved');
 
-            $user_exercise = DB::table('users_to_exercise')
-                ->where([['user_id', $user_id], ['ex_id', $ex_id]])
-                ->first();
-
-            // if the user is solving for the first time, create the instance
-            if($user_exercise == null){
-                $inserted_id = DB::table('users_to_exercise')->insertGetId(
-                    ['user_id' => $user_id, 'ex_id' => $ex_id]
-                );
-                $user_exercise = DB::table('users_to_exercise')
-                    ->where('id', $inserted_id)
-                    ->first();
-            }
-
+            $user_exercise = $this->bindUserToExercise($user_id, $ex_id);
 
             // first check if the user has already solved this exercise
             if (!$user_exercise->solved) {
-                DB::table('users')
-                    ->where('id', $user_id)
-                    ->increment('points', Exercise::POINTS_PER_EX);
+                if(!$user_exercise->seen_answer)
+                    DB::table('users')
+                        ->where('id', $user_id)
+                        ->increment('points', Exercise::POINTS_PER_EX);
 
                 DB::table('users_to_exercise')
                     ->where([['user_id', $user_id], ['ex_id', $ex_id]])
@@ -165,5 +178,31 @@ class UserController extends Controller
             }
         }
 
+    }
+
+    /**
+     * @param $user_id - current user
+     * @param $ex_id   - current exercise
+     *
+     *
+     * @return users_to_exercise entity
+     *
+     * */
+    private function bindUserToExercise($user_id, $ex_id){
+        $user_exercise = DB::table('users_to_exercise')
+            ->where([['user_id', $user_id], ['ex_id', $ex_id]])
+            ->first();
+
+        // if the user is solving for the first time, create the instance
+        if($user_exercise == null){
+            $inserted_id = DB::table('users_to_exercise')->insertGetId(
+                ['user_id' => $user_id, 'ex_id' => $ex_id]
+            );
+            $user_exercise = DB::table('users_to_exercise')
+                ->where('id', $inserted_id)
+                ->first();
+        }
+
+        return $user_exercise;
     }
 }
