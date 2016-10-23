@@ -25,3 +25,4 @@ Route::post('/exercise/show/{id}', 'UserController@showAnswer');
 
 
 Route::get('/admin', 'AdminController@index');
+Route::post('/admin/gallery', 'AdminController@updateGallery');
