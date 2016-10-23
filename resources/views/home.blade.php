@@ -23,19 +23,19 @@
                     <!-- Carousel Images -->
                     <div class="carousel-inner">
                         <div class="item">
-                            <img src="img/slideshow/slide1.jpg" alt="slide1">
+                            <img src="img/gallery/gallery1.png" alt="slide1">
                         </div>
                         <div class="item">
-                            <img src="img/slideshow/slide2.jpg" alt="slide2">
+                            <img src="img/gallery/gallery2.png" alt="slide2">
                         </div>
                         <div class="item active">
-                            <img src="img/slideshow/slide3.jpg" alt="slide3">
+                            <img src="img/gallery/gallery3.png" alt="slide3">
                         </div>
                         <div class="item">
-                            <img src="img/slideshow/slide4.jpg" alt="slide4">
+                            <img src="img/gallery/gallery4.png" alt="slide4">
                         </div>
                         <div class="item">
-                            <img src="img/slideshow/slide5.jpg" alt="slide5">
+                            <img src="img/gallery/gallery5.png" alt="slide5">
                         </div>
                     </div>
                     <!-- End Carousel Images -->

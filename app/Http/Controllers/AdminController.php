@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 use App\Http\Requests;
 
@@ -20,9 +21,12 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-
     public function index()
+    {
+        return redirect('/admin/home');
+    }
+
+    public function home()
     {
         return view('admin.home');
     }
@@ -40,7 +44,7 @@ class AdminController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +55,7 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -62,7 +66,7 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -73,8 +77,8 @@ class AdminController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -82,10 +86,48 @@ class AdminController extends Controller
         //
     }
 
+
+    /**
+     * Update the gallery resources in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateGallery(Request $request)
+    {
+        $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
+
+        foreach ($images as $image) {
+            $file = $request->file($image);
+            if ($file != null) {
+                $img = Image::make($file)->resize(1080, 422);
+                $img->save('img/gallery/' . $image . '.png');
+            }
+        }
+        return back();
+    }
+
+    /**
+     * Update the partner logos in storage.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateLogos(Request $request)
+    {
+
+        $file = $request->file('logo-footer');
+        if ($file != null) {
+            $img = Image::make($file)->resize(810, 140);
+            $img->save('img/logo/footer.png');
+        }
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -11,62 +11,63 @@
                     <div class="col-md-12 ">
                         <h1>Galerii
                             <span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
-                                  data-toggle="modal" data-target="#slider-help"></span>
+                                  data-toggle="modal" data-target="#gallery-help"></span>
                         </h1>
 
                         <hr>
-                        <form method="POST" action="/admin/gallery" enctype="multipart/form-data">
+                        <form method="POST" action="/admin/upload/gallery" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 img-box">
-                                    <div class="form-group no-padding no-margin has-feedback">
-                                        <input type="file" id="inputSlide1" multiple="">
+                                    <div class="form-group no-padding no-margin">
+                                        <input type="file" id="inputGallery1" multiple="" name="gallery1">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <input type="text" readonly="" class="form-control upload-input"
                                                placeholder="Pilt 1">
-                                        <img src="img/slideshow/slide1.jpg" alt="slide1">
+                                        <img src="/img/gallery/gallery1.png" alt="gallery1">
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
-                                    <div class="form-group no-padding no-margin has-feedback">
-                                        <input type="file" id="inputSlide2" multiple="">
+                                    <div class="form-group no-padding no-margin">
+                                        <input type="file" id="inputgallery2" multiple="" name="gallery2">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <input type="text" readonly="" class="form-control upload-input"
                                                placeholder="Pilt 2">
-                                        <img src="img/slideshow/slide2.jpg" alt="slide2">
+                                        <img src="/img/gallery/gallery2.png" alt="gallery2">
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
-                                    <div class="form-group no-padding no-margin has-feedback">
-                                        <input type="file" id="inputSlide3" multiple="">
+                                    <div class="form-group no-padding no-margin">
+                                        <input type="file" id="inputgallery3" multiple="" name="gallery3">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <input type="text" readonly="" class="form-control upload-input"
                                                placeholder="Pilt 3">
-                                        <img src="img/slideshow/slide3.jpg" alt="slide3">
+                                        <img src="/img/gallery/gallery3.png" alt="gallery3">
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 img-box">
-                                    <div class="form-group no-padding no-margin has-feedback">
-                                        <input type="file" id="inputSlide4" multiple="">
+                                    <div class="form-group no-padding no-margin">
+                                        <input type="file" id="inputgallery4" multiple="" name="gallery4">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <input type="text" readonly="" class="form-control upload-input"
                                                placeholder="Pilt 4">
-                                        <img src="img/slideshow/slide4.jpg" alt="slide4">
+                                        <img src="/img/gallery/gallery4.png" alt="gallery4">
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 col-md-offset-3 img-box">
-                                    <div class="form-group no-padding no-margin has-feedback">
-                                        <input type="file" id="inputSlide5" multiple="">
+                                    <div class="form-group no-padding no-margin" >
+                                        <input type="file" id="inputgallery5" multiple="" name="gallery5">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <input type="text" readonly="" class="form-control upload-input"
                                                placeholder="Pilt 5">
-                                        <img src="img/slideshow/slide5.jpg" alt="slide5">
+                                        <img src="/img/gallery/gallery5.png" alt="gallery5">
                                     </div>
                                     <button class="btn btn-primary btn-raised" type="submit">Uuenda
                                     </button>
@@ -81,14 +82,15 @@
                         <h1>Logod<span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
                                        data-toggle="modal" data-target="#logo-help"></span></h1>
                         <hr>
-                        <form>
+                        <form method="POST" action="/admin/upload/logo" enctype="multipart/form-data">
+                            {{ csrf_field() }}
                             <div class="form-group no-padding no-margin has-feedback">
-                                <input type="file" id="inputLogos" multiple="">
+                                <input type="file" id="inputLogos" multiple="" name="logo-footer">
                                 <span class="glyphicon glyphicon-open upload-icon"
                                       aria-hidden="true"></span>
                                 <input type="text" readonly="" class="form-control upload-input"
                                        placeholder="Logod">
-                                <img class="sponsors" src="/img/partnerid.png" alt="Logo"/>
+                                <img class="sponsors" src="/img/logo/footer.png" alt="Logo"/>
                             </div>
 
                             <button class="btn btn-primary btn-raised" type="submit">Uuenda
@@ -113,7 +115,7 @@ Website: www.example.com</textarea>
         </div>
     </section>
 
-    <div id="slider-help" class="modal fade" role="dialog">
+    <div id="gallery-help" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content  panel panel-primary">
                 <div class="panel-heading">

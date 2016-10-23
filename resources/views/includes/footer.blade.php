@@ -3,7 +3,7 @@
         <div class="row ">
             <!-- Disclaimer -->
             <div class="col-md-9">
-                <img class="sponsors" src="/img/partnerid.png" alt="Logo"/>
+                <img class="sponsors" src="/img/logo/footer.png" alt="Logo"/>
             </div>
             <!-- End Disclaimer -->
             <!-- Contact Details -->
