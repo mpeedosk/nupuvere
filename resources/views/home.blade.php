@@ -4,7 +4,7 @@
 
 
 @section('content')
-    <div id="slideshow" class="margin-vert-30">
+    <section id="slideshow" class="margin-vert-30">
         <div class="container bottom-border">
             <div class="row">
                 <!-- Carousel Slideshow -->
@@ -51,7 +51,7 @@
                 <!-- End Carousel Slideshow -->
             </div>
         </div>
-    </div>
+    </section>
     @include('includes.footer')
 
 @endsection

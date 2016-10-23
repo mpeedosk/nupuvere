@@ -296,12 +296,12 @@ footer, .push {
 }
 
 .color-yellow {
-    color: #d0b426 !important;
+    color: #ffba57 !important;
 }
 
 .color-yellow[class^="fa-"]:before,
 .color-yellow[class*=" fa-"]:before {
-    color: #d0b426;
+    color: #ffba57;
 }
 
 .color-brown {
@@ -867,6 +867,9 @@ footer, .push {
     min-height: 60px;
     display: block;
 }
+.nav-bar-active{
+    border-bottom: 4px solid #ffba57;
+}
 
 #nav .navbar-nav {
     float: none;
@@ -879,7 +882,7 @@ footer, .push {
 #nav ul#navmenu {
     cursor: pointer;
     display: inline-block;
-    margin: 0 0 -6px;
+    margin: 0 0 -7px;
     padding: 0px;
 }
 
@@ -1030,112 +1033,6 @@ footer, .push {
 /*-----------------------------------------------------------------------------------*/
 /* Sidebar Menu */
 /*-----------------------------------------------------------------------------------*/
-.sidebar-nav {
-    border-radius: 5px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.sidebar-nav li {
-    padding: 0;
-    /*Sidebar Sub Navigation*/
-}
-
-.sidebar-nav li a {
-    background: #f4f4f4;
-    border-bottom: 1px solid #d8d8d8;
-    display: block;
-    padding: 10px 20px;
-    outline: none;
-    color: #3f51b5;
-    font-size: 16px;
-    font-weight: 300;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-}
-
-.sidebar-nav li ul {
-    background: #fff;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.sidebar-nav li ul a {
-    background: #fff;
-    color: #555555;
-    font-size: 12px;
-    border-bottom: solid 1px #d8d8d8;
-    padding: 5px 23px;
-}
-
-.sidebar-nav ul li:hover a,
-.sidebar-nav ul li.active a {
-    color: #3f51b5;
-}
-
-.sidebar-nav > li:last-child a {
-    border: none;
-}
-
-/*Sidebar Badges*/
-.list-group-item li > .badge {
-    float: right;
-}
-
-.sidebar-nav span.badge {
-    margin-top: 8px;
-    margin-right: 10px;
-}
-
-.sidebar-nav .list-toggle > span.badge {
-    margin-right: 25px;
-}
-
-.sidebar-nav ul li span.badge {
-    margin-top: 0px;
-    font-size: 10px;
-    padding: 3px 5px;
-    margin-right: 20px;
-    border-radius: 0 0 5px 5px;
-    background: #42969e;
-}
-
-/*Sidebar List Toggle*/
-.list-toggle:after {
-    top: 10px;
-    right: 20px;
-    color: #777;
-    font-size: 14px;
-    content: "\f105";
-    position: absolute;
-    font-weight: normal;
-    display: inline-block;
-    font-family: FontAwesome;
-}
-
-.list-toggle.active:after {
-    color: #fff;
-    content: "\f107";
-}
-
-/* Make Font Awesome icons fixed width */
-.sidebar-nav li [class^="fa"],
-.sidebar-nav li [class*=" fa"] {
-    width: 1.25em;
-    left: -2px;
-    margin-right: 2px;
-    text-align: center;
-    position: relative;
-    display: inline-block;
-}
-
-.sidebar-nav li [class^="fa"].fa-lg,
-.sidebar-nav li [class*=" fa"].fa-lg {
-    /* increased font size for fa-lg */
-    width: 1.5625em;
-}
 
 /*-----------------------------------------------------------------------------------*/
 /* Mobile Menu */
@@ -1457,10 +1354,11 @@ ul.menu ul {
     font-size: 90%;
     border-radius: 5px;
 }
+/*
 
-/*-----------------------------------------------------------------------------------*/
-/* Font Awesome */
-/*-----------------------------------------------------------------------------------*/
+!*-----------------------------------------------------------------------------------*!
+!* Font Awesome *!
+!*-----------------------------------------------------------------------------------*!
 [class^="fa-"]:before,
 [class*=" fa-"]:before {
     font-family: FontAwesome;
@@ -1504,7 +1402,7 @@ ul.menu ul {
     color: rgba(0, 0, 0, 0.1);
 }
 
-/* Top Menu Icons */
+!* Top Menu Icons *!
 #nav li [class^="fa-"]:before,
 #nav li [class*=" fa-"]:before {
     color: rgba(255, 255, 255, 0.2);
@@ -1513,7 +1411,7 @@ ul.menu ul {
     font-size: 18px;
 }
 
-/* Header-# Menu Icons */
+!* Header-# Menu Icons *!
 .header-1 .menu li [class^="fa-"]:before,
 .header-1 .menu li [class*=" fa-"]:before,
 .header-2 .menu li [class^="fa-"]:before,
@@ -1522,13 +1420,13 @@ ul.menu ul {
     top: 1px;
 }
 
-/* Base Module Icons */
+!* Base Module Icons *!
 #base [class^="fa-"]:before,
 #base [class*=" fa-"]:before {
     color: rgba(255, 255, 255, 0.2);
 }
 
-/* Footer Menu Icons */
+!* Footer Menu Icons *!
 #footermenu li [class^="fa-"]:before,
 #footermenu li [class*=" fa-"]:before {
     color: rgba(255, 255, 255, 0.2);
@@ -1639,7 +1537,7 @@ i.fa.center {
     padding-right: 0;
 }
 
-/* Buttons */
+!* Buttons *!
 .btn [class^="fa-"]:before,
 .btn [class*=" fa-"]:before {
     color: #ffffff;
@@ -1650,7 +1548,7 @@ i.fa.center {
     color: rgba(0, 0, 0, 0.3);
 }
 
-/* Labels */
+!* Labels *!
 .label [class^="fa-"]:before,
 .label [class*=" fa-"]:before {
     color: #ffffff;
@@ -1661,7 +1559,7 @@ i.fa.center {
     color: rgba(0, 0, 0, 0.3);
 }
 
-/* Remove from mobile menu */
+!* Remove from mobile menu *!
 a.slicknav_item [class^="fa-"]:before,
 a.slicknav_item [class*=" fa-"]:before,
 .slicknav_menu li [class^="fa-"]:before,
@@ -1678,6 +1576,7 @@ a.slicknav_item [class^="fa-"],
 a.slicknav_item [class*=" fa-"] {
     padding-left: 0 !important;
 }
+*/
 
 /*-----------------------------------------------------------------------------------*/
 /* Glyphicons */
@@ -2287,9 +2186,6 @@ td a {
     border: 1px solid #9a9292;
 }
 
-.active {
-}
-
 .text-icon {
     margin-left: -1em
 }
@@ -2329,3 +2225,4 @@ td a {
     max-width: 200px;
     padding: 5px;
 }
+

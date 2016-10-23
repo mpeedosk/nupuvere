@@ -22,3 +22,6 @@ Route::get('/{category}/{age_group}/{difficulty}/{ex_id}', 'ExerciseController@e
 
 Route::post('/exercise/check/{id}', 'UserController@checkAnswer');
 Route::post('/exercise/show/{id}', 'UserController@showAnswer');
+
+
+Route::get('/admin', 'AdminController@index');

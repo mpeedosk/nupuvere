@@ -23,18 +23,5 @@ class PagesController extends Controller
     {
             return redirect()->back();
     }
-    /**
-     * Display the homepage.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function exercise(){
-//        $users = DB::table('users')->get();
-        $exercise = DB::table('exercises')->first();
-//        return $ex-> title;
-        return view ('exercise')->withExercise($exercise);
-//        return view ('exercise');
-    }
-
 
 }

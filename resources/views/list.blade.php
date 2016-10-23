@@ -3,7 +3,7 @@
 
 
 @section('content')
-    <div class="content margin-vert-30">
+    <section class="content margin-vert-30">
         <div class="container">
             <div class="row text-center">
 
@@ -103,5 +103,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection

@@ -1,121 +1,4 @@
-/*/!* Portfolio *!/
- $(window).load(function() {
- var $cont = $('.portfolio-group');
-
- $cont.isotope({
- itemSelector: '.portfolio-group .portfolio-item',
- masonry: {columnWidth: $('.isotope-item:first').width(), gutterWidth: -20, isFitWidth: true},
- filter: '*',
- });
-
- $('.portfolio-filter-container a').click(function() {
- $cont.isotope({
- filter: this.getAttribute('data-filter')
- });
-
- return false;
- });
-
- var lastClickFilter = null;
- $('.portfolio-filter a').click(function() {
-
- //first clicked we don't know which element is selected last time
- if (lastClickFilter === null) {
- $('.portfolio-filter a').removeClass('portfolio-selected');
- }
- else {
- $(lastClickFilter).removeClass('portfolio-selected');
- }
-
- lastClickFilter = this;
- $(this).addClass('portfolio-selected');
- });
-
- });*/
-
-/* Image Hover  - Add hover class on hover */
-/*
- $(document).ready(function(){
- if (Modernizr.touch) {
- // show the close overlay button
- $(".close-overlay").removeClass("hidden");
- // handle the adding of hover class when clicked
- $(".image-hover figure").click(function(e){
- if (!$(this).hasClass("hover")) {
- $(this).addClass("hover");
- }
- });
- // handle the closing of the overlay
- $(".close-overlay").click(function(e){
- e.preventDefault();
- e.stopPropagation();
- if ($(this).closest(".image-hover figure").hasClass("hover")) {
- $(this).closest(".image-hover figure").removeClass("hover");
- }
- });
- } else {
- // handle the mouseenter functionality
- $(".image-hover figure").mouseenter(function(){
- $(this).addClass("hover");
- })
- // handle the mouseleave functionality
- .mouseleave(function(){
- $(this).removeClass("hover");
- });
- }
- });
- */
-
-// thumbs animations
-/*$(function () {
-
- $(".thumbs-gallery i").animate({
- opacity: 0
-
- }, {
- duration: 300,
- queue: false
- });
-
- $(".thumbs-gallery").parent().hover(
- function () {},
- function () {
- $(".thumbs-gallery i").animate({
- opacity: 0
- }, {
- duration: 300,
- queue: false
- });
- });
-
- $(".thumbs-gallery i").hover(
- function () {
- $(this).animate({
- opacity: 0
-
- }, {
- duration: 300,
- queue: false
- });
-
- $(".thumbs-gallery i").not( $(this) ).animate({
- opacity: 0.4         }, {
- duration: 300,
- queue: false
- });
- }, function () {
- }
- );
-
- });*/
-
-// Mobile Menu
-$(function () {
-    $('#navmenu').slicknav();
-    $("div.slicknav_menu").addClass("hidden-lg hidden-md");
-    $('.slicknav_menu').prepend('<a href="/" title=""><img class="logo-menu padding-5" src="/img/logo.png" alt="Logo"/></a>');
-
-});
+/* INITIALIZATIONS */
 
 // Material design
 $.material.init();
@@ -135,7 +18,27 @@ toastr.options = {
     "hideEasing": "linear",
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
+};
+
+
+// initialize sortable
+var el = document.getElementById('draggable');
+// var sortable = Sortable.create(el);
+
+if (el != null) {
+    Sortable.create(el, {
+        animation: 150,
+        draggable: ".drag"
+    });
 }
+
+// Mobile Menu
+$(function () {
+    $('#navmenu').slicknav();
+    $("div.slicknav_menu").addClass("hidden-lg hidden-md");
+    $('.slicknav_menu').prepend('<a href="/" title=""><img class="logo-menu padding-5" src="/img/logo.png" alt="Logo"/></a>');
+
+});
 
 
 // Vertically center modals
@@ -162,10 +65,18 @@ $(modalVerticalCenterClass).on('show.bs.modal', function (e) {
 });
 $(window).on('resize', centerModals);
 
+
+
+
+/* Exercise scripts */
+
+function loginRequired() {
+    toastr.info('Vastamiseks peate sisse logima!');
+}
+
+
 // user has chosen to see the answer
 function showAnswer(id, type) {
-    console.log(id);
-
     $.ajax({
         url: "/exercise/show/" + id,
         type: "post",
@@ -231,15 +142,9 @@ function showAnswer(id, type) {
 
 }
 
-function loginRequired() {
-    toastr.info('Vastamiseks peate sisse logima!');
-}
-
 // User has chosen to submit the exercise answer
 function submitAnswer(event, id, type) {
     event.preventDefault();
-    console.log(id);
-    console.log(type);
     answers = [];
     switch (type) {
         case 1 :
@@ -270,8 +175,6 @@ function submitAnswer(event, id, type) {
 
 
     var postArray = JSON.stringify(answers);
-    console.log(postArray);
-
 
     $.ajax({
         url: "/exercise/check/" + id,
@@ -288,19 +191,17 @@ function submitAnswer(event, id, type) {
                     document.getElementById('solution-text').innerText = data.solution;
                     document.getElementById('solution').style.display = "block";
                 }
-                console.log(data.points);
                 document.getElementById('user-points').innerText = data.points;
-                // $("#next-ex").removeClass("btn-aqua").addClass("btn-success");
 
                 $("#active").removeClass("btn-not-solved").addClass("btn-solved");
 
-                // var inputfield = document.getElementById('answer-input');
-                // inputfield.disabled = true;
-                // inputfield.value = "225g";
                 document.getElementById('submit-answer').disabled = true;
 
             } else {
-                $("#wrong-answer").modal()
+                $("#wrong-answer").modal({
+                    keyboard: false,
+                    backdrop: 'static'
+                })
             }
         },
         error: function (xhr) {
@@ -310,17 +211,4 @@ function submitAnswer(event, id, type) {
 
 
 }
-
-// initialize sortable
-var el = document.getElementById('draggable');
-// var sortable = Sortable.create(el);
-
-if (el != null) {
-    Sortable.create(el, {
-        animation: 150,
-        draggable: ".drag"
-    });
-}
-
-
 

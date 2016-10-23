@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
 @section('content')
-    <div class="margin-vert-30">
+    <section class="margin-vert-30">
         <div class="container">
             <div class="row">
 
@@ -110,7 +110,7 @@
 
             </div>
         </div>
-    </div>
+    </section>
 
     <div id="hint-dialog" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">

@@ -3,31 +3,31 @@
         <div class="row">
             <div class="col-md-11 no-padding">
                 <ul id="navmenu" class="nav navbar-nav">
-                    @foreach(App\Category::getCategories() as $category )
-                        <li>
-                            <span>{{ucfirst($category->name)}}</span>
+                    @foreach(App\Category::getCategories() as $cat )
+                        <li @if(isset($category)&& $category == mb_strtolower($cat->name) )class="nav-bar-active"@endif>
+                            <span>{{ucfirst($cat->name)}}</span>
                             <ul>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($category->name)}}/avastaja">Avastajad
+                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/avastaja">Avastajad
                                             <i class="pull-right">(.. - 2.kl)</i></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($category->name)}}/uurija">Uurijad
+                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/uurija">Uurijad
                                             <i class="pull-right">(3. - 6.kl)</i></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($category->name)}}/teadja">Teadjad
+                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/teadja">Teadjad
                                             <i class="pull-right">(7. - 9. kl)</i></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($category->name)}}/ekspert">Eksperdid
+                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/ekspert">Eksperdid
                                             <i class="pull-right">(10. - 12. kl)</i></a>
                                     </div>
                                 </li>
