@@ -36,7 +36,7 @@
         <link rel="stylesheet" href="{{secure_asset('css/responsive.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
         <link rel="stylesheet" href="{{secure_asset('css/admin.css')}}">
-
+        h
     @endif
 
 
@@ -50,29 +50,35 @@
 <body id="body-bg">
 <section class="admin-page-container">
     <div class="admin-page-layout">
-        {{--    <header class="header black-bg">
-                <!--logo start-->
-                <a href="#" class="logo"><b>DASHGUM FREE</b></a>
-                <!--logo end-->
-                <div class="nav notify-row" id="top_menu">
-                    <!--  notification start -->
-                    <!--  notification end -->
-                </div>
-                <div class="top-menu">
-                    <ul class="nav pull-right top-menu">
-                        <li><a class="logout" href="\login">Logout</a></li>
-                    </ul>
-                </div>
-            </header>--}}
+        <header class="admin-page-header">
+            <!--logo start-->
+            <div class="admin-page-header-row">
+
+                <span class="header-title hidden-sm hidden-xs">Pealehe muutmine | Galerii | Logod | Kontakt</span>
+
+                <div class="empty-space"></div>
+
+                <form id="logout-form"
+                      action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
+                      method="POST">
+                    <button class="btn btn-primary btn-raised" type="submit">Logi välja
+                    </button>
+                    {{ csrf_field() }}
+
+                </form>
+            </div>
+            <!--logo end-->
+        </header>
 
         <div id="sidebar">
             <!-- sidebar menu start-->
             <a href="#" class="sidebar-logo withripple padding-10">
                 <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif"
                      alt="Logo"/></a>
+
             <header class="sidebar-header text-center" id="nav-accordion">
                 <i class="fa fa-cogs fa-10x color-yellow" aria-hidden="true"></i>
-                <h5 class="centered">Martin Peedosk</h5>
+                <span class="font-size-md">Martin Peedosk</span>
             </header>
 
             <div class="sidebar-nav">
@@ -83,27 +89,138 @@
                 </a>
 
                 <a href="#" class="sidebar-item withripple sidebar-item-active">
-                    <i class="fa fa-fw fa-dashboard "></i> Nupuvere
+                    <i class="fa fa-fw fa-picture-o"></i> Nupuvere
                 </a>
 
                 <a href="#" class="sidebar-item withripple">
-                    <i class="fa fa-fw fa-gift"></i> Kategooriad
+                    <i class="fa fa-fw fa-book"></i> Kategooriad
                 </a>
 
                 <a href="#" class="sidebar-item withripple">
-                    <i class="fa fa-fw fa-globe"></i> Ülesanded
+                    <i class="fa fa-fw fa-list-alt"></i> Ülesanded
                 </a>
 
 
                 <a href="#" class="sidebar-item withripple">
-                    <i class="fa fa-fw fa-car"></i> Edetabel
+                    <i class="fa fa-fw fa-trophy"></i> Edetabel
                 </a>
 
                 <a href="#" class="sidebar-item withripple">
-                    <i class="fa fa-fw fa-user"></i> Administraatorid
+                    <i class="fa fa-fw fa-users"></i> Administraatorid
                 </a>
             </div>
         </div>
+
+
+        <section class="admin-page-content">
+            <div class="container">
+                <div class="row vert-full full-height">
+                    <div class="col-md-6 vert-full text-center">
+                        <div class="col-md-12 ">
+                            <h1>Galerii
+                                <span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
+                                      data-toggle="modal" data-target="#slider-help"></span>
+                            </h1>
+
+                            <hr>
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6 img-box">
+                                        <div class="form-group no-padding no-margin has-feedback">
+                                            <input type="file" id="inputSlide1" multiple="">
+                                            <span class="glyphicon glyphicon-open upload-icon"
+                                                  aria-hidden="true"></span>
+                                            <input type="text" readonly="" class="form-control upload-input"
+                                                   placeholder="Pilt 1">
+                                            <img src="img/slideshow/slide1.jpg" alt="slide1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 img-box">
+                                        <div class="form-group no-padding no-margin has-feedback">
+                                            <input type="file" id="inputSlide2" multiple="">
+                                            <span class="glyphicon glyphicon-open upload-icon"
+                                                  aria-hidden="true"></span>
+                                            <input type="text" readonly="" class="form-control upload-input"
+                                                   placeholder="Pilt 2">
+                                            <img src="img/slideshow/slide2.jpg" alt="slide2">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 img-box">
+                                        <div class="form-group no-padding no-margin has-feedback">
+                                            <input type="file" id="inputSlide3" multiple="">
+                                            <span class="glyphicon glyphicon-open upload-icon"
+                                                  aria-hidden="true"></span>
+                                            <input type="text" readonly="" class="form-control upload-input"
+                                                   placeholder="Pilt 3">
+                                            <img src="img/slideshow/slide3.jpg" alt="slide3">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 img-box">
+                                        <div class="form-group no-padding no-margin has-feedback">
+                                            <input type="file" id="inputSlide4" multiple="">
+                                            <span class="glyphicon glyphicon-open upload-icon"
+                                                  aria-hidden="true"></span>
+                                            <input type="text" readonly="" class="form-control upload-input"
+                                                   placeholder="Pilt 4">
+                                            <img src="img/slideshow/slide4.jpg" alt="slide4">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-3 img-box">
+                                        <div class="form-group no-padding no-margin has-feedback">
+                                            <input type="file" id="inputSlide5" multiple="">
+                                            <span class="glyphicon glyphicon-open upload-icon"
+                                                  aria-hidden="true"></span>
+                                            <input type="text" readonly="" class="form-control upload-input"
+                                                   placeholder="Pilt 5">
+                                            <img src="img/slideshow/slide5.jpg" alt="slide5">
+                                        </div>
+                                        <button class="btn btn-primary btn-raised" type="submit">Uuenda
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 vert-full text-center full-height">
+                        <div class="col-md-12 vert-half">
+                            <h1>Logod<span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
+                                           data-toggle="modal" data-target="#logo-help"></span></h1>
+                            <hr>
+                            <form>
+                                <div class="form-group no-padding no-margin has-feedback">
+                                    <input type="file" id="inputLogos" multiple="">
+                                    <span class="glyphicon glyphicon-open upload-icon"
+                                          aria-hidden="true"></span>
+                                    <input type="text" readonly="" class="form-control upload-input"
+                                           placeholder="Logod">
+                                    <img class="sponsors" src="/img/partnerid.png" alt="Logo"/>
+                                </div>
+
+                                <button class="btn btn-primary btn-raised" type="submit">Uuenda
+                                </button>
+                            </form>
+
+                        </div>
+                        <div class="col-md-12 vert-half text-center">
+                            <h1>Kontakt</h1>
+                            <hr>
+                            <form>
+                            <textarea class="ex-text-area" rows="5">Telephone:1-800-123-4567
+Email: info@example.com
+Website: www.example.com</textarea>
+                                <button class="btn btn-primary btn-raised" type="submit">Uuenda
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
         {{--
             <!-- **********************************************************************************************************************************************************
              MAIN CONTENT
@@ -133,6 +250,46 @@
                 </div>
             </footer>
             <!--footer end-->--}}
+    </div>
+
+    <div id="slider-help" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content  panel panel-primary">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <h4 class="panel-title">Galerii uuendamine</h4>
+                </div>
+                <div class="modal-body font-size-lg" style="text-align: justify">
+                    <p>Uuendatavate piltide mõõtmed peaksid olema 1080 x 422 pikselit. Pärast faili üleslaadimist süsteem
+                    automaatselt muudab dimensioone. Seega, kui laadida üles pilt, mille mõõtmed ei ole vastavad,
+                    võib see esilehel näha teistmoodi välja.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="logo-help" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content  panel panel-primary">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <h4 class="panel-title">Logo uuendamine</h4>
+                </div>
+                <div class="modal-body font-size-lg" style="text-align: justify">
+                    <p>Logo suurus peaks olema 810 x 140. Pärast faili üleslaadimist süsteem
+                        automaatselt muudab dimensioone. Seega, kui laadida üles pilt, mille mõõtmed ei ole vastavad,
+                        võib see esilehel näha teistmoodi välja.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
