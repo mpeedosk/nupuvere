@@ -176,9 +176,6 @@ footer, .push {
     max-height: 122px;
 }
 
-.tool-tip [disabled] {
-    pointer-events: none;
-}
 /*-----------------------------------------------------------------------------------*/
 /* Utility Classes */
 /*-----------------------------------------------------------------------------------*/
@@ -210,6 +207,18 @@ footer, .push {
     -o-box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
     box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.1) inset;
 }
+
+.visuallyhidden {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px
+}
+
 
 .color-default {
     color: #555555 !important;
@@ -1274,6 +1283,7 @@ p {
     margin: 0px 0 0px;
 }
 
+
 a,
 a:active,
 a:focus,
@@ -1282,6 +1292,9 @@ a:hover {
     text-decoration: none;
 }
 
+.justyfy{
+    text-align: justify;
+}
 /*p {*/
     /*margin-bottom: 16px;*/
 /*}*/
@@ -1686,6 +1699,18 @@ a.slicknav_item [class*=" fa-"] {
     box-shadow: 0 0 5px 2px #4ba44f !important;
 }
 
+#solution{
+    display: none;
+}
+#solution .ex-text-area{
+    border: 2px solid #000;
+    margin-top: 0;"
+}
+#next-ex{
+    margin-right: 20px
+}
+
+
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */
 /*-----------------------------------------------------------------------------------*/
@@ -2023,6 +2048,7 @@ td a {
 }
 
 .ex-text-area {
+    text-align: left;
     background-color: #f0f8ff;
     margin: 23px 0 20px;
     display: block;

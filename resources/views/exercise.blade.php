@@ -38,19 +38,19 @@
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
-                                <div class="padding-10" align="left">
+                                <div class="padding-10">
                                     {!! $exercise -> content !!}
                                 </div>
                             </div>
                         </div>
-                        <div id="solution" class="col-md-12 animate fadeInRightBig animated" style="display: none;">
-                            <div class="ex-text-area font-size-md " style=" border: 2px solid #000;  margin-top: 0;">
-                                <div class="padding-10" align="left">
+                        <div id="solution" class="col-md-12 animate fadeInRightBig animated">
+                            <div class="ex-text-area font-size-md">
+                                <div class="padding-10">
                                     <p id="solution-text"></p>
                                 </div>
                             </div>
                         </div>
-                        <form role="form" method="POST" action="{{ url('/exercise/check/'.$exercise-> id)}}">
+                        <form method="POST" action="{{ url('/exercise/check/'.$exercise-> id)}}">
                             <div class="col-xs-12">
                                 @include('exercises.'.$type)
                             </div>
@@ -78,7 +78,7 @@
 
                                     <a id="next-ex"
                                        href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
-                                       style="margin-right: 20px"
+
                                        class="btn btn-raised btn-aqua pull-right">
                                         <span class="hidden-xs">Edasi</span>
                                         <span class="visible-xs">&rarr;</span>

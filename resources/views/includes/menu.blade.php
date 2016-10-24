@@ -10,25 +10,25 @@
                                 <li>
                                     <div>
                                         <a class="withripple" href="/{{mb_strtolower($cat->name)}}/avastaja">Avastajad
-                                            <i class="pull-right">(.. - 2.kl)</i></a>
+                                            <em class="pull-right">(.. - 2.kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <a class="withripple" href="/{{mb_strtolower($cat->name)}}/uurija">Uurijad
-                                            <i class="pull-right">(3. - 6.kl)</i></a>
+                                            <em class="pull-right">(3. - 6.kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <a class="withripple" href="/{{mb_strtolower($cat->name)}}/teadja">Teadjad
-                                            <i class="pull-right">(7. - 9. kl)</i></a>
+                                            <em class="pull-right">(7. - 9. kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
                                         <a class="withripple" href="/{{mb_strtolower($cat->name)}}/ekspert">Eksperdid
-                                            <i class="pull-right">(10. - 12. kl)</i></a>
+                                            <em class="pull-right">(10. - 12. kl)</em></a>
                                     </div>
                                 </li>
                             </ul>

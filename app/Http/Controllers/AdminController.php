@@ -31,6 +31,12 @@ class AdminController extends Controller
         return view('admin.home');
     }
 
+
+    public function category()
+    {
+        return view('admin.category');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -104,7 +110,7 @@ class AdminController extends Controller
                 $img->save('img/gallery/' . $image . '.png');
             }
         }
-        return back();
+        return redirect()->refresh();
     }
 
     /**
@@ -121,7 +127,7 @@ class AdminController extends Controller
             $img = Image::make($file)->resize(810, 140);
             $img->save('img/logo/footer.png');
         }
-        return back();
+        return redirect()->refresh();
     }
 
     /**

@@ -5,36 +5,40 @@
              alt="Logo"/></a>
 
     <header class="sidebar-header text-center" id="nav-accordion">
-        <i class="fa fa-cogs fa-10x color-yellow" aria-hidden="true"></i>
+        <span class="fa fa-cogs fa-10x color-yellow" aria-hidden="true"></span>
         <span class="font-size-md">Martin Peedosk</span>
     </header>
 
     <div class="sidebar-nav">
 
         <a href="/" class="sidebar-item withripple">
-            <i class="fa fa-fw fa-long-arrow-left "></i> Tagasi pealehele
+            <span class="fa fa-fw fa-long-arrow-left "></span> Tagasi pealehele
 
         </a>
-
-        <a href="#" class="sidebar-item withripple sidebar-item-active">
-            <i class="fa fa-fw fa-picture-o"></i> Nupuvere
+        <a href="/admin/home" class="sidebar-item withripple
+            @if(Route::getCurrentRoute()->getPath() == 'admin/home') sidebar-item-active @endif">
+            <span class="fa fa-fw fa-picture-o"></span> Nupuvere
         </a>
 
-        <a href="#" class="sidebar-item withripple">
-            <i class="fa fa-fw fa-book"></i> Kategooriad
+        <a href="/admin/category" class="sidebar-item withripple
+            @if(Route::getCurrentRoute()->getPath() == 'admin/category') sidebar-item-active @endif">
+            <span class="fa fa-fw fa-book"></span> Kategooriad
         </a>
 
-        <a href="#" class="sidebar-item withripple">
-            <i class="fa fa-fw fa-list-alt"></i> Ülesanded
+        <a href="/admin/exercise" class="sidebar-item withripple
+            @if(Route::getCurrentRoute()->getPath() == 'admin/exercise') sidebar-item-active @endif">
+            <span class="fa fa-fw fa-list-alt"></span> Ülesanded
         </a>
 
 
-        <a href="#" class="sidebar-item withripple">
-            <i class="fa fa-fw fa-trophy"></i> Edetabel
+        <a href="/admin/highscore" class="sidebar-item withripple
+            @if(Route::getCurrentRoute()->getPath() == 'admin/highscore') sidebar-item-active @endif">
+            <span class="fa fa-fw fa-trophy"></span> Edetabel
         </a>
 
-        <a href="#" class="sidebar-item withripple">
-            <i class="fa fa-fw fa-users"></i> Administraatorid
+        <a href="/admin/admins" class="sidebar-item withripple
+            @if(Route::getCurrentRoute()->getPath() == 'admin/admins') sidebar-item-active @endif">
+            <span class="fa fa-fw fa-users"></span> Administraatorid
         </a>
     </div>
 </div>

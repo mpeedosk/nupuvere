@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding-lg">
                         @if (Auth::guest() )
-                            <form class="login-page" role="form" method="POST"
+                            <form class="login-page" method="POST"
                                   action="@if (App::isLocal()) {{ url('/login') }} @else{{ secure_url('/login') }} @endif ">
                                 {{ csrf_field() }}
                                 <div class="row inputs">
@@ -54,9 +54,10 @@
                                     <div class="form-group hidden">
                                         <div class="col-md-6 col-md-offset-4">
                                             <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" name="remember" checked> Remember Me
-                                                </label>
+                                                <label for="remember" class="visuallyhidden">Hoia mind
+                                                    sisselogituna</label>
+                                                <input id="remember" type="checkbox" name="remember" checked> Mäleta
+                                                mind
                                             </div>
                                         </div>
                                     </div>
@@ -84,8 +85,8 @@
                                          style="display:inline-block; width: 80%; padding-top: 10px;">
 
                                         <div class="pull-left">
-                                            <span ><i id="points-icon" class="fa fa-trophy"
-                                                                       aria-hidden="true"></i></span>
+                                            <span id="points-icon" class="fa fa-trophy"
+                                                  aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
                                         </div>
                                         <h2 style="display:inline-block;">{{Auth::user() -> username }}</h2>
@@ -117,8 +118,8 @@
                                          style="width: 80%; padding-top: 10px;">
 
                                         <div class="col-xs-4">
-                                            <span><i id="points-icon" class="fa fa-trophy"
-                                                     aria-hidden="true"></i></span>
+                                            <span id="points-icon" class="fa fa-trophy"
+                                                  aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
                                         </div>
 
@@ -142,10 +143,11 @@
                             <form class="search-form" role="search">
                                 <div class="form-group form-group-sm">
                                     <div class="input-group">
+                                        <label for="search" class="visuallyhidden">Otsi</label>
                                         <input type="text" id="search" placeholder="Otsi..." class="form-control">
                                         <span class="input-group-btn">
-                                    <button class="btn btn-primary btn-raised btn-xs" type="submit"><i
-                                                class="glyphicon glyphicon-search"></i></button></span>
+                                    <button class="btn btn-primary btn-raised btn-xs" type="submit"><span
+                                                class="glyphicon glyphicon-search"></span></button></span>
                                     </div>
                                 </div>
                             </form>
