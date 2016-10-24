@@ -101,6 +101,7 @@ class AdminController extends Controller
      */
     public function updateGallery(Request $request)
     {
+
         $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
 
         foreach ($images as $image) {
@@ -110,7 +111,8 @@ class AdminController extends Controller
                 $img->save('img/gallery/' . $image . '.png');
             }
         }
-        return redirect()->refresh();
+
+        return redirect()->back();
     }
 
     /**
@@ -121,23 +123,12 @@ class AdminController extends Controller
      */
     public function updateLogos(Request $request)
     {
-
         $file = $request->file('logo-footer');
         if ($file != null) {
             $img = Image::make($file)->resize(810, 140);
             $img->save('img/logo/footer.png');
         }
-        return redirect()->refresh();
+        return redirect()->back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
