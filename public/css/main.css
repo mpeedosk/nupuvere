@@ -2043,10 +2043,6 @@ ul.posts-list li {
     font-size: 12px;
 }
 
-td a {
-    display: block;
-}
-
 .ex-text-area {
     text-align: left;
     background-color: #f0f8ff;
@@ -2209,6 +2205,7 @@ td a {
     box-shadow: none;
 }
 
+/*
 .table {
     border-collapse: separate;
     border-spacing: 5px;
@@ -2218,6 +2215,7 @@ td a {
 .table td {
     border: 1px solid #9a9292;
 }
+*/
 
 .text-icon {
     margin-left: -1em

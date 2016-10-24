@@ -261,3 +261,34 @@ h4{
     margin-left: -1em;
     color: #eea236;
 }
+
+
+/* TABLE */
+
+.category-table{
+    padding: 40px 40px 0 40px;
+}
+
+.category-row{
+    padding-right: 40px;
+}
+table{
+    background-color: #616161;
+    color: #EEEEEE;;
+}
+.table-hover>tbody>tr:hover{
+    background-color: #2a2d2d;
+}
+td .btn{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+td input{
+    color: #313131;
+    border: 2px solid #313131;
+}
+
+.table th {
+    text-align: center;
+    background-color: #313131;
+}
