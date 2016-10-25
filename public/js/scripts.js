@@ -208,7 +208,31 @@ function submitAnswer(event, id, type) {
             toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
         }
     });
+}
 
+function showCategoryConfirm(id, name) {
+    $("#confirm-category-name").html(name);
+    $("#confirm-category-id").html(id);
+    $("#confirm-dialog").modal()
+}
 
+function deleteCategory(){
+    var name = document.getElementById('confirm-category-name').innerHTML;
+    var id = document.getElementById('confirm-category-id').innerHTML;
+
+    $.ajax({
+        url: "/categories/delete/" + id,
+        type: 'post',
+        data: {_method: 'delete',
+            '_token': $('input[name="_token"]').val()
+        },
+        success: function (data){
+            toastr.success('Kategooria ' + name + " edukalt kustutatud!").css("width","400px");
+            document.getElementById('cat-'+ id).style.display = 'none';
+        },
+        error : function(xhr){
+            toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
+    }
+    });
 }
 

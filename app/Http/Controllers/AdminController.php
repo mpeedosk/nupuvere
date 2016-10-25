@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 
 class AdminController extends Controller
@@ -12,7 +12,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('auth');
     }
 
 
@@ -34,7 +34,12 @@ class AdminController extends Controller
 
     public function category()
     {
-        return view('admin.category');
+        $categories = DB::table('categories')->orderBy('order', 'asc')->get();
+        $count = 0;
+        if(! $categories -> isEmpty())
+            $count = $categories->last()->order;
+
+        return view('admin.category', ['categories' => $categories, 'count' => $count]);
     }
 
     /**

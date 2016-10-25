@@ -5,29 +5,29 @@
                 <ul id="navmenu" class="nav navbar-nav">
                     @foreach(App\Category::getCategories() as $cat )
                         <li @if(isset($category)&& $category == mb_strtolower($cat->name) )class="nav-bar-active"@endif>
-                            <span>{{ucfirst($cat->name)}}</span>
+                            <span>{{str_replace('_', ' ', ucfirst($cat->name)) }}</span>
                             <ul>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/avastaja">Avastajad
+                                        <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/avastaja">Avastajad
                                             <em class="pull-right">(.. - 2.kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/uurija">Uurijad
+                                        <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/uurija">Uurijad
                                             <em class="pull-right">(3. - 6.kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/teadja">Teadjad
+                                        <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/teadja">Teadjad
                                             <em class="pull-right">(7. - 9. kl)</em></a>
                                     </div>
                                 </li>
                                 <li>
                                     <div>
-                                        <a class="withripple" href="/{{mb_strtolower($cat->name)}}/ekspert">Eksperdid
+                                        <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/ekspert">Eksperdid
                                             <em class="pull-right">(10. - 12. kl)</em></a>
                                     </div>
                                 </li>

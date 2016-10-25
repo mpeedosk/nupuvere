@@ -13,6 +13,8 @@ class Exercise extends Model
 
     const POINTS_PER_EX = 1;
 
+    protected $table = 'exercises';
+
     /**
      * @return array
      */

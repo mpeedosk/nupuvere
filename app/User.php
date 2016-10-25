@@ -32,6 +32,8 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $table = 'users';
+
     public function isAdmin(){
         if ($this->role == User::ADMIN || $this->role == User::SUPERADMIN)
             return true;

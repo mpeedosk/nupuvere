@@ -20,6 +20,7 @@
     {{--<link rel="stylesheet"--}}
     {{--href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.10/css/bootstrap-material-design.css">--}}
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
 
     @if (App::isLocal())
@@ -38,7 +39,6 @@
         <link rel="stylesheet" href="{{secure_asset('css/admin.css')}}">
     @endif
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
 
     <link rel="stylesheet"
@@ -46,7 +46,6 @@
 
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
-
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript"
@@ -64,6 +63,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-et-EE.min.js"></script>
+
 </head>
 <body id="body-bg">
 <section class="admin-page-container">
@@ -75,29 +75,12 @@
 
         @yield('content')
     </div>
-
-
 </section>
 
 @if (App::isLocal())
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
 @else
-    <!-- JS -->
-    {{--<script type="text/javascript" src="{{secure_asset('js/jquery.min.js')}}"></script>--}}
-    {{--<script type="text/javascript" src="{{secure_asset('js/bootstrap.min.js')}}"></script>--}}
-    <!-- Isotope - Portfolio Sorting -->
-    {{--<script type="text/javascript" src="{{secure_asset('js/jquery.isotope.js')}}"></script>--}}
-    <!-- Mobile Menu - Slicknav -->
-    {{--<script type="text/javascript" src="{{secure_asset('js/jquery.slicknav.js')}}"></script>--}}
-
-
-
-    <!-- Animate on Scroll-->
-    {{--<script type="text/javascript" src="{{secure_asset('js/jquery.visible.js')}}" charset="utf-8"></script>--}}
-    {{--<!-- Slimbox2-->--}}
-    {{--<script type="text/javascript" src="{{secure_asset('js/slimbox2.js')}}" charset="utf-8"></script>--}}
-    {{--<!-- Modernizr -->--}}
     <script type="text/javascript" src="{{secure_asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
 @endif

@@ -25,7 +25,6 @@ class CreateExercisesTable extends Migration
             $table->text('solution')->nullable();
 
             $table->string('category');
-            $table->foreign('category')->references('name')->on('categories');
             $table->string('age_group');
             $table->string('difficulty');
 
