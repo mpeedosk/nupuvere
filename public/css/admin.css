@@ -277,8 +277,12 @@ table{
     color: #EEEEEE;;
 }
 .table-hover>tbody>tr:hover{
-    background-color: #2a2d2d;
+    background-color: #2a2d2d !important;
 }
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #444444;
+}
+
 td .btn{
     margin-top: 0;
     margin-bottom: 0;

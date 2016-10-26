@@ -1,0 +1,133 @@
+@extends('admin.layouts.dashboard')
+@section('title', 'Administraator')
+@section('description', 'Kategooriad | Lisamine | Muutmine | Kustutamine')
+
+
+@section('content')
+    @if(Session::has('toast'))
+        <script>
+            $(function () {
+                toastr.success('Kategooriad edukalt uuendatud!');
+            });
+        </script>
+    @elseif(Session::has('category-update'))
+        <script>
+            toastr.success('Kategooriad edukalt uuendatud!');
+        </script>
+    @endif
+
+    <section class="admin-page-content">
+        <div class="container">
+            <div class="row">
+                <h2>Lisa uus</h2>
+                {{--                <div class="drag-panel">
+                                    <ul class="list-group">
+                                        <li class="list-group-item">
+                                            <i class="fa fa-check-square" aria-hidden="true"></i>
+                                            <a href="#">Tekstiline/numbriline</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                            <a href="#"> Valikvastusega - üks õige</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <i class="fa fa-check-square" aria-hidden="true"></i>
+
+                                            <a href="#" class="">
+                                                Valikvastusega - mitu õiget
+
+                                            </a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <a href="#" class="">
+                                                Järjestamine
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>--}}
+
+                <div class="list-group">
+                    <div class="list-group-item">
+                        <a href="#" class="list-group-item-heading">
+                            <span class="fa fa-fw fa-quote-left" aria-hidden="true"></span>
+                            Tekstiline/numbriline</a>
+                    </div>
+                    <div class="list-group-item">
+                        <a href="#" class="list-group-item-heading">
+                            <span class="fa fa-fw fa-check-circle-o" aria-hidden="true"></span>
+                            Valikvastusega - üks õige</a>
+                    </div>
+                    <div class="list-group-item">
+                        <a href="#" class="list-group-item-heading">
+                            <span class="fa fa-fw fa-check-square" aria-hidden="true"></span>
+                            Valikvastusega - mitu õiget</a>
+                    </div>
+                    <div class="list-group-item botto">
+                        <a href="#" class="list-group-item-heading">
+                            <span class="fa fa-fw fa-sort-amount-asc" aria-hidden="true"></span>
+                            Järjestamine</a>
+                    </div>
+
+                </div>
+
+                <h2>Ülesanded</h2>
+                <table data-toggle="table"
+                       data-search="true"
+                       data-show-columns="true"
+                       data-pagination="true"
+                       data-id-field="id"
+                       data-striped="true"
+                >
+                    <thead>
+                    <tr>
+                        <th data-sortable="true">ID</th>
+                        <th class="col-md-2" data-sortable="true">Peakiri</th>
+                        <th data-sortable="true">Kategooria</th>
+                        <th data-sortable="true">Vanuserühm</th>
+                        <th data-sortable="true">Raskusaste</th>
+                        <th data-sortable="true">Lahendatud</th>
+                        <th data-sortable="true">Proovitud</th>
+                        <th data-sortable="true">%</th>
+                        <th class="col-md-3">Tegevus</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($exercises as $exercise)
+                        <tr>
+                            <td>{{$exercise -> id}}</td>
+                            <td>{{$exercise -> title}}</td>
+                            <td>{{$exercise -> category}}</td>
+                            <td>{{$exercise -> age_group}}</td>
+                            <td>{{$exercise -> difficulty}}</td>
+                            <td>{{$exercise -> solved}}</td>
+                            <td>{{$exercise -> attempted}}</td>
+                            <td>{{ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
+                            <td class="text-center">
+                                <button class="btn btn-info btn-raised btn-sm" type="button" data-toggle="tooltip"
+                                        title="Muuda">
+                                    <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-danger btn-raised btn-sm" type="button" data-toggle="tooltip"
+                                        title="Kustuta">
+                                    <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="btn btn-default btn-raised btn-sm" type="button" data-toggle="tooltip"
+                                        title="Peida">
+                                    <span class="glyphicon glyphicon-eye-close pull-right" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    @endforeach
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+
+
+@endsection

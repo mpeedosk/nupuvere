@@ -30,6 +30,7 @@ class CreateExercisesTable extends Migration
 
             $table->integer('solved')->unsigned();
             $table->integer('attempted')->unsigned();
+            $table->boolean('hidden');
 
         });
     }

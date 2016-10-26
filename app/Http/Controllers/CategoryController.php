@@ -6,6 +6,7 @@ use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -16,6 +17,11 @@ class CategoryController extends Controller
      */
     public function create(Request $request)
     {
+        $this-> validate(request(), [
+            'name' => 'required | unique:categories,name'
+        ]);
+
+
         $categoryLast = DB::table('categories')
             ->orderBy('order', 'desc')
             ->pluck('order')
@@ -28,6 +34,8 @@ class CategoryController extends Controller
         $category->order = $categoryLast + 1;
 
         $category->save();
+
+        Session::flash('category-create', $category->name);
 
         return redirect()->back();
 
@@ -54,6 +62,9 @@ class CategoryController extends Controller
                 ->where('name', $category)
                 ->update(['order' => $request->input($category)]);
         }
+
+        Session::flash('category-update', "true");
+
         return redirect()->back();
     }
 

@@ -4,6 +4,21 @@
 
 
 @section('content')
+
+    @if(Session::has('main-gallery'))
+        <script>
+            $(function() {
+                toastr.success('{{Session::get('main-gallery')}}');
+            });
+        </script>
+    @elseif(Session::has('main-logo'))
+        <script>
+            $(function() {
+                toastr.success('{{Session::get('main-logo')}}');
+            });
+        </script>
+    @endif
+
     <section class="admin-page-content">
         <div class="container">
             <div class="row vert-full full-height">

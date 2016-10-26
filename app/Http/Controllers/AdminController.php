@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
+
 
 class AdminController extends Controller
 {
@@ -36,10 +38,19 @@ class AdminController extends Controller
     {
         $categories = DB::table('categories')->orderBy('order', 'asc')->get();
         $count = 0;
-        if(! $categories -> isEmpty())
+        if (!$categories->isEmpty())
             $count = $categories->last()->order;
 
         return view('admin.category', ['categories' => $categories, 'count' => $count]);
+    }
+
+
+    public function exercise()
+    {
+        $exercises = DB::table('exercises')->paginate(10);
+
+        Session::flash('toast', 'Galerii uuendatud!');
+        return view('admin.exercise', ['exercises' => $exercises]);
     }
 
     /**
@@ -117,6 +128,8 @@ class AdminController extends Controller
             }
         }
 
+        Session::flash('main-gallery', 'Galerii uuendatud!');
+
         return redirect()->back();
     }
 
@@ -133,6 +146,9 @@ class AdminController extends Controller
             $img = Image::make($file)->resize(810, 140);
             $img->save('img/logo/footer.png');
         }
+
+        Session::flash('main-logo', 'Logod uuendatud!');
+
         return redirect()->back();
     }
 

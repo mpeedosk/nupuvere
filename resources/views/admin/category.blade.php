@@ -4,6 +4,20 @@
 
 
 @section('content')
+    @if(Session::has('category-create'))
+        <script>
+            $(function() {
+                toastr.success('Kategooria {{str_replace('_', ' ', ucfirst(Session::get('category-create')))}} edukalt lisatud!');
+            });
+        </script>
+    @elseif(Session::has('category-update'))
+        <script>
+            $(function() {
+                toastr.success('Kategooriad edukalt uuendatud!');
+            });
+        </script>
+    @endif
+
     <section class="admin-page-content">
         <div class="container">
             <form action="/categories/update" method="POST">
@@ -17,7 +31,7 @@
                         <tr>
                             <th class="col-md-1" data-sortable="true">ID</th>
                             <th class="col-md-6">Nimi</th>
-                            <th class="col-md-1" data-sortable="true" data-editable="true">Järjekord</th>
+                            <th class="col-md-1" data-sortable="true">Järjekord</th>
                             <th class="col-md-4">Tegevus</th>
                         </tr>
                         </thead>
@@ -53,9 +67,17 @@
                     <div class="col-md-4 col-md-offset-8 text-center">
                         <label for="newCategory" class="font-size-lg">Kategooria nimi: </label>
                         <br>
-                        <input id="newCategory" type="text" name="name">
+                        <input id="newCategory" type="text" name="name" value="{{old('name')}}">
                         <br>
                         <button class="btn btn-success btn-raised margin-top-20" type="submit"> Lisa uus</button>
+
+                        @if(count($errors) > 0)
+                            <div class="alert alert-danger">
+                                    @foreach($errors->all() as $error)
+                                        {{$error}}
+                                    @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </form>

@@ -6,14 +6,17 @@ $.material.init();
 // Initialize bootstrap tooltip
 // $('[data-toggle="popover"]').popover();
 
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 // Initialize toastr
 toastr.options = {
-    "positionClass": "toast-top-center",
+    "positionClass": "toast-top-left",
     "showDuration": "300",
     "hideDuration": "1000",
-    "timeOut": "5000",
-    "extendedTimeOut": "1000",
+    "timeOut": "7000",
+    "extendedTimeOut": "2000",
     "showEasing": "swing",
     "hideEasing": "linear",
     "showMethod": "fadeIn",
@@ -85,7 +88,7 @@ function showAnswer(id, type) {
             '_token': $('input[name="_token"]').val(),
         },
         success: function (data) {
-            toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.').css("width","400px");
+            toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
 
             var answers = JSON.parse(data.answers);
 
@@ -168,7 +171,9 @@ function submitAnswer(event, id, type) {
             for (var i = 0; i < listElements.length; i++) {
                 answers.push(listElements[i].innerHTML.trim());
             }
+/*
             document.getElementById("draggable").id = "not-draggable";
+*/
 
             break;
     }
@@ -227,7 +232,7 @@ function deleteCategory(){
             '_token': $('input[name="_token"]').val()
         },
         success: function (data){
-            toastr.success('Kategooria ' + name + " edukalt kustutatud!").css("width","400px");
+            toastr.success('Kategooria ' + name + " edukalt kustutatud!");
             document.getElementById('cat-'+ id).style.display = 'none';
         },
         error : function(xhr){
@@ -235,4 +240,5 @@ function deleteCategory(){
     }
     });
 }
+
 
