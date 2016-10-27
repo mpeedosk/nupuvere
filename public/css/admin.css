@@ -319,6 +319,10 @@ tr a:hover{
     }
 }
 
+.hidden-start{
+    display: none;
+}
+
 .short-input{
     max-width: 400px;
 }

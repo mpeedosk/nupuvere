@@ -46,12 +46,14 @@
                 </div>
 
                 <h2 class="table-title" >Ülesanded</h2>
-                <table data-toggle="table"
+                <table id="table"
+                        data-toggle="table"
                        data-search="true"
                        data-show-columns="true"
                        data-pagination="true"
                        data-id-field="id"
                        data-striped="true"
+                       class="hidden-start"
                 >
                     <thead>
                     <tr>

@@ -23,6 +23,8 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
+$( "#table" ).fadeIn("slow");
+
 
 // initialize sortable
 var el = document.getElementById('draggable');
@@ -279,8 +281,4 @@ $('#submit').click(function () {
         }
     });
 });
-
-var $table = $('#ex-table');
-$table.removeClass('hidden');
-
 

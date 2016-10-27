@@ -26,6 +26,8 @@
                 <div class="row category-table">
                     <h2>Kategooriad</h2>
                     <table data-toggle="table"
+                           id="table"
+                           class="hidden-start"
                     >
                         <thead>
                         <tr>
