@@ -303,6 +303,15 @@ td input {
     background-color: #313131;
 }
 
+
+tr a{
+    text-decoration: none;
+    color: inherit;
+}
+tr a:hover{
+    color: #b6beec;
+}
+
 @media (min-width: 763px) {
 
     .table-title {

@@ -280,3 +280,7 @@ $('#submit').click(function () {
     });
 });
 
+var $table = $('#ex-table');
+$table.removeClass('hidden');
+
+

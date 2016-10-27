@@ -47,7 +47,7 @@ class AdminController extends Controller
 
     public function exercise()
     {
-        $exercises = DB::table('exercises')->paginate(10);
+        $exercises = DB::table('exercises')->get();
 
         Session::flash('toast', 'Galerii uuendatud!');
         return view('admin.exercise', ['exercises' => $exercises]);

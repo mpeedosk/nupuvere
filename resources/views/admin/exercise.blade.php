@@ -71,7 +71,8 @@
                     @foreach($exercises as $exercise)
                         <tr>
                             <td>{{$exercise -> id}}</td>
-                            <td>{{$exercise -> title}}</td>
+                            <td><a href="/{{$exercise->category.'/'.$exercise->age_group.'/'.$exercise->difficulty.'/'.$exercise->id}}"
+                                   target="_blank"> {{$exercise -> title}}</a></td>
                             <td>{{$exercise -> category}}</td>
                             <td>{{$exercise -> age_group}}</td>
                             <td>{{$exercise -> difficulty}}</td>
