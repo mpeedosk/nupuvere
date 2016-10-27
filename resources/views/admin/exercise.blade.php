@@ -1,6 +1,6 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
-@section('description', 'Kategooriad | Lisamine | Muutmine | Kustutamine')
+@section('description', 'Ülesannete ülevaade')
 
 
 @section('content')
@@ -19,37 +19,11 @@
     <section class="admin-page-content">
         <div class="container">
             <div class="row">
-                <h2>Lisa uus</h2>
-                {{--                <div class="drag-panel">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">
-                                            <i class="fa fa-check-square" aria-hidden="true"></i>
-                                            <a href="#">Tekstiline/numbriline</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
-                                            <a href="#"> Valikvastusega - üks õige</a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <i class="fa fa-check-square" aria-hidden="true"></i>
-
-                                            <a href="#" class="">
-                                                Valikvastusega - mitu õiget
-
-                                            </a>
-                                        </li>
-                                        <li class="list-group-item">
-                                            <a href="#" class="">
-                                                Järjestamine
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                </div>--}}
+                <h2>Lisa uus: </h2>
 
                 <div class="list-group">
                     <div class="list-group-item">
-                        <a href="#" class="list-group-item-heading">
+                        <a href="/exercise/text" class="list-group-item-heading">
                             <span class="fa fa-fw fa-quote-left" aria-hidden="true"></span>
                             Tekstiline/numbriline</a>
                     </div>
@@ -71,7 +45,7 @@
 
                 </div>
 
-                <h2>Ülesanded</h2>
+                <h2 class="table-title" >Ülesanded</h2>
                 <table data-toggle="table"
                        data-search="true"
                        data-show-columns="true"
@@ -103,7 +77,7 @@
                             <td>{{$exercise -> difficulty}}</td>
                             <td>{{$exercise -> solved}}</td>
                             <td>{{$exercise -> attempted}}</td>
-                            <td>{{ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
+                            <td>{{$exercise->attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
                             <td class="text-center">
                                 <button class="btn btn-info btn-raised btn-sm" type="button" data-toggle="tooltip"
                                         title="Muuda">
@@ -120,8 +94,6 @@
                             </td>
                         </tr>
                     @endforeach
-
-
                     </tbody>
                 </table>
             </div>

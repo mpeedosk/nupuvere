@@ -103,7 +103,7 @@
                         </button>
                     @endif
                     <p class="font-size-sm">
-                        Koostanud Ahhaa
+                        Koostanud: {{$exercise -> author}}
                     </p>
                 </div>
 

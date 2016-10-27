@@ -14,23 +14,29 @@ class CreateExercisesTable extends Migration
     public function up()
     {
         Schema::create('exercises', function (Blueprint $table) {
+            // maintaining info
             $table->increments('id');
             $table->timestamps();
 
+            // exercise body
             $table->string('title')->unique();
             $table->text('content');
             $table->integer('type')->unsigned();
             $table->text('hint');
-
             $table->text('solution')->nullable();
+            $table->string('author')->nullable();
 
+            // categorization
             $table->string('category');
             $table->string('age_group');
             $table->string('difficulty');
 
-            $table->integer('solved')->unsigned();
-            $table->integer('attempted')->unsigned();
-            $table->boolean('hidden');
+            // statistics
+            $table->integer('solved')->unsigned()->default(0);
+            $table->integer('attempted')->unsigned()->default(0);
+
+            // optional hide feature
+            $table->boolean('hidden')->default(false);
 
         });
     }

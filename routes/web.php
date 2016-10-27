@@ -13,7 +13,6 @@
 
 Auth::routes();
 
-
 Route::get('/', 'PagesController@index');
 Route::get('/home', 'PagesController@back');
 
@@ -32,6 +31,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('/categories/add', 'CategoryController@create');
     Route::patch('/categories/update', 'CategoryController@update');
     Route::delete('/categories/delete/{id}', 'CategoryController@destroy');
+
+    Route::get('/exercise/text','ExerciseController@getTextual');
+    Route::get('/exercise/choice','ExerciseController@getChoice');
+    Route::get('/exercise/multiple','ExerciseController@getMultiple');
+    Route::get('/exercise/order','ExerciseController@getOrder');
+
+    Route::post('/exercise/text/new', 'ExerciseController@createTextual');
 
 });
 

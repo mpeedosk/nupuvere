@@ -1,6 +1,5 @@
 /* Inspired by material design*/
 
-
 .admin-page-container {
     position: absolute;
     width: 100%;
@@ -21,7 +20,6 @@
     overflow-x: hidden;
     position: relative;
 }
-
 
 .fa-10x {
     font-size: 10em;
@@ -99,6 +97,7 @@
     flex-grow: 1;
     z-index: -2;
 }
+
 .sidebar-item {
     display: -ms-flexbox !important;
     display: flex !important;
@@ -224,70 +223,77 @@
 .container {
     max-width: none;
     padding: 20px 30px 15px 30px;
-    height:100%;
+    height: 100%;
     overflow-y: auto;
 }
 
-.img-box{
+.img-box {
     padding-bottom: 15px;
 }
-h4{
+
+h4 {
     color: #000;
 }
-.vert-half{
-    min-height:50%;
+
+.vert-half {
+    min-height: 50%;
 }
 
-.vert-full{
-    min-height:100%;
-}
-.full-height{
-    height:100%;
+.vert-full {
+    min-height: 100%;
 }
 
-.upload-icon{
+.full-height {
+    height: 100%;
+}
+
+.upload-icon {
     top: 0.4em;
     /*top: 8px;*/
     font-size: 1.5em;
     margin-right: 5px;
 }
-.upload-input{
+
+.upload-input {
     display: inline-block;
     width: calc(100% - 2em);
 }
 
-.icon-help{
+.icon-help {
     left: 40px;
     margin-left: -1em;
     color: #eea236;
 }
 
-
 /* TABLE */
 
-.category-table{
+.category-table {
     padding: 40px 40px 0 40px;
 }
 
-.category-row{
+.category-row {
     padding-right: 40px;
 }
-table{
+
+table {
     background-color: #616161;
     color: #EEEEEE;;
 }
-.table-hover>tbody>tr:hover{
+
+.table-hover > tbody > tr:hover {
     background-color: #2a2d2d !important;
 }
-.table-striped>tbody>tr:nth-of-type(odd) {
+
+.table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #444444;
 }
 
-td .btn{
+td .btn {
     margin-top: 0;
     margin-bottom: 0;
 }
-td input{
+
+td input {
     color: #313131;
     border: 2px solid #313131;
 }
@@ -295,4 +301,21 @@ td input{
 .table th {
     text-align: center;
     background-color: #313131;
+}
+
+@media (min-width: 763px) {
+
+    .table-title {
+        margin-bottom: -40px;
+    }
+}
+
+.short-input{
+    max-width: 400px;
+}
+
+.dropdown-input{
+    max-width: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
 }

@@ -2193,10 +2193,10 @@ ul.posts-list li {
     text-align: center;
 }
 
-.form-group .help-block {
+/*.form-group .help-block {
     position: absolute;
     display: block;
-}
+}*/
 
 .form-group.form-group-sm .help-block {
     margin-top: 0;
@@ -2293,3 +2293,4 @@ ul.posts-list li {
         color: #313131 !important;
     }
 }
+

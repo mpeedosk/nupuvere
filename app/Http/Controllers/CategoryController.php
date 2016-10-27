@@ -37,6 +37,7 @@ class CategoryController extends Controller
 
         Session::flash('category-create', $category->name);
 
+
         return redirect()->back();
 
 

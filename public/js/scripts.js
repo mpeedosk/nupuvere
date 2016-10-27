@@ -6,7 +6,7 @@ $.material.init();
 // Initialize bootstrap tooltip
 // $('[data-toggle="popover"]').popover();
 
-$(document).ready(function(){
+$(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 });
 
@@ -69,8 +69,6 @@ $(modalVerticalCenterClass).on('show.bs.modal', function (e) {
 $(window).on('resize', centerModals);
 
 
-
-
 /* Exercise scripts */
 
 function loginRequired() {
@@ -115,9 +113,9 @@ function showAnswer(id, type) {
                     var listElements = document.querySelectorAll('input[name = "answer"]');
                     for (var i = 0; i < listElements.length; i++) {
                         listElements[i].disabled = true;
-                        if(answers.indexOf(listElements[i].value) >=0 ){
+                        if (answers.indexOf(listElements[i].value) >= 0) {
                             listElements[i].checked = true;
-                        }else{
+                        } else {
                             listElements[i].checked = false;
                         }
                     }
@@ -171,9 +169,9 @@ function submitAnswer(event, id, type) {
             for (var i = 0; i < listElements.length; i++) {
                 answers.push(listElements[i].innerHTML.trim());
             }
-/*
-            document.getElementById("draggable").id = "not-draggable";
-*/
+            /*
+             document.getElementById("draggable").id = "not-draggable";
+             */
 
             break;
     }
@@ -221,24 +219,64 @@ function showCategoryConfirm(id, name) {
     $("#confirm-dialog").modal()
 }
 
-function deleteCategory(){
+function deleteCategory() {
     var name = document.getElementById('confirm-category-name').innerHTML;
     var id = document.getElementById('confirm-category-id').innerHTML;
 
     $.ajax({
         url: "/categories/delete/" + id,
         type: 'post',
-        data: {_method: 'delete',
+        data: {
+            _method: 'delete',
             '_token': $('input[name="_token"]').val()
         },
-        success: function (data){
+        success: function (data) {
             toastr.success('Kategooria ' + name + " edukalt kustutatud!");
-            document.getElementById('cat-'+ id).style.display = 'none';
+            document.getElementById('cat-' + id).style.display = 'none';
         },
-        error : function(xhr){
+        error: function (xhr) {
             toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
-    }
+        }
     });
 }
 
+var i = -1;
+
+function addAnswer(count) {
+    if (i == -1)
+        i = count + 1;
+    else
+        i++;
+    document.getElementById('answer_count').value = i;
+
+
+    var answer_group = '<div class="form-group" id="answer_group_' + i + '">' +
+        ' <label for="a' + i + '"> Vastus ' + i + '</label>' +
+        '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee'+
+        'malda" name="remove" tabindex="-1" id="' + i + '">' +
+        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>' +
+        '<input class="form-control" id="a' + i + '" name="answer_' + i + '"></div>';
+
+
+    $('#answers').append(answer_group);
+
+}
+
+$(document).on('click', '.btn_remove', function () {
+    var button_id = $(this).attr("id");
+    console.log(button_id);
+    $('#answer_group_' + button_id + '').remove();
+});
+
+$('#submit').click(function () {
+    $.ajax({
+        url: "name.php",
+        method: "POST",
+        data: $('#add_name').serialize(),
+        success: function (data) {
+            alert(data);
+            $('#add_name')[0].reset();
+        }
+    });
+});
 
