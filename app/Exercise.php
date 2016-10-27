@@ -23,4 +23,19 @@ class Exercise extends Model
         return $this->appends;
     }
 
+    public static function getTypeNameFromInt($type){
+        switch ($type) {
+            case Exercise::TEXTUAL:
+                return "textual";
+            case Exercise::MULTIPLE_ONE:
+                return "multipleone";
+            case Exercise::MULTIPLE_MANY:
+                return "multiplemany";
+            case Exercise::ORDERING:
+                return "ordering";
+        }
+
+        return 'unknown-type ' . $type;
+    }
+
 }

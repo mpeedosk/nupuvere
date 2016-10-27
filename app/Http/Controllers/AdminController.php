@@ -49,7 +49,7 @@ class AdminController extends Controller
     {
         $exercises = DB::table('exercises')->get();
 
-        Session::flash('toast', 'Galerii uuendatud!');
+//        Session::flash('toast', 'Galerii uuendatud!');
         return view('admin.exercise', ['exercises' => $exercises]);
     }
 

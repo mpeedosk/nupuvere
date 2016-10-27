@@ -13,27 +13,36 @@ use Illuminate\Support\Facades\Session;
 class ExerciseController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
+     * Display all the different difficulty exercises for this category and age group
+     * @param String $category - name of the exercise category
+     * @param String $age_group - name of the exercise age group
      * @return \Illuminate\Http\Response
      */
     public function index($category, $age_group)
     {
 
+        // Get all the easy exercises for this category and age group
         $easyList = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne']])
             ->get();
+
+        // Get all the medium exercises for this category and age group
         $mediumList = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine']])
             ->get();
+
+        // Get all the hard exercises for this category and age group
         $hardList = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske']])
             ->get();
 
+        // If user is not logged in, we can't calculate the progress or show solved exercises
         if (Auth::guest()) {
             return view('list', ['category' => $category, 'age_group' => $age_group, 'easyEx' => $easyList,
                 'mediumEx' => $mediumList, 'hardEx' => $hardList]);
         }
+
+        // calculate all the progress bars
 
         $user_id = Auth::user()->id;
 
@@ -52,21 +61,28 @@ class ExerciseController extends Controller
 
     /**
      * Calcualte the current progress based on the difficulty and user
-     * @param difficulty - difficulty of the exercise
-     * @param user_id - the ID of currently authenticated user
+     * @param String $difficulty - difficulty of the exercise
+     * @param Int $user_id - the ID of currently authenticated user
+     * @param String $category - the category of the exercise group
+     * @param String $age_group - the age group of the exercise group
      * @return Float - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
      */
     private function calculateProgress($difficulty, $user_id, $category, $age_group)
     {
-        $solved_easy = DB::table('users_to_exercise')
+        // Get all the solved exercises for this user
+        $solved_exercises = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
             ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group], ['users_to_exercise.solved', True]])
             ->count();
-        $all_easy = DB::table('exercises')->where('difficulty', $difficulty)->count();
 
-        if ($all_easy != 0)
-            return $solved_easy / $all_easy * 100;
+        // Get all the exercises
+        $all_exercises = DB::table('exercises')->where('difficulty', $difficulty)->count();
 
+        // Get the percentage of solved exercises
+        if ($all_exercises != 0)
+            return $solved_exercises / $all_exercises * 100;
+
+        // if no exercises exist
         return 0;
     }
 
@@ -79,35 +95,29 @@ class ExerciseController extends Controller
      */
     public function exercise($category, $age_group, $difficulty, $ex_id)
     {
-        /* kui ID järgi teha query, siis oleks palju lühem*/
+        // fetch the exercise the user wants to solve
         $exercise = DB::table('exercises')
             ->where('id', $ex_id)
             ->first();
+
+        // fetch all the exercises in this category, age_group and difficulty for the sidebar
         $exercise_list = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
             ->get();
 
-        $type = "";
+        // pluck the answer text for this exercise
         $answers = DB::table('answers')
             ->where('ex_id', $ex_id)
             ->pluck('content')
             ->toArray();
+
+        // randomize the answer order
         shuffle($answers);
 
-        switch ($exercise->type) {
-            case Exercise::TEXTUAL:
-                $type = "textual";
-                break;
-            case Exercise::MULTIPLE_ONE:
-                $type = "multipleone";
-                break;
-            case Exercise::MULTIPLE_MANY:
-                $type = "multiplemany";
-                break;
-            case Exercise::ORDERING:
-                $type = "ordering";
-                break;
-        }
+        // get type name for view
+        $type = Exercise::getTypeNameFromInt($exercise->type);
+
+        // if user is not logged in we will not return the solved exercise list
         if (Auth::guest())
             return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
                 'answers' => $answers, 'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
@@ -118,6 +128,9 @@ class ExerciseController extends Controller
             'solved' => Auth::user()->getSolvedEx()]);
     }
 
+    /** Get the new textual exercise template
+     * @return \Illuminate\View\View
+     * */
 
     public function getTextual()
     {
@@ -132,6 +145,9 @@ class ExerciseController extends Controller
     public function createTextual(Request $request)
     {
 
+
+        // validate user inputs
+
         $this-> validate(request(), [
             'ex_title' => 'required | unique:exercises,title',
             'ex_content' => 'required',
@@ -141,7 +157,9 @@ class ExerciseController extends Controller
             'answer_1' => 'required'
         ]);
 
+        // create and populate a new exercise
         $exercise = new Exercise;
+
         $exercise->type = Exercise::TEXTUAL;
 
         $exercise->title    = $request->ex_title;
@@ -160,8 +178,10 @@ class ExerciseController extends Controller
         $id = $exercise->id;
 
 
-        $remaining_answers = $request->answer_count;
+        // insert the answers
+        // start from the last answer id and try to get every answer in between
 
+        $remaining_answers = $request->answer_count;
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
             if (isset($ans)&& trim($ans) != '') {
@@ -176,6 +196,7 @@ class ExerciseController extends Controller
         }
 
 
+        // flash the session to show successful operation
         Session::flash('exercise-create', $request->ex_title);
 
         return redirect()->back();

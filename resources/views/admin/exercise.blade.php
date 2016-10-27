@@ -4,7 +4,7 @@
 
 
 @section('content')
-    @if(Session::has('toast'))
+{{--    @if(Session::has('toast'))
         <script>
             $(function () {
                 toastr.success('Kategooriad edukalt uuendatud!');
@@ -14,7 +14,7 @@
         <script>
             toastr.success('Kategooriad edukalt uuendatud!');
         </script>
-    @endif
+    @endif--}}
 
     <section class="admin-page-content">
         <div class="container">

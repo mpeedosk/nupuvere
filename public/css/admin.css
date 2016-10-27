@@ -303,12 +303,12 @@ td input {
     background-color: #313131;
 }
 
-
-tr a{
+tr a {
     text-decoration: none;
     color: inherit;
 }
-tr a:hover{
+
+tr a:hover {
     color: #b6beec;
 }
 
@@ -319,15 +319,34 @@ tr a:hover{
     }
 }
 
-.hidden-start{
+.hidden-start {
     display: none;
 }
 
-.short-input{
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    color: #fff;
+    cursor: default;
+    background-color: #5e70d4;
+    border-color: #5e70d4;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: #eeeeee;
+    background-color: #444444;
+    border: 1px solid #b3aeae;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color: #5e70d4;
+}
+
+/* exercise input length*/
+.short-input {
     max-width: 400px;
 }
 
-.dropdown-input{
+/* dropdown menu fix*/
+.dropdown-input {
     max-width: 200px;
     padding-left: 10px;
     padding-right: 10px;
