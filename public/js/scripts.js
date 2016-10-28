@@ -23,7 +23,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
-$("#table").fadeIn(700);
+// $("#table").fadeIn(700);
 
 
 // initialize sortable
@@ -131,7 +131,8 @@ function showAnswer(id, type) {
                     break;
             }
             if (data.solution != null) {
-                document.getElementById('solution-text').innerText = data.solution;
+                console.log(data.solution);
+                document.getElementById('solution-text').insertAdjacentHTML('beforeend',data.solution);
                 document.getElementById('solution').style.display = "block";
             }
             document.getElementById('submit-answer').disabled = true;
@@ -285,3 +286,12 @@ $('#submit').click(function () {
     });
 });
 
+
+$('#ex-content').find('img').addClass('ex-image');
+
+$(function() {
+    $('.ex-image').on('click', function() {
+        $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
+        $('#enlargeImageModal').modal();
+    });
+});

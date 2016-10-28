@@ -2294,3 +2294,12 @@ ul.posts-list li {
     }
 }
 
+.ex-image {
+    cursor: zoom-in;
+}
+
+.height-responsive {
+    width: auto;
+    display:block;
+    height: 100%;
+}

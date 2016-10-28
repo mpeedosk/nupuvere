@@ -45,14 +45,17 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+    @yield('scripts')
 
 </head>
 <body id="body-bg">
+
 <section class="admin-page-container">
     <div class="admin-page-layout">
         @include('admin.includes.header')
 
         @include('admin.includes.sidebar')
+
 
 
         @yield('content')
@@ -77,9 +80,11 @@
 
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/admin.only.js')}}"></script>
 @else
     <script type="text/javascript" src="{{secure_asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
+    <script type="text/javascript" src="{{secure_asset('js/admin.only.js')}}"></script>
 @endif
 
 </body>

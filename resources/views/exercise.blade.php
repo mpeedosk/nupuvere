@@ -19,11 +19,11 @@
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                                 <?php $next = true;?>
                             </a>
-                         @else
-                                <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
-                                   class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                    {{$ex -> title}}
-                                </a>
+                        @else
+                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                               class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                {{$ex -> title}}
+                            </a>
                         @endif
 
                     @endforeach
@@ -38,15 +38,14 @@
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
-                                <div class="padding-10">
+                                <div id="ex-content" class="padding-10" style=" overflow: hidden ">
                                     {!! $exercise -> content !!}
                                 </div>
                             </div>
                         </div>
                         <div id="solution" class="col-md-12 animate fadeInRightBig animated">
                             <div class="ex-text-area font-size-md">
-                                <div class="padding-10">
-                                    <p id="solution-text"></p>
+                                <div id="solution-text" class="padding-10">
                                 </div>
                             </div>
                         </div>
@@ -112,7 +111,7 @@
         </div>
     </section>
 
-    <div id="hint-dialog" class="modal fade" role="dialog">
+    <div id="hint-dialog" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content  panel panel-primary">
                 <div class="panel-heading">
@@ -122,7 +121,7 @@
                     <h4 class="panel-title">Vihjed</h4>
                 </div>
                 <div class="modal-body">
-                    <p>{{$exercise -> hint}}</p>
+                    <p>{!! $exercise -> hint !!}</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
@@ -131,7 +130,7 @@
         </div>
     </div>
 
-    <div id="confirm-dialog" class="modal fade" role="dialog">
+    <div id="confirm-dialog" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content  panel panel-danger">
                 <div class="panel-heading">
@@ -156,7 +155,7 @@
     </div>
 
 
-    <div id="wrong-answer" class="modal fade" role="dialog">
+    <div id="wrong-answer" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content panel panel-warning">
                 <div class="panel-heading">
@@ -176,5 +175,33 @@
         </div>
     </div>
 
+    <!-- Creates the bootstrap modal where the image will appear -->
+    {{--
+        <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <img src="" class="enlargeImageModalSource" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>--}}
+
+    <div id="enlargeImageModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="enlargeImageModal"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="" class="enlargeImageModalSource">
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

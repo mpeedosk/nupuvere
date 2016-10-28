@@ -17,6 +17,7 @@
     @endif--}}
 
     <section class="admin-page-content">
+        <div class="se-pre-con"></div>
         <div class="container">
             <div class="row">
                 <h2>Lisa uus: </h2>
@@ -80,7 +81,7 @@
                             <td>{{$exercise -> difficulty}}</td>
                             <td>{{$exercise -> solved}}</td>
                             <td>{{$exercise -> attempted}}</td>
-                            <td>{{$exercise->attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
+                            <td>{{$exercise -> attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
                             <td class="text-center">
                                 <button class="btn btn-info btn-raised btn-sm" type="button" data-toggle="tooltip"
                                         title="Muuda">

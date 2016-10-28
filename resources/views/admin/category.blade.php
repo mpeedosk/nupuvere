@@ -19,6 +19,7 @@
     @endif
 
     <section class="admin-page-content">
+        <div class="se-pre-con"></div>
         <div class="container">
             <form action="/categories/update" method="POST">
                 {{ method_field('PATCH')}}

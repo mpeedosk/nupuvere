@@ -120,13 +120,13 @@ class AdminController extends Controller
 
         $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
 
-        foreach ($images as $image) {
+/*        foreach ($images as $image) {
             $file = $request->file($image);
             if ($file != null) {
                 $img = Image::make($file)->resize(1080, 422);
                 $img->save('img/gallery/' . $image . '.png');
             }
-        }
+        }*/
 
         Session::flash('main-gallery', 'Galerii uuendatud!');
 
@@ -150,6 +150,49 @@ class AdminController extends Controller
         Session::flash('main-logo', 'Logod uuendatud!');
 
         return redirect()->back();
+    }
+
+    public function upload(Request $request){
+        $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+        $full_filename = NULL;
+
+        $slug = $request->input('type_slug');
+        $file = $request->file('image');
+        $filename = str_random(20);
+
+        $path =  'img/ex_images/';
+        $full_path = $path . $filename . '.' . $file->getClientOriginalExtension();
+
+        $ext = $file->guessClientExtension();
+
+        $resize_width = 1800;
+        $resize_height = null;
+
+        if (in_array($ext, $valid_exts))
+        {
+            $image = Image::make($file)->resize($resize_width, $resize_height, function($constraint){
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->encode($file->getClientOriginalExtension(), 75);
+
+            // move uploaded file from temp to uploads directory
+            try{
+                $image->save($full_path);
+                $status = 'Image successfully uploaded!';
+                $full_filename = $full_path;
+            }
+            catch (Exception $e){
+                $status = 'Upload Fail: Unknown error occurred!';
+            }
+        }
+        else {
+
+            $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
+        }
+
+        //echo out script that TinyMCE can handle and update the image in the editor
+
+        return ('<script> parent.setImageValue("/' . $full_filename . '"); </script>');
     }
 
 }

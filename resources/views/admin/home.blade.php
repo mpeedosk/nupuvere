@@ -20,6 +20,14 @@
     @endif
 
     <section class="admin-page-content">
+{{--        <div id="voyager-loader">
+            <div style="background:url(/img/gears.gif) no-repeat center center;width:32px;height:32px;"></div>
+            --}}{{--<img src="/img/gears.gif" alt="Voyager Loader">--}}{{--
+
+        </div>--}}
+
+        <div class="se-pre-con"></div>
+
         <div class="container">
             <div class="row vert-full full-height">
                 <div class="col-md-6 vert-full text-center">
@@ -36,7 +44,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery1" class="visuallyhidden">Esimene pilt</label>
-                                        <input type="file" id="inputGallery1" multiple="" name="gallery1">
+                                        <input type="file" id="inputGallery1" multiple="" name="gallery[]">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery1-valid" class="visuallyhidden">Esimene pilt</label>
@@ -48,7 +56,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery2" class="visuallyhidden">Teine pilt</label>
-                                        <input type="file" id="inputGallery2" multiple="" name="gallery2">
+                                        <input type="file" id="inputGallery2" multiple="" name="gallery[]">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery2-valid" class="visuallyhidden">Teine pilt</label>
@@ -60,7 +68,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery3" class="visuallyhidden">Kolmas pilt</label>
-                                        <input type="file" id="inputGallery3" multiple="" name="gallery3">
+                                        <input type="file" id="inputGallery3" multiple="" name="gallery[]">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery3-valid" class="visuallyhidden">Kolmas pilt</label>
@@ -73,7 +81,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery4" class="visuallyhidden">Neljas pilt</label>
-                                        <input type="file" id="inputGallery4" multiple="" name="gallery4">
+                                        <input type="file" id="inputGallery4" multiple="" name="gallery[]">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery4-valid" class="visuallyhidden">Neljas pilt</label>
@@ -86,7 +94,7 @@
                                 <div class="col-md-6 col-md-offset-3 img-box">
                                     <div class="form-group no-padding no-margin" >
                                         <label for="inputGallery5" class="visuallyhidden">Viies pilt</label>
-                                        <input type="file" id="inputGallery5" multiple="" name="gallery5">
+                                        <input type="file" id="inputGallery5" multiple="" name="gallery[]">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery5-valid" class="visuallyhidden">Viies pilt</label>
