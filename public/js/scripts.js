@@ -23,7 +23,7 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
-$( "#table" ).fadeIn("slow");
+$("#table").fadeIn(700);
 
 
 // initialize sortable
@@ -191,12 +191,15 @@ function submitAnswer(event, id, type) {
         },
         success: function (data) {
             if (data.response) {
-                toastr.success('Te vastasite õigesti!');
+                var points = document.getElementById('user-points');
+                data.points == points.innerHTML ? toastr.success('Te vastasite õigesti!') :
+                    toastr.success('Te vastasite õigesti ning kogusite 1 punkti.');
+
                 if (data.solution != null) {
                     document.getElementById('solution-text').innerText = data.solution;
                     document.getElementById('solution').style.display = "block";
                 }
-                document.getElementById('user-points').innerText = data.points;
+                points.innerText = data.points;
 
                 $("#active").removeClass("btn-not-solved").addClass("btn-solved");
 
@@ -254,7 +257,7 @@ function addAnswer(count) {
 
     var answer_group = '<div class="form-group" id="answer_group_' + i + '">' +
         ' <label for="a' + i + '"> Vastus ' + i + '</label>' +
-        '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee'+
+        '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
         'malda" name="remove" tabindex="-1" id="' + i + '">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>' +
         '<input class="form-control" id="a' + i + '" name="answer_' + i + '"></div>';

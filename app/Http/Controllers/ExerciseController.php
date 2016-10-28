@@ -76,7 +76,7 @@ class ExerciseController extends Controller
             ->count();
 
         // Get all the exercises
-        $all_exercises = DB::table('exercises')->where('difficulty', $difficulty)->count();
+        $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty],['age_group', $age_group], ['category', $category]])->count();
 
         // Get the percentage of solved exercises
         if ($all_exercises != 0)

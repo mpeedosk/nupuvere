@@ -23,6 +23,11 @@ class Exercise extends Model
         return $this->appends;
     }
 
+
+    /** Return the type name for use in views
+     * @param Int $type - the type of the exercises stored in db
+     * @return String
+     */
     public static function getTypeNameFromInt($type){
         switch ($type) {
             case Exercise::TEXTUAL:
