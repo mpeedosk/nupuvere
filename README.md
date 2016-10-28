@@ -2,6 +2,7 @@
 
 - MySQL
 - Composer
+- PHP >= 5.6
 
 ## Project setup
 
@@ -24,9 +25,10 @@
 
 ### Installing the project
 8. Install the dependencies `composer install`
-9. Populate the database `php artisan migrate --seed`
-10. Launch the website `php artisan serve`
-11. Open in your browser `http://localhost:8000`
+9. Generate a new app key `php artisan key:generate`
+10. Populate the database `php artisan migrate --seed`
+11. Launch the website `php artisan serve`
+12. Open in your browser `http://localhost:8000`
 
 ###
 * You can log in with the username `user` and password `parool`
