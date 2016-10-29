@@ -38,7 +38,12 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('exercise/multiple','ExerciseController@getMultiple');
     Route::get('exercise/order','ExerciseController@getOrder');
 
-    Route::post('exercise/text/new', 'ExerciseController@createTextual');
+    Route::get('exercise/edit/{id}', 'ExerciseController@edit');
+    Route::delete('exercise/delete/{id}', 'ExerciseController@destroy');
+
+    Route::post('exercise/text/create', 'ExerciseController@createTextual');
+    Route::get('exercise/text/edit/{id}', 'ExerciseController@getTextualForEdit');
+    Route::patch('exercise/text/edit/{id}', 'ExerciseController@updateTextual');
 
 });
 

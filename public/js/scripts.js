@@ -243,22 +243,53 @@ function deleteCategory() {
     });
 }
 
-var i = -1;
+function showExerciseConfirm(id, name){
+    $("#confirm-exercise-name").html(name);
+    $("#confirm-exercise-id").html(id);
+    $("#confirm-dialog").modal()
+}
+
+function deleteExercise() {
+    var name = document.getElementById('confirm-exercise-name').innerHTML;
+    var id = document.getElementById('confirm-exercise-id').innerHTML;
+
+    $.ajax({
+        url: "/exercise/delete/" + id,
+        type: 'post',
+        data: {
+            _method: 'delete',
+            '_token': $('input[name="_token"]').val()
+        },
+        success: function (data) {
+            toastr.success(name + " edukalt kustutatud!");
+            document.getElementById('ex-' + id).style.display = 'none';
+        },
+        error: function (xhr) {
+            toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
+        }
+    });
+}
+
+var answerCount = -1;
 
 function addAnswer(count) {
-    if (i == -1)
-        i = count + 1;
+
+    console.log(answerCount + " WTF");
+
+    if (answerCount == -1)
+        answerCount = parseInt(count) + 1;
     else
-        i++;
-    document.getElementById('answer_count').value = i;
+        answerCount++;
+    console.log(answerCount);
+    document.getElementById('answer_count').value = answerCount;
 
 
-    var answer_group = '<div class="form-group" id="answer_group_' + i + '">' +
-        ' <label for="a' + i + '"> Vastus ' + i + '</label>' +
+    var answer_group = '<div class="form-group" id="answer_group_' + answerCount + '">' +
+        ' <label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
         '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
-        'malda" name="remove" tabindex="-1" id="' + i + '">' +
+        'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>' +
-        '<input class="form-control" id="a' + i + '" name="answer_' + i + '"></div>';
+        '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '"></div>';
 
 
     $('#answers').append(answer_group);
@@ -269,18 +300,6 @@ $(document).on('click', '.btn_remove', function () {
     var button_id = $(this).attr("id");
     console.log(button_id);
     $('#answer_group_' + button_id + '').remove();
-});
-
-$('#submit').click(function () {
-    $.ajax({
-        url: "name.php",
-        method: "POST",
-        data: $('#add_name').serialize(),
-        success: function (data) {
-            alert(data);
-            $('#add_name')[0].reset();
-        }
-    });
 });
 
 

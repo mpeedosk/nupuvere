@@ -76,7 +76,7 @@ class ExerciseController extends Controller
             ->count();
 
         // Get all the exercises
-        $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty],['age_group', $age_group], ['category', $category]])->count();
+        $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty], ['age_group', $age_group], ['category', $category]])->count();
 
         // Get the percentage of solved exercises
         if ($all_exercises != 0)
@@ -137,18 +137,15 @@ class ExerciseController extends Controller
         return view('admin.exercises.textual');
     }
 
-
     /** Add a new textual exercise
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse - redirect the user back with flash message
      * */
     public function createTextual(Request $request)
     {
-
-
         // validate user inputs
 
-        $this-> validate(request(), [
+        $this->validate(request(), [
             'ex_title' => 'required | unique:exercises,title',
             'ex_content' => 'required',
             'category' => 'required',
@@ -162,15 +159,15 @@ class ExerciseController extends Controller
 
         $exercise->type = Exercise::TEXTUAL;
 
-        $exercise->title    = $request->ex_title;
-        $exercise->content  = $request->ex_content;
-        $exercise->author   = $request->ex_author;
-        $exercise->hint     = $request->ex_hint;
+        $exercise->title = $request->ex_title;
+        $exercise->content = $request->ex_content;
+        $exercise->author = $request->ex_author;
+        $exercise->hint = $request->ex_hint;
         $exercise->solution = $request->ex_solution;
 
-        $exercise->category     = $request->category;
-        $exercise->age_group    = $request->age_group;
-        $exercise->difficulty   = $request->difficulty;
+        $exercise->category = $request->category;
+        $exercise->age_group = $request->age_group;
+        $exercise->difficulty = $request->difficulty;
 
         $exercise->save();
 
@@ -184,7 +181,7 @@ class ExerciseController extends Controller
         $remaining_answers = $request->answer_count;
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
-            if (isset($ans)&& trim($ans) != '') {
+            if (isset($ans) && trim($ans) != '') {
                 $answer = new Answer;
                 $answer->content = $ans;
                 $answer->is_correct = true;
@@ -200,6 +197,84 @@ class ExerciseController extends Controller
         Session::flash('exercise-create', $request->ex_title);
 
         return redirect()->back();
+    }
+
+    public function getTextualForEdit($ex_id)
+    {
+        // fetch the exercise the user wants to solve
+
+
+        $exercise = DB::table('exercises')
+            ->where('id', $ex_id)
+            ->first();
+
+        if ($exercise->type != Exercise::TEXTUAL)
+            return redirect('admin/exercise');
+
+        $answers = DB::table('answers')
+            ->where('ex_id', $ex_id)
+            ->pluck('content')
+            ->toArray();
+
+        return view('admin.exercises.textual', ['exercise' => $exercise, 'answers' => $answers]);
+
+    }
+
+
+    public function updateTextual(Request $request, $ex_id)
+    {
+        // validate user inputs
+
+
+        $this->validate(request(), [
+            'ex_title' => 'required | unique:exercises,title,' . $ex_id,
+            'ex_content' => 'required',
+            'category' => 'required',
+            'age_group' => 'required',
+            'difficulty' => 'required',
+            'answer_1' => 'required'
+        ]);
+
+        // create and populate a new exercise
+        $exercise = Exercise::find($ex_id);
+
+        if ($exercise->type != Exercise::TEXTUAL)
+            return redirect('admin/exercise');
+
+        $exercise->title = $request->ex_title;
+        $exercise->content = $request->ex_content;
+        $exercise->author = $request->ex_author;
+        $exercise->hint = $request->ex_hint;
+        $exercise->solution = $request->ex_solution;
+
+        $exercise->category = $request->category;
+        $exercise->age_group = $request->age_group;
+        $exercise->difficulty = $request->difficulty;
+
+        $exercise->save();
+
+        // insert the answers
+        // start from the last answer id and try to get every answer in between
+
+        /*        $remaining_answers = $request->answer_count;
+                while ($remaining_answers > 0) {
+                    $ans = $request->input('answer_' . $remaining_answers);
+                    if (isset($ans)&& trim($ans) != '') {
+                        $answer = new Answer;
+                        $answer->content = $ans;
+                        $answer->is_correct = true;
+                        $answer->order = $remaining_answers;
+                        $answer->ex_id = $id;
+                        $answer->save();
+                    }
+                    $remaining_answers--;
+                }*/
+
+
+        // flash the session to show successful operation
+        Session::flash('exercise-create', $request->ex_title);
+
+        return redirect('admin/exercise');
     }
 
     /**
@@ -242,7 +317,25 @@ class ExerciseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $exercise = DB::table('exercises')
+            ->where('id', $id)
+            ->first();
+
+        switch ($exercise->type) {
+            case Exercise::TEXTUAL:
+                return redirect('exercise/text/edit/' . $id);
+                break;
+            case Exercise::MULTIPLE_ONE:
+                return redirect('exercise/choice/edit/' . $id);
+                break;
+            case Exercise::MULTIPLE_MANY:
+                return redirect('exercise/multiple/edit/' . $id);
+                break;
+            case Exercise::ORDERING:
+                return redirect('exercise/order/edit/' . $id);
+                break;
+        }
+        return redirect('admin/exercise');
     }
 
     /**
@@ -265,6 +358,9 @@ class ExerciseController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        DB::table('exercises')->where('id', $id)->delete();
+
+        return redirect()->back();
     }
 }

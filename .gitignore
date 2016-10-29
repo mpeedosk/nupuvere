@@ -10,3 +10,5 @@ Homestead.yaml
 *.iml
 out
 gen
+public/lib/js/plugins/tiny_mce_wiris/formulas/
+public/lib/js/plugins/tiny_mce_wiris/cache/

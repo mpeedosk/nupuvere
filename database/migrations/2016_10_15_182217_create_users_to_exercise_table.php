@@ -17,9 +17,9 @@ class CreateUsersToExerciseTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('ex_id')->unsigned();
-            $table->foreign('ex_id')->references('id')->on('exercises');
+            $table->foreign('ex_id')->references('id')->on('exercises')->onDelete('cascade');
             $table->boolean('solved')->default(false);
             $table->boolean('attempted')->default(false);
             $table->boolean('seen_answer')->default(false);

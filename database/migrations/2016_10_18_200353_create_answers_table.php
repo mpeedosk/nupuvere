@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('ex_id')->unsigned();
-            $table->foreign('ex_id')->references('id')->on('exercises');
+            $table->foreign('ex_id')->references('id')->on('exercises')->onDelete('cascade');
             $table->string('content');
             $table->boolean('is_correct')->default(false);
             $table->integer('order')->default(0);

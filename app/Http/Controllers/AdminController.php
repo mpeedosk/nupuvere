@@ -153,10 +153,10 @@ class AdminController extends Controller
     }
 
     public function upload(Request $request){
+
         $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
         $full_filename = NULL;
 
-        $slug = $request->input('type_slug');
         $file = $request->file('image');
         $filename = str_random(20);
 

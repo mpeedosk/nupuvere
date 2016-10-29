@@ -36,12 +36,6 @@
                 image_caption: true,
                 image_advtab: true,
                 content_css: '/css/main.css',
-                wirisimagebgcolor: '#FFFFFF',
-                wirisimagesymbolcolor: '#000000',
-                wiristransparency: 'true',
-                wirisimagefontsize: '16',
-                wirisimagenumbercolor: '#000000',
-                wirisimageidentcolor: '#000000',
                 wirisformulaeditorlang: 'et'
             });
         });
@@ -70,14 +64,19 @@
         <div class="container">
             <div class="row margin-30">
                 <div class="col-md-7">
-                    <form method="POST" action="/exercise/text/new">
-                        {{ csrf_field() }}
+                    <form method="POST"
+                          action="@if(isset($exercise->id)){{ '/exercise/text/edit/' . $exercise->id }}@else{{ '/exercise/text/create' }}@endif ">
+                        @if(isset($exercise))
+                            {{ method_field('PATCH')}}
+                        @endif
 
+                        {{ csrf_field() }}
                         <div class="form-group label-floating short-input">
                             <label for="ex_title" class="control-label "><span class="fa fa-fw fa-asterisk"
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
-                            <input class="form-control" id="ex_title" name="ex_title">
+                            <input class="form-control" id="ex_title" name="ex_title"
+                                   value="@if(isset($exercise->title)){{ $exercise->title }}@endif">
                             <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
                         </div>
 
@@ -85,27 +84,34 @@
                             <label for="ex_authro" class="control-label"><span class="fa fa-fw"
                                                                                aria-hidden="true"></span>
                                 Ülesande autor</label>
-                            <input class="form-control" id="ex_author" name="ex_author">
+                            <input class="form-control" id="ex_author" name="ex_author"
+                                   value="@if(isset($exercise->author)){{ $exercise->author }}@endif">
                             <span class="help-block color-default">See väli ei ole kohustuslik</span>
                         </div>
 
                         <div class="form-group label-static">
                             <label for="ex_content" class=""><span class="fa fa-fw fa-asterisk"
                                                                    aria-hidden="true"></span>Ülesande püstitus</label>
-                            <textarea class="form-control" id="ex_content" name="ex_content"></textarea>
+                            <textarea class="form-control" id="ex_content" name="ex_content">
+                                @if(isset($exercise->content)){{ $exercise->content }}@endif
+                            </textarea>
                         </div>
 
                         <div class="form-group label-static">
                             <label for="ex_solution" class=""><span class="fa fa-fw"
                                                                     aria-hidden="true"></span>Lahenduskäik</label>
-                            <textarea class=" form-control" id="ex_solution" name="ex_solution"></textarea>
+                            <textarea class=" form-control" id="ex_solution" name="ex_solution">
+                                 @if(isset($exercise->solution)){{ $exercise->solution }}@endif
+                            </textarea>
                         </div>
 
                         <div class="form-group label-static modal-sm">
                             <label for="ex_hint" class=""><span class="fa fa-fw"
                                                                 aria-hidden="true"></span>Lisa vihje</label>
 
-                            <textarea class=" form-control" id="ex_hint" name="ex_hint"></textarea>
+                            <textarea class=" form-control" id="ex_hint" name="ex_hint">
+                                @if(isset($exercise->hint)){{ $exercise->hint }}@endif
+                            </textarea>
                         </div>
                         <div class="form-group label-static">
                             <label for="answer_count" class=""><span class="fa fa-fw fa-asterisk"
@@ -114,10 +120,21 @@
                         </div>
 
                         <div id="answers">
-                            <div class="form-group" id="answer_group_1">
-                                <label class="" for="a1"> Vastus 1</label>
-                                <input class="form-control" id="a1" name="answer_1">
-                            </div>
+
+                            @if(isset($answers))
+                                @foreach($answers as $answer)
+                                    <div class="form-group" id="answer_group_{{$loop->index + 1}}">
+                                        <label class="" for="a{{$loop->index + 1}}"> Vastus {{$loop->index + 1}}</label>
+                                        <input class="form-control" id="a{{$loop->index + 1}}"
+                                               name="answer_{{$loop->index + 1}}" value="{{$answer}}">
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="form-group" id="answer_group_1">
+                                    <label class="" for="a1"> Vastus 1</label>
+                                    <input class="form-control" id="a1" name="answer_1">
+                                </div>
+                            @endif
 
                             {{--<div class="form-group" id="answer_group_2">
                                 <label for="a2"> Vastus 2</label>
@@ -130,19 +147,25 @@
     --}}
                         </div>
 
-                        <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswer(1)">
-                            <span class="glyphicon glyphicon-plus">  </span> Lisa veel üks vastus
+                        <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
+                            @if(isset($answers))onclick="addAnswer({{count($answers)}})"
+                            @else onclick="addAnswer(1)"
+                            @endif>
+                            <span class="glyphicon glyphicon-plus"></span> Lisa veel üks vastus
                         </button>
 
                         <div class="form-group">
                             <label class=""><span class="fa fa-fw fa-asterisk"
                                                   aria-hidden="true"></span>Kategooria: </label>
                             <select class="form-control dropdown-input" name="category">
-                                <option value="matemaatika">Matemaatika</option>
-                                <option value="füüsika">Füüsika</option>
-                                <option value="keemia">Keemia</option>
-                                <option value="bioloogia">Bioloogia</option>
-                                <option value="ajalugu">Ajalugu</option>
+                                @foreach(App\Category::getCategories() as $cat )
+                                    @if(isset($exercise))
+                                    <option value="{{$cat->name}}"
+                                            @if($cat->name == $exercise->category) selected @endif>{{str_replace('_', ' ', ucfirst($cat->name)) }}</option>
+                                    @else
+                                        <option value="{{$cat->name}}">{{str_replace('_', ' ', ucfirst($cat->name)) }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
 
@@ -150,10 +173,18 @@
                             <label class=""><span class="fa fa-fw fa-asterisk"
                                                   aria-hidden="true"></span>Vanuseklass: </label>
                             <select class="form-control dropdown-input" name="age_group">
-                                <option value="avastaja">Avastajad (... - 2kl)</option>
-                                <option value="uurija">Uurijad (3. - 6. kl)</option>
-                                <option value="teadja">Teadjad (7. - 9. kl)</option>
-                                <option value="ekspert">Eksperdid (10. - 12. kl)</option>
+                                <option value="avastaja" @if(isset($exercise) && $exercise->age_group == 'avastaja') selected @endif >
+                                    Avastajad (... - 2kl)
+                                </option>
+                                <option value="uurija" @if(isset($exercise) && $exercise->age_group == 'uurija') selected @endif>Uurijad (3.
+                                    - 6. kl)
+                                </option>
+                                <option value="teadja" @if(isset($exercise) && $exercise->age_group == 'teadja') selected @endif>Teadjad (7.
+                                    - 9. kl)
+                                </option>
+                                <option value="ekspert" @if(isset($exercise) && $exercise->age_group == 'ekspert') selected @endif>Eksperdid
+                                    (10. - 12. kl)
+                                </option>
                             </select>
                         </div>
 
@@ -161,16 +192,26 @@
                             <label class=""><span class="fa fa-fw fa-asterisk"
                                                   aria-hidden="true"></span>Raskusaste: </label>
                             <select class="form-control dropdown-input" name="difficulty">
-                                <option value="lihtne">Lihtne</option>
-                                <option value="keskmine">Keskmine</option>
-                                <option value="raske">Raske</option>
-
+                                <option value="lihtne" @if(isset($exercise) && $exercise->difficulty == 'lihtne') selected @endif>Lihtne
+                                </option>
+                                <option value="keskmine" @if(isset($exercise) && $exercise->difficulty == 'keskmine') selected @endif>
+                                    Keskmine
+                                </option>
+                                <option value="raske" @if(isset($exercise) && $exercise->difficulty == 'raske') selected @endif>Raske
+                                </option>
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-indigo">
-                            Lisa ülesanne
-                        </button>
+                        @if(isset($exercise))
+                            <button type="submit" class="btn btn-info btn-raised">
+                                Uuenda
+                            </button>
+                        @else
+                            <button type="submit" class="btn btn-indigo">
+                                Lisa ülesanne
+                            </button>
+                        @endif
+
                     </form>
                 </div>
             </div>
