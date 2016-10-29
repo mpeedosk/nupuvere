@@ -3,6 +3,7 @@
 @section('description', 'Tekstiline/numbriline')
 @section('scripts')
     <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
+
     <script>
         function setImageValue(url) {
             $('.mce-btn.mce-open').parent().find('.mce-textbox').val(url);
@@ -18,21 +19,23 @@
             tinymce.init({
                 selector: 'textarea',
                 language: 'et',
+                theme: 'modern',
                 menubar: false,
                 relative_urls: false,
-                plugins: 'link, image, code, youtube, imagetools, print, preview, charmap, media, textcolor, hr',
+                plugins: 'link, image, code, youtube, imagetools, print, preview, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
                 extended_valid_elements: 'input[onclick|value|style|type]',
                 file_browser_callback: function (field_name, url, type, win) {
                     if (type == 'image') {
                         $('#upload_file').trigger('click');
                     }
                 },
-                toolbar1: 'styleselect bold italic underline forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent',
-                toolbar2: 'link image editimage youtube | hr subscript superscript charmap preview',
+                toolbar1: 'styleselect | fontselect fontsizeselect | bold italic underline forecolor  | alignleft aligncenter alignright alignjustify | ' +
+                'bullist numlist outdent indent | link image editimage youtube | table | hr | subscript superscript | preview |' +
+                'charmap tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
                 plugin_preview_width: 600,
                 image_caption: true,
-                image_title: true,
-                image_advtab: true
+                image_advtab: true,
+                content_css: '/css/main.css'
             });
         });
     </script>

@@ -1,6 +1,6 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
-@section('description', 'Kategooriad | Lisamine | Muutmine | Kustutamine')
+@section('description', 'Kategooriate ülevaade')
 
 
 @section('content')

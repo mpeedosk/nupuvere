@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
 @section('content')
+    <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
     <section class="margin-vert-30">
         <div class="container">
             <div class="row">

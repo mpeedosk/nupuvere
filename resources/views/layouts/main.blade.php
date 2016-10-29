@@ -54,6 +54,7 @@
 
 </head>
 <body id="body-bg">
+
 <!-- Header -->
 @include('includes.header')
 <!-- End Header -->

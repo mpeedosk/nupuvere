@@ -23,8 +23,6 @@ toastr.options = {
     "hideMethod": "fadeOut"
 };
 
-// $("#table").fadeIn(700);
-
 
 // initialize sortable
 var el = document.getElementById('draggable');
@@ -131,8 +129,7 @@ function showAnswer(id, type) {
                     break;
             }
             if (data.solution != null) {
-                console.log(data.solution);
-                document.getElementById('solution-text').insertAdjacentHTML('beforeend',data.solution);
+                document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                 document.getElementById('solution').style.display = "block";
             }
             document.getElementById('submit-answer').disabled = true;
@@ -197,7 +194,7 @@ function submitAnswer(event, id, type) {
                     toastr.success('Te vastasite õigesti ning kogusite 1 punkti.');
 
                 if (data.solution != null) {
-                    document.getElementById('solution-text').innerText = data.solution;
+                    document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                     document.getElementById('solution').style.display = "block";
                 }
                 points.innerText = data.points;
