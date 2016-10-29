@@ -35,7 +35,14 @@
                 plugin_preview_width: 600,
                 image_caption: true,
                 image_advtab: true,
-                content_css: '/css/main.css'
+                content_css: '/css/main.css',
+                wirisimagebgcolor: '#FFFFFF',
+                wirisimagesymbolcolor: '#000000',
+                wiristransparency: 'true',
+                wirisimagefontsize: '16',
+                wirisimagenumbercolor: '#000000',
+                wirisimageidentcolor: '#000000',
+                wirisformulaeditorlang: 'et'
             });
         });
     </script>
