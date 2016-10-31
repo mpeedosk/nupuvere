@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('order');
+            $table->string('color')->default("#eeeeee");
             $table->string('name')->unique();
         });
     }

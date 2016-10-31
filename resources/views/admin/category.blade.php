@@ -33,7 +33,8 @@
                         <thead>
                         <tr>
                             <th class="col-md-1" data-sortable="true">ID</th>
-                            <th class="col-md-6">Nimi</th>
+                            <th class="col-md-5">Nimi</th>
+                            <th class="col-md-1">Värv</th>
                             <th class="col-md-1" data-sortable="true">Järjekord</th>
                             <th class="col-md-4">Tegevus</th>
                         </tr>
@@ -44,6 +45,7 @@
                             <tr id="cat-{{$category->id}}">
                                 <td>{{$category->id}}</td>
                                 <td>{{ str_replace('_', ' ', ucfirst($category->name) )}}</td>
+                                <td><div style="background-color: {{$category->color}}; width: 100%;">&nbsp;</div></td>
                                 <td><input type="number" min="1" max="{{$count}}"
                                            value="{{$category->order}}" name="{{$category->name}}"></td>
                                 <td class="text-center">

@@ -870,7 +870,7 @@ footer, .push {
 
 #nav .container {
     background-color: #313131;
-    box-shadow: 0 -4px 0 #3f51b5 inset, 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 0 #707070 inset, 0 0 20px rgba(0, 0, 0, 0.1);
     min-height: 60px;
     display: block;
 }
@@ -900,6 +900,8 @@ footer, .push {
 #nav ul#navmenu > li > a,
 #nav ul#navmenu > li > span {
     color: #e3e3e3;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
     font-size: 1em;
     font-weight: normal;
     letter-spacing: 1px;
@@ -927,8 +929,7 @@ footer, .push {
 #nav ul ul {
     text-align: left;
     background: #f2f2f2;
-    border-radius: 5px;
-    border: 1px solid #dddddd;
+    border: 1px solid #313131;
     position: relative;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
@@ -938,7 +939,7 @@ footer, .push {
     display: block;
     list-style: none;
     margin: 0px;
-    padding: 5px 0 !important;
+    padding: 0 0 !important;
     min-width: 200px;
     z-index: 30;
 }
@@ -956,7 +957,9 @@ footer, .push {
     box-shadow: none;
     display: block;
     padding: 6px 15px;
-    color: #555555 !important;
+    color: #e3e3e3 !important;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
     text-transform: none;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
