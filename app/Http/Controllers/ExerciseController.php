@@ -172,12 +172,20 @@ class ExerciseController extends Controller
         $exercise->save();
 
         // fetch the just created exercise id
-        $id = $exercise->id;
-
 
         // insert the answers
         // start from the last answer id and try to get every answer in between
+        $this->addAnswers($request, $exercise->id);
 
+
+
+        // flash the session to show successful operation
+        Session::flash('exercise-create', $request->ex_title);
+
+        return redirect()->back();
+    }
+
+    private function addAnswers($request, $id){
         $remaining_answers = $request->answer_count;
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
@@ -191,12 +199,6 @@ class ExerciseController extends Controller
             }
             $remaining_answers--;
         }
-
-
-        // flash the session to show successful operation
-        Session::flash('exercise-create', $request->ex_title);
-
-        return redirect()->back();
     }
 
     public function getTextualForEdit($ex_id)
@@ -256,26 +258,22 @@ class ExerciseController extends Controller
         // insert the answers
         // start from the last answer id and try to get every answer in between
 
-        /*        $remaining_answers = $request->answer_count;
-                while ($remaining_answers > 0) {
-                    $ans = $request->input('answer_' . $remaining_answers);
-                    if (isset($ans)&& trim($ans) != '') {
-                        $answer = new Answer;
-                        $answer->content = $ans;
-                        $answer->is_correct = true;
-                        $answer->order = $remaining_answers;
-                        $answer->ex_id = $id;
-                        $answer->save();
-                    }
-                    $remaining_answers--;
-                }*/
+        $id = $exercise->id;
 
+        DB::table('answers')->where('ex_id', $id)->delete();
+        $this->addAnswers($request, $id);
 
         // flash the session to show successful operation
         Session::flash('exercise-create', $request->ex_title);
 
         return redirect('admin/exercise');
     }
+
+    public function getChoice()
+    {
+        return view('admin.exercises.multipleone');
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -272,24 +272,61 @@ function deleteExercise() {
 
 var answerCount = -1;
 
-function addAnswer(count) {
-
-    console.log(answerCount + " WTF");
-
+function updateAnswerCount(count){
     if (answerCount == -1)
         answerCount = parseInt(count) + 1;
     else
         answerCount++;
-    console.log(answerCount);
+}
+
+
+
+function addAnswer(count) {
+
+    updateAnswerCount(count);
+
     document.getElementById('answer_count').value = answerCount;
 
+    var answer_group =
+        '<div class="form-group" id="answer_group_' + answerCount + '">' +
+            '<label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
+            '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
+                'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+                '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+            '</button>' +
+            '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '">' +
+        '</div>';
 
-    var answer_group = '<div class="form-group" id="answer_group_' + answerCount + '">' +
-        ' <label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
-        '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
-        'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
-        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>' +
-        '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '"></div>';
+
+    $('#answers').append(answer_group);
+
+}
+
+function addAnswerChoice(count){
+    updateAnswerCount(count);
+
+    document.getElementById('answer_count').value = answerCount;
+    var userInput = document.getElementById('answer-title');
+    content = userInput.value;
+    userInput.value = "";
+
+    console.log(content);
+
+    var answer_group =
+        '<div class="form-group" id="answer_group_' + answerCount + '">'+
+            '<div class="radio radio-inline">' +
+                '<label for="answer_'+ answerCount + '">'+
+                    '<input id="answer_' + answerCount + '" type="radio" name="answer">'+
+                        '<span class="circle"></span>' +
+                        '<span class="check"></span>'+
+                        content +
+                '</label>'+
+            '</div>'+
+            '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"'+
+            'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount +'">'+
+                '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+            '</button>' +
+        '</div>';
 
 
     $('#answers').append(answer_group);

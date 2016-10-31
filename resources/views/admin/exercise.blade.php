@@ -23,27 +23,30 @@
                 <h2>Lisa uus: </h2>
 
                 <div class="list-group">
+
                     <div class="list-group-item">
                         <a href="/exercise/text" class="list-group-item-heading">
                             <span class="fa fa-fw fa-quote-left" aria-hidden="true"></span>
                             Tekstiline/numbriline</a>
                     </div>
+
                     <div class="list-group-item">
-                        <a href="#" class="list-group-item-heading">
+                        <a href="/exercise/choice" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-circle-o" aria-hidden="true"></span>
                             Valikvastusega - üks õige</a>
                     </div>
+
                     <div class="list-group-item">
                         <a href="#" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-square" aria-hidden="true"></span>
                             Valikvastusega - mitu õiget</a>
                     </div>
+
                     <div class="list-group-item botto">
                         <a href="#" class="list-group-item-heading">
                             <span class="fa fa-fw fa-sort-amount-asc" aria-hidden="true"></span>
                             Järjestamine</a>
                     </div>
-
                 </div>
 
                 <h2 class="table-title">Ülesanded</h2>

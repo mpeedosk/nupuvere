@@ -125,6 +125,9 @@
                                 @foreach($answers as $answer)
                                     <div class="form-group" id="answer_group_{{$loop->index + 1}}">
                                         <label class="" for="a{{$loop->index + 1}}"> Vastus {{$loop->index + 1}}</label>
+                                        <button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button"
+                                                data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="{{$loop->index + 1}}">
+                                            <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>
                                         <input class="form-control" id="a{{$loop->index + 1}}"
                                                name="answer_{{$loop->index + 1}}" value="{{$answer}}">
                                     </div>

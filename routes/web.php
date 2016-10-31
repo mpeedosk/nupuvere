@@ -45,6 +45,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('exercise/text/edit/{id}', 'ExerciseController@getTextualForEdit');
     Route::patch('exercise/text/edit/{id}', 'ExerciseController@updateTextual');
 
+
+
 });
 
 Route::group(['middleware' => 'auth'], function () {
