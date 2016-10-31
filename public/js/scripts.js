@@ -243,7 +243,7 @@ function deleteCategory() {
     });
 }
 
-function showExerciseConfirm(id, name){
+function showExerciseConfirm(id, name) {
     $("#confirm-exercise-name").html(name);
     $("#confirm-exercise-id").html(id);
     $("#confirm-dialog").modal()
@@ -272,13 +272,12 @@ function deleteExercise() {
 
 var answerCount = -1;
 
-function updateAnswerCount(count){
+function updateAnswerCount(count) {
     if (answerCount == -1)
         answerCount = parseInt(count) + 1;
     else
         answerCount++;
 }
-
 
 
 function addAnswer(count) {
@@ -289,12 +288,12 @@ function addAnswer(count) {
 
     var answer_group =
         '<div class="form-group" id="answer_group_' + answerCount + '">' +
-            '<label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
-            '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
-                'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
-                '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
-            '</button>' +
-            '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '">' +
+        '<label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
+        '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
+        'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+        '</button>' +
+        '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '">' +
         '</div>';
 
 
@@ -302,7 +301,7 @@ function addAnswer(count) {
 
 }
 
-function addAnswerChoice(count){
+function addAnswerChoice(count) {
     updateAnswerCount(count);
 
     document.getElementById('answer_count').value = answerCount;
@@ -313,19 +312,19 @@ function addAnswerChoice(count){
     console.log(content);
 
     var answer_group =
-        '<div class="form-group" id="answer_group_' + answerCount + '">'+
-            '<div class="radio radio-inline">' +
-                '<label for="answer_'+ answerCount + '">'+
-                    '<input id="answer_' + answerCount + '" type="radio" name="answer">'+
-                        '<span class="circle"></span>' +
-                        '<span class="check"></span>'+
-                        content +
-                '</label>'+
-            '</div>'+
-            '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"'+
-            'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount +'">'+
-                '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
-            '</button>' +
+        '<div class="form-group" id="answer_group_' + answerCount + '">' +
+        '<div class="radio radio-inline">' +
+        '<label for="answer_' + answerCount + '">' +
+        '<input id="answer_' + answerCount + '" type="radio" name="answer">' +
+        '<span class="circle"></span>' +
+        '<span class="check"></span>' +
+        content +
+        '</label>' +
+        '</div>' +
+        '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"' +
+        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+        '</button>' +
         '</div>';
 
 
@@ -342,9 +341,37 @@ $(document).on('click', '.btn_remove', function () {
 
 $('#ex-content').find('img').addClass('ex-image');
 
-$(function() {
-    $('.ex-image').on('click', function() {
+$(function () {
+    $('.ex-image').on('click', function () {
         $('.enlargeImageModalSource').attr('src', $(this).attr('src'));
         $('#enlargeImageModal').modal();
     });
+});
+
+
+$('#table').bootstrapTable({
+    onPostBody: function (data) {
+        $('.color').colorPicker({
+            opacity: false,
+
+            buildCallback: function($elm) {
+                this.$colorPatch = $elm.prepend('<div class="cp-disp">').find('.cp-disp');
+            },
+            cssAddon:
+            '.cp-disp {padding:10px; margin-bottom:6px; font-size:16px; height:25px; line-height:6px}' +
+            '.cp-xy-slider {width:150px; height:150px;}' +
+            '.cp-xy-cursor {width:16px; height:16px; border-width:2px; margin:-8px}' +
+            '.cp-z-slider {height:150px; width:25px;}' +
+            '.cp-z-cursor {border-width:8px; margin-top:-8px;}',
+
+            renderCallback: function($elm, toggled) {
+                var colors = this.color.colors;
+
+                this.$colorPatch.css({
+                    backgroundColor: '#' + colors.HEX,
+                    color: colors.RGBLuminance > 0.22 ? '#222' : '#ddd'
+                }).text(this.color.toString($elm._colorMode)); // $elm.val();
+            }
+        });
+    }
 });

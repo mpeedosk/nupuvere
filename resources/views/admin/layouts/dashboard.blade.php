@@ -18,8 +18,6 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
-
-
     @if (App::isLocal())
         <link rel="stylesheet" href="{{asset('css/bootstrap-material-design.css')}}">
         <link rel="stylesheet" href="{{asset('css/animate.css')}}">
@@ -44,6 +42,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tinyColorPicker/1.1.1/jqColorPicker.min.js"></script>
 
     @yield('scripts')
 
@@ -87,6 +86,7 @@
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/admin.only.js')}}"></script>
 @endif
+
 
 </body>
 </html>

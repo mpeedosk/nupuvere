@@ -32,6 +32,7 @@ class CategoryController extends Controller
 
         $category->name = str_replace(' ', '_', mb_strtolower($request->name));;
         $category->order = $categoryLast + 1;
+        $category->color = $request->color;
 
         $category->save();
 
@@ -59,9 +60,8 @@ class CategoryController extends Controller
             ->toArray();
 
         foreach ($categories as $category) {
-            DB::table('categories')
-                ->where('name', $category)
-                ->update(['order' => $request->input($category)]);
+            Category::where('name',$category)->update(['order' => $request->input($category)]);
+            Category::where('name',$category)->update(['color' => $request->input("cp-".$category)]);
         }
 
         Session::flash('category-update', "true");

@@ -870,10 +870,12 @@ footer, .push {
 
 #nav .container {
     background-color: #313131;
-    box-shadow: 0 -4px 0 #707070 inset, 0 0 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 0 #3f51b5 inset, 0 0 20px rgba(63, 81, 185, 0.20);
+    /*box-shadow: 0 -4px 0 #707070 inset, 0 0 20px rgba(0, 0, 0, 0.1);*/
     min-height: 60px;
     display: block;
 }
+
 .nav-bar-active{
     border-bottom: 4px solid #ffba57;
 }
@@ -907,7 +909,6 @@ footer, .push {
     letter-spacing: 1px;
     line-height: normal;
     padding: 19px 16px 20px;
-    text-transform: uppercase;
     display: block;
 }
 

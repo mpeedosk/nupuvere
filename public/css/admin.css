@@ -274,6 +274,25 @@ h4 {
 .category-row {
     padding-right: 40px;
 }
+.new-category{
+    margin-left: 20px;
+}
+.new-category .color{
+    margin-top: 2px;
+    min-width: 70px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.color{
+    border:none;
+    width: 100%;
+    color: rgba(0,0,0,0) !important;
+    cursor: pointer;
+}
+.cp-color-picker{
+    z-index: 2;
+}
 
 table {
     background-color: #616161;
@@ -347,4 +366,5 @@ tr a:hover {
     padding-left: 10px;
     padding-right: 10px;
 }
+
 
