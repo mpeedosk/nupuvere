@@ -201,7 +201,7 @@ class ExerciseController extends Controller
         }
     }
 
-    public function getTextualForEdit($ex_id)
+    public function getExerciseForEdit($ex_id)
     {
         // fetch the exercise the user wants to solve
 
@@ -210,15 +210,19 @@ class ExerciseController extends Controller
             ->where('id', $ex_id)
             ->first();
 
-        if ($exercise->type != Exercise::TEXTUAL)
-            return redirect('admin/exercise');
-
         $answers = DB::table('answers')
             ->where('ex_id', $ex_id)
-            ->pluck('content')
+            ->orderBy('order', 'asc')
+            ->get()
             ->toArray();
 
-        return view('admin.exercises.textual', ['exercise' => $exercise, 'answers' => $answers]);
+        switch ($exercise->type){
+            case Exercise::TEXTUAL:
+                return view('admin.exercises.textual', ['exercise' => $exercise, 'answers' => $answers]);
+            case Exercise::MULTIPLE_ONE:
+                return view('admin.exercises.multipleone', ['exercise' => $exercise, 'answers' => $answers]);
+        }
+        return redirect('admin/exercise');
 
     }
 
@@ -274,7 +278,126 @@ class ExerciseController extends Controller
         return view('admin.exercises.multipleone');
     }
 
+    public function createChoice(Request $request)
+    {
+        // validate user inputs
 
+        $this->validate(request(), [
+            'ex_title' => 'required | unique:exercises,title',
+            'ex_content' => 'required',
+            'category' => 'required',
+            'age_group' => 'required',
+            'difficulty' => 'required',
+            'answer' => 'required'
+        ]);
+
+        // create and populate a new exercise
+        $exercise = new Exercise;
+
+        $exercise->type = Exercise::MULTIPLE_ONE;
+
+        $exercise->title = $request->ex_title;
+        $exercise->content = $request->ex_content;
+        $exercise->author = $request->ex_author;
+        $exercise->hint = $request->ex_hint;
+        $exercise->solution = $request->ex_solution;
+
+        $exercise->category = $request->category;
+        $exercise->age_group = $request->age_group;
+        $exercise->difficulty = $request->difficulty;
+
+        $exercise->save();
+
+        // fetch the just created exercise id
+
+        // insert the answers
+        // start from the last answer id and try to get every answer in between
+        $this->addAnswersChoice($request, $exercise->id);
+
+
+
+        // flash the session to show successful operation
+        Session::flash('exercise-create', $request->ex_title);
+
+        return redirect()->back();
+    }
+
+
+    // Needs refactoring
+
+    private function addAnswersChoice($request, $id){
+        $remaining_answers = $request->answer_count;
+        $correct_order = 0;
+        // add the incorrect answers first
+        while ($remaining_answers > 0) {
+            $ans = $request->input('incorrect_' . $remaining_answers);
+            if (isset($ans) && trim($ans) != '') {
+                $answer = new Answer;
+                $answer->content = $ans;
+                $answer->is_correct = false;
+                $answer->order = $remaining_answers;
+                $answer->ex_id = $id;
+                $answer->save();
+            }else{
+                $correct_order = $remaining_answers;
+            }
+            $remaining_answers--;
+        }
+
+        // add the correct answer
+        $answer = new Answer;
+            $answer->content = $request->input('answer');
+            $answer->is_correct = true;
+            $answer->order = $correct_order;
+            $answer->ex_id = $id;
+            $answer->save();
+    }
+
+    public function updateChoice(Request $request, $ex_id)
+    {
+        // validate user inputs
+
+
+        $this->validate(request(), [
+            'ex_title' => 'required | unique:exercises,title,' . $ex_id,
+            'ex_content' => 'required',
+            'category' => 'required',
+            'age_group' => 'required',
+            'difficulty' => 'required',
+            'answer' => 'required'
+        ]);
+
+        // create and populate a new exercise
+        $exercise = Exercise::find($ex_id);
+
+        if ($exercise->type != Exercise::MULTIPLE_ONE)
+            return redirect('admin/exercise');
+
+        $exercise->title = $request->ex_title;
+        $exercise->content = $request->ex_content;
+        $exercise->author = $request->ex_author;
+        $exercise->hint = $request->ex_hint;
+        $exercise->solution = $request->ex_solution;
+
+        $exercise->category = $request->category;
+        $exercise->age_group = $request->age_group;
+        $exercise->difficulty = $request->difficulty;
+
+        $exercise->save();
+
+        // insert the answers
+        // start from the last answer id and try to get every answer in between
+
+        $id = $exercise->id;
+
+        DB::table('answers')->where('ex_id', $id)->delete();
+        $this->addAnswersChoice($request, $exercise->id);
+
+        // flash the session to show successful operation
+        Session::flash('exercise-create', $request->ex_title);
+
+        return redirect('admin/exercise');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -313,28 +436,7 @@ class ExerciseController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $exercise = DB::table('exercises')
-            ->where('id', $id)
-            ->first();
 
-        switch ($exercise->type) {
-            case Exercise::TEXTUAL:
-                return redirect('exercise/text/edit/' . $id);
-                break;
-            case Exercise::MULTIPLE_ONE:
-                return redirect('exercise/choice/edit/' . $id);
-                break;
-            case Exercise::MULTIPLE_MANY:
-                return redirect('exercise/multiple/edit/' . $id);
-                break;
-            case Exercise::ORDERING:
-                return redirect('exercise/order/edit/' . $id);
-                break;
-        }
-        return redirect('admin/exercise');
-    }
 
     /**
      * Update the specified resource in storage.

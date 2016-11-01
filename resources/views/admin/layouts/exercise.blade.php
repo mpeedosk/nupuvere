@@ -1,6 +1,4 @@
 @extends('admin.layouts.dashboard')
-@section('title', 'Administraator')
-@section('description', 'Valikvastustega - üks õige')
 @section('scripts')
     <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
 
@@ -9,6 +7,12 @@
             $('.mce-btn.mce-open').parent().find('.mce-textbox').val(url);
         }
         $(document).ready(function () {
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
 
             tinymce.init({
                 selector: 'textarea',
@@ -58,8 +62,8 @@
         <div class="container">
             <div class="row margin-30">
                 <div class="col-md-7">
-                    <form method="POST" onSubmit="return getCheckedValue()"
-                          action="@if(isset($exercise->id)){{ '/exercise/choice/edit/' . $exercise->id }}@else{{ '/exercise/choice/create' }}@endif ">
+                    <form method="POST"
+                          action="@if(isset($exercise->id)){{ '/exercise/text/edit/' . $exercise->id }}@else{{ '/exercise/text/create' }}@endif ">
                         @if(isset($exercise))
                             {{ method_field('PATCH')}}
                         @endif
@@ -108,69 +112,12 @@
                             </textarea>
                         </div>
                         <div class="form-group label-static">
-                            <label for="answer_count" onclick="getCheckedValue()"><span class="fa fa-fw fa-asterisk"
-                                                                                        aria-hidden="true"></span>Lisa
-                                vastus</label>
-                            <input hidden id="answer_count" name="answer_count" value="0">
+                            <label for="answer_count" class=""><span class="fa fa-fw fa-asterisk"
+                                                                     aria-hidden="true"></span>Lisa vastus</label>
+                            <input id="answer_count" class="hidden" name="answer_count" value="0">
                         </div>
 
-                        <div id="answers">
-
-                            @if(isset($answers))
-                                @foreach($answers as $answer)
-                                    <div class="form-group margin-top-10" id="answer_group_{{$loop->index + 1}}">
-                                        <div class="radio radio-inline">
-                                            <label for="answer_{{$loop->index + 1}}">
-                                                <input id="answer_{{$loop->index + 1}}" type="radio" name="answer"
-                                                       value="{{$answer->content}}" @if($answer->is_correct) checked="checked" @endif>
-                                                {{$answer->content}}
-                                            </label>
-                                        </div>
-                                        <button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"
-                                                data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="{{$loop->index + 1}}">
-                                            <span class="glyphicon glyphicon-remove pull-right"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    </div>
-                                @endforeach
-                            @endif
-
-
-                            {{--
-                                                        <div class="form-group" id="answer_group_1">
-                                                            <div class="radio radio-inline">
-                                                                <label for="answer_1">
-                                                                    <input id="answer_1" type="radio" name="answer">
-                                                                    Tere
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                            --}}
-
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="answer-title">Lisa veel vastusevariante</label>
-                            <div class="input-group">
-                                <input type="text" id="answer-title" class="form-control">
-                                <span class="input-group-btn">
-                                    <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
-                                            @if(isset($answers)) onclick="addAnswerChoice({{count($answers)}})"
-                                            @else onclick="addAnswerChoice(0)"
-                                            @endif
-                                    >
-                                        <span class="glyphicon glyphicon-plus"></span>&nbsp;Lisa</button>
-                                 </span>
-                            </div>
-                        </div>
-
-                        {{--                            <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
-                                                            @if(isset($answers))onclick="addAnswer({{count($answers)}})"
-                                                            @else onclick="addAnswer(1)"
-                                                            @endif>
-                                                        <span class="glyphicon glyphicon-plus"></span> Lisa veel üks vastus
-                                                    </button>--}}
-
+                        @yield('answer-content')
 
                         <div class="form-group">
                             <label class=""><span class="fa fa-fw fa-asterisk"

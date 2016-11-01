@@ -40,7 +40,7 @@
                             <input type="text" id="newCategory" class="form-control" name="name"
                                    value="{{old('name')}}">
                             <span class="input-group-addon">
-                                    <input class="color btn btn-sm btn-raised" name="color"
+                                    <input class="color btn btn-sm btn-raised" spellcheck=false name="color"
                                            value="#5e70d4" maxlength="7"/>
                                 </span>
 
@@ -89,7 +89,7 @@
                                 <td>
                                     <div class="input-toggles wrapper">
                                         <input class="color" name="cp-{{$category->name}}" value="{{$category->color}}"
-                                               maxlength="7"/>
+                                               spellcheck=false maxlength="7"/>
                                     </div>
                                 </td>
                                 <td><input type="number" min="1" max="{{$count}}"

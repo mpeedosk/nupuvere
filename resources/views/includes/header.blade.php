@@ -85,9 +85,10 @@
                                          style="display:inline-block; width: 80%; padding-top: 10px;">
 
                                         <div class="pull-left">
-                                            <span id="points-icon" class="fa fa-trophy"
+                                            <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
+                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
                                         </div>
                                         <h2 style="display:inline-block;">{{Auth::user() -> username }}</h2>
 
@@ -118,7 +119,7 @@
                                          style="width: 80%; padding-top: 10px;">
 
                                         <div class="col-xs-4">
-                                            <span id="points-icon" class="fa fa-trophy"
+                                            <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
                                         </div>

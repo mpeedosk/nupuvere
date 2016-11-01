@@ -33,18 +33,22 @@ Route::group(['middleware' => 'admin'], function () {
     Route::patch('categories/update', 'CategoryController@update');
     Route::delete('categories/delete/{id}', 'CategoryController@destroy');
 
-    Route::get('exercise/text','ExerciseController@getTextual');
-    Route::get('exercise/choice','ExerciseController@getChoice');
+
+    // EXERCICE CONTROLLER NEEDS REFACTORING!
+
     Route::get('exercise/multiple','ExerciseController@getMultiple');
     Route::get('exercise/order','ExerciseController@getOrder');
 
-    Route::get('exercise/edit/{id}', 'ExerciseController@edit');
+    Route::get('exercise/edit/{id}', 'ExerciseController@getExerciseForEdit');
     Route::delete('exercise/delete/{id}', 'ExerciseController@destroy');
 
+    Route::get('exercise/text','ExerciseController@getTextual');
     Route::post('exercise/text/create', 'ExerciseController@createTextual');
-    Route::get('exercise/text/edit/{id}', 'ExerciseController@getTextualForEdit');
     Route::patch('exercise/text/edit/{id}', 'ExerciseController@updateTextual');
 
+    Route::get('exercise/choice','ExerciseController@getChoice');
+    Route::post('exercise/choice/create', 'ExerciseController@createChoice');
+    Route::patch('exercise/choice/edit/{id}', 'ExerciseController@updateChoice');
 
 
 });

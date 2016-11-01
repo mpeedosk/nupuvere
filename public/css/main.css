@@ -2257,9 +2257,13 @@ ul.posts-list li {
     font-size: 2.5em;
 }
 
-#points-icon {
+.points-icon {
     display: inline-block;
     font-size: 2.6em;
+}
+.points-increase{
+    color: #4caf50;
+    opacity: 0;
 }
 
 @media (min-width: 992px) {
