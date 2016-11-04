@@ -105,35 +105,7 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        if ($request->ajax()){
-            return $request->input("fileselect");
-
-        }
-
-/*        $fn = (isset($_SERVER['HTTP_X_FILENAME']) ? $_SERVER['HTTP_X_FILENAME'] : false);
-
-        if ($fn) {
-
-            // AJAX call
-        }
-        else {
-
-            // form submit
-            $files = $_FILES['fileselect'];
-
-            foreach ($files['error'] as $id => $err) {
-                if ($err == UPLOAD_ERR_OK) {
-                    $fn = $files['name'][$id];
-                    move_uploaded_file(
-                        $files['tmp_name'][$id],
-                        'uploads/' . $fn
-                    );
-                    echo "<p>File $fn uploaded.</p>";
-                }
-            }
-
-        }*/
+        //
     }
 
 
@@ -148,13 +120,13 @@ class AdminController extends Controller
 
         $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
 
-        foreach ($images as $image) {
+/*        foreach ($images as $image) {
             $file = $request->file($image);
             if ($file != null) {
                 $img = Image::make($file)->resize(1080, 422);
                 $img->save('img/gallery/' . $image . '.png');
             }
-        }
+        }*/
 
         Session::flash('main-gallery', 'Galerii uuendatud!');
 
@@ -224,5 +196,3 @@ class AdminController extends Controller
     }
 
 }
-
-

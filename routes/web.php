@@ -25,7 +25,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/highscore', 'AdminController@home');
     Route::get('admin/admins', 'AdminController@home');
 
-    Route::post('admin/upload/gallery', 'AdminController@update');
+    Route::post('admin/upload/gallery', 'AdminController@updateGallery');
     Route::post('admin/upload/logo', 'AdminController@updateLogos');
     Route::post('admin/upload', 'AdminController@upload');
 
