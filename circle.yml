@@ -4,7 +4,7 @@ machine:
 
 database:
   override:
-    - php artisan migrate --seed
+    - php artisan migrate:refresh --seed
 
 deployment:
   staging:
