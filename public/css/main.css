@@ -918,7 +918,7 @@ footer, .push {
 #nav ul#navmenu > li > span.active,
 #nav ul#navmenu > li > a.current,
 #nav ul#navmenu > li > span.current {
-    background: #3f51b5;
+    background: #424242;
 }
 
 #nav .nav > li > a:hover,
@@ -929,8 +929,8 @@ footer, .push {
 /* Dropdown Menu */
 #nav ul ul {
     text-align: left;
-    background: #f2f2f2;
-    border: 1px solid #313131;
+    background: #424242;
+    border: 2px solid #313131;
     position: relative;
     -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
@@ -958,23 +958,13 @@ footer, .push {
     box-shadow: none;
     display: block;
     padding: 6px 15px;
-    color: #e3e3e3 !important;
-    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,
-    -1px 1px 0 #000, 1px 1px 0 #000;
+    color: #EEEEEE !important;
+    /*text-shadow: -1px -1px 0 #000, 1px -1px 0 #000,*/
+    /*-1px 1px 0 #000, 1px 1px 0 #000;*/
     text-transform: none;
     border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-#nav ul ul:before {
-    background: transparent url('../img/menu_arrow.png') no-repeat 0 0;
-    content: "";
-    display: block;
-    height: 10px;
-    left: 21px;
-    position: absolute;
-    top: -10px;
-    width: 14px;
-}
 
 #nav ul ul li:first-child a {
     border: none;
@@ -984,7 +974,7 @@ footer, .push {
 #nav ul ul li a:focus,
 #nav ul ul li a:hover {
     text-decoration: none;
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 #nav ul ul li:hover a {

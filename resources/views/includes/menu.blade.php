@@ -8,25 +8,25 @@
                         mb_strtolower($cat->name) ) background-color: {{$cat->color}};@endif">
                             <span>{{str_replace('_', ' ', ucfirst($cat->name)) }}</span>
                             <ul>
-                                <li style="background-color: {{shade4($cat->color)}}">
+                                <li style="border-bottom: 3px solid {{shade4($cat->color)}}">
                                     <div>
                                         <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/avastaja">Avastajad
                                             <em class="pull-right">(.. - 2.kl)</em></a>
                                     </div>
                                 </li>
-                                <li style="background-color: {{shade3($cat->color)}}">
+                                <li style="border-bottom: 3px solid {{shade3($cat->color)}}" >
                                     <div>
                                         <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/uurija">Uurijad
                                             <em class="pull-right">(3. - 6.kl)</em></a>
                                     </div>
                                 </li>
-                                <li style="background-color: {{shade2($cat->color)}}">
+                                <li style="border-bottom: 3px solid {{shade1($cat->color)}}" >
                                     <div>
                                         <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/teadja">Teadjad
                                             <em class="pull-right">(7. - 9. kl)</em></a>
                                     </div>
                                 </li>
-                                <li style="background-color: {{shade1($cat->color)}}">
+                                <li style="border-bottom: 3px solid {{shade1($cat->color)}}">
                                     <div>
                                         <a class="withripple" href="/{{str_replace(' ', '_', mb_strtolower($cat->name))}}/ekspert">Eksperdid
                                             <em class="pull-right">(10. - 12. kl)</em></a>

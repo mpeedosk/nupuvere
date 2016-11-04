@@ -91,10 +91,13 @@
                 </div>
 
                 <div class="col-md-2 margin-50-lg text-center">
+
+                    @if(!$exercise -> hint == "")
                     <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
                             data-target="#hint-dialog">
                         <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                     </button>
+                    @endif
 
                     @if(!Auth::guest() )
                         <button type="button" class="btn btn-danger btn-default" data-toggle="modal"
