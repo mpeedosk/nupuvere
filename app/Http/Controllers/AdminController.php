@@ -120,13 +120,13 @@ class AdminController extends Controller
 
         $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
 
-/*        foreach ($images as $image) {
+        foreach ($images as $image) {
             $file = $request->file($image);
             if ($file != null) {
                 $img = Image::make($file)->resize(1080, 422);
                 $img->save('img/gallery/' . $image . '.png');
             }
-        }*/
+        }
 
         Session::flash('main-gallery', 'Galerii uuendatud!');
 
