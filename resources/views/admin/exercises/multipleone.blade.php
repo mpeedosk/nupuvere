@@ -1,7 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
 @section('description', 'Valikvastustega - üks õige')
-@section('scripts')
+@section('css')
     <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
 
     <script>

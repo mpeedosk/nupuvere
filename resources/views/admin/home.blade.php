@@ -3,6 +3,10 @@
 @section('description', 'Pealehe haldus')
 
 
+@section('css')
+
+@endsection
+
 @section('content')
 
     @if(Session::has('main-gallery'))
@@ -27,7 +31,6 @@
         </div>--}}
 
         <div class="se-pre-con"></div>
-
         <div class="container">
             <div class="row vert-full full-height">
                 <div class="col-md-6 vert-full text-center">
@@ -38,13 +41,15 @@
                         </h2>
 
                         <hr>
-                        <form method="POST" action="/admin/upload/gallery" enctype="multipart/form-data">
+                        <form id="uploadGallery" class="dropzone"
+                              method="POST" action="/admin/upload/gallery" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 img-box">
+                                    <div id="progress"></div>
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery1" class="visuallyhidden">Esimene pilt</label>
-                                        <input type="file" id="inputGallery1" multiple="" name="gallery[]">
+                                        <input type="file" id="inputGallery1" multiple="" name="gallery1">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery1-valid" class="visuallyhidden">Esimene pilt</label>
@@ -56,7 +61,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery2" class="visuallyhidden">Teine pilt</label>
-                                        <input type="file" id="inputGallery2" multiple="" name="gallery[]">
+                                        <input type="file" id="inputGallery2" multiple="" name="gallery2">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery2-valid" class="visuallyhidden">Teine pilt</label>
@@ -68,7 +73,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery3" class="visuallyhidden">Kolmas pilt</label>
-                                        <input type="file" id="inputGallery3" multiple="" name="gallery[]">
+                                        <input type="file" id="inputGallery3" multiple="" name="gallery3">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery3-valid" class="visuallyhidden">Kolmas pilt</label>
@@ -81,7 +86,7 @@
                                 <div class="col-md-6 img-box">
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery4" class="visuallyhidden">Neljas pilt</label>
-                                        <input type="file" id="inputGallery4" multiple="" name="gallery[]">
+                                        <input type="file" id="inputGallery4" multiple="" name="gallery4">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery4-valid" class="visuallyhidden">Neljas pilt</label>
@@ -94,7 +99,7 @@
                                 <div class="col-md-6 col-md-offset-3 img-box">
                                     <div class="form-group no-padding no-margin" >
                                         <label for="inputGallery5" class="visuallyhidden">Viies pilt</label>
-                                        <input type="file" id="inputGallery5" multiple="" name="gallery[]">
+                                        <input type="file" id="inputGallery5" multiple="" name="gallery5">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery5-valid" class="visuallyhidden">Viies pilt</label>
@@ -191,4 +196,8 @@ Website: www.example.com</textarea>
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+
 @endsection

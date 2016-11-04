@@ -51,7 +51,6 @@ html{
     background-size: 100% 2em;*/
 
     background: #e9f1f7 url("../img/asfalt-dark.png");
-
 /*    background:
             linear-gradient(135deg, #c7e2f5 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
             linear-gradient(225deg, #c7e2f5 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
@@ -897,6 +896,8 @@ footer, .push {
 
 #nav ul#navmenu > li {
     margin: 0px;
+    width: 115px;
+    text-align: center;
 }
 
 #nav ul#navmenu > li > a,
@@ -908,7 +909,7 @@ footer, .push {
     font-weight: normal;
     letter-spacing: 1px;
     line-height: normal;
-    padding: 19px 16px 20px;
+    padding: 20px 0 20px;
     display: block;
 }
 

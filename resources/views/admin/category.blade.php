@@ -2,7 +2,7 @@
 @section('title', 'Administraator')
 @section('description', 'Kategooria haldus')
 
-@section('scripts')
+@section('css')
 
 
 @endsection

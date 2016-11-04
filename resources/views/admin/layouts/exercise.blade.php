@@ -1,5 +1,5 @@
 @extends('admin.layouts.dashboard')
-@section('scripts')
+@section('css')
     <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
 
     <script>

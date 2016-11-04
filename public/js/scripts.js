@@ -246,3 +246,7 @@ $(document).on('keypress', 'input,select', function (e) {
     }
 });
 
+$(document).ready(function(){
+    $('#body-bg').fadeIn("fast");
+});
+
