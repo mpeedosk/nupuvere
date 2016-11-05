@@ -1,11 +1,16 @@
 ##Prerequisites
 
-- MySQL
-- Composer
+- [MySQL] (http://dev.mysql.com/downloads/file/?id=466291)
+Click the "No thanks, just start my download." link. Install MySQL with the developer default settings.
+- [Composer](https://getcomposer.org/)
 - PHP >= 5.6
+Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for your desired platform and install with the default settings.
+- PHP gd-extension
 
 ## Project setup
 
+## First setup
+Follow these steps, if you don't have it installed locally
 ### Clone the repository
 1. Open cmd
 2. Go to the directory where you want to clone the project
@@ -16,9 +21,9 @@
 4. Open the .env.example file in notepad
 5. In the file, set up the following:
     * DB_USERNAME set this to your mysql username (default is root)
-    * DB_PASSWORD set this to your mysql password
+    * DB_PASSWORD set this to your mysql password (if you're using the default root user, then the password is what you entered at installation)
 6. Save the file as .env
-7. Back in cmd execute `mysql -u root -p` and enter your mysql password, or use the MySQL command line client
+7. Open the  MySQL command line client and enter your root password
     * execute `create database nupuvere;`
     * execute `use nupuvere;`
     * to exit mysql cmd type `quit;`
@@ -30,9 +35,22 @@
 11. Launch the website `php artisan serve`
 12. Open in your browser `http://localhost:8000`
 
+## Updating existing project
+Follow these steps, if you have an existing copy locally
+### Clone the repository
+1. Open cmd
+2. Go to the project directory
+3. Pull the updates using `git pull`
+### Installing the project
+4. Install the dependencies `composer install`
+5. Populate the database `php artisan migrate:refresh --seed`
+6. Launch the website `php artisan serve`
+7. Open in your browser `http://localhost:8000`
+
 ###
 * You can log in with the username `user` and password `parool`
-
+* You can log in as admin with the username `admin` and password `parool`
+ 
 ##License
 MIT License
 
