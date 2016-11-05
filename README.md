@@ -8,6 +8,8 @@ Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for yo
 
 ## Project setup
 
+## First setup
+Follow these steps, if you don't have it installed locally
 ### Clone the repository
 1. Open cmd
 2. Go to the directory where you want to clone the project
@@ -31,6 +33,18 @@ Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for yo
 10. Populate the database `php artisan migrate --seed`
 11. Launch the website `php artisan serve`
 12. Open in your browser `http://localhost:8000`
+
+## Updating existing project
+Follow these steps, if you have an existing copy locally
+### Clone the repository
+1. Open cmd
+2. Go to the project directory
+3. Pull the updates using `git pull`
+### Installing the project
+4. Install the dependencies `composer install`
+5. Populate the database `php artisan migrate:refresh --seed`
+6. Launch the website `php artisan serve`
+7. Open in your browser `http://localhost:8000`
 
 ###
 * You can log in with the username `user` and password `parool`
