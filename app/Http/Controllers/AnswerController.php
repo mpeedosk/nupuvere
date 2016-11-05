@@ -44,6 +44,7 @@ class AnswerController extends Controller
         $user_answer = json_decode($request->answers, true);
 
 
+
         // default value is false
         $correct = False;
 
@@ -77,8 +78,9 @@ class AnswerController extends Controller
             ];
         }
 
+
         // currently we only support ajax request checking so we should never actually reach here
-        return redirect()->refresh();
+        return redirect()->back();
     }
 
     /** Return the correct answer and solution
