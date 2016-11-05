@@ -11,24 +11,24 @@
 
     @if(Session::has('main-gallery'))
         <script>
-            $(function() {
+            $(function () {
                 toastr.success('{{Session::get('main-gallery')}}');
             });
         </script>
     @elseif(Session::has('main-logo'))
         <script>
-            $(function() {
+            $(function () {
                 toastr.success('{{Session::get('main-logo')}}');
             });
         </script>
     @endif
 
     <section class="admin-page-content">
-{{--        <div id="voyager-loader">
-            <div style="background:url(/img/gears.gif) no-repeat center center;width:32px;height:32px;"></div>
-            --}}{{--<img src="/img/gears.gif" alt="Voyager Loader">--}}{{--
+        {{--        <div id="voyager-loader">
+                    <div style="background:url(/img/gears.gif) no-repeat center center;width:32px;height:32px;"></div>
+                    --}}{{--<img src="/img/gears.gif" alt="Voyager Loader">--}}{{--
 
-        </div>--}}
+                </div>--}}
 
         <div class="se-pre-con"></div>
         <div class="container">
@@ -53,9 +53,10 @@
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery1-valid" class="visuallyhidden">Esimene pilt</label>
-                                        <input id="gallery1-valid" type="text" readonly="" class="form-control upload-input"
+                                        <input id="gallery1-valid" type="text" readonly=""
+                                               class="form-control upload-input"
                                                placeholder="Pilt 1">
-                                        <img src="/img/gallery/gallery1.png" alt="gallery1">
+                                        <img id="gallery1-preview" src="/img/gallery/gallery1.png" alt="gallery1">
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
@@ -65,9 +66,12 @@
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery2-valid" class="visuallyhidden">Teine pilt</label>
-                                        <input id="gallery2-valid" type="text" readonly="" class="form-control upload-input"
+                                        <input id="gallery2-valid" type="text" readonly=""
+                                               class="form-control upload-input"
                                                placeholder="Pilt 2">
-                                        <img src="/img/gallery/gallery2.png" alt="gallery2">
+                                        <div>
+                                            <img id="gallery2-preview" src="/img/gallery/gallery2.png" alt="gallery2">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
@@ -77,9 +81,10 @@
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery3-valid" class="visuallyhidden">Kolmas pilt</label>
-                                        <input id="gallery3-valid" type="text" readonly="" class="form-control upload-input"
+                                        <input id="gallery3-valid" type="text" readonly=""
+                                               class="form-control upload-input"
                                                placeholder="Pilt 3">
-                                        <img src="/img/gallery/gallery3.png" alt="gallery3">
+                                        <img id="gallery3-preview" src="/img/gallery/gallery3.png" alt="gallery3">
                                     </div>
 
                                 </div>
@@ -90,23 +95,25 @@
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery4-valid" class="visuallyhidden">Neljas pilt</label>
-                                        <input id="gallery4-valid" type="text" readonly="" class="form-control upload-input"
+                                        <input id="gallery4-valid" type="text" readonly=""
+                                               class="form-control upload-input"
                                                placeholder="Pilt 4">
-                                        <img src="/img/gallery/gallery4.png" alt="gallery4">
+                                        <img id="gallery4-preview" src="/img/gallery/gallery4.png" alt="gallery4">
                                     </div>
 
                                 </div>
                                 <div class="col-md-6 col-md-offset-3 img-box">
-                                    <div class="form-group no-padding no-margin" >
+                                    <div class="form-group no-padding no-margin">
                                         <label for="inputGallery5" class="visuallyhidden">Viies pilt</label>
                                         <input type="file" id="inputGallery5" multiple="" name="gallery5">
                                         <span class="glyphicon glyphicon-open upload-icon"
                                               aria-hidden="true"></span>
                                         <label for="gallery5-valid" class="visuallyhidden">Viies pilt</label>
 
-                                        <input id="gallery5-valid" type="text" readonly="" class="form-control upload-input"
+                                        <input id="gallery5-valid" type="text" readonly=""
+                                               class="form-control upload-input"
                                                placeholder="Pilt 5">
-                                        <img src="/img/gallery/gallery5.png" alt="gallery5">
+                                        <img id="gallery5-preview" src="/img/gallery/gallery5.png" alt="gallery5">
                                     </div>
                                     <button class="btn btn-primary btn-raised" type="submit">Uuenda
                                     </button>
@@ -166,7 +173,8 @@ Website: www.example.com</textarea>
                     <h4 class="panel-title">Galerii uuendamine</h4>
                 </div>
                 <div class="modal-body font-size-lg justify">
-                    <p>Uuendatavate piltide mõõtmed peaksid olema 1080 x 422 pikselit. Pärast faili üleslaadimist süsteem
+                    <p>Uuendatavate piltide mõõtmed peaksid olema 1080 x 422 pikselit. Pärast faili üleslaadimist
+                        süsteem
                         automaatselt muudab dimensioone. Seega, kui laadida üles pilt, mille mõõtmed ei ole vastavad,
                         võib see esilehel näha teistmoodi välja.</p>
                 </div>

@@ -250,3 +250,83 @@ $(document).ready(function(){
     $('#body-bg').fadeIn("fast");
 });
 
+
+/*
+function resizeInCanvas(img){
+    /////////  3-3 manipulate image
+    var perferedWidth = 2700;
+    var ratio = perferedWidth / img.width;
+    var canvas = $("<canvas>")[0];
+    canvas.width = 1080;
+    canvas.height = 422;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0,0,canvas.width, canvas.height);
+    //////////4. export as dataUrl
+    return canvas.toDataURL();
+}
+*/
+/*
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            console.log(e.target.result);
+            $('#gallery2-preview').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#inputGallery2").change(function(){
+    readURL(this);
+});*/
+
+// http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
+
+$('#inputGallery1').on('change', function() {
+    resizeImages(this.files[0], 1);
+});
+$('#inputGallery2').on('change', function() {
+    resizeImages(this.files[0], 2);
+});
+$('#inputGallery3').on('change', function() {
+    resizeImages(this.files[0], 3);
+});
+$('#inputGallery4').on('change', function() {
+    resizeImages(this.files[0], 4);
+});
+$('#inputGallery5').on('change', function() {
+    resizeImages(this.files[0], 5);
+});
+
+function resizeImages(file, id) {
+    if(file == null){
+        $('#gallery'+ id +'-preview').attr('src', '/img/gallery/gallery'+ id +'.png');
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+
+        var img = new Image();
+        img.onload = function() {
+
+            $('#gallery'+ id +'-preview').attr('src', resizeInCanvas(img));
+        };
+
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function resizeInCanvas(img){
+    var canvas = $("<canvas>")[0];
+
+    canvas.width = 1080;
+    canvas.height = 422;
+
+    canvas.getContext("2d").drawImage(img, 0,0,canvas.width, canvas.height);
+
+    return canvas.toDataURL();
+}
