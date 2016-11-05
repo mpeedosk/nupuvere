@@ -34,7 +34,8 @@ Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for yo
 
 ###
 * You can log in with the username `user` and password `parool`
-
+* You can log in as admin with the username `admin` and password `parool`
+ 
 ##License
 MIT License
 
