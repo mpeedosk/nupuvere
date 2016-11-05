@@ -1,0 +1,180 @@
+<?php
+
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
+class UITest extends TestCase
+{
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+
+
+     //"see" kontrollib, kas kirjeldatud teksti on näha
+     //"dontSee" kontrollib, kas kirjeldatud teksti ei ole näha
+     //"click" vajutab kirjeldatud lingile
+     //"visit" läheb kirjeldatud lehele
+     //"type" kirjutab teises argumendis kirjeldatud lahtrisse esimese argumendi teksti
+     //"press" vajutab kirjeldatud nupule
+
+
+    //core use-case-de kasutajaliidese testid.
+    public function testFrontPage() //esilehe test
+    {
+        $this->visit('/')
+             ->see('Telephone')
+             ->see('Email')
+             ->see('Otsi');
+    }
+
+    public function testMenu()//esilehe menüü test
+    {
+        $this->visit('/')
+             ->click('Avastajad')
+             ->see('Keskmine')
+             ->see('Lihtne')
+             ->see('Raske')
+             ->dontSee('Telephone');
+    }
+    public function testSeeExerciseEasy()//kontrollib kas menüü valimine kuvatakse.
+    {
+        $this->visit('/matemaatika/avastaja')
+            ->click('Ülesanne 1')
+            ->see('Nimekiri')
+            ->see('Edasi')
+            ->see('Vihje')
+            ->see('Koostanud')
+            ->see('Sisestage vastus')
+            ->dontSee('Telephone');
+}
+    public function testSeeExerciseMedium()//kontrollib kas menüü valimine kuvatakse.
+    {
+        $this->visit('/matemaatika/avastaja')
+            ->click('Mitu õiget varianti')
+            ->see('Nimekiri')
+            ->see('Edasi')
+            ->see('Vihje')
+            ->see('Koostanud')
+            ->dontSee('Telephone');
+    }
+
+    public function testSolvExerciseAvastajadEasy()//Kontrollib kas ülesande lahendamine kuvatakse õigesti.
+    {
+        $this->visit('/')
+             ->type('martinliba','username')
+             ->type('parool','password')
+             ->press('Logi sisse')
+             ->visit('/matemaatika/avastaja')
+             ->click('Ülesanne 1')
+             ->type('225g','answer-input')
+             ->press('Vasta')
+             ->see('Retseptis');
+    }
+    
+
+   public function testAdminAddExercise() // Kontrolliba, kui admin lisab ülesandeid, kas kõik kuvatakse õigesti.
+    {
+        $this->visit('/')
+             ->see('Telephone')
+             ->see('Email')
+             ->see('Otsi')
+             ->type('admin','username')
+             ->type('parool','password')
+             ->press('Logi sisse')
+             ->see('Admin')
+             ->click('Admin')
+             ->see('Kategooriad')
+             ->click('Ülesanded')
+             ->see('Lisa uus')
+             ->click('Tekstiline/numbriline')
+             ->see('Lisa vastus')
+             ->type('testülesanne','ex_title')
+             ->type('testautor','ex_author')
+             ->type('test ülesande sisu','ex_content')
+             ->type('test','answer_1')
+             ->type('matemaatika','category')
+             ->press('Lisa ülesanne')
+             ->click('Ülesanded')
+             ->see('testülesanne'); 
+        }
+
+    public function testAdminAddExerciseEmptyTitle()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel pealikiri jääb tühjaks.
+    {
+        $this->visit('/')
+             ->see('Telephone')
+             ->see('Email')
+             ->see('Otsi')
+             ->type('admin','username')
+             ->type('parool','password')
+             ->press('Logi sisse')
+             ->see('Admin')
+             ->click('Admin')
+             ->see('Kategooriad')
+             ->click('Ülesanded')
+             ->see('Lisa uus')
+             ->click('Tekstiline/numbriline')
+             ->see('Lisa vastus')
+             ->type('','ex_title')
+             ->type('testautor','ex_author')
+             ->type('test ülesande sisu','ex_content')
+             ->type('test','answer_1')
+             ->type('matemaatika','category')
+             ->press('Lisa ülesanne')
+             ->see('The ex title field is required.'); 
+        }
+
+    public function testAdminAddExerciseEmptyContent()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel sisu jääb tühjaks.
+    {
+        $this->visit('/')
+             ->see('Telephone')
+             ->see('Email')
+             ->see('Otsi')
+             ->type('admin','username')
+             ->type('parool','password')
+             ->press('Logi sisse')
+             ->see('Admin')
+             ->click('Admin')
+             ->see('Kategooriad')
+             ->click('Ülesanded')
+             ->see('Lisa uus')
+             ->click('Tekstiline/numbriline')
+             ->see('Lisa vastus')
+             ->type('','ex_title')
+             ->type('testautor','ex_author')
+             ->type('','ex_content')
+             ->type('test','answer_1')
+             ->type('matemaatika','category')
+             ->press('Lisa ülesanne')
+             ->see('The ex content field is required.'); 
+        }
+
+        public function testAdminAddExerciseEmptyAnswer()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel vastus jääb tühjaks.
+    {
+        $this->visit('/')
+             ->see('Telephone')
+             ->see('Email')
+             ->see('Otsi')
+             ->type('admin','username')
+             ->type('parool','password')
+             ->press('Logi sisse')
+             ->see('Admin')
+             ->click('Admin')
+             ->see('Kategooriad')
+             ->click('Ülesanded')
+             ->see('Lisa uus')
+             ->click('Tekstiline/numbriline')
+             ->see('Lisa vastus')
+             ->type('','ex_title')
+             ->type('testautor','ex_author')
+             ->type('','ex_content')
+             ->type('','answer_1')
+             ->type('matemaatika','category')
+             ->press('Lisa ülesanne')
+             ->see('The answer 1 field is required.'); 
+        }
+    
+
+}
