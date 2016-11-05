@@ -311,7 +311,6 @@ function resizeImages(file, id) {
 
         var img = new Image();
         img.onload = function() {
-
             $('#gallery'+ id +'-preview').attr('src', resizeInCanvas(img));
         };
 

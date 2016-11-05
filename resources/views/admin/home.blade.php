@@ -15,10 +15,10 @@
                 toastr.success('{{Session::get('main-gallery')}}');
             });
         </script>
-    @elseif(Session::has('main-logo'))
+    @elseif(Session::has('wrong-ext'))
         <script>
             $(function () {
-                toastr.success('{{Session::get('main-logo')}}');
+                toastr.error('{{Session::get('wrong-ext')}}');
             });
         </script>
     @endif

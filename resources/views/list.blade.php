@@ -10,94 +10,106 @@
                 <div class="col-sm-4">
 
                     <H1> Lihtne</H1>
-                    @if (Auth::guest() )
-                        @foreach($easyEx as $exercise)
-                            <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                               class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
-                        @endforeach
-                    @else
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success" role="progressbar"
-                                 aria-valuenow="{{$p_easy}}"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: {{$p_easy}}%">
-                            </div>
-                        </div>
 
-                        @foreach($easyEx as $exercise)
-                            @if( in_array($exercise-> id, $solved))
-                                <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                                   class="btn center-block btn-solved">
-                                    {{$exercise -> title}}
-                                    <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
-                                </a>
-                            @else
+                    @if(count($easyEx)==0)
+                        <h3>Selles raskusastmes ülesanded puuduvad</h3>
+                    @else
+                        @if (Auth::guest() )
+
+                            @foreach($easyEx as $exercise)
                                 <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
                                    class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
-                            @endif
-                        @endforeach
-                    @endif
-                </div>
-                <div class="col-sm-4">
-                    <div class="vertical-lines">
-                        <H1> Keskmine</H1>
-                        @if (Auth::guest() )
-                            @foreach($mediumEx as $exercise)
-                                <a class="btn center-block btn-not-solved"
-                                   href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}">
-                                    {{$exercise -> title}}
-                                </a>
                             @endforeach
                         @else
                             <div class="progress">
                                 <div class="progress-bar progress-bar-success" role="progressbar"
-                                     aria-valuenow="{{$p_med}}"
-                                     aria-valuemin="0" aria-valuemax="100" style="width: {{$p_med}}%">
+                                     aria-valuenow="{{$p_easy}}"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: {{$p_easy}}%">
                                 </div>
                             </div>
-
-                            @foreach($mediumEx as $exercise)
+                            @foreach($easyEx as $exercise)
                                 @if( in_array($exercise-> id, $solved))
-                                    <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
+                                    <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
                                        class="btn center-block btn-solved">
                                         {{$exercise -> title}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
-                                    <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
+                                    <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
                                        class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
                                 @endif
                             @endforeach
+                        @endif
+                    @endif
+                </div>
+                <div class="col-sm-4">
+                    <div class="vertical-lines">
+                        <H1> Keskmine</H1>
+                        @if(count($mediumEx)==0)
+                            <h3>Selles raskusastmes ülesanded puuduvad</h3>
+                        @else
+                            @if (Auth::guest() )
+                                @foreach($mediumEx as $exercise)
+                                    <a class="btn center-block btn-not-solved"
+                                       href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}">
+                                        {{$exercise -> title}}
+                                    </a>
+                                @endforeach
+                            @else
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                         aria-valuenow="{{$p_med}}"
+                                         aria-valuemin="0" aria-valuemax="100" style="width: {{$p_med}}%">
+                                    </div>
+                                </div>
+
+                                @foreach($mediumEx as $exercise)
+                                    @if( in_array($exercise-> id, $solved))
+                                        <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
+                                           class="btn center-block btn-solved">
+                                            {{$exercise -> title}}
+                                            <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
+                                        </a>
+                                    @else
+                                        <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
+                                           class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                    @endif
+                                @endforeach
+                            @endif
                         @endif
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <H1> Raske</H1>
-
-                    @if(Auth::guest())
-                        @foreach($hardEx as $exercise)
-                            <a class="btn center-block btn-not-solved"
-                               href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{$exercise -> title}}</a>
-                        @endforeach
+                    @if(count($hardEx)==0)
+                        <h3>Selles raskusastmes ülesanded puuduvad</h3>
                     @else
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-violet" role="progressbar"
-                                 aria-valuenow="{{$p_hard}}"
-                                 aria-valuemin="0" aria-valuemax="100" style="width: {{$p_hard}}%">
+                        @if(Auth::guest())
+                            @foreach($hardEx as $exercise)
+                                <a class="btn center-block btn-not-solved"
+                                   href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{$exercise -> title}}</a>
+                            @endforeach
+                        @else
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-violet" role="progressbar"
+                                     aria-valuenow="{{$p_hard}}"
+                                     aria-valuemin="0" aria-valuemax="100" style="width: {{$p_hard}}%">
+                                </div>
                             </div>
-                        </div>
 
-                        @foreach($hardEx as $exercise)
-                            @if( in_array($exercise-> id, $solved))
-                                <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
-                                   class="btn center-block btn-solved">
-                                    {{$exercise -> title}}
-                                    <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
-                                </a>
-                            @else
-                                <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
-                                   class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
-                            @endif
-                        @endforeach
+                            @foreach($hardEx as $exercise)
+                                @if( in_array($exercise-> id, $solved))
+                                    <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
+                                       class="btn center-block btn-solved">
+                                        {{$exercise -> title}}
+                                        <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
+                                    </a>
+                                @else
+                                    <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
+                                       class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                @endif
+                            @endforeach
+                        @endif
                     @endif
 
                 </div>

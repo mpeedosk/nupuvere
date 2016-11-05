@@ -64,8 +64,7 @@
 
                                     <div class="col-md-4 margin-top-10 no-padding">
                                         <div class="col-md-6">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi sisse
-                                            </button>
+                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi sisse</button>
                                         </div>
                                         <div class="col-md-6">
                                             <a class="btn btn-sm btn-primary pull-right" href="/register">Loo konto</a>

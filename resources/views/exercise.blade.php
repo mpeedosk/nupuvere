@@ -71,9 +71,7 @@
                                         {{ csrf_field() }}
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
-                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
-                                            Vasta
-                                        </button>
+                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">Vasta</button>
                                     @endif
 
                                     <a id="next-ex"

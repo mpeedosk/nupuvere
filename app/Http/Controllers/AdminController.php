@@ -118,11 +118,25 @@ class AdminController extends Controller
     public function updateGallery(Request $request)
     {
 
+
+        $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+
+
         $images = ['gallery1', 'gallery2', 'gallery3', 'gallery4', 'gallery5'];
 
         foreach ($images as $image) {
             $file = $request->file($image);
+
+
             if ($file != null) {
+
+                $ext = $file->guessClientExtension();
+                if (!in_array($ext, $valid_exts)){
+                    Session::flash('wrong-ext', 'Viga! Lubatud pildi formaadid on jpeg, jpg, png ja gif');
+                    return redirect()->back();
+
+                }
+
                 $img = Image::make($file)->resize(1080, 422);
                 $img->save('img/gallery/' . $image . '.png');
             }
