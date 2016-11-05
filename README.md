@@ -1,8 +1,10 @@
 ##Prerequisites
 
-- MySQL
-- Composer
+- [MySQL] (http://dev.mysql.com/downloads/file/?id=466291)
+Click the "No thanks, just start my download." link. Install MySQL with the developer default settings.
+- [Composer](https://getcomposer.org/)
 - PHP >= 5.6
+Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for your desired platform and install with the default settings.
 
 ## Project setup
 
@@ -16,9 +18,9 @@
 4. Open the .env.example file in notepad
 5. In the file, set up the following:
     * DB_USERNAME set this to your mysql username (default is root)
-    * DB_PASSWORD set this to your mysql password
+    * DB_PASSWORD set this to your mysql password (if you're using the default root user, then the password is what you entered at installation)
 6. Save the file as .env
-7. Back in cmd execute `mysql -u root -p` and enter your mysql password, or use the MySQL command line client
+7. Open the  MySQL command line client and enter your root password
     * execute `create database nupuvere;`
     * execute `use nupuvere;`
     * to exit mysql cmd type `quit;`
