@@ -41,16 +41,21 @@ Follow these steps, if you have an existing copy locally
 1. Open cmd
 2. Go to the project directory
 3. Pull the updates using `git pull`
-### Installing the project
+
+### Updating the project
 4. Install the dependencies `composer install`
-5. Populate the database `php artisan migrate:refresh --seed`
-6. Launch the website `php artisan serve`
-7. Open in your browser `http://localhost:8000`
+5. Update the dependencies `composer update`
+6. Populate the database `php artisan migrate:refresh --seed`
+7. Launch the website `php artisan serve`
+8. Open in your browser `http://localhost:8000`
 
 ###
 * You can log in with the username `user` and password `parool`
 * You can log in as admin with the username `admin` and password `parool`
  
+## Testing
+* Test can be run with the command `phpunit`
+
 ##License
 MIT License
 
