@@ -41,14 +41,7 @@
 @endsection
 
 @section('content')
-    @if(Session::has('exercise-create'))
-        <script>
-            $(function () {
-                toastr.success('Ülesanne "{{Session::get('exercise-create')}}" edukalt lisatud');
-            });
-            console.log('{{Session::get('exercise-create')}}')
-        </script>
-    @endif
+
 
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
@@ -73,7 +66,7 @@
                             <label for="ex_title" class="control-label "><span class="fa fa-fw fa-asterisk"
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
-                            <input class="form-control" id="ex_title" name="ex_title"
+                            <input class="form-control" id="ex_title" name="ex_title" maxlength="20"
                                    value="@if(isset($exercise->title)){{ $exercise->title }}@endif">
                             <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
                         </div>

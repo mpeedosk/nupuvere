@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 use phpDocumentor\Reflection\Types\Boolean;
 
 class AnswerController extends Controller
@@ -41,36 +42,38 @@ class AnswerController extends Controller
 
         // get the user submited answers
         // convert the json object from the ajax request to array
-        $user_answer = json_decode($request->answers, true);
 
 
-
-        // default value is false
-        $correct = False;
-
-        // different method for each different exercise type
-        switch ($exercise->type) {
-            case Exercise::TEXTUAL       :
-                $correct = $this->hasCorrect($answers, $user_answer[0]);
-                break;
-            case Exercise::MULTIPLE_ONE  :
-                $correct = $this->oneCorrect($answers, $user_answer[0]);
-                break;
-            case Exercise::MULTIPLE_MANY :
-                $correct = $this->allCorrect($answers, $user_answer);
-                break;
-            case Exercise::ORDERING      :
-                $correct = $this->inOrder($answers, $user_answer);
-                break;
-        }
-
-
-        // update the fields where needed
-        $this->update_db($correct, $user_id, $ex_id);
-
-
-        // if the request was ajax, that means we need to return the data
         if ($request->ajax()) {
+            $user_answer = json_decode($request->answers, true);
+
+
+            // default value is false
+            $correct = False;
+
+            // different method for each different exercise type
+            switch ($exercise->type) {
+                case Exercise::TEXTUAL       :
+                    $correct = $this->hasCorrect($answers, $user_answer[0]);
+                    break;
+                case Exercise::MULTIPLE_ONE  :
+                    $correct = $this->oneCorrect($answers, $user_answer[0]);
+                    break;
+                case Exercise::MULTIPLE_MANY :
+                    $correct = $this->allCorrect($answers, $user_answer);
+                    break;
+                case Exercise::ORDERING      :
+                    $correct = $this->inOrder($answers, $user_answer);
+                    break;
+            }
+
+
+            // update the fields where needed
+            $this->update_db($correct, $user_id, $ex_id);
+
+
+            // if the request was ajax, that means we need to return the data
+
             return [
                 'response' => $correct,
                 'solution' => $exercise->solution,
@@ -78,9 +81,20 @@ class AnswerController extends Controller
             ];
         }
 
+        $user_answer = $request->input("answer-input");
 
+        $correct = False;
+
+        // different method for each different exercise type
+        switch ($exercise->type) {
+            case Exercise::TEXTUAL       :
+                $correct = $this->hasCorrect($answers, $user_answer);
+                break;
+        }
+        Session::flash('answer-check', $correct);
+//        dd($correct);
         // currently we only support ajax request checking so we should never actually reach here
-        return redirect()->back();
+        return redirect('/'.$exercise->category.'/'.$exercise->age_group.'/'.$exercise->difficulty.'/'.$ex_id);
     }
 
     /** Return the correct answer and solution
@@ -127,6 +141,8 @@ class AnswerController extends Controller
             ];
         }
 
+
+
         // currently we only support ajax request checking so we should never actually reach here
         return redirect()->refresh();
     }
@@ -140,8 +156,12 @@ class AnswerController extends Controller
      * */
     private function hasCorrect($answers, $user_answer)
     {
+        // remove whitespaces and convert to lowercase
+        $user_answer = mb_strtolower(preg_replace('/\s*/', '', $user_answer));
         foreach ($answers as $answer) {
-            if ($answer->is_correct && mb_strtolower($answer->content) == mb_strtolower($user_answer))
+
+            $answer_str = mb_strtolower(preg_replace('/\s*/', '', $answer->content));
+            if ($answer->is_correct && $answer_str == $user_answer)
                 return True;
         }
         return False;

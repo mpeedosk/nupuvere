@@ -15,7 +15,13 @@
                 toastr.success('Kategooriad edukalt uuendatud!');
             </script>
         @endif--}}
-
+    @if(Session::has('exercise-create'))
+        <script>
+            $(function () {
+                toastr.success('Ülesanne "{{Session::get('exercise-create')}}" edukalt lisatud');
+            });
+        </script>
+    @endif
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">

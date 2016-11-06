@@ -1,5 +1,9 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
+
+
+
+
 @section('content')
     <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
     <section class="margin-vert-30">
@@ -41,15 +45,38 @@
                             <div class="ex-text-area font-size-md">
                                 <div id="ex-content" class="padding-10" style=" overflow: hidden ">
                                     {!! $exercise -> content !!}
+
                                 </div>
                             </div>
                         </div>
-                        <div id="solution" class="col-md-12 animate fadeInRightBig animated">
-                            <div class="ex-text-area font-size-md">
-                                <div id="solution-text" class="padding-10">
+
+                        @if(Session::has('answer-check'))
+                            @if(Session::get('answer-check'))
+                                <div class="col-md-12 animate fadeInRightBig animated">
+                                    <div class="ex-text-area font-size-md">
+                                        <div id="solution-text" class="padding-10">
+                                            {!! $exercise -> solution !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @else
+                            <div id="solution" class="col-md-12 animate fadeInRightBig animated">
+                                <div class="ex-text-area font-size-md">
+                                    <div id="solution-text" class="padding-10">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
+
+                        @if(Session::has('answer-check'))
+                            @if(Session::get('answer-check'))
+                                <p class="answer-no-js">Vastasite õigesti!</p>
+                            @else
+                                <p class="answer-no-js">Vastasite valesti!</p>
+                            @endif
+                        @endif
+
                         <form method="POST" action="{{ url('/exercise/check/'.$exercise-> id)}}">
                             <div class="col-xs-12">
                                 @include('exercises.'.$type)
@@ -71,7 +98,9 @@
                                         {{ csrf_field() }}
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
-                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">Vasta</button>
+                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
+                                            Vasta
+                                        </button>
                                     @endif
 
                                     <a id="next-ex"
@@ -91,10 +120,10 @@
                 <div class="col-md-2 margin-50-lg text-center">
 
                     @if(!$exercise -> hint == "")
-                    <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
-                            data-target="#hint-dialog">
-                        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
-                    </button>
+                        <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
+                                data-target="#hint-dialog">
+                            <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
+                        </button>
                     @endif
 
                     @if(!Auth::guest() )

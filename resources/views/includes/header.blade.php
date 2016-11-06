@@ -56,7 +56,7 @@
                                             <div class="checkbox">
                                                 <label for="remember" class="visuallyhidden">Hoia mind
                                                     sisselogituna</label>
-                                                <input id="remember" type="checkbox" name="remember" checked> Mäleta
+                                                <input tabindex="-1" id="remember" type="checkbox" name="remember" checked> Mäleta
                                                 mind
                                             </div>
                                         </div>

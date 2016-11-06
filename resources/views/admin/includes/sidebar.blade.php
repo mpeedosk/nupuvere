@@ -1,6 +1,6 @@
 <div id="sidebar">
     <!-- sidebar menu start-->
-    <a href="#" class="sidebar-logo withripple padding-10">
+    <a href="/" class="sidebar-logo withripple padding-10">
         <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif"
              alt="Logo"/></a>
 

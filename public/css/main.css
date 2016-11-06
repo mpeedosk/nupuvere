@@ -1711,6 +1711,11 @@ a.slicknav_item [class*=" fa-"] {
     margin-right: 20px
 }
 
+.answer-no-js{
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */

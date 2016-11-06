@@ -12,13 +12,25 @@ class UITest extends TestCase
      * @return void
      */
 
-
-     //"see" kontrollib, kas kirjeldatud teksti on näha
+    //"see" kontrollib, kas kirjeldatud teksti on näha
      //"dontSee" kontrollib, kas kirjeldatud teksti ei ole näha
      //"click" vajutab kirjeldatud lingile
      //"visit" läheb kirjeldatud lehele
      //"type" kirjutab teises argumendis kirjeldatud lahtrisse esimese argumendi teksti
      //"press" vajutab kirjeldatud nupule
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->artisan('migrate');
+        Artisan::call('db:seed', ['--database' => 'testing']);
+    }
+
+    public function tearDown()
+    {
+        $this->artisan('migrate:reset');
+    }
 
 
     //core use-case-de kasutajaliidese testid.
@@ -98,7 +110,7 @@ class UITest extends TestCase
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
              ->click('Ülesanded')
-             ->see('testülesanne'); 
+             ->see('testülesanne');
         }
 
     public function testAdminAddExerciseEmptyTitle()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel pealikiri jääb tühjaks.
@@ -175,6 +187,6 @@ class UITest extends TestCase
              ->press('Lisa ülesanne')
              ->see('The answer 1 field is required.'); 
         }
-    
+
 
 }

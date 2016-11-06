@@ -18,6 +18,7 @@ class ExerciseController extends Controller
      * @param String $age_group - name of the exercise age group
      * @return \Illuminate\Http\Response
      */
+    
     public function index($category, $age_group)
     {
 
@@ -143,10 +144,11 @@ class ExerciseController extends Controller
      * */
     public function createTextual(Request $request)
     {
+//        dd($request);
         // validate user inputs
 
         $this->validate(request(), [
-            'ex_title' => 'required | unique:exercises,title',
+            'ex_title' => 'required | max:20 |unique:exercises,title',
             'ex_content' => 'required',
             'category' => 'required',
             'age_group' => 'required',
@@ -182,10 +184,10 @@ class ExerciseController extends Controller
         // flash the session to show successful operation
         Session::flash('exercise-create', $request->ex_title);
 
-        return redirect()->back();
+        return redirect('/admin/exercise');
     }
 
-    private function addAnswers($request, $id){
+    public static function addAnswers($request, $id){
         $remaining_answers = $request->answer_count;
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
