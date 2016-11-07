@@ -5,7 +5,7 @@ Click the "No thanks, just start my download." link. Install MySQL with the deve
 - [Composer](https://getcomposer.org/)
 - PHP >= 5.6
 Best way is to download [XAMPP](https://www.apachefriends.org/index.html) for your desired platform and install with the default settings.
-- PHP gd-extension
+- PHP gd-extension (comes by default when isnstalling with xampp)
 
 ## Project setup
 
