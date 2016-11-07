@@ -22,7 +22,7 @@
                 relative_urls: false,
                 plugins: 'link, image, code, youtube, imagetools, print, preview, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
                 extended_valid_elements: 'input[onclick|value|style|type]',
-                file_browser_callback: function (field_name, url, type, win) {
+                file_browser_callback: function (field_name, url, type) {
                     if (type == 'image') {
                         $('#upload_file').trigger('click');
                     }
@@ -42,6 +42,13 @@
 
 @section('content')
 
+    @if(Session::has('exercise-update'))
+        <script>
+            $(function () {
+                toastr.success('Ülesanne "{{Session::get('exercise-update')}}" edukalt uuendatud');
+            });
+        </script>
+    @endif
 
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
@@ -55,8 +62,7 @@
         <div class="container">
             <div class="row margin-30">
                 <div class="col-md-7">
-                    <form method="POST"
-                          action="@if(isset($exercise->id)){{ '/exercise/text/edit/' . $exercise->id }}@else{{ '/exercise/text/create' }}@endif ">
+                    <form method="POST" @yield('action')>
                         @if(isset($exercise))
                             {{ method_field('PATCH')}}
                         @endif
@@ -72,7 +78,7 @@
                         </div>
 
                         <div class="form-group label-floating short-input">
-                            <label for="ex_authro" class="control-label"><span class="fa fa-fw"
+                            <label for="ex_author" class="control-label"><span class="fa fa-fw"
                                                                                aria-hidden="true"></span>
                                 Ülesande autor</label>
                             <input class="form-control" id="ex_author" name="ex_author"
@@ -104,18 +110,22 @@
                                 @if(isset($exercise->hint)){{ $exercise->hint }}@endif
                             </textarea>
                         </div>
+
                         <div class="form-group label-static">
                             <label for="answer_count" class=""><span class="fa fa-fw fa-asterisk"
                                                                      aria-hidden="true"></span>Lisa vastus</label>
-                            <input id="answer_count" class="hidden" name="answer_count" value="0">
+                            <input id="answer_count" class="hidden" name="answer_count"
+                                   @if(isset($answers))value="{{count($answers)}}"
+                                   @else value="1"
+                                    @endif>
                         </div>
 
                         @yield('answer-content')
 
                         <div class="form-group">
-                            <label class=""><span class="fa fa-fw fa-asterisk"
-                                                  aria-hidden="true"></span>Kategooria: </label>
-                            <select class="form-control dropdown-input" name="category">
+                            <label for="category-select"><span class="fa fa-fw fa-asterisk"
+                                                               aria-hidden="true"></span>Kategooria: </label>
+                            <select id="category-select" class="form-control dropdown-input" name="category">
                                 @foreach(App\Category::getCategories() as $cat )
                                     @if(isset($exercise))
                                         <option value="{{$cat->name}}"
@@ -128,9 +138,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class=""><span class="fa fa-fw fa-asterisk"
-                                                  aria-hidden="true"></span>Vanuseklass: </label>
-                            <select class="form-control dropdown-input" name="age_group">
+                            <label for="age_group-select"><span class="fa fa-fw fa-asterisk"
+                                                                aria-hidden="true"></span>Vanuseklass: </label>
+                            <select id="age_group-select" class="form-control dropdown-input" name="age_group">
                                 <option value="avastaja"
                                         @if(isset($exercise) && $exercise->age_group == 'avastaja') selected @endif >
                                     Avastajad (... - 2kl)
@@ -154,9 +164,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label class=""><span class="fa fa-fw fa-asterisk"
-                                                  aria-hidden="true"></span>Raskusaste: </label>
-                            <select class="form-control dropdown-input" name="difficulty">
+                            <label for="difficulty-select"><span class="fa fa-fw fa-asterisk"
+                                                                 aria-hidden="true"></span>Raskusaste: </label>
+                            <select id="difficulty-select" class="form-control dropdown-input" name="difficulty">
                                 <option value="lihtne"
                                         @if(isset($exercise) && $exercise->difficulty == 'lihtne') selected @endif>
                                     Lihtne
@@ -185,7 +195,6 @@
                 </div>
             </div>
         </div>
-
     </section>
 
     @include('admin.includes.tinymceUpload')

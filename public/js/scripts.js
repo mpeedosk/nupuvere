@@ -311,3 +311,43 @@ function resizeInCanvas(img){
 
     return canvas.toDataURL();
 }
+
+
+// modified from http://codeconvey.com/expanding-search-bar-with-jquery/
+
+$(document).ready(function(){
+    var searchIcon = $('.search-icon');
+    var searchInput = $('.search-input');
+    var searchBox = $('.search');
+    var isOpen = false;
+
+    $(document).mouseup(function(){
+        if(isOpen == true){
+            searchInput.val('');
+            searchBox.removeClass('search-open');
+            isOpen = false;
+        }
+    });
+
+    searchIcon.mouseup(function(){
+        return false;
+    });
+
+    searchBox.mouseup(function(){
+        return false;
+    });
+
+    searchIcon.click(function(){
+        if(isOpen == false){
+            searchBox.addClass('search-open');
+            isOpen = true;
+        }else{
+            if($("#search").val() != "")
+                document.getElementById("search-form").submit();
+            else{
+                searchBox.removeClass('search-open');
+                isOpen = false;
+            }
+        }
+    });
+});

@@ -120,14 +120,70 @@ html{
     z-index: 20;
 }*/
 
-.search-bar .form-group {
-    margin: 15px 0 0 0;
-}
-
 /* nav */
 #nav {
     z-index: 21;
 }
+
+
+/* Logo */
+.logo a {
+    /*top: 40px;*/
+    /*position: relative;*/
+    z-index: 20;
+}
+
+.logo img {
+    margin-top: 27px;
+    margin-bottom: 27px;
+    width: 80%;
+    max-width: 100%;
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -ms-transition: all 1s ease; /* IE 9 */
+    -o-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+}
+
+.logo img:hover {
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+    transform:scale(1.25);
+}
+
+
+
+
+/*.spin {
+    cursor: pointer;
+    transform-style: preserve-3d;
+}
+
+.spin:hover {
+    animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}*/
+
+.user-bar {
+    margin-top: 35px;
+    display: inline-block;
+}
+
+.user-bar-item {
+    font-size: 16px;
+    color: inherit;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Footer */
@@ -174,6 +230,9 @@ footer, .push {
 
 .sponsors{
     max-height: 122px;
+}
+.contact{
+    padding-top: 25px;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -889,14 +948,14 @@ footer, .push {
 }
 
 #nav ul#navmenu {
-    cursor: pointer;
-    display: inline-block;
+    width: 100%;
     margin: 0 0 -7px;
-    padding: 0px;
+    padding: 0;
 }
 
 #nav ul#navmenu > li {
-    margin: 0px;
+    cursor: pointer;
+    margin: 0;
     width: 115px;
     text-align: center;
 }
@@ -1032,6 +1091,99 @@ footer, .push {
     display: inline-block;
     font-family: FontAwesome;
 }
+
+/* Menu search icon*/
+
+/*
+    position: absolute;
+    right: calc((100% - 1080px)/2 + 115px);
+*/
+
+
+.search-container{
+    height:56px;
+    width: auto;
+    overflow: hidden;
+}
+
+
+.search {
+    position: relative;
+    width: 0;
+    height:100%;
+    min-width: 56px;
+    float: right;
+    overflow: hidden;
+    -webkit-transition: width 0.3s;
+    -moz-transition: width 0.3s;
+    transition: width 0.3s;
+}
+.search :hover{
+    background-color: #424242;
+}
+.search-input {
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #414141;
+    border: none;
+    color: #EEEEEE;
+    margin-right: 56px;
+    width: calc(100% - 56px);
+    padding-left: 10px;
+}
+
+.search-icon,
+.search-btn  {
+    width: 56px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 56px;
+    text-align: center;
+    cursor: pointer;
+}
+
+
+.search-btn {
+    opacity: 0;
+    color: transparent;
+    border: none;
+    outline: none;
+    z-index: -1;
+}
+
+.search-icon {
+    color: #EEEEEE;
+    z-index: 90;
+    font-size: 22px;
+    line-height: 64px;
+}
+
+.search-open{
+    width: 100% !important;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Leaderboard Icons */
+/*-----------------------------------------------------------------------------------*/
+.leaderboard a {
+    background: url(../img/social_icons/lb.png) no-repeat;
+    background-size: contain;
+    width: 56px;
+    height: 56px;
+    margin: 0 15px 0 15px;
+}
+
+.leaderboard:hover {
+    background-color: #424242 !important;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Sidebar Menu */
@@ -1814,36 +1966,6 @@ a.slicknav_item [class*=" fa-"] {
 }
 
 /*-----------------------------------------------------------------------------------*/
-/* Leaderboard Icons */
-/*-----------------------------------------------------------------------------------*/
-
-.leaderboard a {
-    background: url(../img/social_icons/lb.png) no-repeat;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    display: block;
-    width: 56px;
-    height: 56px;
-    text-indent: -9999px;
-    opacity: 1;
-    background-size: contain;
-}
-
-.leaderboard :hover {
-    background-color: #3f51b5 !important;
-    opacity: 1;
-    -webkit-transition-duration: 0.5s;
-    -moz-transition-duration: 0.5s;
-    -o-transition-duration: 0.5s;
-    -ms-transition-duration: 0.5s;
-    transition-duration: 0.5s;
-    -webkit-transition-property: background-color;
-    -moz-transition-property: background-color;
-    -o-transition-property: background-color;
-    -ms-transition-property: background-color;
-    transition-property: background-color;
-}
-
-/*-----------------------------------------------------------------------------------*/
 /* Carousel */
 /*-----------------------------------------------------------------------------------*/
 .carousel-control {
@@ -2138,50 +2260,6 @@ ul.posts-list li {
 
 }
 
-/* Logo */
-.logo a {
-    /*top: 40px;*/
-    /*position: relative;*/
-    z-index: 20;
-}
-
-.logo img {
-    margin-top: 40px;
-    width: 80%;
-    max-width: 100%;
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -ms-transition: all 1s ease; /* IE 9 */
-    -o-transition: all 1s ease; /* Opera */
-    transition: all 1s ease;
-}
-
-.logo img:hover {
-    -webkit-transform:scale(1.25); /* Safari and Chrome */
-    -moz-transform:scale(1.25); /* Firefox */
-    -ms-transform:scale(1.25); /* IE 9 */
-    -o-transform:scale(1.25); /* Opera */
-    transform:scale(1.25);
-}
-
-/*.spin {
-    cursor: pointer;
-    transform-style: preserve-3d;
-}
-
-.spin:hover {
-    animation: spin 5s linear infinite;
-}
-
-@keyframes spin {
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
-}*/
-
 /* Bootstrap override*/
 .modal-img {
     float: left;
@@ -2238,15 +2316,6 @@ ul.posts-list li {
 }
 
 /* custom stuff */
-.user-bar {
-    margin-top: 20px;
-    display: inline-block;
-}
-
-.user-bar-item {
-    font-size: 16px;
-    color: inherit;
-}
 
 .points {
     color: #555555;

@@ -187,7 +187,7 @@ class ExerciseController extends Controller
         return redirect('/admin/exercise');
     }
 
-    public static function addAnswers($request, $id){
+    public function addAnswers($request, $id){
         $remaining_answers = $request->answer_count;
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
@@ -270,9 +270,9 @@ class ExerciseController extends Controller
         $this->addAnswers($request, $id);
 
         // flash the session to show successful operation
-        Session::flash('exercise-create', $request->ex_title);
+        Session::flash('exercise-update', $request->ex_title);
 
-        return redirect('admin/exercise');
+        return redirect('exercise/edit/'.$ex_id);
     }
 
     public function getChoice()
@@ -396,9 +396,9 @@ class ExerciseController extends Controller
         $this->addAnswersChoice($request, $exercise->id);
 
         // flash the session to show successful operation
-        Session::flash('exercise-create', $request->ex_title);
+        Session::flash('exercise-update', $request->ex_title);
 
-        return redirect('admin/exercise');
+        return redirect('exercise/edit/'.$ex_id);
     }
     /**
      * Show the form for creating a new resource.

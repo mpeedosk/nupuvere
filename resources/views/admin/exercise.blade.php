@@ -4,17 +4,6 @@
 
 
 @section('content')
-    {{--    @if(Session::has('toast'))
-            <script>
-                $(function () {
-                    toastr.success('Kategooriad edukalt uuendatud!');
-                });
-            </script>
-        @elseif(Session::has('category-update'))
-            <script>
-                toastr.success('Kategooriad edukalt uuendatud!');
-            </script>
-        @endif--}}
     @if(Session::has('exercise-create'))
         <script>
             $(function () {

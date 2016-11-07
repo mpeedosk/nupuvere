@@ -7,14 +7,14 @@
             </div>
             <!-- End Disclaimer -->
             <!-- Contact Details -->
-            <div class="col-md-3 margin-bottom-20">
+            <div class="col-md-3 margin-bottom-20 contact">
                 <p>
-                    <span class="fa-phone">Telephone:</span>1-800-123-4567
+                    <span>Telephone:</span> 1-800-123-4567
                     <br>
-                    <span class="fa-envelope">Email:</span>
+                    <span>Email:</span>
                     <a href="mailto:info@example.com">info@example.com</a>
                     <br>
-                    <span class="fa-link">Website:</span>
+                    <span>Website:</span>
                     <a href="http://www.example.com">www.example.com</a>
                 </p>
             </div>

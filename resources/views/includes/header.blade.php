@@ -48,7 +48,6 @@
                                         </div>
                                         <a id="forgot-password" class="small pull-right"
                                            href="{{ url('/password/reset') }}" tabindex="-1">Unustasid parooli?</a>
-
                                     </div>
 
                                     <div class="form-group hidden">
@@ -138,23 +137,6 @@
 
 
                         @endif
-
-                        <div class="search-bar col-md-6 col-md-offset-6 no-padding visible-lg">
-                            <form class="search-form" role="search">
-                                <div class="form-group form-group-sm">
-                                    <div class="input-group">
-                                        <label for="search" class="visuallyhidden">Otsi</label>
-                                        <input type="text" id="search" placeholder="Otsi..." class="form-control">
-                                        <span class="input-group-btn">
-                                    <button class="btn btn-primary btn-raised btn-xs" type="submit"><span
-                                                class="glyphicon glyphicon-search"></span></button></span>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row">
-
                     </div>
                     <!-- End Login Box -->
                 </div>

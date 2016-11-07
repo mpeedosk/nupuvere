@@ -1,8 +1,12 @@
 @extends('admin.layouts.exercise')
 @section('title', 'Administraator')
 @section('description', 'Tekstiline/numbriline')
+@section('action')
+    action="@if(isset($exercise->id)){{ '/exercise/text/edit/' . $exercise->id }}@else{{ '/exercise/text/create' }}@endif"
+@endsection
 
 @section('answer-content')
+
     <div id="answers">
 
         @if(isset($answers))
@@ -23,15 +27,6 @@
             </div>
         @endif
 
-        {{--<div class="form-group" id="answer_group_2">
-            <label for="a2"> Vastus 2</label>
-            <button class="btn btn-danger btn-sm margin-bottom-15  btn_remove" type="button" data-toggle="tooltip"
-                    title="Eemalda" name="remove" id="2" tabindex="-1">
-                <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
-            </button>
-            <input class="form-control" id="a2" name="answer_2">
-        </div>
---}}
     </div>
 
     <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
