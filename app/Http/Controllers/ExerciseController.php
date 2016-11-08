@@ -321,7 +321,7 @@ class ExerciseController extends Controller
         // flash the session to show successful operation
         Session::flash('exercise-create', $request->ex_title);
 
-        return redirect()->back();
+        return redirect('/admin/exercise');
     }
 
 

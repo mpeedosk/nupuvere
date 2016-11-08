@@ -13,9 +13,11 @@
             @foreach($answers as $answer)
                 <div class="form-group" id="answer_group_{{$loop->index + 1}}">
                     <label class="" for="a{{$loop->index + 1}}"> Vastus {{$loop->index + 1}}</label>
+                    @if(!$loop->first)
                     <button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button"
                             data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="{{$loop->index + 1}}">
                         <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>
+                    @endif
                     <input class="form-control" id="a{{$loop->index + 1}}"
                            name="answer_{{$loop->index + 1}}" value="{{$answer->content}}">
                 </div>
