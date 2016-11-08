@@ -74,8 +74,13 @@ function loginRequired() {
     toastr.info('Vastamiseks peate sisse logima!');
 }
 
+var solutionSeen = false;
 // user has chosen to see the answer
 function showAnswer(id, type) {
+
+    if (solutionSeen)
+        return;
+    console.log("never get here");
     $.ajax({
         url: "/exercise/show/" + id,
         type: "post",
@@ -131,6 +136,7 @@ function showAnswer(id, type) {
                 document.getElementById('solution').style.display = "block";
             }
             document.getElementById('submit-answer').disabled = true;
+            solutionSeen = true;
 
         },
         error: function (xhr) {
@@ -227,73 +233,72 @@ $(function () {
 });
 
 
-
-$(document).ready(function(){
+$(document).ready(function () {
     $('#body-bg').fadeIn("fast");
 });
 
 
 /*
-function resizeInCanvas(img){
-    /////////  3-3 manipulate image
-    var perferedWidth = 2700;
-    var ratio = perferedWidth / img.width;
-    var canvas = $("<canvas>")[0];
-    canvas.width = 1080;
-    canvas.height = 422;
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0,0,canvas.width, canvas.height);
-    //////////4. export as dataUrl
-    return canvas.toDataURL();
-}
-*/
+ function resizeInCanvas(img){
+ /////////  3-3 manipulate image
+ var perferedWidth = 2700;
+ var ratio = perferedWidth / img.width;
+ var canvas = $("<canvas>")[0];
+ canvas.width = 1080;
+ canvas.height = 422;
+ var ctx = canvas.getContext("2d");
+ ctx.drawImage(img, 0,0,canvas.width, canvas.height);
+ //////////4. export as dataUrl
+ return canvas.toDataURL();
+ }
+ */
 /*
-function readURL(input) {
+ function readURL(input) {
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            console.log(e.target.result);
-            $('#gallery2-preview').attr('src', e.target.result);
-        };
+ if (input.files && input.files[0]) {
+ var reader = new FileReader();
+ reader.onload = function (e) {
+ console.log(e.target.result);
+ $('#gallery2-preview').attr('src', e.target.result);
+ };
 
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+ reader.readAsDataURL(input.files[0]);
+ }
+ }
 
-$("#inputGallery2").change(function(){
-    readURL(this);
-});*/
+ $("#inputGallery2").change(function(){
+ readURL(this);
+ });*/
 
 // http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
 
-$('#inputGallery1').on('change', function() {
+$('#inputGallery1').on('change', function () {
     resizeImages(this.files[0], 1);
 });
-$('#inputGallery2').on('change', function() {
+$('#inputGallery2').on('change', function () {
     resizeImages(this.files[0], 2);
 });
-$('#inputGallery3').on('change', function() {
+$('#inputGallery3').on('change', function () {
     resizeImages(this.files[0], 3);
 });
-$('#inputGallery4').on('change', function() {
+$('#inputGallery4').on('change', function () {
     resizeImages(this.files[0], 4);
 });
-$('#inputGallery5').on('change', function() {
+$('#inputGallery5').on('change', function () {
     resizeImages(this.files[0], 5);
 });
 
 function resizeImages(file, id) {
-    if(file == null){
-        $('#gallery'+ id +'-preview').attr('src', '/img/gallery/gallery'+ id +'.png');
+    if (file == null) {
+        $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
         return;
     }
     var reader = new FileReader();
-    reader.onload = function(e) {
+    reader.onload = function (e) {
 
         var img = new Image();
-        img.onload = function() {
-            $('#gallery'+ id +'-preview').attr('src', resizeInCanvas(img));
+        img.onload = function () {
+            $('#gallery' + id + '-preview').attr('src', resizeInCanvas(img));
         };
 
         img.src = e.target.result;
@@ -301,13 +306,13 @@ function resizeImages(file, id) {
     reader.readAsDataURL(file);
 }
 
-function resizeInCanvas(img){
+function resizeInCanvas(img) {
     var canvas = $("<canvas>")[0];
 
     canvas.width = 1080;
     canvas.height = 422;
 
-    canvas.getContext("2d").drawImage(img, 0,0,canvas.width, canvas.height);
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
 
     return canvas.toDataURL();
 }
@@ -315,36 +320,36 @@ function resizeInCanvas(img){
 
 // modified from http://codeconvey.com/expanding-search-bar-with-jquery/
 
-$(document).ready(function(){
+$(document).ready(function () {
     var searchIcon = $('.search-icon');
     var searchInput = $('.search-input');
     var searchBox = $('.search');
     var isOpen = false;
 
-    $(document).mouseup(function(){
-        if(isOpen == true){
+    $(document).mouseup(function () {
+        if (isOpen == true) {
             searchInput.val('');
             searchBox.removeClass('search-open');
             isOpen = false;
         }
     });
 
-    searchIcon.mouseup(function(){
+    searchIcon.mouseup(function () {
         return false;
     });
 
-    searchBox.mouseup(function(){
+    searchBox.mouseup(function () {
         return false;
     });
 
-    searchIcon.click(function(){
-        if(isOpen == false){
+    searchIcon.click(function () {
+        if (isOpen == false) {
             searchBox.addClass('search-open');
             isOpen = true;
-        }else{
-            if($("#search").val() != "")
+        } else {
+            if ($("#search").val() != "")
                 document.getElementById("search-form").submit();
-            else{
+            else {
                 searchBox.removeClass('search-open');
                 isOpen = false;
             }

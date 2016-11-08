@@ -45,7 +45,7 @@
 
                 @if(count(App\Category::getCategories()) > 6)
                     <li class="menu-expand">
-                        <i class="fa fa-bars fa-fw fa-2x" aria-hidden="true"></i>
+                        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
                         <ul>
                             @foreach(App\Category::getCategories() as $cat )
                                 @if($loop->iteration <= 6)
@@ -95,8 +95,9 @@
                     <a href=""> Edetabel</a>
                 </li>
                 <div class="leaderboard pull-right visible-md visible-lg">
-                    <a class="center-block" href="#" target="_blank" title="Leaderboard"></a>
+                    <a class="center-block" href="#" title="Leaderboard"></a>
                 </div>
+
                 <div class="search-container">
                     <div class="search">
                         <form id="search-form">
