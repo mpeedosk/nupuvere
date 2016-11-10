@@ -1,17 +1,13 @@
 /**
  * Created by Martin on 28.10.2016.
  */
+
+/* Fade loader icon away after page has loaded*/
 $(document).ready(function(){
     $(".se-pre-con").fadeOut("slow");
     $(".pre-loader-ex").fadeOut("slow");
 
 });
-
-/*
- $(window).load(function() {
- // Animate loader off screen
- $(".se-pre-con").fadeOut("slow");
- });*/
 
 
 function showCategoryConfirm(id, name) {
@@ -41,6 +37,7 @@ function deleteCategory() {
     });
 }
 
+/* confirmation for deleting an exercise */
 function showExerciseConfirm(id, name) {
     $("#confirm-exercise-name").html(name);
     $("#confirm-exercise-id").html(id);
@@ -68,6 +65,7 @@ function deleteExercise() {
     });
 }
 
+/* keep track of exercise answers*/
 var answerCount = -1;
 
 function updateAnswerCount(count) {
@@ -77,7 +75,7 @@ function updateAnswerCount(count) {
         answerCount++;
 }
 
-
+/* adding answers for textual/numeric exercises*/
 function addAnswer(count) {
 
     updateAnswerCount(count);
@@ -99,6 +97,8 @@ function addAnswer(count) {
 
 }
 
+/* adding answers for multiple choice exercises*/
+
 function addAnswerChoice(count) {
 
     updateAnswerCount(count);
@@ -112,7 +112,7 @@ function addAnswerChoice(count) {
         '<div class="form-group margin-top-10" id="answer_group_' + answerCount + '">' +
         '<div class="radio radio-inline">' +
         '<label for="answer_' + answerCount + '">' +
-        '<input id="answer_' + answerCount + '" type="radio" name="answer" value="' + content + '">' +
+        '<input id="answer_' + answerCount + '" type="radio" name="answer_1" value="' + content + '">' +
         '<span class="circle"></span>' +
         '<span class="check"></span>' +
         content +
@@ -128,15 +128,14 @@ function addAnswerChoice(count) {
     $('#answers').append(answer_group);
 
 }
-
+/* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
     var button_id = $(this).attr("id");
-    console.log(button_id);
     $('#answer_group_' + button_id + '').remove();
 });
 
 
-
+/* initializing bootstrap table*/
 $('#table').bootstrapTable({
     onPostBody: function (data) {
         $('.color').colorPicker({
@@ -163,9 +162,9 @@ $('#table').bootstrapTable({
     }
 });
 
-
+/* adding answers for backend processing for multiple choice exercises */
 function getCheckedValue() {
-    var radios = document.getElementsByName('answer');
+    var radios = document.getElementsByName('answer_1');
     var correct = false;
 
     // check if we have an correct answer chosen
@@ -192,7 +191,54 @@ function getCheckedValue() {
     return true;
 
 }
+// http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
 
+$('#inputGallery1').on('change', function () {
+    resizeImages(this.files[0], 1);
+});
+$('#inputGallery2').on('change', function () {
+    resizeImages(this.files[0], 2);
+});
+$('#inputGallery3').on('change', function () {
+    resizeImages(this.files[0], 3);
+});
+$('#inputGallery4').on('change', function () {
+    resizeImages(this.files[0], 4);
+});
+$('#inputGallery5').on('change', function () {
+    resizeImages(this.files[0], 5);
+});
+
+/* gallary image upload preview */
+
+function resizeImages(file, id) {
+    if (file == null) {
+        $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function (e) {
+
+        var img = new Image();
+        img.onload = function () {
+            $('#gallery' + id + '-preview').attr('src', resizeInCanvas(img));
+        };
+
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function resizeInCanvas(img) {
+    var canvas = $("<canvas>")[0];
+
+    canvas.width = 1080;
+    canvas.height = 422;
+
+    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    return canvas.toDataURL();
+}
 /* Move to next input on enter http://stackoverflow.com/questions/24209588/how-to-move-focus-on-next-field-when-enter-is-pressed  */
 
 // register jQuery extension

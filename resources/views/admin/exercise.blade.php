@@ -4,35 +4,35 @@
 
 
 @section('content')
-    @if(Session::has('exercise-create'))
-        <script>
-            $(function () {
-                toastr.success('Ülesanne "{{Session::get('exercise-create')}}" edukalt lisatud');
-            });
-        </script>
-    @endif
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
+            @if(Session::has('exercise-create'))
+                <script>
+                    $(function () {
+                        toastr.success('Ülesanne "{{Session::get('exercise-create')}}" edukalt lisatud');
+                    });
+                </script>
+            @endif
             <div class="row">
                 <h2>Lisa uus: </h2>
 
                 <div class="list-group">
 
                     <div class="list-group-item">
-                        <a href="/exercise/text" class="list-group-item-heading">
+                        <a href="/admin/exercise/create/1" class="list-group-item-heading">
                             <span class="fa fa-fw fa-quote-left" aria-hidden="true"></span>
                             Tekstiline/numbriline</a>
                     </div>
 
                     <div class="list-group-item">
-                        <a href="/exercise/choice" class="list-group-item-heading">
+                        <a href="/admin/exercise/create/2" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-circle-o" aria-hidden="true"></span>
                             Valikvastusega - üks õige</a>
                     </div>
 
                     <div class="list-group-item">
-                        <a href="#" class="list-group-item-heading">
+                        <a href="/admin/exercise/create/3" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-square" aria-hidden="true"></span>
                             Valikvastusega - mitu õiget</a>
                     </div>
@@ -82,7 +82,7 @@
                             <td>{{$exercise -> attempted}}</td>
                             <td>{{$exercise -> attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
                             <td class="text-center">
-                                <a href="/exercise/edit/{{$exercise->id}}" class="btn btn-info btn-raised btn-sm"
+                                <a href="/admin/exercise/edit/{{$exercise->id}}" class="btn btn-info btn-raised btn-sm"
                                    type="button" data-toggle="tooltip"
                                    title="Muuda">
                                     <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>

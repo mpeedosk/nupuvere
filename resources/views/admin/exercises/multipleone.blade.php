@@ -4,7 +4,7 @@
 
 @section('action')
     onSubmit="return getCheckedValue()"
-    action="@if(isset($exercise->id)){{ '/exercise/choice/edit/' . $exercise->id }}@else{{ '/exercise/choice/create' }}@endif"
+    action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/2' }}@endif"
 @endsection
 
 @section('answer-content')
@@ -15,7 +15,7 @@
                 <div class="form-group margin-top-10" id="answer_group_{{$loop->index + 1}}">
                     <div class="radio radio-inline">
                         <label for="answer_{{$loop->index + 1}}">
-                            <input id="answer_{{$loop->index + 1}}" type="radio" name="answer"
+                            <input id="answer_{{$loop->index + 1}}" type="radio" name="answer_1"
                                    value="{{$answer->content}}" @if($answer->is_correct) checked="checked" @endif>
                             {{$answer->content}}
                         </label>

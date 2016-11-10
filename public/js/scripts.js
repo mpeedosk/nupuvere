@@ -26,8 +26,8 @@ toastr.options = {
 
 // initialize sortable
 var el = document.getElementById('draggable');
-// var sortable = Sortable.create(el);
 
+/* initialize draggable elements*/
 if (el != null) {
     Sortable.create(el, {
         animation: 150,
@@ -54,7 +54,7 @@ function centerModals($element) {
     } else {
         $modals = $(modalVerticalCenterClass + ':visible');
     }
-    $modals.each(function (i) {
+    $modals.each(function () {
         var $clone = $(this).clone().css('display', 'block').appendTo('body');
         var top = Math.round(($clone.height() - $clone.find('.modal-content').height()) / 2);
         top = top > 0 ? top : 0;
@@ -62,7 +62,7 @@ function centerModals($element) {
         $(this).find('.modal-content').css("margin-top", top);
     });
 }
-$(modalVerticalCenterClass).on('show.bs.modal', function (e) {
+$(modalVerticalCenterClass).on('show.bs.modal', function () {
     centerModals($(this));
 });
 $(window).on('resize', centerModals);
@@ -74,19 +74,21 @@ function loginRequired() {
     toastr.info('Vastamiseks peate sisse logima!');
 }
 
-var solutionSeen = false;
 // user has chosen to see the answer
+
+var solutionSeen = false;
+
 function showAnswer(id, type) {
 
     if (solutionSeen)
         return;
     console.log("never get here");
     $.ajax({
-        url: "/exercise/show/" + id,
+        url: "/answer/show/" + id,
         type: "post",
         dataType: "JSON",
         data: {
-            '_token': $('input[name="_token"]').val(),
+            '_token': $('input[name="_token"]').val()
         },
         success: function (data) {
             toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
@@ -184,7 +186,7 @@ function submitAnswer(event, id, type) {
     var postArray = JSON.stringify(answers);
 
     $.ajax({
-        url: "/exercise/check/" + id,
+        url: "/answer/check/" + id,
         type: "post",
         dataType: "JSON",
         data: {
@@ -222,7 +224,7 @@ function submitAnswer(event, id, type) {
     });
 }
 
-
+/* image zoom on click*/
 $('#ex-content').find('img').addClass('ex-image');
 
 $(function () {
@@ -233,91 +235,8 @@ $(function () {
 });
 
 
-$(document).ready(function () {
-    $('#body-bg').fadeIn("fast");
-});
 
-
-/*
- function resizeInCanvas(img){
- /////////  3-3 manipulate image
- var perferedWidth = 2700;
- var ratio = perferedWidth / img.width;
- var canvas = $("<canvas>")[0];
- canvas.width = 1080;
- canvas.height = 422;
- var ctx = canvas.getContext("2d");
- ctx.drawImage(img, 0,0,canvas.width, canvas.height);
- //////////4. export as dataUrl
- return canvas.toDataURL();
- }
- */
-/*
- function readURL(input) {
-
- if (input.files && input.files[0]) {
- var reader = new FileReader();
- reader.onload = function (e) {
- console.log(e.target.result);
- $('#gallery2-preview').attr('src', e.target.result);
- };
-
- reader.readAsDataURL(input.files[0]);
- }
- }
-
- $("#inputGallery2").change(function(){
- readURL(this);
- });*/
-
-// http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
-
-$('#inputGallery1').on('change', function () {
-    resizeImages(this.files[0], 1);
-});
-$('#inputGallery2').on('change', function () {
-    resizeImages(this.files[0], 2);
-});
-$('#inputGallery3').on('change', function () {
-    resizeImages(this.files[0], 3);
-});
-$('#inputGallery4').on('change', function () {
-    resizeImages(this.files[0], 4);
-});
-$('#inputGallery5').on('change', function () {
-    resizeImages(this.files[0], 5);
-});
-
-function resizeImages(file, id) {
-    if (file == null) {
-        $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
-        return;
-    }
-    var reader = new FileReader();
-    reader.onload = function (e) {
-
-        var img = new Image();
-        img.onload = function () {
-            $('#gallery' + id + '-preview').attr('src', resizeInCanvas(img));
-        };
-
-        img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-}
-
-function resizeInCanvas(img) {
-    var canvas = $("<canvas>")[0];
-
-    canvas.width = 1080;
-    canvas.height = 422;
-
-    canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    return canvas.toDataURL();
-}
-
-
+/* search bar*/
 // modified from http://codeconvey.com/expanding-search-bar-with-jquery/
 
 $(document).ready(function () {

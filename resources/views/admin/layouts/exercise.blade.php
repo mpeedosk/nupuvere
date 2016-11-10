@@ -52,14 +52,14 @@
 
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
-        @if(count($errors) > 0)
-            <div class="alert alert-danger">
-                @foreach($errors->all() as $error)
-                    {{$error}}
-                @endforeach
-            </div>
-        @endif
         <div class="container">
+            @if(count($errors) > 0)
+                <div class="alert alert-danger">
+                    @foreach($errors->all() as $error)
+                        {{$error}}
+                    @endforeach
+                </div>
+            @endif
             <div class="row margin-30">
                 <div class="col-md-7">
                     <form method="POST" @yield('action')>
@@ -73,7 +73,7 @@
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
                             <input class="form-control" id="ex_title" name="ex_title" maxlength="20"
-                                   value="@if(isset($exercise->title)){{ $exercise->title }}@endif">
+                                   value="@if(isset($exercise->title)){{ $exercise->title }} @else {{ old('ex_title') }} @endif">
                             <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
                         </div>
 
@@ -82,7 +82,7 @@
                                                                                aria-hidden="true"></span>
                                 Ülesande autor</label>
                             <input class="form-control" id="ex_author" name="ex_author"
-                                   value="@if(isset($exercise->author)){{ $exercise->author }}@endif">
+                                   value="@if(isset($exercise->author)){{ $exercise->author }} @else {{ old('ex_author') }} @endif">
                             <span class="help-block color-default">See väli ei ole kohustuslik</span>
                         </div>
 
@@ -90,7 +90,7 @@
                             <label for="ex_content" class=""><span class="fa fa-fw fa-asterisk"
                                                                    aria-hidden="true"></span>Ülesande püstitus</label>
                             <textarea class="form-control" id="ex_content" name="ex_content">
-                                @if(isset($exercise->content)){{ $exercise->content }}@endif
+                                @if(isset($exercise->content)){{ $exercise->content }} @else {{ old('ex_content') }} @endif
                             </textarea>
                         </div>
 
@@ -98,7 +98,7 @@
                             <label for="ex_solution" class=""><span class="fa fa-fw"
                                                                     aria-hidden="true"></span>Lahenduskäik</label>
                             <textarea class=" form-control" id="ex_solution" name="ex_solution">
-                                 @if(isset($exercise->solution)){{ $exercise->solution }}@endif
+                                 @if(isset($exercise->solution)){{ $exercise->solution }} @else {{ old('ex_solution') }} @endif
                             </textarea>
                         </div>
 
@@ -107,7 +107,7 @@
                                                                 aria-hidden="true"></span>Lisa vihje</label>
 
                             <textarea class=" form-control" id="ex_hint" name="ex_hint">
-                                @if(isset($exercise->hint)){{ $exercise->hint }}@endif
+                                @if(isset($exercise->hint)){{ $exercise->hint }} @else {{ old('ex_hint') }}@endif
                             </textarea>
                         </div>
 
@@ -117,7 +117,7 @@
                             <input id="answer_count" class="hidden" name="answer_count"
                                    @if(isset($answers))value="{{count($answers)}}"
                                    @else value="1"
-                                    @endif>
+                                   @endif>
                         </div>
 
                         @yield('answer-content')

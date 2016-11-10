@@ -77,7 +77,7 @@
                             @endif
                         @endif
 
-                        <form method="POST" action="{{ url('/exercise/check/'.$exercise-> id)}}">
+                        <form method="POST" action="{{ url('/answer/check/'.$exercise-> id)}}">
                             <div class="col-xs-12">
                                 @include('exercises.'.$type)
                             </div>

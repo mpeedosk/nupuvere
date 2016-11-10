@@ -36,29 +36,23 @@ Route::group(['middleware' => 'admin'], function () {
 
     // EXERCICE CONTROLLER NEEDS REFACTORING!
 
-    Route::get('exercise/multiple','ExerciseController@getMultiple');
-    Route::get('exercise/order','ExerciseController@getOrder');
 
-    Route::get('exercise/edit/{id}', 'ExerciseController@getExerciseForEdit');
+    Route::get('admin/exercise/create/{type}', 'ExerciseController@showExerciseTemplate');
+    Route::post('admin/exercise/create/{type}', 'ExerciseController@create');
+    Route::get('admin/exercise/edit/{id}', 'ExerciseController@getExerciseForEdit');
+    Route::patch('admin/exercise/edit/{id}', 'ExerciseController@update');
     Route::delete('exercise/delete/{id}', 'ExerciseController@destroy');
 
-    Route::get('exercise/text','ExerciseController@getTextual');
-    Route::post('exercise/text/create', 'ExerciseController@createTextual');
-    Route::patch('exercise/text/edit/{id}', 'ExerciseController@updateTextual');
-
-    Route::get('exercise/choice','ExerciseController@getChoice');
-    Route::post('exercise/choice/create', 'ExerciseController@createChoice');
-    Route::patch('exercise/choice/edit/{id}', 'ExerciseController@updateChoice');
 
 
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('exercise/check/{id}', 'AnswerController@checkAnswer');
-    Route::post('exercise/show/{id}', 'AnswerController@showAnswer');
+    Route::post('answer/check/{ex_id}', 'AnswerController@checkAnswer');
+    Route::post('answer/show/{ex_id}', 'AnswerController@showAnswer');
 });
 
 
-Route::get('{category}/{age_group}', 'ExerciseController@index');
-Route::get('{category}/{age_group}/{difficulty}/{ex_id}', 'ExerciseController@exercise');
+Route::get('{category}/{age_group}', 'ExerciseController@showExerciseList');
+Route::get('{category}/{age_group}/{difficulty}/{ex_id}', 'ExerciseController@show');
 

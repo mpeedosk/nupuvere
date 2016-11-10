@@ -2,7 +2,7 @@
 @section('title', 'Administraator')
 @section('description', 'Tekstiline/numbriline')
 @section('action')
-    action="@if(isset($exercise->id)){{ '/exercise/text/edit/' . $exercise->id }}@else{{ '/exercise/text/create' }}@endif"
+    action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/1' }}@endif"
 @endsection
 
 @section('answer-content')

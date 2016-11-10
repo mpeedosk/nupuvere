@@ -84,7 +84,7 @@ class ExerciseTest extends TestCase
 
         $this->assertEquals(200, $response->status());
 
-        $response = $this->call('POST', '/exercise/check/1');
+        $response = $this->call('POST', '/answer/check/1');
 
         $this->assertEquals(302, $response->status());
     }
@@ -118,7 +118,11 @@ class ExerciseTest extends TestCase
 
         $this->assertEquals(200, $response->status());
 
-        $response = $this->call('GET', '/exercise/text');
+        $response = $this->call('GET', '/admin/exercise/create/1');
+
+        $this->assertEquals(200, $response->status());
+
+        $response = $this->call('GET', '/admin/exercise/create/2');
 
         $this->assertEquals(200, $response->status());
     }
@@ -148,7 +152,7 @@ class ExerciseTest extends TestCase
             'answer_1' => 'Test answer'
         ];
 
-        $this->call('POST', 'exercise/text/create', $input);
+        $this->call('POST', '/admin/exercise/create/1', $input);
         $this->assertRedirectedTo('/admin/exercise');
 
 
@@ -181,7 +185,7 @@ class ExerciseTest extends TestCase
             'answer_1' => 'Test answer'
         ];
 
-        $this->call('POST', 'exercise/text/create', $input);
+        $this->call('POST', '/admin/exercise/create/1', $input);
 
         $this->assertCount(0, Exercise::all());
         $this->assertCount(0, Answer::all());
@@ -212,7 +216,7 @@ class ExerciseTest extends TestCase
             'answer_1' => 'Test answer'
         ];
 
-        $this->call('POST', 'exercise/text/create', $input);
+        $this->call('POST', '/admin/exercise/create/1', $input);
 
         $this->assertCount(1, Exercise::all());
         $this->assertCount(1, Answer::all());
@@ -245,7 +249,7 @@ class ExerciseTest extends TestCase
             'answer_3' => 'Test answer 3'
         ];
 
-        $this->call('POST', 'exercise/text/create', $input);
+        $this->call('POST', '/admin/exercise/create/1', $input);
 
         $this->assertCount(1, Exercise::all());
         $this->assertCount(3, Answer::all());
@@ -276,7 +280,7 @@ class ExerciseTest extends TestCase
             'answer_1' => 'Test answer'
         ];
 
-        $this->call('POST', 'exercise/text/create', $input);
+        $this->call('POST', '/admin/exercise/create/1', $input);
 
         $this->assertCount(0, Exercise::all());
         $this->assertCount(0, Answer::all());
@@ -300,7 +304,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'Test answer 1'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
     }
@@ -324,7 +328,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'Test answer 2'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
 
@@ -332,7 +336,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'Test answer 3'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
     }
@@ -356,7 +360,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'test answer 1'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
 
@@ -364,7 +368,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'TEST ANSWER 1'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
     }
@@ -388,7 +392,7 @@ class ExerciseTest extends TestCase
             'answer-input' => '     test       answer    1    '
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
 
@@ -396,7 +400,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'TESTANSWER1'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
     }
@@ -420,7 +424,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'Test answer 5'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite valesti!');
     }
@@ -444,7 +448,7 @@ class ExerciseTest extends TestCase
             'answer-input' => 'Test answer'
         ];
 
-        $this->call('POST', '/exercise/check/1', $input);
+        $this->call('POST', '/answer/check/1', $input);
         $this->followRedirects();
         $this->see('Vastasite õigesti!');
         $this->see('Test solution');

@@ -85,7 +85,7 @@ class UITest extends TestCase
              ->press('Vasta')
              ->see('Retseptis');
     }
-    
+
 
    public function testAdminAddExercise() // Kontrolliba, kui admin lisab ülesandeid, kas kõik kuvatakse õigesti.
     {
@@ -135,7 +135,7 @@ class UITest extends TestCase
              ->type('test','answer_1')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->see('The ex title field is required.'); 
+             ->see('The ex title field is required.');
         }
 
     public function testAdminAddExerciseEmptyContent()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel sisu jääb tühjaks.
@@ -160,7 +160,7 @@ class UITest extends TestCase
              ->type('test','answer_1')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->see('The ex content field is required.'); 
+             ->see('The ex content field is required.');
         }
 
         public function testAdminAddExerciseEmptyAnswer()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel vastus jääb tühjaks.
@@ -185,7 +185,7 @@ class UITest extends TestCase
              ->type('','answer_1')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->see('The answer 1 field is required.'); 
+             ->see('The answer 1 field is required.');
         }
 
 

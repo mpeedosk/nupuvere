@@ -25,7 +25,7 @@
                                         <div class="form-group form-group-sm label-floating">
                                             <label for="username" class="control-label">Kasutajanimi</label>
                                             <input id="username" class="form-control" type="text" name="username"
-                                                   {{ old('username') }} required>
+                                                   value="{{ old('username') }}" required>
                                             @if($errors->has('username'))
                                                 <span class="help-block">
                                                          <strong>{{ $errors->first('username') }}</strong>
