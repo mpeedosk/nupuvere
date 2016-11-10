@@ -101,7 +101,7 @@ class ExerciseController extends Controller
         $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty], ['age_group', $age_group], ['category', $category]])->count();
 
         // if no exercises exist
-        if ($all_exercises != 0)
+        if ($all_exercises == 0)
             return 0;
 
         // Get the percentage of solved exercises

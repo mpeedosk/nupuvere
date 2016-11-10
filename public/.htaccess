@@ -1,8 +1,7 @@
 ## EXPIRES CACHING ##
 <IfModule mod_expires.c>
 ExpiresActive On
-ExpiresByType image/svg "access 1 year"
-ExpiresDefault "access 1 week"
+ExpiresByType image/svg "access 1 week"
 </IfModule>
 ## EXPIRES CACHING ##
 
