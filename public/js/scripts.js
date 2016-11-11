@@ -82,7 +82,6 @@ function showAnswer(id, type) {
 
     if (solutionSeen)
         return;
-    console.log("never get here");
     $.ajax({
         url: "/answer/show/" + id,
         type: "post",
@@ -142,7 +141,11 @@ function showAnswer(id, type) {
 
         },
         error: function (xhr) {
-            toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
+            if (xhr.status == 401){
+                toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
+            } else {
+                toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
+            }
         }
     });
 
@@ -219,7 +222,12 @@ function submitAnswer(event, id, type) {
             }
         },
         error: function (xhr) {
-            toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
+            console.log(xhr.status);
+            if (xhr.status == 401){
+                toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
+            } else {
+                toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
+            }
         }
     });
 }

@@ -51,7 +51,6 @@
 
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
-
 </head>
 <body id="body-bg">
 
@@ -77,5 +76,12 @@
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
 @endif
 
+@if (session('expired'))
+    <script>
+        $(function () {
+            toastr.error({{ session('expired') }});
+        });
+    </script>
+@endif
 </body>
 </html>

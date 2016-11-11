@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -44,6 +45,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof TokenMismatchException){
+            // Catch it here and do what you want. For example...
+            if ($request->ajax())
+                return abort(401);
+            return redirect()->back()->with('expired', 'Teie sessioon on aegunud.');
+        }
         return parent::render($request, $exception);
     }
 

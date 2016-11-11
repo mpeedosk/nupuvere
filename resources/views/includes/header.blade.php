@@ -12,7 +12,7 @@
                 </div>
             </div>
 
-            <div class="col-sm-7 padding-vert-5 no-padding-lg">
+            <div class="col-sm-7 padding-vert-5">
                 <!-- Login Box -->
                 <div class="row">
                     <div class="col-md-12 no-padding-lg">
@@ -78,6 +78,7 @@
                             <form style="padding-right: 29px" id="logout-form"
                                   action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
+                                {{ csrf_field() }}
                                 <div class="row text-center">
                                     <div class="bottom-border user-bar pull-right"
                                          style="display:inline-block; width: 80%; padding-top: 10px;">
@@ -100,22 +101,13 @@
                                     </div>
                                 </div>
                             </form>
-                            {{--   @elseif(Auth::user()->isAdmin())
-                                   <H1>Admin</H1>
-                                   <form style="padding-right: 29px" id="logout-form" action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
-                                         method="POST">
-                                       <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
-                                                   </button>
-                                                   {{ csrf_field() }}
-                                   </form>--}}
                         @else
-                            <form style="padding-right: 29px" id="logout-form"
+                            <form style="padding-right: 30px;padding-left: 30px" id="logout-form"
                                   action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
+                                {{ csrf_field() }}
                                 <div class="row text-center">
-                                    <div class="bottom-border user-bar pull-right"
-                                         style="width: 80%; padding-top: 10px;">
-
+                                    <div class="bottom-border user-bar pull-right">
                                         <div class="col-xs-4">
                                             <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
@@ -123,19 +115,16 @@
                                         </div>
 
                                         <div class="col-xs-4">
-                                            <h2>{{Auth::user() -> username }}</h2>
+                                            <div class="user-bar-name">{{Auth::user() -> username }}</div>
                                         </div>
 
                                         <div class="col-xs-4">
                                             <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
                                             </button>
-                                            {{ csrf_field() }}
                                         </div>
                                     </div>
                                 </div>
                             </form>
-
-
                         @endif
                     </div>
                     <!-- End Login Box -->

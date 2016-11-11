@@ -9,16 +9,16 @@
 
 @section('content')
 
-    @if(Session::has('main-gallery'))
+    @if(session('main-gallery'))
         <script>
             $(function () {
-                toastr.success('{{Session::get('main-gallery')}}');
+                toastr.success('{{session('main-gallery')}}');
             });
         </script>
-    @elseif(Session::has('wrong-ext'))
+    @elseif(session('wrong-ext'))
         <script>
             $(function () {
-                toastr.error('{{Session::get('wrong-ext')}}');
+                toastr.error('{{session('wrong-ext')}}');
             });
         </script>
     @endif

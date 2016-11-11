@@ -42,10 +42,10 @@
 
 @section('content')
 
-    @if(Session::has('exercise-update'))
+    @if(session('exercise-update'))
         <script>
             $(function () {
-                toastr.success('Ülesanne "{{Session::get('exercise-update')}}" edukalt uuendatud');
+                toastr.success('Ülesanne "{{session('exercise-update')}}" edukalt uuendatud');
             });
         </script>
     @endif

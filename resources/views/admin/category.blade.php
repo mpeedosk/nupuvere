@@ -8,13 +8,13 @@
 @endsection
 
 @section('content')
-    @if(Session::has('category-create'))
+    @if(session('category-create'))
         <script>
             $(function () {
-                toastr.success('Kategooria {{str_replace('_', ' ', ucfirst(Session::get('category-create')))}} edukalt lisatud!');
+                toastr.success('Kategooria {{str_replace('_', ' ', ucfirst(session('category-create')))}} edukalt lisatud!');
             });
         </script>
-    @elseif(Session::has('category-update'))
+    @elseif(session('category-update'))
         <script>
             $(function () {
                 toastr.success('Kategooriad edukalt uuendatud!');

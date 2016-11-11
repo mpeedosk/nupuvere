@@ -7,10 +7,10 @@
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
-            @if(Session::has('exercise-create'))
+            @if(session('exercise-create'))
                 <script>
                     $(function () {
-                        toastr.success('Ülesanne "{{Session::get('exercise-create')}}" edukalt lisatud');
+                        toastr.success('Ülesanne "{{session('exercise-create')}}" edukalt lisatud');
                     });
                 </script>
             @endif

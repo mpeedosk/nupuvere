@@ -101,6 +101,7 @@
                 <div class="search-container">
                     <div class="search">
                         <form id="search-form">
+                            {{ csrf_field() }}
                             <input class="search-input" placeholder="Otsi..."
                                    type="search" value="" name="search" id="search">
                             <input class="search-btn" type="submit" value="">

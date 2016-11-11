@@ -78,6 +78,7 @@
                         @endif
 
                         <form method="POST" action="{{ url('/answer/check/'.$exercise-> id)}}">
+                            {{ csrf_field() }}
                             <div class="col-xs-12">
                                 @include('exercises.'.$type)
                             </div>
@@ -95,7 +96,6 @@
                                               disabled
                                               onclick="loginRequired()">Vasta</span>
                                     @else
-                                        {{ csrf_field() }}
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
                                                 onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
