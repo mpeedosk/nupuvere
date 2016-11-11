@@ -15,7 +15,7 @@
                 <div class="form-group margin-top-10" id="answer_group_{{$loop->index + 1}}">
                     <div class="radio radio-inline">
                         <label for="answer_{{$loop->index + 1}}">
-                            <input id="answer_{{$loop->index + 1}}" type="radio" name="answer_1"
+                            <input id="answer_{{$loop->index + 1}}" type="radio" name="answer"
                                    value="{{$answer->content}}" @if($answer->is_correct) checked="checked" @endif>
                             {{$answer->content}}
                         </label>

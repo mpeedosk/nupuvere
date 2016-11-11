@@ -1,4 +1,4 @@
-<div class="form-group" style="margin-left: 20px">
+<div class="form-group">
     @foreach($answers as $answer)
         <div class="checkbox">
             <label>

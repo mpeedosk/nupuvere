@@ -73,7 +73,7 @@
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
                             <input class="form-control" id="ex_title" name="ex_title" maxlength="20"
-                                   value="@if(isset($exercise->title)){{ $exercise->title }} @else {{ old('ex_title') }} @endif">
+                                   value="@if(isset($exercise->title)){{ $exercise->title }}@else{{old('ex_title')}}@endif">
                             <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
                         </div>
 
@@ -82,7 +82,7 @@
                                                                                aria-hidden="true"></span>
                                 Ülesande autor</label>
                             <input class="form-control" id="ex_author" name="ex_author"
-                                   value="@if(isset($exercise->author)){{ $exercise->author }} @else {{ old('ex_author') }} @endif">
+                                   value="@if(isset($exercise->author)){{ $exercise->author }}@else{{old('ex_author') }}@endif">
                             <span class="help-block color-default">See väli ei ole kohustuslik</span>
                         </div>
 

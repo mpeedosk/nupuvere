@@ -3,7 +3,7 @@
  */
 
 /* Fade loader icon away after page has loaded*/
-$(document).ready(function(){
+$(document).ready(function () {
     $(".se-pre-con").fadeOut("slow");
     $(".pre-loader-ex").fadeOut("slow");
 
@@ -98,21 +98,20 @@ function addAnswer(count) {
 }
 
 /* adding answers for multiple choice exercises*/
-
 function addAnswerChoice(count) {
 
     updateAnswerCount(count);
     document.getElementById('answer_count').value = answerCount;
 
     var userInput = document.getElementById('answer-title');
-    content = userInput.value;
+    var content = userInput.value;
     userInput.value = "";
 
     var answer_group =
         '<div class="form-group margin-top-10" id="answer_group_' + answerCount + '">' +
         '<div class="radio radio-inline">' +
         '<label for="answer_' + answerCount + '">' +
-        '<input id="answer_' + answerCount + '" type="radio" name="answer_1" value="' + content + '">' +
+        '<input id="answer_' + answerCount + '" type="radio" name="answer" value="' + content + '">' +
         '<span class="circle"></span>' +
         '<span class="check"></span>' +
         content +
@@ -126,8 +125,41 @@ function addAnswerChoice(count) {
 
 
     $('#answers').append(answer_group);
+}
+
+
+/* adding answers for multiple choice exercises*/
+function addAnswerChoiceM(count) {
+
+    updateAnswerCount(count);
+    document.getElementById('answer_count').value = answerCount;
+
+    var userInput = document.getElementById('answer-title');
+    var content = userInput.value;
+    userInput.value = "";
+
+    var answer_group =
+        '<div class="form-group margin-top-10" id="answer_group_' + answerCount + '">' +
+        '<div class="checkbox checkbox-inline">' +
+        '<label for="answer_' + answerCount + '">' +
+        '<input id="answer_' + answerCount + '" type="checkbox" name="answer"  value="' + content + '">' +
+        '<span class="checkbox-material">' +
+        '<span class="check"></span>' +
+        '</span>' +
+        '  ' + content +
+        '</label>' +
+        '</div>' +
+        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0" type="button"' +
+        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+        '</button>' +
+        '</div>';
+
+
+    $('#answers').append(answer_group);
 
 }
+
 /* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
     var button_id = $(this).attr("id");
@@ -164,9 +196,9 @@ $('#table').bootstrapTable({
 
 /* adding answers for backend processing for multiple choice exercises */
 function getCheckedValue() {
-    var radios = document.getElementsByName('answer_1');
+    var radios = document.getElementsByName('answer');
     var correct = false;
-
+    console.log(radios);
     // check if we have an correct answer chosen
     for (var i = 0; i < radios.length; i++) {
         if (radios[i].checked) {
@@ -181,12 +213,15 @@ function getCheckedValue() {
     // add a new input for each non-correct answer with the value as value
     for (i = 0; i < radios.length; i++) {
         if (!radios[i].checked) {
-            $('#answers').append('<input hidden value="' + radios[i].value + '" name="incorrect_' + (i+1) + '">');
+            $('#answers').append('<input hidden value="' + radios[i].value + '" name="incorrect_' + (i + 1) + '">');
+        }else{
+            $('#answers').append('<input hidden value="' + radios[i].value + '" name="answer_' + (i + 1) + '">');
+
         }
     }
 
     // update the answer_count for backend
-    document.getElementById('answer_count').value= radios.length;
+    document.getElementById('answer_count').value = radios.length;
 
     return true;
 

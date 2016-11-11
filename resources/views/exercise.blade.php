@@ -1,28 +1,18 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
-
-
-
-
 @section('content')
     <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
     <section class="margin-vert-30">
         <div class="container">
             <div class="row">
-
                 <div class="col-md-3 visible-lg visible-md">
-                    <?php $next = false; ?>
-                    @foreach($exercises as $ex)
-                        @if($next)
-                            <?php $next_id = $ex->id; $next = false;?>
-                        @endif
+                    @foreach($exercises_before as $ex)
                         @if ($ex->id == $exercise->id)
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 {{$ex -> title}}
 
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
-                                <?php $next = true;?>
                             </a>
                         @else
                             <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
@@ -30,9 +20,22 @@
                                 {{$ex -> title}}
                             </a>
                         @endif
-
                     @endforeach
+                        @foreach($exercises_after as $ex)
+                            @if ($loop->first)
+                                <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                                   class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                    {{$ex -> title}}
 
+                                    <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                                </a>
+                            @else
+                                <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                                   class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                    {{$ex -> title}}
+                                </a>
+                            @endif
+                        @endforeach
 
                 </div>
 
@@ -104,7 +107,7 @@
                                     @endif
 
                                     <a id="next-ex"
-                                       href="{{isset($next_id) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$next_id : '/'.$category.'/'.$age_group }}"
+                                       href="{{isset($exercises_after[1]) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$exercises_after[1]->id : '/'.$category.'/'.$age_group }}"
 
                                        class="btn btn-raised btn-aqua pull-right">
                                         <span class="hidden-xs">Edasi</span>
@@ -185,7 +188,6 @@
         </div>
     </div>
 
-
     <div id="wrong-answer" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content panel panel-warning">
@@ -205,21 +207,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Creates the bootstrap modal where the image will appear -->
-    {{--
-        <div class="modal fade" id="enlargeImageModal" tabindex="-1" role="dialog" aria-labelledby="enlargeImageModal" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <img src="" class="enlargeImageModalSource" style="width: 100%;">
-                    </div>
-                </div>
-            </div>
-        </div>--}}
 
     <div id="enlargeImageModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="enlargeImageModal"
          aria-hidden="true">

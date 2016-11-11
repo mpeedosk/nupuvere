@@ -18,7 +18,7 @@ class ExerciseController extends Controller
      * @param String $age_group - name of the exercise age group
      * @return \Illuminate\Http\Response
      */
-    
+
     public function showExerciseList($category, $age_group)
     {
 
@@ -66,8 +66,9 @@ class ExerciseController extends Controller
      * @return \Illuminate\View\View
      * */
 
-    public function showExerciseTemplate($type){
-        switch ($type){
+    public function showExerciseTemplate($type)
+    {
+        switch ($type) {
             case Exercise::TEXTUAL:
                 return view('admin.exercises.textual');
             case Exercise::MULTIPLE_ONE:
@@ -124,9 +125,20 @@ class ExerciseController extends Controller
             ->first();
 
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
-        $exercise_list = DB::table('exercises')
+
+        $exercise_list_after = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
+            ->where('id', '>=', $ex_id)
+            ->take(5)
             ->get();
+
+        $exercise_list_before = DB::table('exercises')
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
+            ->where('id', '<', $ex_id)
+            ->orderBy('id', 'desc')
+            ->take(4)
+            ->get()
+            ->reverse();
 
         // pluck the answer text for this exercise
         $answers = DB::table('answers')
@@ -142,15 +154,14 @@ class ExerciseController extends Controller
 
         // if user is not logged in we will not return the solved exercise list
         if (Auth::guest())
-            return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
-                'answers' => $answers, 'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
-                'solved' => []]);
+            return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises_before' => $exercise_list_before,
+                'exercises_after' => $exercise_list_after, 'answers' => $answers, 'difficulty' => $difficulty, 'category'
+                => $category, 'age_group' => $age_group, 'solved' => []]);
 
-        return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises' => $exercise_list,
-            'answers' => $answers, 'difficulty' => $difficulty, 'category' => $category, 'age_group' => $age_group,
-            'solved' => Auth::user()->getSolvedEx()]);
+        return view('exercise', ['type' => $type, 'exercise' => $exercise, 'exercises_before' => $exercise_list_before,
+            'exercises_after' => $exercise_list_after, 'answers' => $answers, 'difficulty' => $difficulty, 'category' =>
+                $category, 'age_group' => $age_group, 'solved' => Auth::user()->getSolvedEx()]);
     }
-
 
 
     /**
@@ -175,16 +186,17 @@ class ExerciseController extends Controller
             ->get()
             ->toArray();
 
-        switch ($exercise->type){
+        switch ($exercise->type) {
             case Exercise::TEXTUAL:
                 return view('admin.exercises.textual', ['exercise' => $exercise, 'answers' => $answers]);
             case Exercise::MULTIPLE_ONE:
                 return view('admin.exercises.multipleone', ['exercise' => $exercise, 'answers' => $answers]);
+            case Exercise::MULTIPLE_MANY:
+                return view('admin.exercises.multiplemany', ['exercise' => $exercise, 'answers' => $answers]);
         }
         return redirect('admin/exercise');
 
     }
-
 
 
     /** Create a new exercise
@@ -192,26 +204,20 @@ class ExerciseController extends Controller
      * @param Int $type - the type of the exercise
      * @return \Illuminate\Http\RedirectResponse - redirect the user back with flash message
      * */
-    public function create(Request $request, $type){
-
+    public function create(Request $request, $type)
+    {
+        if ($type == Exercise::TEXTUAL){
+            $this->validate(request(), [
+                'answer_1' => 'required',
+            ]);
+        }
         // validate user inputs
         $this->validateFields($request);
 
         // create and populate a new exercise & fetch the exercise id
         $ex_id = $this->createOrUpdateExerciseEntity($request, $type);
 
-        switch ($type){
-            case Exercise::TEXTUAL:
-                $this->addAnswers($request, $ex_id);
-                break;
-            case Exercise::MULTIPLE_ONE:
-                $this->addAnswersChoice($request, $ex_id);
-                break;
-            case Exercise::MULTIPLE_MANY:
-                return view('admin.exercises.multiplemany');
-            case Exercise::ORDERING:
-                return view('admin.exercises.ordering');
-        }
+        $this->addAnswers($request, $ex_id);
 
         // insert the answers
         // start from the last answer id and try to get every answer in between
@@ -229,16 +235,16 @@ class ExerciseController extends Controller
      * @param  Request $request
      * @return void
      */
-    private function validateFields(Request $request, $ex_id = null){
-        $validId = (isset($ex_id)) ? ','.$ex_id : '';
+    private function validateFields(Request $request, $ex_id = null)
+    {
+        $validId = (isset($ex_id)) ? ',' . $ex_id : '';
 
         $this->validate(request(), [
-            'ex_title' => 'required | max:20 |unique:exercises,title'.$validId,
+            'ex_title' => 'required | max:20 |unique:exercises,title' . $validId,
             'ex_content' => 'required',
             'category' => 'required',
             'age_group' => 'required',
             'difficulty' => 'required',
-            'answer_1' => 'required'
         ]);
     }
 
@@ -247,12 +253,13 @@ class ExerciseController extends Controller
      *
      * @param  Request $request
      * @param  Int $type - the exercise type
-     * @param  Exercise  - if we need to update, an exercise is provided
+     * @param  Exercise - if we need to update, an exercise is provided
      * @return Int
      */
-    private function createOrUpdateExerciseEntity(Request $request, $type, $exercise = null){
+    private function createOrUpdateExerciseEntity(Request $request, $type, $exercise = null)
+    {
 
-        if (!isset($exercise)){
+        if (!isset($exercise)) {
             // create and populate a new exercise
             $exercise = new Exercise;
             $exercise->type = $type;
@@ -276,8 +283,19 @@ class ExerciseController extends Controller
     // Needs refactoring
 
 
-    private function addAnswers($request, $id){
+    /**
+     * Add answers to the exercise
+     * incorret_n answers are incorrect
+     * answer_n answers are correct
+     *
+     * @param  Request $request
+     * @param  Int $id - id of the exercise
+     * @return void
+     */
+    private function addAnswers($request, $id)
+    {
         $remaining_answers = $request->answer_count;
+        // add the incorrect answers first
         while ($remaining_answers > 0) {
             $ans = $request->input('answer_' . $remaining_answers);
             if (isset($ans) && trim($ans) != '') {
@@ -287,48 +305,19 @@ class ExerciseController extends Controller
                 $answer->order = $remaining_answers;
                 $answer->ex_id = $id;
                 $answer->save();
+            } else {
+                $ans = $request->input('incorrect_' . $remaining_answers);
+                if (isset($ans) && trim($ans) != '') {
+                    $answer = new Answer;
+                    $answer->content = $ans;
+                    $answer->is_correct = false;
+                    $answer->order = $remaining_answers;
+                    $answer->ex_id = $id;
+                    $answer->save();
+                }
             }
             $remaining_answers--;
         }
-    }
-
-
-    /**
-     * Add answers to the exercise
-     * incorret_n answers are incorrect
-     * answer_n answers are correct
-     *
-     * @param  Request $request
-     * @param  Int $id - id of the exercise
-     * @return Int
-     */
-    private function addAnswersChoice($request, $id){
-        $remaining_answers = $request->answer_count;
-        $correct_order = 0;
-        // add the incorrect answers first
-        while ($remaining_answers > 0) {
-            $ans = $request->input('incorrect_' . $remaining_answers);
-            if (isset($ans) && trim($ans) != '') {
-                $answer = new Answer;
-                $answer->content = $ans;
-                $answer->is_correct = false;
-                $answer->order = $remaining_answers;
-                $answer->ex_id = $id;
-                $answer->save();
-            }else{
-                // Where the correct answer should be ordered
-                $correct_order = $remaining_answers;
-            }
-            $remaining_answers--;
-        }
-
-        // add the correct answer
-        $answer = new Answer;
-            $answer->content = $request->input('answer_1');
-            $answer->is_correct = true;
-            $answer->order = $correct_order;
-            $answer->ex_id = $id;
-            $answer->save();
     }
 
 
@@ -343,22 +332,15 @@ class ExerciseController extends Controller
 
         DB::table('answers')->where('ex_id', $ex_id)->delete();
 
-        switch ($exercise->type){
-            case Exercise::TEXTUAL:
-                $this->addAnswers($request, $ex_id);
-                break;
-            case Exercise::MULTIPLE_ONE:
-                $this->addAnswersChoice($request, $ex_id);
-                break;
-            default:
-                abort(501);
-        }
+        $this->addAnswers($request, $ex_id);
+
 
         // flash the session to show successful operation
         Session::flash('exercise-update', $request->ex_title);
 
-        return redirect('/admin/exercise/edit/'.$ex_id);
+        return redirect('/admin/exercise/edit/' . $ex_id);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -369,7 +351,6 @@ class ExerciseController extends Controller
     {
         //
     }
-
 
 
     /**

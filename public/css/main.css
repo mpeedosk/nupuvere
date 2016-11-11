@@ -1863,7 +1863,12 @@ a.slicknav_item [class*=" fa-"] {
     margin-left: 20px;
     margin-bottom: 20px;
 }
-
+.form-group .checkbox{
+    margin-left: 20px;
+}
+.checkbox-material{
+    margin-right: 10px;
+}
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */
 /*-----------------------------------------------------------------------------------*/
