@@ -3,7 +3,7 @@
 @section('description', 'Valikvastustega - mitu õiget')
 
 @section('action')
-    onSubmit="return getCheckedValueM()"
+    onSubmit="return getCheckedValue()"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/3' }}@endif"
 @endsection
 
