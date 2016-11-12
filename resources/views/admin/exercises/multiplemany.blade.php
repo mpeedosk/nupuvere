@@ -1,9 +1,9 @@
 @extends('admin.layouts.exercise')
 @section('title', 'Administraator')
-@section('description', 'Valikvastustega - üks õige')
+@section('description', 'Valikvastustega - mitu õiget')
 
 @section('action')
-    onSubmit="return getCheckedValue()"
+    onSubmit="return getCheckedValueM()"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/3' }}@endif"
 @endsection
 
