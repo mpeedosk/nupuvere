@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="list-group-item botto">
-                        <a href="#" class="list-group-item-heading">
+                        <a href="/admin/exercise/create/4" class="list-group-item-heading">
                             <span class="fa fa-fw fa-sort-amount-asc" aria-hidden="true"></span>
                             Järjestamine</a>
                     </div>

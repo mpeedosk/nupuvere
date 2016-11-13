@@ -160,6 +160,19 @@ function addAnswerChoiceM(count) {
 
 }
 
+/* adding answers for multiple choice exercises*/
+function addAnswerOrder(count) {
+    var userInput = document.getElementById('answer-title');
+    var content = userInput.value;
+    userInput.value = "";
+
+    var answer_group = '<div class="drag-item drag">' + content + '</div>';
+
+
+    $('#draggable').append(answer_group);
+}
+
+
 /* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
     var button_id = $(this).attr("id");
@@ -214,7 +227,7 @@ function getCheckedValue() {
     for (i = 0; i < radios.length; i++) {
         if (!radios[i].checked) {
             $('#answers').append('<input hidden value="' + radios[i].value + '" name="incorrect_' + (i + 1) + '">');
-        }else{
+        } else {
             $('#answers').append('<input hidden value="' + radios[i].value + '" name="answer_' + (i + 1) + '">');
 
         }
@@ -226,6 +239,34 @@ function getCheckedValue() {
     return true;
 
 }
+
+
+
+/* adding answers for backend processing for ordering exercises */
+function getCheckedValueO() {
+
+
+
+    var listElements = document.getElementsByClassName("drag-item");
+        // if no correct answer is provided, display a warning
+    if (listElements.length == 0) {
+        toastr.warning('Üks vastus on kohustuslik!');
+        return false;
+    }
+    // add a new input for each non-correct answer with the value as value
+
+    for (var i = 0; i < listElements.length; i++) {
+        $('#answers').append('<input hidden value="' + listElements[i].innerHTML.trim() + '" name="answer_' + (i + 1) + '">');
+    }
+
+    // update the answer_count for backend
+    document.getElementById('answer_count').value = listElements.length;
+
+    return true;
+
+}
+
+
 // http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
 
 $('#inputGallery1').on('change', function () {

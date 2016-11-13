@@ -193,6 +193,8 @@ class ExerciseController extends Controller
                 return view('admin.exercises.multipleone', ['exercise' => $exercise, 'answers' => $answers]);
             case Exercise::MULTIPLE_MANY:
                 return view('admin.exercises.multiplemany', ['exercise' => $exercise, 'answers' => $answers]);
+            case Exercise::ORDERING:
+                return view('admin.exercises.ordering', ['exercise' => $exercise, 'answers' => $answers]);
         }
         return redirect('admin/exercise');
 

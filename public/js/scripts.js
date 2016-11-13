@@ -132,7 +132,7 @@ function showAnswer(id, type) {
                     }
                     break;
             }
-            if (data.solution != null) {
+            if (data.solution != null && data.solution != "") {
                 document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                 document.getElementById('solution').style.display = "block";
             }
@@ -204,7 +204,7 @@ function submitAnswer(event, id, type) {
                     $('#points-increase').fadeTo('slow', 1).delay(2000).fadeTo('slow', 0);
                 }
 
-                if (data.solution != null) {
+                if (data.solution != null && data.solution != "") {
                     document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                     document.getElementById('solution').style.display = "block";
                 }
