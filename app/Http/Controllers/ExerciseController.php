@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Session;
 
 class ExerciseController extends Controller
 {
+    const age_groups = array("avastaja", "uurija","teadja", "ekspert");
+    const difficulties = array("lihtne", "keskmine", "raske");
     /**
      * Display all the different difficulty exercises for this category and age group
      * @param String $category - name of the exercise category
@@ -21,7 +23,9 @@ class ExerciseController extends Controller
 
     public function showExerciseList($category, $age_group)
     {
-
+        if (!in_array($age_group, self::age_groups)){
+            return abort(404);
+        }
         // Get all the easy exercises for this category and age group
         $easyList = DB::table('exercises')
             ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne']])
@@ -92,6 +96,8 @@ class ExerciseController extends Controller
      */
     private function calculateProgress($difficulty, $user_id, $category, $age_group)
     {
+
+
         // Get all the solved exercises for this user
         $solved_exercises = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
@@ -124,10 +130,10 @@ class ExerciseController extends Controller
             ->where('id', $ex_id)
             ->first();
 
-        // no such exercise exists
-        if ($exercise == null)
+        // no such exercise exists or the difficulty or age_group is wrong
+        if ($exercise == null || !in_array($age_group, self::age_groups) || !in_array($difficulty, self::difficulties)){
             return abort(404);
-
+        }
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
 
         $exercise_list_after = DB::table('exercises')
