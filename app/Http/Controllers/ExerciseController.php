@@ -124,6 +124,10 @@ class ExerciseController extends Controller
             ->where('id', $ex_id)
             ->first();
 
+        // no such exercise exists
+        if ($exercise == null)
+            return abort(404);
+
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
 
         $exercise_list_after = DB::table('exercises')

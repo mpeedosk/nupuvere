@@ -41,12 +41,13 @@
 
                 <div class="col-md-7 content-bg">
                     <div class="row">
-                        <div class="ex-title col-md-12 animate fadeInRight animated">
+                        <div class="ex-title col-md-12 fadeInRight animated">
                             <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
                                 <div id="ex-content" class="padding-10" style=" overflow: hidden ">
+
                                     {!! $exercise -> content !!}
 
                                 </div>
@@ -55,7 +56,7 @@
 
                         @if(Session::has('answer-check'))
                             @if(Session::get('answer-check'))
-                                <div class="col-md-12 animate fadeInRightBig animated">
+                                <div class="col-md-12 fadeInRightBig animated">
                                     <div class="ex-text-area font-size-md">
                                         <div id="solution-text" class="padding-10">
                                             {!! $exercise -> solution !!}
@@ -64,9 +65,10 @@
                                 </div>
                             @endif
                         @else
-                            <div id="solution" class="col-md-12 animate fadeInRightBig animated">
+                            <div id="solution" class="col-md-12 fadeInRightBig animated">
                                 <div class="ex-text-area font-size-md">
                                     <div id="solution-text" class="padding-10">
+
                                     </div>
                                 </div>
                             </div>

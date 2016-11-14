@@ -135,6 +135,10 @@ function showAnswer(id, type) {
             if (data.solution != null && data.solution != "") {
                 document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                 document.getElementById('solution').style.display = "block";
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = " /lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image";
+                document.getElementsByTagName('head')[0].appendChild(script);
             }
             document.getElementById('submit-answer').disabled = true;
             solutionSeen = true;
