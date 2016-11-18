@@ -21,21 +21,21 @@
                             </a>
                         @endif
                     @endforeach
-                        @foreach($exercises_after as $ex)
-                            @if ($loop->first)
-                                <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
-                                   class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                    {{$ex -> title}}
+                    @foreach($exercises_after as $ex)
+                        @if ($loop->first)
+                            <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                               class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                {{$ex -> title}}
 
-                                    <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
-                                </a>
-                            @else
-                                <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
-                                   class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                    {{$ex -> title}}
-                                </a>
-                            @endif
-                        @endforeach
+                                <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                            </a>
+                        @else
+                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                               class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
+                                {{$ex -> title}}
+                            </a>
+                        @endif
+                    @endforeach
 
                 </div>
 
@@ -140,6 +140,20 @@
                     <p class="font-size-sm">
                         Koostanud: {{$exercise -> author}}
                     </p>
+                    <p class="font-size-sm">
+                        Litsents: <span class="fa fa-creative-commons" style="font-size: 16px" aria-hidden="true"
+                                        data-toggle="tooltip" data-placement="bottom"
+                                        title="See ülesanne on kaitstud Creative Commons 3.0 litsentsiga"></span>
+                    </p>
+
+                    <div>
+                         <span class="fa fa-2x fa-creative-commons" aria-hidden="true"
+                               data-toggle="tooltip" data-placement="bottom"
+                               title="See ülesanne on kaitstud Creative Commons 3.0 litsentsiga"></span>
+                    </div>
+
+                    <img src="/img/licence.svg" alt="creative commons">
+
                 </div>
 
 
@@ -223,5 +237,4 @@
             </div>
         </div>
     </div>
-
 @endsection

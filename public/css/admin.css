@@ -287,9 +287,9 @@ h4 {
 .color{
     border:none;
     width: 100%;
-    color: rgba(0,0,0,0) !important;
     cursor: pointer;
 }
+
 .cp-color-picker{
     z-index: 2;
 }
@@ -355,6 +355,10 @@ tr a:hover {
     color: #5e70d4;
 }
 
+.drag-delete {
+    margin-top: -3px;
+    margin-right: -25px;
+}
 /* exercise input length*/
 .short-input {
     max-width: 400px;

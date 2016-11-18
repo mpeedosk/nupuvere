@@ -65,60 +65,42 @@ function deleteExercise() {
     });
 }
 
-/* keep track of exercise answers*/
-var answerCount = -1;
-
-function updateAnswerCount(count) {
-    if (answerCount == -1)
-        answerCount = parseInt(count) + 1;
-    else
-        answerCount++;
-}
-
 /* adding answers for textual/numeric exercises*/
-function addAnswer(count) {
-
-    updateAnswerCount(count);
-
-    document.getElementById('answer_count').value = answerCount;
+function addAnswer() {
 
     var answer_group =
-        '<div class="form-group" id="answer_group_' + answerCount + '">' +
-        '<label for="a' + answerCount + '"> Vastus ' + answerCount + '</label>' +
+        '<div class="form-group">' +
+        '<label> Vastus</label>' +
         '<button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button" data-toggle="tooltip" title="Ee' +
-        'malda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        'malda" name="remove" tabindex="-1"">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
-        '<input class="form-control" id="a' + answerCount + '" name="answer_' + answerCount + '">' +
+        '<input class="form-control" name="answer">' +
         '</div>';
-
 
     $('#answers').append(answer_group);
 
 }
 
 /* adding answers for multiple choice exercises*/
-function addAnswerChoice(count) {
-
-    updateAnswerCount(count);
-    document.getElementById('answer_count').value = answerCount;
+function addAnswerChoice() {
 
     var userInput = document.getElementById('answer-title');
     var content = userInput.value;
     userInput.value = "";
 
     var answer_group =
-        '<div class="form-group margin-top-10" id="answer_group_' + answerCount + '">' +
+        '<div class="form-group margin-top-10">' +
         '<div class="radio radio-inline">' +
-        '<label for="answer_' + answerCount + '">' +
-        '<input id="answer_' + answerCount + '" type="radio" name="answer" value="' + content + '">' +
+        '<label>' +
+        '<input type="radio" name="answer" value="' + content + '">' +
         '<span class="circle"></span>' +
         '<span class="check"></span>' +
         content +
         '</label>' +
         '</div>' +
         '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"' +
-        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
         '</div>';
@@ -129,20 +111,17 @@ function addAnswerChoice(count) {
 
 
 /* adding answers for multiple choice exercises*/
-function addAnswerChoiceM(count) {
-
-    updateAnswerCount(count);
-    document.getElementById('answer_count').value = answerCount;
+function addAnswerChoiceM() {
 
     var userInput = document.getElementById('answer-title');
     var content = userInput.value;
     userInput.value = "";
 
     var answer_group =
-        '<div class="form-group margin-top-10" id="answer_group_' + answerCount + '">' +
+        '<div class="form-group margin-top-10">' +
         '<div class="checkbox checkbox-inline">' +
-        '<label for="answer_' + answerCount + '">' +
-        '<input id="answer_' + answerCount + '" type="checkbox" name="answer"  value="' + content + '">' +
+        '<label>' +
+        '<input type="checkbox" name="answer"  value="' + content + '">' +
         '<span class="checkbox-material">' +
         '<span class="check"></span>' +
         '</span>' +
@@ -150,7 +129,7 @@ function addAnswerChoiceM(count) {
         '</label>' +
         '</div>' +
         '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0" type="button"' +
-        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="' + answerCount + '">' +
+        'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
         '</div>';
@@ -161,13 +140,15 @@ function addAnswerChoiceM(count) {
 }
 
 /* adding answers for multiple choice exercises*/
-function addAnswerOrder(count) {
-    var userInput = document.getElementById('answer-title');
-    var content = userInput.value;
-    userInput.value = "";
+function addAnswerOrder() {
+    var content = tinyMCE.get('answer-title').getContent();
+    tinyMCE.get('answer-title').setContent("");
 
-    var answer_group = '<div class="drag-item drag">' + content + '</div>';
-
+    var answer_group = '<div class="drag-item drag"><div class="drag-content inline-block">' + content + '</div>' +
+        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button"' +
+        'name="remove" tabindex="-1">' +
+        '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
+        '</button></div>';
 
     $('#draggable').append(answer_group);
 }
@@ -175,8 +156,10 @@ function addAnswerOrder(count) {
 
 /* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
-    var button_id = $(this).attr("id");
-    $('#answer_group_' + button_id + '').remove();
+    /*    var button_id = $(this).attr("id");
+     console.log();
+     $('#answer_group_' + button_id + '').remove();*/
+    $(this).parent().remove();
 });
 
 
@@ -209,46 +192,44 @@ $('#table').bootstrapTable({
 
 /* adding answers for backend processing for multiple choice exercises */
 function getCheckedValue() {
-    var radios = document.getElementsByName('answer');
+    var answers = document.getElementsByName('answer');
     var correct = false;
-    console.log(radios);
+    console.log(answers);
     // check if we have an correct answer chosen
-    for (var i = 0; i < radios.length; i++) {
-        if (radios[i].checked) {
+    for (var i = 0; i < answers.length; i++) {
+        if (answers[i].checked) {
             correct = true;
         }
     }
+
     // if no correct answer is provided, display a warning
     if (!correct) {
         toastr.warning('Üks õige vastus on kohustuslik!');
         return false;
     }
+
     // add a new input for each non-correct answer with the value as value
-    for (i = 0; i < radios.length; i++) {
-        if (!radios[i].checked) {
-            $('#answers').append('<input hidden value="' + radios[i].value + '" name="incorrect_' + (i + 1) + '">');
+    for (i = 0; i < answers.length; i++) {
+        if (!answers[i].checked) {
+            $('#answers').append('<input hidden value="' + answers[i].value + '" name="incorrect_' + (i + 1) + '">');
         } else {
-            $('#answers').append('<input hidden value="' + radios[i].value + '" name="answer_' + (i + 1) + '">');
+            $('#answers').append('<input hidden value="' + answers[i].value + '" name="answer_' + (i + 1) + '">');
 
         }
     }
-
     // update the answer_count for backend
-    document.getElementById('answer_count').value = radios.length;
+    document.getElementById('answer_count').value = answers.length;
 
     return true;
-
 }
-
 
 
 /* adding answers for backend processing for ordering exercises */
 function getCheckedValueO() {
 
 
-
-    var listElements = document.getElementsByClassName("drag-item");
-        // if no correct answer is provided, display a warning
+    var listElements = document.getElementsByClassName("drag-content");
+    // if no correct answer is provided, display a warning
     if (listElements.length == 0) {
         toastr.warning('Üks vastus on kohustuslik!');
         return false;
@@ -256,7 +237,8 @@ function getCheckedValueO() {
     // add a new input for each non-correct answer with the value as value
 
     for (var i = 0; i < listElements.length; i++) {
-        $('#answers').append('<input hidden value="' + listElements[i].innerHTML.trim() + '" name="answer_' + (i + 1) + '">');
+        console.log(listElements[i].innerHTML);
+        $('#answers').append('<textarea hidden name="answer_' + (i + 1) + '">' + listElements[i].innerHTML + '</textarea>');
     }
 
     // update the answer_count for backend
@@ -266,6 +248,19 @@ function getCheckedValueO() {
 
 }
 
+function getCheckedValueT() {
+    var answers = document.getElementsByName('answer');
+    var answerContainer = $('#answers');
+    // add a new input for each non-correct answer with the value as value
+    for (var i = 0; i < answers.length; i++) {
+        answerContainer.append('<input hidden value="' + answers[i].value + '" name="answer_' + (i + 1) + '">');
+
+    }
+    // update the answer_count for backend
+    document.getElementById('answer_count').value = answers.length;
+
+    return true;
+}
 
 // http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
 

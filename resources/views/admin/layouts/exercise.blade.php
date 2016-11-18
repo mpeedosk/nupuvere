@@ -1,6 +1,8 @@
 @extends('admin.layouts.dashboard')
 @section('css')
     <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
+    <script id="wiris" type="text/javascript"
+            src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
 
     <script>
         function setImageValue(url) {
@@ -20,7 +22,7 @@
                 theme: 'modern',
                 menubar: false,
                 relative_urls: false,
-                plugins: 'link, image, code, youtube, imagetools, print, preview, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
+                plugins: 'link, image, code, youtube, imagetools, print, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
                 extended_valid_elements: 'input[onclick|value|style|type]',
                 file_browser_callback: function (field_name, url, type) {
                     if (type == 'image') {
@@ -30,11 +32,44 @@
                 toolbar1: 'styleselect | fontselect fontsizeselect | bold italic underline forecolor  | alignleft aligncenter alignright alignjustify | ' +
                 'bullist numlist outdent indent | link image editimage youtube | table | hr | subscript superscript | preview |' +
                 'charmap tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
-                plugin_preview_width: 600,
                 image_caption: true,
                 image_advtab: true,
                 content_css: '/css/main.css',
-                wirisformulaeditorlang: 'et'
+                wirisformulaeditorlang: 'et',
+                setup: function (editor) {
+                    editor.addButton('preview',
+                            {
+                                title: "Preview",
+                                onclick: function () {
+                                    var modal = $("#modal-view");
+                                    modal.removeClass("modal-sm");
+
+                                    var preview = document.getElementById('preview');
+                                    preview.innerHTML = "";
+                                    preview.insertAdjacentHTML('beforeend', editor.getContent());
+
+                                    if (editor.id == 'ex_hint') {
+                                        modal.addClass("modal-sm");
+                                        modal.removeClass('font-size-md');
+                                    }
+                                    else {
+                                        modal.addClass('font-size-md')
+                                    }
+                                    $("#preview-modal").modal();
+                                    var script = document.createElement('script');
+                                    script.id = 'wiris';
+                                    script.type = 'text/javascript';
+                                    script.src = " /lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image";
+                                    $('#wiris').remove();
+                                    document.getElementsByTagName('head')[0].appendChild(script);
+                                }
+                            });
+                    editor.addMenuItem("preview", {
+                        text: "Preview",
+                        cmd: "mcePreview",
+                        context: "view"
+                    })
+                }
             });
         });
     </script>
@@ -72,7 +107,7 @@
                             <label for="ex_title" class="control-label "><span class="fa fa-fw fa-asterisk"
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
-                            <input class="form-control" id="ex_title" name="ex_title" maxlength="20"
+                            <input class="form-control" id="ex_title" name="ex_title" required
                                    value="@if(isset($exercise->title)){{ $exercise->title }}@else{{old('ex_title')}}@endif">
                             <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
                         </div>
@@ -89,7 +124,7 @@
                         <div class="form-group label-static">
                             <label for="ex_content" class=""><span class="fa fa-fw fa-asterisk"
                                                                    aria-hidden="true"></span>Ülesande püstitus</label>
-                            <textarea class="form-control" id="ex_content" name="ex_content">
+                            <textarea class="form-control" id="ex_content" name="ex_content" required>
                                 @if(isset($exercise->content)){{ $exercise->content }} @else {{ old('ex_content') }} @endif
                             </textarea>
                         </div>
@@ -102,7 +137,7 @@
                             </textarea>
                         </div>
 
-                        <div class="form-group label-static modal-sm">
+                        <div class="form-group label-static">
                             <label for="ex_hint" class=""><span class="fa fa-fw"
                                                                 aria-hidden="true"></span>Lisa vihje</label>
 
@@ -117,7 +152,7 @@
                             <input id="answer_count" class="hidden" name="answer_count"
                                    @if(isset($answers))value="{{count($answers)}}"
                                    @else value="1"
-                                   @endif>
+                                    @endif>
                         </div>
 
                         @yield('answer-content')
@@ -198,5 +233,25 @@
     </section>
 
     @include('admin.includes.tinymceUpload')
+
+
+    <div id="preview-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div id="modal-view" class="modal-dialog modal-sm font-size-md">
+            <div class="modal-content  panel panel-primary">
+                <div class="panel-heading">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <h4 class="panel-title">Eelvaade</h4>
+                </div>
+                <div id="preview" class="modal-body ex-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

@@ -20,7 +20,7 @@
                         </label>
                     </div>
                     <button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"
-                            data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="{{$loop->index + 1}}">
+                            data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">
                         <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -33,9 +33,7 @@
         <div class="input-group">
             <input type="text" id="answer-title" class="form-control">
             <span class="input-group-btn">
-                <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
-                        @if(isset($answers)) onclick="addAnswerChoiceM({{count($answers)}})"
-                        @else onclick="addAnswerChoiceM(0)" @endif>
+                <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswerChoiceM()">
                     <span class="glyphicon glyphicon-plus"></span>&nbspLisa
                 </button>
             </span>

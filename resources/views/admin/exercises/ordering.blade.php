@@ -1,7 +1,6 @@
 @extends('admin.layouts.exercise')
 @section('title', 'Administraator')
 @section('description', 'Järjestamine')
-
 @section('action')
     onSubmit="return getCheckedValueO()"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/4' }}@endif"
@@ -13,7 +12,9 @@
             @if(isset($answers))
                 @foreach($answers as $answer)
                     <div class="drag-item drag">
-                        {{$answer->content}}
+                        <div>
+                            {!!$answer->content!!}
+                        </div>
                     </div>
                 @endforeach
             @endif
@@ -23,11 +24,9 @@
     <div class="form-group">
         <label class="control-label" for="answer-title">Lisa veel vastusevariante</label>
         <div class="input-group">
-            <input type="text" id="answer-title" class="form-control">
+            <textarea id="answer-title" class="form-control"></textarea>
             <span class="input-group-btn">
-                <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
-                        @if(isset($answers)) onclick="addAnswerOrder({{count($answers)}})"
-                        @else onclick="addAnswerOrder(0)" @endif>
+                <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswerOrder()">
                     <span class="glyphicon glyphicon-plus"></span>&nbspLisa
                 </button>
             </span>

@@ -79,7 +79,7 @@
 @if (session('expired'))
     <script>
         $(function () {
-            toastr.error({{ session('expired') }});
+            toastr.error("{{ session('expired') }}");
         });
     </script>
 @endif

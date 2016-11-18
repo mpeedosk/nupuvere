@@ -2,39 +2,33 @@
 @section('title', 'Administraator')
 @section('description', 'Tekstiline/numbriline')
 @section('action')
+    onSubmit="return getCheckedValueT()"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/1' }}@endif"
 @endsection
 
 @section('answer-content')
-
     <div id="answers">
-
         @if(isset($answers))
             @foreach($answers as $answer)
-                <div class="form-group" id="answer_group_{{$loop->index + 1}}">
-                    <label class="" for="a{{$loop->index + 1}}"> Vastus {{$loop->index + 1}}</label>
+                <div class="form-group">
+                    <label for="answer_{{$loop->iteration}}"> Vastus</label>
                     @if(!$loop->first)
-                    <button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button"
-                            data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1" id="{{$loop->index + 1}}">
-                        <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>
+                        <button class="btn btn-danger btn-sm margin-bottom-15 btn_remove" type="button"
+                                data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">
+                            <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>
                     @endif
-                    <input class="form-control" id="a{{$loop->index + 1}}"
-                           name="answer_{{$loop->index + 1}}" value="{{$answer->content}}">
+                    <input class="form-control" name="answer" value="{{$answer->content}}" id="answer_{{$loop->iteration}}">
                 </div>
             @endforeach
         @else
-            <div class="form-group" id="answer_group_1">
-                <label class="" for="a1"> Vastus 1</label>
-                <input class="form-control" id="a1" name="answer_1">
+            <div class="form-group">
+                <label for="a1"> Vastus</label>
+                <input class="form-control" id="a1" name="answer">
             </div>
         @endif
-
     </div>
 
-    <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua"
-            @if(isset($answers))onclick="addAnswer({{count($answers)}})"
-            @else onclick="addAnswer(1)"
-            @endif>
+    <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswer()">
         <span class="glyphicon glyphicon-plus"></span> Lisa veel üks vastus
     </button>
 @endsection

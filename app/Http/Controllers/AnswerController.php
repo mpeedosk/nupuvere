@@ -217,7 +217,7 @@ class AnswerController extends Controller
     private function inOrder($answers, $user_answer)
     {
         for ($i = 0; $i < count($answers); $i++) {
-            if ($answers[$i]->content != $user_answer[$i])
+            if ($answers[$i]->id!= $user_answer[$i])
                 return False;
         }
         return True;

@@ -106,7 +106,7 @@ class UITest extends TestCase
              ->type('testülesanne','ex_title')
              ->type('testautor','ex_author')
              ->type('test ülesande sisu','ex_content')
-             ->type('test','answer_1')
+             ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
              ->click('Ülesanded')
@@ -132,7 +132,7 @@ class UITest extends TestCase
              ->type('','ex_title')
              ->type('testautor','ex_author')
              ->type('test ülesande sisu','ex_content')
-             ->type('test','answer_1')
+             ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
              ->see('The ex title field is required.');
@@ -157,36 +157,9 @@ class UITest extends TestCase
              ->type('','ex_title')
              ->type('testautor','ex_author')
              ->type('','ex_content')
-             ->type('test','answer_1')
+             ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
              ->see('The ex content field is required.');
         }
-
-        public function testAdminAddExerciseEmptyAnswer()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel vastus jääb tühjaks.
-    {
-        $this->visit('/')
-             ->see('Telephone')
-             ->see('Email')
-             ->see('Otsi')
-             ->type('admin','username')
-             ->type('parool','password')
-             ->press('Logi sisse')
-             ->see('Admin')
-             ->click('Admin')
-             ->see('Kategooriad')
-             ->click('Ülesanded')
-             ->see('Lisa uus')
-             ->click('Tekstiline/numbriline')
-             ->see('Lisa vastus')
-             ->type('','ex_title')
-             ->type('testautor','ex_author')
-             ->type('','ex_content')
-             ->type('','answer_1')
-             ->type('matemaatika','category')
-             ->press('Lisa ülesanne')
-             ->see('The answer 1 field is required.');
-        }
-
-
 }

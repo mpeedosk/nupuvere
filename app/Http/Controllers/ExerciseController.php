@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Session;
 
 class ExerciseController extends Controller
 {
-    const age_groups = array("avastaja", "uurija","teadja", "ekspert");
+    const age_groups = array("avastaja", "uurija", "teadja", "ekspert");
     const difficulties = array("lihtne", "keskmine", "raske");
+
     /**
      * Display all the different difficulty exercises for this category and age group
      * @param String $category - name of the exercise category
@@ -23,7 +24,7 @@ class ExerciseController extends Controller
 
     public function showExerciseList($category, $age_group)
     {
-        if (!in_array($age_group, self::age_groups)){
+        if (!in_array($age_group, self::age_groups)) {
             return abort(404);
         }
         // Get all the easy exercises for this category and age group
@@ -96,8 +97,6 @@ class ExerciseController extends Controller
      */
     private function calculateProgress($difficulty, $user_id, $category, $age_group)
     {
-
-
         // Get all the solved exercises for this user
         $solved_exercises = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
@@ -118,10 +117,12 @@ class ExerciseController extends Controller
 
 
     /**
-     * Return the corresponding exercise view with the correct content
-     * @param difficulty - difficulty of the exercise
-     * @param user_id - the ID of currently authenticated user
-     * @return Float - the % of solved exercises of difficulty $difficulty , in the range on [0,100]
+     * Return the exercise view with the correct content
+     * @param $category - category of the exercise
+     * @param $age_group - age group of the exercise
+     * @param $difficulty - difficulty of the exercise
+     * @param $ex_id - the ID of currently authenticated user
+     * @return \Illuminate\View\View
      */
     public function show($category, $age_group, $difficulty, $ex_id)
     {
@@ -131,7 +132,7 @@ class ExerciseController extends Controller
             ->first();
 
         // no such exercise exists or the difficulty or age_group is wrong
-        if ($exercise == null || !in_array($age_group, self::age_groups) || !in_array($difficulty, self::difficulties)){
+        if ($exercise == null || !in_array($age_group, self::age_groups) || !in_array($difficulty, self::difficulties)) {
             return abort(404);
         }
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
@@ -153,7 +154,7 @@ class ExerciseController extends Controller
         // pluck the answer text for this exercise
         $answers = DB::table('answers')
             ->where('ex_id', $ex_id)
-            ->pluck('content')
+            ->get()
             ->toArray();
 
         // randomize the answer order
@@ -218,11 +219,6 @@ class ExerciseController extends Controller
      * */
     public function create(Request $request, $type)
     {
-        if ($type == Exercise::TEXTUAL){
-            $this->validate(request(), [
-                'answer_1' => 'required',
-            ]);
-        }
         // validate user inputs
         $this->validateFields($request);
 
@@ -307,40 +303,49 @@ class ExerciseController extends Controller
     private function addAnswers($request, $id)
     {
         $remaining_answers = $request->answer_count;
+        $answers = [];
+
+        // randomizing, so answer ID wouldn't be in order
+        for ($x = 1; $x <= $remaining_answers; $x++) {
+            array_push($answers, $x);
+        }
+        shuffle($answers);
+
         // add the incorrect answers first
-        while ($remaining_answers > 0) {
-            $ans = $request->input('answer_' . $remaining_answers);
+        for($i = 0 ; $i < count($answers); $i++){
+            $ans = $request->input('answer_' . $answers[$i]);
             if (isset($ans) && trim($ans) != '') {
                 $answer = new Answer;
                 $answer->content = $ans;
                 $answer->is_correct = true;
-                $answer->order = $remaining_answers;
+                $answer->order = $answers[$i];
                 $answer->ex_id = $id;
                 $answer->save();
             } else {
-                $ans = $request->input('incorrect_' . $remaining_answers);
+                $ans = $request->input('incorrect_' . $answers[$i]);
                 if (isset($ans) && trim($ans) != '') {
                     $answer = new Answer;
                     $answer->content = $ans;
                     $answer->is_correct = false;
-                    $answer->order = $remaining_answers;
+                    $answer->order = $answers[$i];
                     $answer->ex_id = $id;
                     $answer->save();
                 }
             }
-            $remaining_answers--;
         }
     }
 
 
     public function update(Request $request, $ex_id)
     {
+
         // validate user inputs
         $this->validateFields($request, $ex_id);
 
         $exercise = Exercise::find($ex_id);
 
         $this->createOrUpdateExerciseEntity($request, null, $exercise);
+
 
         DB::table('answers')->where('ex_id', $ex_id)->delete();
 
