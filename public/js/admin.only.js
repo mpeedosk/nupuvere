@@ -85,21 +85,20 @@ function addAnswer() {
 /* adding answers for multiple choice exercises*/
 function addAnswerChoice() {
 
-    var userInput = document.getElementById('answer-title');
-    var content = userInput.value;
-    userInput.value = "";
+    var content = tinyMCE.get('answer-title').getContent();
+    tinyMCE.get('answer-title').setContent("");
+
 
     var answer_group =
         '<div class="form-group margin-top-10">' +
         '<div class="radio radio-inline">' +
         '<label>' +
-        '<input type="radio" name="answer" value="' + content + '">' +
+        '<input type="radio" name="answer" value=\'' + content + '\'>' +
         '<span class="circle"></span>' +
-        '<span class="check"></span>' +
-        content +
-        '</label>' +
+        '<span class="check"></span><span class="pre-formatted">' + content +
+        '</span></label>' +
         '</div>' +
-        '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"' +
+        '<button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button" ' +
         'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
@@ -107,28 +106,26 @@ function addAnswerChoice() {
 
 
     $('#answers').append(answer_group);
+    reloadWiris();
 }
 
 
 /* adding answers for multiple choice exercises*/
 function addAnswerChoiceM() {
-
-    var userInput = document.getElementById('answer-title');
-    var content = userInput.value;
-    userInput.value = "";
+    var content = tinyMCE.get('answer-title').getContent();
+    tinyMCE.get('answer-title').setContent("");
 
     var answer_group =
         '<div class="form-group margin-top-10">' +
         '<div class="checkbox checkbox-inline">' +
         '<label>' +
-        '<input type="checkbox" name="answer"  value="' + content + '">' +
+        '<input type="checkbox" name="answer"  value=\'' + content + '\'>' +
         '<span class="checkbox-material">' +
         '<span class="check"></span>' +
-        '</span>' +
-        '  ' + content +
-        '</label>' +
+        '</span><span class="inline-block">' + content +
+        '</span></label>' +
         '</div>' +
-        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0" type="button"' +
+        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0" type="button" ' +
         'data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
@@ -136,6 +133,7 @@ function addAnswerChoiceM() {
 
 
     $('#answers').append(answer_group);
+    reloadWiris();
 
 }
 
@@ -145,12 +143,15 @@ function addAnswerOrder() {
     tinyMCE.get('answer-title').setContent("");
 
     var answer_group = '<div class="drag-item drag"><div class="drag-content inline-block">' + content + '</div>' +
-        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button"' +
+        '<div class="visuallyhidden"><input hidden class="drag-input"  value=\'' + content + '\'>' +
+        '</div>'+
+        '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button" ' +
         'name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button></div>';
 
     $('#draggable').append(answer_group);
+    reloadWiris();
 }
 
 
@@ -211,9 +212,9 @@ function getCheckedValue() {
     // add a new input for each non-correct answer with the value as value
     for (i = 0; i < answers.length; i++) {
         if (!answers[i].checked) {
-            $('#answers').append('<input hidden value="' + answers[i].value + '" name="incorrect_' + (i + 1) + '">');
+            $('#answers').append('<input hidden value=\'' + answers[i].value + '\' name="incorrect_' + (i + 1) + '">');
         } else {
-            $('#answers').append('<input hidden value="' + answers[i].value + '" name="answer_' + (i + 1) + '">');
+            $('#answers').append('<input hidden value=\'' + answers[i].value + '\' name="answer_' + (i + 1) + '">');
 
         }
     }
@@ -228,7 +229,7 @@ function getCheckedValue() {
 function getCheckedValueO() {
 
 
-    var listElements = document.getElementsByClassName("drag-content");
+    var listElements = document.getElementsByClassName("drag-input");
     // if no correct answer is provided, display a warning
     if (listElements.length == 0) {
         toastr.warning('Üks vastus on kohustuslik!');
@@ -237,8 +238,7 @@ function getCheckedValueO() {
     // add a new input for each non-correct answer with the value as value
 
     for (var i = 0; i < listElements.length; i++) {
-        console.log(listElements[i].innerHTML);
-        $('#answers').append('<textarea hidden name="answer_' + (i + 1) + '">' + listElements[i].innerHTML + '</textarea>');
+        $('#answers').append('<textarea hidden name="answer_' + (i + 1) + '">' + listElements[i].value + '</textarea>');
     }
 
     // update the answer_count for backend
@@ -253,7 +253,7 @@ function getCheckedValueT() {
     var answerContainer = $('#answers');
     // add a new input for each non-correct answer with the value as value
     for (var i = 0; i < answers.length; i++) {
-        answerContainer.append('<input hidden value="' + answers[i].value + '" name="answer_' + (i + 1) + '">');
+        answerContainer.append('<input hidden value=\'' + answers[i].value + '\' name="answer_' + (i + 1) + '">');
 
     }
     // update the answer_count for backend

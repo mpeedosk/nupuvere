@@ -178,7 +178,7 @@ class AnswerController extends Controller
     {
         foreach ($answers as $answer) {
             if ($answer->is_correct)
-                return mb_strtolower($answer->content) == mb_strtolower($user_answer);
+                return $answer->id == $user_answer;
         }
         return False;
     }
@@ -196,10 +196,10 @@ class AnswerController extends Controller
     {
         foreach ($answers as $answer) {
             if ($answer->is_correct) {
-                if (!in_array($answer->content, $user_answer))
+                if (!in_array($answer->id, $user_answer))
                     return False;
             } else {
-                if (in_array($answer->content, $user_answer)) {
+                if (in_array($answer->id, $user_answer)) {
                     return False;
                 }
             }

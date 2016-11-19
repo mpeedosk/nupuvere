@@ -56,12 +56,7 @@
                                         modal.addClass('font-size-md')
                                     }
                                     $("#preview-modal").modal();
-                                    var script = document.createElement('script');
-                                    script.id = 'wiris';
-                                    script.type = 'text/javascript';
-                                    script.src = " /lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image";
-                                    $('#wiris').remove();
-                                    document.getElementsByTagName('head')[0].appendChild(script);
+                                    reloadWiris();
                                 }
                             });
                     editor.addMenuItem("preview", {

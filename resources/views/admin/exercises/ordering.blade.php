@@ -12,9 +12,16 @@
             @if(isset($answers))
                 @foreach($answers as $answer)
                     <div class="drag-item drag">
-                        <div>
+                        <div class="drag-content inline-block">
                             {!!$answer->content!!}
                         </div>
+                        <div class="visuallyhidden">
+                            <input hidden class="drag-input" value='{!! $answer->content !!}'>
+                        </div>
+                        <button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button"
+                                data-toggle="tooltip" title="Eemalda" name="remove" tabindex="-1">
+                            <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+                        </button>
                     </div>
                 @endforeach
             @endif

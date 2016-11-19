@@ -2,8 +2,8 @@
     @foreach($answers as $answer)
         <div class="radio">
             <label>
-                <input type="radio" name="answer" id="{{$answer->id}}" value="{{$answer->content}}">
-                {{$answer->content}}
+                <span class="pre-formatted">{!!$answer->content!!}</span>
+                <input type="radio" name="answer" id="{{$answer->id}}">
             </label>
         </div>
     @endforeach

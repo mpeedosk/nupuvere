@@ -1860,6 +1860,15 @@ a.slicknav_item [class*=" fa-"] {
 .checkbox-material{
     margin-right: 10px;
 }
+.pre-formatted{
+    display: inline-block !important;
+    position: inherit !important;
+    top: 0 !important;
+}
+.pre-formatted span{
+    display: inline-block !important;
+    position: inherit !important;
+}
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */
 /*-----------------------------------------------------------------------------------*/

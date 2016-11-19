@@ -14,9 +14,9 @@
                 <div class="form-group margin-top-10" id="answer_group_{{$loop->index + 1}}">
                     <div class="radio radio-inline">
                         <label for="answer_{{$loop->index + 1}}">
+                            <span class="pre-formatted"> {!!$answer->content!!} </span>
                             <input id="answer_{{$loop->index + 1}}" type="radio" name="answer"
-                                   value="{{$answer->content}}" @if($answer->is_correct) checked="checked" @endif>
-                            {{$answer->content}}
+                                   value='{!!$answer->content!!}' @if($answer->is_correct) checked="checked" @endif>
                         </label>
                     </div>
                     <button class="btn btn-danger btn-sm  margin-bottom-0 btn_remove" type="button"
@@ -31,7 +31,7 @@
     <div class="form-group">
         <label class="control-label" for="answer-title">Lisa veel vastusevariante</label>
         <div class="input-group">
-            <input type="text" id="answer-title" class="form-control">
+            <textarea id="answer-title" class="form-control"></textarea>
             <span class="input-group-btn">
                 <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswerChoice()">
                     <span class="glyphicon glyphicon-plus"></span>&nbspLisa

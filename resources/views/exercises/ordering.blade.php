@@ -13,10 +13,15 @@
     @endforeach
 </div>
 
-{{--
 <script>
-        height = document.getElementsByClassName('drag-item')[0].offsetHeight;
-        if(height>70)
-                $('.drag-item-label').css('margin-bottom', 2 * height / 3);
+    var items = document.getElementsByClassName('drag-item');
+    var height = 0;
+    for (var i = 0; i < items.length; i++) {
+        height += items[i].offsetHeight
+    }
+    console.log(height + " " + 38* items.length);
+    if (height != 38 * items.length) {
+        var margin = ((height - items.length * 38) / items.length);
+        $('.drag-item-label').css('margin-bottom', margin + 10);
+    }
 </script>
---}}
