@@ -122,12 +122,27 @@ class AnswerController extends Controller
             ->orderBy('order', 'asc')
             ->pluck('content');
 
+        $answer_id = DB::table('answers')
+            ->where([['ex_id', $ex_id], ['is_correct', True]])
+            ->orderBy('order', 'asc')
+            ->pluck('id');
+
+
 
         // convert the array to a serializable object for ajax response
         $correct_answers = json_encode($answers, true);
+        $correct_answers_id = json_encode($answer_id, true);
 
         // bind the user to the current exercise
         $this->bindUserToExercise($user_id, $ex_id);
+
+        $already_seen = DB::table('users_to_exercise')
+            ->where([['user_id', $user_id], ['ex_id', $ex_id]])
+            ->pluck('seen_answer');
+
+        $already_solved = DB::table('users_to_exercise')
+            ->where([['user_id', $user_id], ['ex_id', $ex_id]])
+            ->pluck('solved');
 
         // mark the answer as seen by the user
         DB::table('users_to_exercise')
@@ -137,7 +152,9 @@ class AnswerController extends Controller
         if ($request->ajax()) {
             return [
                 'answers' => $correct_answers,
+                'answers_id' =>$correct_answers_id,
                 'solution' => $exercise->solution,
+                'seenOrSolved' => $already_seen[0] || $already_solved[0]
             ];
         }
 

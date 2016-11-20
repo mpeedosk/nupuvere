@@ -90,34 +90,33 @@ function showAnswer(id, type) {
             '_token': $('input[name="_token"]').val()
         },
         success: function (data) {
-            toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
-
             var answers = JSON.parse(data.answers);
+            var answers_id = JSON.parse(data.answers_id);
+            var listElements = null;
 
             switch (type) {
                 case 1 :
-                    answers.push(document.getElementById("answer-input").value.trim());
-                    var inputfield = document.getElementById('answer-input');
-                    inputfield.disabled = true;
-                    inputfield.value = answers[0];
-                    inputfield.className += " correct-answer";
+                    var inputField = document.getElementById('answer-input');
+                    answers.push(inputField.value.trim());
+                    inputField.disabled = true;
+                    inputField.value = answers[0];
+                    inputField.className += " correct-answer";
                     break;
                 case 2 :
-                    var listElements = document.querySelectorAll('input[name = "answer"]');
+                    listElements = document.querySelectorAll('input[name = "answer"]');
                     for (var i = 0; i < listElements.length; i++) {
                         listElements[i].disabled = true;
-                        if (listElements[i].value == answers[0]) {
+                        if (listElements[i].id == answers_id[0]) {
                             listElements[i].checked = true;
-                            listElements[i].parentNode.parentNode.className += " correct-answer";
                         } else
                             listElements[i].checked = false;
                     }
                     break;
                 case 3 :
-                    var listElements = document.querySelectorAll('input[name = "answer"]');
+                    listElements = document.querySelectorAll('input[name = "answer"]');
                     for (var i = 0; i < listElements.length; i++) {
                         listElements[i].disabled = true;
-                        if (answers.indexOf(listElements[i].value) >= 0) {
+                        if (answers_id.indexOf(parseInt(listElements[i].id)) >= 0) {
                             listElements[i].checked = true;
                         } else {
                             listElements[i].checked = false;
@@ -125,20 +124,27 @@ function showAnswer(id, type) {
                     }
                     break;
                 case 4 :
-                    var listElements = document.getElementsByClassName("drag-item");
+                    listElements = document.getElementsByClassName("drag-item");
                     for (var i = 0; i < answers.length; i++) {
-                        listElements[i].innerText = answers[i];
+                        listElements[i].innerText = "";
+                        listElements[i].insertAdjacentHTML('beforeend', answers[i]);
                         listElements[i].className = "drag-item";
                     }
                     break;
             }
             if (data.solution != null && data.solution != "") {
+
                 document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                 document.getElementById('solution').style.display = "block";
                 reloadWiris()
             }
             document.getElementById('submit-answer').disabled = true;
             solutionSeen = true;
+
+            if (data.seenOrSolved == false){
+                toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
+            }
+
 
         },
         error: function (xhr) {

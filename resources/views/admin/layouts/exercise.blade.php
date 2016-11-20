@@ -22,7 +22,7 @@
                 theme: 'modern',
                 menubar: false,
                 relative_urls: false,
-                plugins: 'link, image, code, youtube, imagetools, print, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
+                plugins: 'link, image, code, youtube, imagetools, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
                 extended_valid_elements: 'input[onclick|value|style|type]',
                 file_browser_callback: function (field_name, url, type) {
                     if (type == 'image') {
@@ -30,7 +30,7 @@
                     }
                 },
                 toolbar1: 'styleselect | fontselect fontsizeselect | bold italic underline forecolor  | alignleft aligncenter alignright alignjustify | ' +
-                'bullist numlist outdent indent | link image editimage youtube | table | hr | subscript superscript | preview |' +
+                'bullist numlist outdent indent | link image editimage youtube | table | hr | subscript superscript | preview | ' +
                 'charmap tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
                 image_caption: true,
                 image_advtab: true,

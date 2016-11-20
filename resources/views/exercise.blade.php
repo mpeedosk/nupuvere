@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
 @section('content')
-    <script id="wiris" src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
+    <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
     <section class="margin-vert-30">
         <div class="container">
             <div class="row">
@@ -11,7 +11,6 @@
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 {{$ex -> title}}
-
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                             </a>
                         @else
@@ -47,9 +46,7 @@
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
                                 <div id="ex-content" class="padding-10" style=" overflow: hidden ">
-
                                     {!! $exercise -> content !!}
-
                                 </div>
                             </div>
                         </div>
@@ -102,7 +99,7 @@
                                               onclick="loginRequired()">Vasta</span>
                                     @else
                                         <button id="submit-answer" type="submit"
-                                                class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                                class="btn btn-raised btn-success btn-default fix-margin-right pull-right button-disabled"
                                                 onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
                                             Vasta
                                         </button>
@@ -138,7 +135,10 @@
                         </button>
                     @endif
                     <p class="font-size-sm">
-                        Koostanud: {{$exercise -> author}}
+                        Koostanud:
+                    </p>
+                    <p class="font-size-sm">
+                        {{$exercise -> author}}
                     </p>
                     <p class="font-size-sm">
                         Litsents: <span class="fa fa-creative-commons" style="font-size: 16px" aria-hidden="true"
