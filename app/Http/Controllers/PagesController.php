@@ -16,8 +16,9 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $page = Page::pluck('updated_at')->first();
-        return view('home', ['updated' => strtotime($page)]);
+        $page = Page::firstOrNew(['content' => "" ]);
+
+        return view('home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
     public function back()

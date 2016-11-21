@@ -31,8 +31,8 @@ class AdminController extends Controller
 
     public function home()
     {
-        $page = Page::pluck('updated_at')->first();
-        return view('admin.home', ['updated' => strtotime($page)]);
+        $page = Page::firstOrNew(['content' => "" ]);
+        return view('admin.home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
 
@@ -110,7 +110,16 @@ class AdminController extends Controller
         //
     }
 
+    public function updateContact(Request $request)
+    {
+        $page = Page::firstOrNew(['content' => "" ]);
 
+        $page->content = $request->contact;
+        $page->save();
+        Session::flash('main-gallery', 'Andmed uuendatud!');
+
+        return redirect()->back();
+    }
     /**
      * Update the gallery resources in storage.
      *

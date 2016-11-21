@@ -37,9 +37,7 @@ class UITest extends TestCase
     public function testFrontPage() //esilehe test
     {
         $this->visit('/')
-             ->see('Telephone')
-             ->see('Email')
-             ->see('Otsi');
+             ->seePageIs('/');
     }
 
     public function testMenu()//esilehe menüü test
@@ -90,9 +88,6 @@ class UITest extends TestCase
    public function testAdminAddExercise() // Kontrolliba, kui admin lisab ülesandeid, kas kõik kuvatakse õigesti.
     {
         $this->visit('/')
-             ->see('Telephone')
-             ->see('Email')
-             ->see('Otsi')
              ->type('admin','username')
              ->type('parool','password')
              ->press('Logi sisse')
@@ -116,9 +111,6 @@ class UITest extends TestCase
     public function testAdminAddExerciseEmptyTitle()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel pealikiri jääb tühjaks.
     {
         $this->visit('/')
-             ->see('Telephone')
-             ->see('Email')
-             ->see('Otsi')
              ->type('admin','username')
              ->type('parool','password')
              ->press('Logi sisse')
@@ -141,9 +133,6 @@ class UITest extends TestCase
     public function testAdminAddExerciseEmptyContent()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel sisu jääb tühjaks.
     {
         $this->visit('/')
-             ->see('Telephone')
-             ->see('Email')
-             ->see('Otsi')
              ->type('admin','username')
              ->type('parool','password')
              ->press('Logi sisse')

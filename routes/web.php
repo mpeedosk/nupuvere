@@ -28,6 +28,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/upload/gallery', 'AdminController@updateGallery');
     Route::post('admin/upload/logo', 'AdminController@updateLogos');
     Route::post('admin/upload', 'AdminController@upload');
+    Route::post('/admin/contact', 'AdminController@updateContact');
 
     Route::post('categories/add', 'CategoryController@create');
     Route::patch('categories/update', 'CategoryController@update');

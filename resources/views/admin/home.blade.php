@@ -3,7 +3,9 @@
 @section('description', 'Pealehe haldus')
 
 
+
 @section('css')
+    <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
 
 @endsection
 
@@ -24,12 +26,6 @@
     @endif
 
     <section class="admin-page-content">
-        {{--        <div id="voyager-loader">
-                    <div style="background:url(/img/gears.gif) no-repeat center center;width:32px;height:32px;"></div>
-                    --}}{{--<img src="/img/gears.gif" alt="Voyager Loader">--}}{{--
-
-                </div>--}}
-
         <div class="se-pre-con"></div>
         <div class="container">
             <div class="row vert-full full-height">
@@ -39,9 +35,8 @@
                             <span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
                                   data-toggle="modal" data-target="#gallery-help"></span>
                         </h2>
-
                         <hr>
-                        <form id="uploadGallery" class="dropzone"
+                        <form id="uploadGallery"
                               method="POST" action="/admin/upload/gallery" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
@@ -56,7 +51,8 @@
                                         <input id="gallery1-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 1">
-                                        <img id="gallery1-preview" src="/img/gallery/gallery1.png?cache={{$updated}}" alt="gallery1">
+                                        <img id="gallery1-preview" src="/img/gallery/gallery1.png?cache={{$updated}}"
+                                             alt="gallery1">
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
@@ -70,7 +66,8 @@
                                                class="form-control upload-input"
                                                placeholder="Pilt 2">
                                         <div>
-                                            <img id="gallery2-preview" src="/img/gallery/gallery2.png?cache={{$updated}}" alt="gallery2">
+                                            <img id="gallery2-preview"
+                                                 src="/img/gallery/gallery2.png?cache={{$updated}}" alt="gallery2">
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +81,8 @@
                                         <input id="gallery3-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 3">
-                                        <img id="gallery3-preview" src="/img/gallery/gallery3.png?cache={{$updated}}" alt="gallery3">
+                                        <img id="gallery3-preview" src="/img/gallery/gallery3.png?cache={{$updated}}"
+                                             alt="gallery3">
                                     </div>
 
                                 </div>
@@ -98,7 +96,8 @@
                                         <input id="gallery4-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 4">
-                                        <img id="gallery4-preview" src="/img/gallery/gallery4.png?cache={{$updated}}" alt="gallery4">
+                                        <img id="gallery4-preview" src="/img/gallery/gallery4.png?cache={{$updated}}"
+                                             alt="gallery4">
                                     </div>
 
                                 </div>
@@ -113,7 +112,8 @@
                                         <input id="gallery5-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 5">
-                                        <img id="gallery5-preview" src="/img/gallery/gallery5.png?cache={{$updated}}" alt="gallery5">
+                                        <img id="gallery5-preview" src="/img/gallery/gallery5.png?cache={{$updated}}"
+                                             alt="gallery5">
                                     </div>
                                     <button class="btn btn-primary btn-raised" type="submit">Uuenda
                                     </button>
@@ -149,13 +149,11 @@
                     <div class="col-md-12 vert-half text-center">
                         <h2>Kontakt</h2>
                         <hr>
-                        <form>
+                        <form method="POST" action="/admin/contact">
+                            {{ csrf_field() }}
                             <label for="contact" class="visuallyhidden"> Kontaktandmed</label>
-                            <textarea id="contact" class="ex-text-area" rows="5">Telephone:1-800-123-4567
-Email: info@example.com
-Website: www.example.com</textarea>
-                            <button class="btn btn-primary btn-raised" type="submit">Uuenda
-                            </button>
+                            <textarea id="contact" name="contact">{!! $contact !!}</textarea>
+                            <button class="btn btn-primary btn-raised" type="submit">Uuenda</button>
                         </form>
                     </div>
 
@@ -204,8 +202,52 @@ Website: www.example.com</textarea>
             </div>
         </div>
     </div>
+
+
 @endsection
 
 @section('scripts')
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            language: 'et',
+            theme: 'modern',
+            height: 108,
+            statusbar: false,
+            menubar: 'file edit insert format tools',
+            plugins: 'link, textcolor, code',
+            extended_valid_elements: 'input[onclick|value|style|type]',
+            toolbar1: 'fontselect fontsizeselect | bold italic underline forecolor |' +
+            'link subscript superscript | preview',
+            content_css: '/css/main.css',
+            setup: function (editor) {
+                editor.addButton('preview',
+                        {
+                            title: "Preview",
+                            onclick: function () {
+                                var modal = $("#modal-view");
+                                modal.removeClass("modal-sm");
 
+                                var preview = document.getElementById('preview');
+                                preview.innerHTML = "";
+                                preview.insertAdjacentHTML('beforeend', editor.getContent());
+
+                                if (editor.id == 'ex_hint') {
+                                    modal.addClass("modal-sm");
+                                    modal.removeClass('font-size-md');
+                                }
+                                else {
+                                    modal.addClass('font-size-md')
+                                }
+                                $("#preview-modal").modal();
+                            }
+                        });
+                editor.addMenuItem("preview", {
+                    text: "Preview",
+                    cmd: "mcePreview",
+                    context: "view"
+                })
+            }
+        });
+    </script>
 @endsection

@@ -127,7 +127,7 @@
                         <div class="form-group label-static">
                             <label for="ex_solution" class=""><span class="fa fa-fw"
                                                                     aria-hidden="true"></span>Lahenduskäik</label>
-                            <textarea class=" form-control" id="ex_solution" name="ex_solution">
+                            <textarea class="form-control" id="ex_solution" name="ex_solution">
                                  @if(isset($exercise->solution)){{ $exercise->solution }} @else {{ old('ex_solution') }} @endif
                             </textarea>
                         </div>
