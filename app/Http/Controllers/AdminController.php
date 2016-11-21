@@ -31,7 +31,12 @@ class AdminController extends Controller
 
     public function home()
     {
-        $page = Page::firstOrNew(['content' => "" ]);
+        $page = Page::first();
+        if ($page == null){
+            $page = new Page;
+            $page->content = "";
+
+        }
         return view('admin.home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
@@ -112,8 +117,11 @@ class AdminController extends Controller
 
     public function updateContact(Request $request)
     {
-        $page = Page::firstOrNew(['content' => "" ]);
-
+        $page = Page::first();
+        if ($page == null){
+            $page = new Page;
+            $page->content = "";
+        }
         $page->content = $request->contact;
         $page->save();
         Session::flash('main-gallery', 'Andmed uuendatud!');

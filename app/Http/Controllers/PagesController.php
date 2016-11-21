@@ -16,8 +16,12 @@ class PagesController extends Controller
      */
     public function index()
     {
-        $page = Page::firstOrNew(['content' => "" ]);
-
+        $page = Page::first();
+        if ($page == null){
+            $page = new Page;
+            $page->content = "";
+            $page->save();
+        }
         return view('home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
