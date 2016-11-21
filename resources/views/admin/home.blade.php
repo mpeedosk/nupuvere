@@ -56,7 +56,7 @@
                                         <input id="gallery1-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 1">
-                                        <img id="gallery1-preview" src="/img/gallery/gallery1.png" alt="gallery1">
+                                        <img id="gallery1-preview" src="/img/gallery/gallery1.png?cache={{$updated}}" alt="gallery1">
                                     </div>
                                 </div>
                                 <div class="col-md-6 img-box">
@@ -70,7 +70,7 @@
                                                class="form-control upload-input"
                                                placeholder="Pilt 2">
                                         <div>
-                                            <img id="gallery2-preview" src="/img/gallery/gallery2.png" alt="gallery2">
+                                            <img id="gallery2-preview" src="/img/gallery/gallery2.png?cache={{$updated}}" alt="gallery2">
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                         <input id="gallery3-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 3">
-                                        <img id="gallery3-preview" src="/img/gallery/gallery3.png" alt="gallery3">
+                                        <img id="gallery3-preview" src="/img/gallery/gallery3.png?cache={{$updated}}" alt="gallery3">
                                     </div>
 
                                 </div>
@@ -98,7 +98,7 @@
                                         <input id="gallery4-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 4">
-                                        <img id="gallery4-preview" src="/img/gallery/gallery4.png" alt="gallery4">
+                                        <img id="gallery4-preview" src="/img/gallery/gallery4.png?cache={{$updated}}" alt="gallery4">
                                     </div>
 
                                 </div>
@@ -113,7 +113,7 @@
                                         <input id="gallery5-valid" type="text" readonly=""
                                                class="form-control upload-input"
                                                placeholder="Pilt 5">
-                                        <img id="gallery5-preview" src="/img/gallery/gallery5.png" alt="gallery5">
+                                        <img id="gallery5-preview" src="/img/gallery/gallery5.png?cache={{$updated}}" alt="gallery5">
                                     </div>
                                     <button class="btn btn-primary btn-raised" type="submit">Uuenda
                                     </button>

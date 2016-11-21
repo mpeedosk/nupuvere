@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +16,8 @@ class PagesController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $page = Page::pluck('updated_at')->first();
+        return view('home', ['updated' => strtotime($page)]);
     }
 
     public function back()

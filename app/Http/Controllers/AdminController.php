@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Page;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,8 @@ class AdminController extends Controller
 
     public function home()
     {
-        return view('admin.home');
+        $page = Page::pluck('updated_at')->first();
+        return view('admin.home', ['updated' => strtotime($page)]);
     }
 
 
@@ -143,6 +145,7 @@ class AdminController extends Controller
         }
 
         Session::flash('main-gallery', 'Galerii uuendatud!');
+        Page::changed();
 
         return redirect()->back();
     }
@@ -162,7 +165,7 @@ class AdminController extends Controller
         }
 
         Session::flash('main-logo', 'Logod uuendatud!');
-
+        Page::changed();
         return redirect()->back();
     }
 
