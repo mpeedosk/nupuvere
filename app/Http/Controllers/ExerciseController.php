@@ -138,8 +138,9 @@ class ExerciseController extends Controller
         }
 
         // tavakasutajale on kättesaamatud, adminile aga mitte
-        if (!Auth::user()->isAdmin() && $exercise->hidden) {
-            abort(404);
+        if ($exercise->hidden) {
+            if(Auth::guest() || !Auth::user()->isAdmin())
+                abort(404);
         }
 
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
