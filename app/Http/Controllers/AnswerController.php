@@ -39,14 +39,11 @@ class AnswerController extends Controller
             ->orderBy('order', 'asc')
             ->get();
 
-
         // get the user submited answers
         // convert the json object from the ajax request to array
 
-
         if ($request->ajax()) {
             $user_answer = json_decode($request->answers, true);
-
 
             // default value is false
             $correct = False;
@@ -67,13 +64,10 @@ class AnswerController extends Controller
                     break;
             }
 
-
             // update the fields where needed
             $this->update_db($correct, $user_id, $ex_id);
 
-
             // if the request was ajax, that means we need to return the data
-
             return [
                 'response' => $correct,
                 'solution' => $exercise->solution,
@@ -127,8 +121,6 @@ class AnswerController extends Controller
             ->orderBy('order', 'asc')
             ->pluck('id');
 
-
-
         // convert the array to a serializable object for ajax response
         $correct_answers = json_encode($answers, true);
         $correct_answers_id = json_encode($answer_id, true);
@@ -157,8 +149,6 @@ class AnswerController extends Controller
                 'seenOrSolved' => $already_seen[0] || $already_solved[0]
             ];
         }
-
-
 
         // currently we only support ajax request checking so we should never actually reach here
         return redirect()->refresh();
@@ -257,7 +247,6 @@ class AnswerController extends Controller
             ->where('id', $ex_id)
             ->increment('attempted');
 
-
         if ($correct) {
             // increment the solved field
             DB::table('exercises')
@@ -280,13 +269,11 @@ class AnswerController extends Controller
                         ->increment('points_this_year', Exercise::POINTS_PER_EX);
                 }
 
-
                 DB::table('users_to_exercise')
                     ->where([['user_id', $user_id], ['ex_id', $ex_id]])
                     ->update(['solved' => True]);
             }
         }
-
     }
 
     /**
@@ -312,7 +299,6 @@ class AnswerController extends Controller
                 ->where('id', $inserted_id)
                 ->first();
         }
-
         return $user_exercise;
     }
 }

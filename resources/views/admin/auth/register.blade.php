@@ -69,7 +69,6 @@
                             </div>
                         </div>
 
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-2 control-label">E-posti aadress</label>
 
@@ -138,7 +137,7 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary btn-raised">
-                                    Loo kasutaja
+                                    @if(isset($admin)) Muuda @else Loo kasutaja @endif
                                 </button>
                             </div>
                         </div>

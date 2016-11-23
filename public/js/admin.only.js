@@ -4,9 +4,11 @@
 
 /* Fade loader icon away after page has loaded*/
 $(document).ready(function () {
-    $(".se-pre-con").fadeOut("slow");
-    $(".pre-loader-ex").fadeOut("slow");
-
+    var pathname = window.location.pathname;
+    if( pathname == "/admin/home" || pathname.startsWith("/admin/exercise/"))
+        $(".se-pre-con").delay(100).fadeOut("slow");
+    else
+        $(".se-pre-con").fadeOut("slow");
 });
 
 
@@ -96,6 +98,7 @@ function deleteUser() {
         }
     });
 }
+
 /* adding answers for textual/numeric exercises*/
 function addAnswer() {
 
@@ -110,7 +113,6 @@ function addAnswer() {
         '</div>';
 
     $('#answers').append(answer_group);
-
 }
 
 /* adding answers for multiple choice exercises*/
@@ -118,7 +120,6 @@ function addAnswerChoice() {
 
     var content = tinyMCE.get('answer-title').getContent();
     tinyMCE.get('answer-title').setContent("");
-
 
     var answer_group =
         '<div class="form-group margin-top-10">' +
@@ -134,7 +135,6 @@ function addAnswerChoice() {
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
         '</div>';
-
 
     $('#answers').append(answer_group);
     reloadWiris();
@@ -161,8 +161,6 @@ function addAnswerChoiceM() {
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
         '</div>';
-
-
     $('#answers').append(answer_group);
     reloadWiris();
 
@@ -185,7 +183,6 @@ function addAnswerOrder() {
     reloadWiris();
 }
 
-
 /* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
     /*    var button_id = $(this).attr("id");
@@ -193,7 +190,6 @@ $(document).on('click', '.btn_remove', function () {
      $('#answer_group_' + button_id + '').remove();*/
     $(this).parent().remove();
 });
-
 
 /* initializing bootstrap table*/
 $('#table').bootstrapTable({
@@ -226,7 +222,6 @@ $('#table').bootstrapTable({
 function getCheckedValue() {
     var answers = document.getElementsByName('answer');
     var correct = false;
-    console.log(answers);
     // check if we have an correct answer chosen
     for (var i = 0; i < answers.length; i++) {
         if (answers[i].checked) {
