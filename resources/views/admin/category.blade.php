@@ -96,7 +96,7 @@
                                            value="{{$category->order}}" name="{{$category->name}}"></td>
                                 <td class="text-center">
                                     <button class="btn btn-danger btn-raised btn-sm" type="button"
-                                            onclick="showCategoryConfirm({{$category->id}}, '{{ str_replace('_', ' ', ucfirst($category->name) )}}')"
+                                            onclick="showCategoryConfirm('{{$category->id}}', '{{ str_replace('_', ' ', ucfirst($category->name) )}}')"
                                     > Kustuta <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     </button>
                                 </td>
@@ -105,14 +105,13 @@
 
                         </tbody>
                     </table>
-            </div>
-            <div class="row category-row">
-                <div class="col-md-4 col-md-offset-8 text-center margin-bottom-20 margin-top-20">
-                    <button class="btn btn-info btn-raised " type="submit"> Salvesta</button>
+                </form>
+                <div class="row category-row">
+                    <div class="col-md-4 col-md-offset-8 text-center margin-bottom-20 margin-top-20">
+                        <button class="btn btn-info btn-raised " type="submit"> Salvesta</button>
+                    </div>
                 </div>
             </div>
-            </form>
-
         </div>
     </section>
 

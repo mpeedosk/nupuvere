@@ -23,29 +23,28 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/category', 'AdminController@category');
     Route::get('admin/exercise', 'AdminController@exercise');
     Route::get('admin/highscore', 'AdminController@home');
-    Route::get('admin/admins', 'AdminController@home');
+    Route::get('admin/admins', 'AdminController@admins');
 
     Route::post('admin/upload/gallery', 'AdminController@updateGallery');
     Route::post('admin/upload/logo', 'AdminController@updateLogos');
     Route::post('admin/upload', 'AdminController@upload');
-    Route::post('/admin/contact', 'AdminController@updateContact');
+    Route::post('admin/contact', 'AdminController@updateContact');
 
     Route::post('categories/add', 'CategoryController@create');
     Route::patch('categories/update', 'CategoryController@update');
     Route::delete('categories/delete/{id}', 'CategoryController@destroy');
 
-
-    // EXERCICE CONTROLLER NEEDS REFACTORING!
-
-
     Route::get('admin/exercise/create/{type}', 'ExerciseController@showExerciseTemplate');
     Route::post('admin/exercise/create/{type}', 'ExerciseController@create');
     Route::get('admin/exercise/edit/{id}', 'ExerciseController@getExerciseForEdit');
     Route::patch('admin/exercise/edit/{id}', 'ExerciseController@update');
-    Route::delete('exercise/delete/{id}', 'ExerciseController@destroy');
+    Route::delete('admin/exercise/delete/{id}', 'ExerciseController@destroy');
 
-
-
+    Route::get('admin/admins/create', 'AdminController@newAdmin');
+    Route::post('admin/admins/create', 'AdminController@create');
+    Route::get('admin/admins/edit/{id}', 'AdminController@getAdminForEdit');
+    Route::patch('admin/admins/edit/{id}', 'AdminController@update');
+    Route::delete('admin/admins/delete/{id}', 'AdminController@destroy');
 });
 
 Route::group(['middleware' => 'auth'], function () {

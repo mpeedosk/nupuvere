@@ -49,7 +49,7 @@ function deleteExercise() {
     var id = document.getElementById('confirm-exercise-id').innerHTML;
 
     $.ajax({
-        url: "/exercise/delete/" + id,
+        url: "/admin/exercise/delete/" + id,
         type: 'post',
         data: {
             _method: 'delete',
@@ -65,6 +65,37 @@ function deleteExercise() {
     });
 }
 
+
+/* confirmation for deleting an exercise */
+function showUserConfirm(id, name) {
+    $("#confirm-user-name").html(name);
+    $("#confirm-user-id").html(id);
+    $("#confirm-dialog").modal()
+}
+
+function deleteUser() {
+    var name = document.getElementById('confirm-user-name').innerHTML;
+    var id = document.getElementById('confirm-user-id').innerHTML;
+
+    $.ajax({
+        url: "/admin/admins/delete/" + id,
+        type: 'post',
+        data: {
+            _method: 'delete',
+            '_token': $('input[name="_token"]').val()
+        },
+        success: function (data) {
+            toastr.success(name + " edukalt kustutatud!");
+            document.getElementById('ex-' + id).style.display = 'none';
+        },
+        error: function (xhr) {
+            if (xhr.status == 403)
+                toastr.error("Iseennast ei saa kustutada");
+            else
+                toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
+        }
+    });
+}
 /* adding answers for textual/numeric exercises*/
 function addAnswer() {
 
@@ -144,7 +175,7 @@ function addAnswerOrder() {
 
     var answer_group = '<div class="drag-item drag"><div class="drag-content inline-block">' + content + '</div>' +
         '<div class="visuallyhidden"><input hidden class="drag-input"  value=\'' + content + '\'>' +
-        '</div>'+
+        '</div>' +
         '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button" ' +
         'name="remove" tabindex="-1">' +
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +

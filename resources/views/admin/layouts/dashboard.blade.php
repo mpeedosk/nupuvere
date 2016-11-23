@@ -60,6 +60,7 @@
         @yield('content')
     </div>
 </section>
+<div id="scripts">
 <script type="text/javascript"
         src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.10/jquery.slicknav.js"></script>
@@ -86,8 +87,8 @@
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/admin.only.js')}}"></script>
 @endif
-
 @yield('scripts')
+</div>
 
 </body>
 </html>

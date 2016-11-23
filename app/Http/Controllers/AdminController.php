@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Page;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Session;
 
@@ -40,6 +42,12 @@ class AdminController extends Controller
         return view('admin.home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
+    public function admins()
+    {
+
+        $admins =DB::table('users')->where('role','>',1)->get();
+        return view('admin.admins', ['admins' => $admins]);
+    }
 
     public function category()
     {
@@ -60,14 +68,54 @@ class AdminController extends Controller
         return view('admin.exercise', ['exercises' => $exercises]);
     }
 
+
+    public function newAdmin()
+    {
+
+        return view('admin.auth.register');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $this->validate(request(), [
+            'username' => 'required|max:255',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $role = 0;
+        if ($request->role === "mod")
+            $role = 2;
+        else if($request->role === "admin")
+            $role = 3;
+        else
+            abort(501);
+
+        User::create([
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'role' => $role,
+            'points' => 0
+        ]);
+
+        Session::flash('toast', 'Kasutaja '. $request->username . " edukalt loodud!");
+
+        return redirect('/admin/admins');
+    }
+
+    public function getAdminForEdit($a_id){
+        $admin = User::find($a_id);
+        return view('admin.auth.register', ['admin' => $admin]);
     }
 
     /**
@@ -112,7 +160,54 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate(request(), [
+            'username' => 'required|max:255',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|max:255|unique:users,email,'.$id,
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $role = 0;
+        if ($request->role === "mod")
+            $role = 2;
+        else if($request->role === "admin")
+            $role = 3;
+        else
+            abort(501);
+
+        $user = User::find($id);
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->role = $role;
+        $user->save();
+
+        Session::flash('toast', 'Kasutaja '. $request->username . " edukalt uuendatud!");
+
+        return redirect()->back();
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        if (intval($id) === Auth::user()->id){
+            Session::flash('error', 'Iseennast ei saa kustutada');
+            abort(403);
+        }
+        DB::table('users')->where('id', $id)->delete();
+
+        Session::flash('user-delete', 'Kasutaja edukalt kustutatud');
+
+        return redirect('/admin/admins');
     }
 
     public function updateContact(Request $request)
@@ -120,7 +215,6 @@ class AdminController extends Controller
         $page = Page::first();
         if ($page == null){
             $page = new Page;
-            $page->content = "";
         }
         $page->content = $request->contact;
         $page->save();
