@@ -271,10 +271,15 @@ class AnswerController extends Controller
             if (!$user_exercise->solved) {
 
                 // check if the user has seen the answer
-                if (!$user_exercise->seen_answer)
+                if (!$user_exercise->seen_answer){
                     DB::table('users')
                         ->where('id', $user_id)
                         ->increment('points', Exercise::POINTS_PER_EX);
+                    DB::table('users')
+                        ->where('id', $user_id)
+                        ->increment('points_this_year', Exercise::POINTS_PER_EX);
+                }
+
 
                 DB::table('users_to_exercise')
                     ->where([['user_id', $user_id], ['ex_id', $ex_id]])
