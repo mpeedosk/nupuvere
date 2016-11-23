@@ -226,6 +226,9 @@
 
 @section('scripts')
     <script>
+        function afterInit(inst) {
+            $(".se-pre-con").fadeOut("slow");
+        }
         tinymce.init({
             selector: 'textarea',
             language: 'et',
@@ -238,6 +241,7 @@
             toolbar1: 'fontselect fontsizeselect | bold italic underline forecolor |' +
             'link subscript superscript | preview',
             content_css: '/css/main.css',
+            init_instance_callback : "afterInit",
             setup: function (editor) {
                 editor.addButton('preview',
                         {

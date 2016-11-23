@@ -5,6 +5,9 @@
             src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
 
     <script>
+        function afterInit(inst) {
+            $(".se-pre-con").fadeOut("slow");
+        }
         function setImageValue(url) {
             $('.mce-btn.mce-open').parent().find('.mce-textbox').val(url);
         }
@@ -36,6 +39,7 @@
                 image_advtab: true,
                 content_css: '/css/main.css',
                 wirisformulaeditorlang: 'et',
+                init_instance_callback : "afterInit",
                 setup: function (editor) {
                     editor.addButton('preview',
                             {

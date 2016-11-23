@@ -5,9 +5,9 @@
 /* Fade loader icon away after page has loaded*/
 $(document).ready(function () {
     var pathname = window.location.pathname;
-    if( pathname == "/admin/home" || pathname.startsWith("/admin/exercise/"))
-        $(".se-pre-con").delay(100).fadeOut("slow");
-    else
+    if(!(pathname == "/admin/home" || pathname.startsWith("/admin/exercise/")))
+        // $(".se-pre-con").delay(100).fadeOut("slow");
+    // else
         $(".se-pre-con").fadeOut("slow");
 });
 
