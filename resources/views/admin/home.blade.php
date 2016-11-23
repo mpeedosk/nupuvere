@@ -203,6 +203,24 @@
         </div>
     </div>
 
+    <div id="preview-modal" class="modal fade" role="dialog" tabindex="-1">
+        <div id="modal-view" class="modal-dialog modal-sm font-size-md">
+            <div class="modal-content  panel panel-primary">
+                <div class="panel-heading">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                    <h4 class="panel-title">Eelvaade</h4>
+                </div>
+                <div id="preview" class="modal-body ex-content">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
 
@@ -226,19 +244,9 @@
                             title: "Preview",
                             onclick: function () {
                                 var modal = $("#modal-view");
-                                modal.removeClass("modal-sm");
-
                                 var preview = document.getElementById('preview');
                                 preview.innerHTML = "";
                                 preview.insertAdjacentHTML('beforeend', editor.getContent());
-
-                                if (editor.id == 'ex_hint') {
-                                    modal.addClass("modal-sm");
-                                    modal.removeClass('font-size-md');
-                                }
-                                else {
-                                    modal.addClass('font-size-md')
-                                }
                                 $("#preview-modal").modal();
                             }
                         });
