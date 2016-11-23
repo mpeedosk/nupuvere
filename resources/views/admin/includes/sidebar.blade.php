@@ -36,9 +36,11 @@
             <span class="fa fa-fw fa-trophy"></span> Edetabel
         </a>
 
-        <a href="/admin/admins" class="sidebar-item withripple
+        @if(Auth::user()->isSuperAdmin())
+            <a href="/admin/admins" class="sidebar-item withripple
             @if(Route::getCurrentRoute()->getPath() == 'admin/admins') sidebar-item-active @endif">
-            <span class="fa fa-fw fa-users"></span> Administraatorid
-        </a>
+                <span class="fa fa-fw fa-users"></span> Administraatorid
+            </a>
+        @endif
     </div>
 </div>

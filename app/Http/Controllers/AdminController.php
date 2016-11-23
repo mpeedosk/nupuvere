@@ -169,7 +169,9 @@ class AdminController extends Controller
         ]);
 
         $role = 0;
-        if ($request->role === "mod")
+        if ($request->role === "normal")
+            $role = 1;
+        else if ($request->role === "mod")
             $role = 2;
         else if($request->role === "admin")
             $role = 3;

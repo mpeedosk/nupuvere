@@ -15,8 +15,8 @@
                 </script>
             @endif
             <div class="row">
-                <div class="col-md-8 registration">
-                    <form class="form-horizontal" role="form" method="POST"
+                <div class="col-md-8">
+                    <form class="form-horizontal registration" role="form" method="POST"
                           @if(isset($admin)) action="/admin/admins/edit/{{$admin->id}}"
                           @else action="/admin/admins/create"
                           @endif>
@@ -119,8 +119,15 @@
                             <div class="col-md-10">
                                 <div class="radio radio-primary">
                                     <label>
+                                        <input type="radio" name="role" value="admin"
+                                               @if(isset($admin)) @if($admin->role === 1) checked="" @endif @else checked="" @endif>
+                                        Tavakasutaja
+                                    </label>
+                                </div>
+                                <div class="radio radio-primary">
+                                    <label>
                                         <input type="radio" name="role" value="mod"
-                                               @if(isset($admin)) @if($admin->role === 2) checked="" @endif @else checked="" @endif>
+                                               @if(isset($admin) && $admin->role === 2)checked="" @endif>
                                         Moderaator
                                     </label>
                                 </div>

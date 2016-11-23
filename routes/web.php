@@ -23,7 +23,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/category', 'AdminController@category');
     Route::get('admin/exercise', 'AdminController@exercise');
     Route::get('admin/highscore', 'AdminController@home');
-    Route::get('admin/admins', 'AdminController@admins');
 
     Route::post('admin/upload/gallery', 'AdminController@updateGallery');
     Route::post('admin/upload/logo', 'AdminController@updateLogos');
@@ -40,11 +39,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::patch('admin/exercise/edit/{id}', 'ExerciseController@update');
     Route::delete('admin/exercise/delete/{id}', 'ExerciseController@destroy');
 
-    Route::get('admin/admins/create', 'AdminController@newAdmin');
-    Route::post('admin/admins/create', 'AdminController@create');
-    Route::get('admin/admins/edit/{id}', 'AdminController@getAdminForEdit');
-    Route::patch('admin/admins/edit/{id}', 'AdminController@update');
-    Route::delete('admin/admins/delete/{id}', 'AdminController@destroy');
+
+    Route::group(['middleware' => 'superAdmin'], function () {
+        Route::get('admin/admins', 'AdminController@admins');
+        Route::get('admin/admins/create', 'AdminController@newAdmin');
+        Route::post('admin/admins/create', 'AdminController@create');
+        Route::get('admin/admins/edit/{id}', 'AdminController@getAdminForEdit');
+        Route::patch('admin/admins/edit/{id}', 'AdminController@update');
+        Route::delete('admin/admins/delete/{id}', 'AdminController@destroy');
+    });
 });
 
 Route::group(['middleware' => 'auth'], function () {
