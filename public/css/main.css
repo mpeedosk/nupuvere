@@ -318,6 +318,16 @@ footer, .push {
     color: #43668c;
 }
 
+.color-black {
+    color: #333 !important;
+}
+
+.color-black[class^="fa-"]:before,
+.color-black[class*=" fa-"]:before {
+    color: #333;
+}
+
+
 .color-green {
     color: #649f2b !important;
 }

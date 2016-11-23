@@ -38,6 +38,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/exercise/edit/{id}', 'ExerciseController@getExerciseForEdit');
     Route::patch('admin/exercise/edit/{id}', 'ExerciseController@update');
     Route::delete('admin/exercise/delete/{id}', 'ExerciseController@destroy');
+    Route::post('admin/exercise/hide/{id}', 'ExerciseController@hide');
 
 
     Route::group(['middleware' => 'superAdmin'], function () {

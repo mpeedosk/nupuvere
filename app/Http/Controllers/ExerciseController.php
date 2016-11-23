@@ -29,17 +29,17 @@ class ExerciseController extends Controller
         }
         // Get all the easy exercises for this category and age group
         $easyList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne']])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne'], ['hidden', False]])
             ->get();
 
         // Get all the medium exercises for this category and age group
         $mediumList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine']])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine'], ['hidden', False]])
             ->get();
 
         // Get all the hard exercises for this category and age group
         $hardList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske']])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske'], ['hidden', False]])
             ->get();
 
         // If user is not logged in, we can't calculate the progress or show solved exercises
@@ -100,11 +100,11 @@ class ExerciseController extends Controller
         // Get all the solved exercises for this user
         $solved_exercises = DB::table('users_to_exercise')
             ->join('exercises', "users_to_exercise.ex_id", "=", "exercises.id")
-            ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group], ['users_to_exercise.solved', True]])
+            ->where([['user_id', $user_id], ['difficulty', $difficulty], ['category', $category], ['age_group', $age_group], ['users_to_exercise.solved', True], ['hidden', False]])
             ->count();
 
         // Get all the exercises
-        $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty], ['age_group', $age_group], ['category', $category]])->count();
+        $all_exercises = DB::table('exercises')->where([['difficulty', $difficulty], ['age_group', $age_group], ['category', $category], ['hidden', False]])->count();
 
         // if no exercises exist
         if ($all_exercises == 0)
@@ -131,20 +131,27 @@ class ExerciseController extends Controller
             ->where('id', $ex_id)
             ->first();
 
+
         // no such exercise exists or the difficulty or age_group is wrong
         if ($exercise == null || !in_array($age_group, self::age_groups) || !in_array($difficulty, self::difficulties)) {
             return abort(404);
         }
+
+        // tavakasutajale on kättesaamatud, adminile aga mitte
+        if (!Auth::user()->isAdmin() && $exercise->hidden) {
+            abort(404);
+        }
+
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
 
         $exercise_list_after = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty], ['hidden', False]])
             ->where('id', '>=', $ex_id)
             ->take(5)
             ->get();
 
         $exercise_list_before = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty]])
+            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty], ['hidden', False]])
             ->where('id', '<', $ex_id)
             ->orderBy('id', 'desc')
             ->take(4)
@@ -187,9 +194,7 @@ class ExerciseController extends Controller
         // fetch the exercise the user wants to solve
 
 
-        $exercise = DB::table('exercises')
-            ->where('id', $ex_id)
-            ->first();
+        $exercise = Exercise::find($ex_id);
 
         $answers = DB::table('answers')
             ->where('ex_id', $ex_id)
@@ -316,7 +321,7 @@ class ExerciseController extends Controller
         shuffle($answers);
 
         // add the incorrect answers first
-        for($i = 0 ; $i < count($answers); $i++){
+        for ($i = 0; $i < count($answers); $i++) {
             $ans = $request->input('answer_' . $answers[$i]);
             if (isset($ans) && trim($ans) != '') {
                 $answer = new Answer;
@@ -388,6 +393,30 @@ class ExerciseController extends Controller
 
         Session::flash('exercise-delete', 'Ülesanne edukalt kustutatud');
 
+        return redirect('/admin/exercise');
+    }
+
+    /**
+     * Hide the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function hide($id)
+    {
+
+        $exercise = Exercise::find($id);
+
+        $isHidden = $exercise->hidden;
+
+        $exercise->hidden = !$isHidden;
+
+        $exercise->save();
+
+        if (!$isHidden)
+            Session::flash('toast', 'Ülesanne edukalt peidetud!');
+        else
+            Session::flash('toast', 'Ülesanne edukalt nähtavaks tehtud!');
         return redirect('/admin/exercise');
     }
 }

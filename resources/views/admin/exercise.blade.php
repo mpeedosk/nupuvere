@@ -13,6 +13,12 @@
                         toastr.success('Ülesanne "{{session('exercise-create')}}" edukalt lisatud');
                     });
                 </script>
+            @elseif(session('toast'))
+                <script>
+                    $(function () {
+                        toastr.success('{{session('toast')}}');
+                    });
+                </script>
             @endif
             <div class="row">
                 <h2>Lisa uus: </h2>
@@ -95,11 +101,23 @@
                                     <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
                                 </button>
 
-                                <a href="/exercise/hide/{{$exercise->id}}" class="btn btn-default btn-raised btn-sm"
-                                   type="button" data-toggle="tooltip"
-                                   title="Peida">
-                                    <span class="glyphicon glyphicon-eye-close pull-right" aria-hidden="true"></span>
-                                </a>
+                                <form class="inline-block" method="POST"
+                                      action="/admin/exercise/hide/{{$exercise->id}}">
+                                    {{ csrf_field() }}
+                                    @if(!$exercise->hidden)
+                                        <button class="btn btn-success btn-raised btn-sm" type="submit"
+                                                data-toggle="tooltip" title="Peida">
+                                            <span class="glyphicon glyphicon-eye-close pull-right color-black"
+                                                  aria-hidden="true"></span>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-default btn-raised btn-sm" type="submit"
+                                                data-toggle="tooltip" title="Tee nähtavaks">
+                                            <span class="glyphicon glyphicon-eye-open pull-right"
+                                                  aria-hidden="true"></span>
+                                        </button>
+                                    @endif
+                                </form>
                             </td>
                         </tr>
                     @endforeach
@@ -123,7 +141,6 @@
                     <span class="hidden" id="confirm-exercise-id"></span>
                 </div>
                 <div class="panel-footer">
-
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
                     <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right"
                             data-dismiss="modal" onclick="deleteExercise()">Kustuta
