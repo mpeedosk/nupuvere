@@ -116,6 +116,16 @@
                             <span class="help-block color-default">See väli ei ole kohustuslik</span>
                         </div>
 
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="licence"
+                                           @if(isset($exercise) && $exercise->licence) checked=""@endif>
+                                    CC BY-NC 4.0 Litsents
+                                </label>
+                            </div>
+                        </div>
+
                         <div class="form-group label-static">
                             <label for="ex_content" class=""><span class="fa fa-fw fa-asterisk"
                                                                    aria-hidden="true"></span>Ülesande püstitus</label>
@@ -151,7 +161,6 @@
                         </div>
 
                         @yield('answer-content')
-
                         <div class="form-group">
                             <label for="category-select"><span class="fa fa-fw fa-asterisk"
                                                                aria-hidden="true"></span>Kategooria: </label>
@@ -229,24 +238,19 @@
 
     @include('admin.includes.tinymceUpload')
 
-
     <div id="preview-modal" class="modal fade" role="dialog" tabindex="-1">
         <div id="modal-view" class="modal-dialog modal-sm font-size-md">
             <div class="modal-content  panel panel-primary">
                 <div class="panel-heading">
-
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                     <h4 class="panel-title">Eelvaade</h4>
                 </div>
-                <div id="preview" class="modal-body ex-content">
-
-                </div>
+                <div id="preview" class="modal-body ex-content"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-raised" data-dismiss="modal">Sulge</button>
                 </div>
             </div>
         </div>
     </div>
-
 @endsection

@@ -100,7 +100,7 @@
                                     @else
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success btn-default fix-margin-right pull-right button-disabled"
-                                                onclick="submitAnswer(event, {{$exercise -> id}},{{$exercise -> type}})">
+                                                onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
                                             Vasta
                                         </button>
                                     @endif
@@ -121,7 +121,7 @@
 
                 <div class="col-md-2 margin-50-lg text-center">
 
-                    @if(!$exercise -> hint == "")
+                    @if(!trim($exercise -> hint) == "")
                         <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
                                 data-target="#hint-dialog">
                             <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
@@ -134,29 +134,28 @@
                             <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
                         </button>
                     @endif
-                    <p class="font-size-sm">
-                        Koostanud:
-                    </p>
-                    <p class="font-size-sm">
-                        {{$exercise -> author}}
-                    </p>
-                    <p class="font-size-sm">
-                        Litsents: <span class="fa fa-creative-commons" style="font-size: 16px" aria-hidden="true"
+
+                    @if(!trim($exercise -> author) == "")
+
+                        <p class="font-size-sm">
+                            Koostanud:
+                        </p>
+                        <p class="font-size-sm">
+                            {{$exercise -> author}}
+                        </p>
+                    @endif
+
+                    @if($exercise->licence)
+                        <div>
+                            <p class="font-size-sm"> Litsents: </p>
+                            <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                                        alt="Creative Commons License"
+                                        src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
                                         data-toggle="tooltip" data-placement="bottom"
-                                        title="See ülesanne on kaitstud Creative Commons 3.0 litsentsiga"></span>
-                    </p>
-
-                    <div>
-                         <span class="fa fa-2x fa-creative-commons" aria-hidden="true"
-                               data-toggle="tooltip" data-placement="bottom"
-                               title="See ülesanne on kaitstud Creative Commons 3.0 litsentsiga"></span>
-                    </div>
-
-                    <img src="/img/licence.svg" alt="creative commons">
-
+                                        title="This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License"/></a>
+                        </div>
+                    @endif
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -197,7 +196,7 @@
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
                     <button id="showAnswer" type="button" class="btn btn-danger btn-raised pull-right"
                             data-dismiss="modal"
-                            onclick="showAnswer({{$exercise -> id}},{{$exercise -> type}})">Näita vastust
+                            onclick="showAnswer('{{$exercise -> id}}','{{$exercise -> type}}')">Näita vastust
                     </button>
                 </div>
             </div>

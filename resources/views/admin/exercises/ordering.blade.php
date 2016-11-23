@@ -30,13 +30,13 @@
 
     <div class="form-group">
         <label class="control-label" for="answer-title">Lisa veel vastusevariante</label>
-        <div class="input-group">
+        <div class="input-group center-block">
             <textarea id="answer-title" class="form-control"></textarea>
-            <span class="input-group-btn">
+            <div class="text-center">
                 <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswerOrder()">
-                    <span class="glyphicon glyphicon-plus"></span>&nbspLisa
+                    <span class="glyphicon glyphicon-plus"></span>&nbspLisa vastus
                 </button>
-            </span>
+            </div>
         </div>
     </div>
 @endsection

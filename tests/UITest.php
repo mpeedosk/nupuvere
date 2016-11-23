@@ -56,7 +56,6 @@ class UITest extends TestCase
             ->see('Nimekiri')
             ->see('Edasi')
             ->see('Vihje')
-            ->see('Koostanud')
             ->see('Sisestage vastus')
             ->dontSee('Telephone');
 }
@@ -67,7 +66,6 @@ class UITest extends TestCase
             ->see('Nimekiri')
             ->see('Edasi')
             ->see('Vihje')
-            ->see('Koostanud')
             ->dontSee('Telephone');
     }
 

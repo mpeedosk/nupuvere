@@ -15,7 +15,7 @@
                 </script>
             @endif
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-8 registration">
                     <form class="form-horizontal" role="form" method="POST"
                           @if(isset($admin)) action="/admin/admins/edit/{{$admin->id}}"
                           @else action="/admin/admins/create"

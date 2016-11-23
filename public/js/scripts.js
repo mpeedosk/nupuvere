@@ -79,6 +79,8 @@ function loginRequired() {
 var solutionSeen = false;
 
 function showAnswer(id, type) {
+    id = parseInt(id);
+    type = parseInt(type);
 
     if (solutionSeen)
         return;
@@ -161,6 +163,9 @@ function showAnswer(id, type) {
 
 // User has chosen to submit the exercise answer
 function submitAnswer(event, id, type) {
+    id = parseInt(id);
+    type = parseInt(type);
+
     event.preventDefault();
     answers = [];
     switch (type) {

@@ -266,12 +266,16 @@ class ExerciseController extends Controller
      */
     private function createOrUpdateExerciseEntity(Request $request, $type, $exercise = null)
     {
-
         if (!isset($exercise)) {
             // create and populate a new exercise
             $exercise = new Exercise;
             $exercise->type = $type;
         }
+
+        if (isset($request->licence))
+            $licence = true;
+        else
+            $licence = false;
 
         $exercise->title = $request->ex_title;
         $exercise->content = $request->ex_content;
@@ -283,12 +287,12 @@ class ExerciseController extends Controller
         $exercise->age_group = $request->age_group;
         $exercise->difficulty = $request->difficulty;
 
+        $exercise->licence = $licence;
+
         $exercise->save();
 
         return $exercise->id;
     }
-
-    // Needs refactoring
 
 
     /**

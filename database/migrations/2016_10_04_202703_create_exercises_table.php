@@ -35,6 +35,8 @@ class CreateExercisesTable extends Migration
             $table->integer('solved')->unsigned()->default(0);
             $table->integer('attempted')->unsigned()->default(0);
 
+            $table->boolean('licence')->default(true);
+
             // optional hide feature
             $table->boolean('hidden')->default(false);
 
