@@ -15,6 +15,11 @@ class Exercise extends Model
 
     protected $table = 'exercises';
 
+    protected $fillable = [
+        'id', 'created_at', 'updated_at', 'title', 'content', 'type', 'hint',
+        'solution','author','category','age_group', 'difficulty', 'solved', 'attempted' , 'licence', 'hidden'
+    ];
+
     /**
      * @return array
      */

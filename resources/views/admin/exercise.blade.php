@@ -51,6 +51,29 @@
                 </div>
 
                 <h2 class="table-title">Ülesanded</h2>
+
+                <form class="inline" method="POST" action="/admin/exercise/export">
+                    {{ csrf_field() }}
+                    <button id="showAnswer" type="submit" class="btn btn-primary btn-raised pull-right">Ekspordi
+                    </button>
+                </form>
+
+                <form class="inline" method="POST" action="/admin/exercise/import" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="form-group has-feedback">
+                        <label for="inputLogos" class="visuallyhidden"> Laadige uued logod</label>
+                        <input type="file" id="import" multiple="" name="import">
+                        <span class="glyphicon glyphicon-open upload-icon"
+                              aria-hidden="true"></span>
+                        <label for="inputLogos2" class="visuallyhidden"> Input with placeholder</label>
+                        <input id="inputLogos2" type="text" readonly="" class="form-control upload-input"
+                               placeholder="Logod">
+                    </div>
+
+                    <button class="btn btn-primary btn-raised" type="submit">Impordi
+                    </button>
+                </form>
+
                 <table id="table"
                        data-toggle="table"
                        data-search="true"

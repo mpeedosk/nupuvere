@@ -22,7 +22,7 @@ class CreateExercisesTable extends Migration
             $table->string('title')->unique();
             $table->text('content');
             $table->integer('type')->unsigned();
-            $table->text('hint');
+            $table->text('hint')->nullable();
             $table->text('solution')->nullable();
             $table->string('author')->nullable();
 

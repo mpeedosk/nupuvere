@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExerciseController extends Controller
 {
@@ -139,7 +141,7 @@ class ExerciseController extends Controller
 
         // tavakasutajale on kättesaamatud, adminile aga mitte
         if ($exercise->hidden) {
-            if(Auth::guest() || !Auth::user()->isAdmin())
+            if (Auth::guest() || !Auth::user()->isAdmin())
                 abort(404);
         }
 
@@ -418,6 +420,38 @@ class ExerciseController extends Controller
             Session::flash('toast', 'Ülesanne edukalt peidetud!');
         else
             Session::flash('toast', 'Ülesanne edukalt nähtavaks tehtud!');
+        return redirect('/admin/exercise');
+    }
+
+    public function export()
+    {
+        Excel::create('exercises_answers', function($excel){
+            $excel->sheet('exercises', function($sheet){
+                $sheet->fromModel(Exercise::all(), null, 'A1', true);
+            });
+            $excel->sheet('answers', function($sheet){
+                $sheet->fromModel(Answer::all(), null, 'A1', true);
+            });
+        })->download('xls');
+    }
+
+    public function import(){
+        Excel::load(Input::file('import'), function ($reader) {
+            $reader->each(function($sheet) {
+                $sheetTitle = $sheet->getTitle();
+                if($sheetTitle === "exercises"){
+                    foreach ($sheet->toArray() as $row) {
+                        Exercise::firstOrCreate($row);
+                    }
+                } else if ($sheetTitle == "answers"){
+                    foreach ($sheet->toArray() as $row) {
+                        Answer::firstOrCreate($row);
+                    }
+                }
+            });
+        });
+
+        Session::flash('toast', 'Ülesanded edukalt imporditud!');
         return redirect('/admin/exercise');
     }
 }

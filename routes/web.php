@@ -42,6 +42,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::patch('admin/exercise/edit/{id}', 'ExerciseController@update');
     Route::delete('admin/exercise/delete/{id}', 'ExerciseController@destroy');
     Route::post('admin/exercise/hide/{id}', 'ExerciseController@hide');
+
+    Route::post('admin/exercise/export', 'ExerciseController@export');
+    Route::post('admin/exercise/import', 'ExerciseController@import');
+
     Route::delete('admin/admins/delete/{id}', 'AdminController@destroy');
 
 

@@ -70,6 +70,8 @@
 @section('scripts')
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-et-EE.min.js"></script>
     <script>
         $(document).ready(function () {
             $(".se-pre-con").fadeOut("slow");
