@@ -25,6 +25,7 @@ class AnswerController extends Controller
      * */
     public function checkAnswer(Request $request, $ex_id)
     {
+
         // get the authenticated user id
         $user_id = Auth::user()->id;
 

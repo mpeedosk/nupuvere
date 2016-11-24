@@ -26,14 +26,10 @@
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
-
-
             <div class="row category-table">
                 <h2>Uus kategooria: </h2>
                 <form method="POST" action="/categories/add">
                     {{ csrf_field() }}
-
-                    {{----}}
                     <div class="form-group label-floating new-category">
                         <div class="input-group short-input">
                             <label class="control-label" for="newCategory">Kategooria nimi:</label>

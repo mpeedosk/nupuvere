@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-2 control-label">E-posti aadress</label>
+                            <label for="email" class="col-md-2 control-label">Meiliaadress</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email"

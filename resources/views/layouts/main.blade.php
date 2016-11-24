@@ -51,6 +51,9 @@
 
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
+
+    @yield('css')
+
 </head>
 <body id="body-bg">
 
@@ -75,6 +78,8 @@
     <script type="text/javascript" src="{{secure_asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{secure_asset('js/scripts.js')}}"></script>
 @endif
+
+@yield('scripts')
 
 @if (session('expired'))
     <script>

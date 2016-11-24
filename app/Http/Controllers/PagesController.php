@@ -30,4 +30,20 @@ class PagesController extends Controller
             return redirect()->back();
     }
 
+    public function highscore()
+    {
+        $all_time = DB::table('users')
+            ->where([['role', 1],['points', '>', 0]])
+            ->orderBy('points', 'desc')
+            ->take(100)
+            ->get();
+
+        $current_year = DB::table('users')
+            ->where([['role', 1], ['points_this_year', '>', 0]])
+            ->orderBy('points_this_year', 'desc')
+            ->take(100)
+            ->get();
+
+        return view('highscore', ['all_time' => $all_time, 'this_year' => $current_year]);
+    }
 }

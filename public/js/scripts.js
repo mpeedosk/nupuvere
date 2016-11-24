@@ -84,6 +84,7 @@ function showAnswer(id, type) {
 
     if (solutionSeen)
         return;
+    $(".se-pre-con").fadeIn("fast");
     $.ajax({
         url: "/answer/show/" + id,
         type: "post",
@@ -92,6 +93,7 @@ function showAnswer(id, type) {
             '_token': $('input[name="_token"]').val()
         },
         success: function (data) {
+
             var answers = JSON.parse(data.answers);
             var answers_id = JSON.parse(data.answers_id);
             var listElements = null;
@@ -138,7 +140,8 @@ function showAnswer(id, type) {
 
                 document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                 document.getElementById('solution').style.display = "block";
-                reloadWiris()
+                reloadWiris();
+
             }
             document.getElementById('submit-answer').disabled = true;
             solutionSeen = true;
@@ -146,6 +149,7 @@ function showAnswer(id, type) {
             if (data.seenOrSolved == false){
                 toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
             }
+            $(".se-pre-con").fadeOut("slow");
 
 
         },
@@ -155,6 +159,7 @@ function showAnswer(id, type) {
             } else {
                 toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
             }
+            $(".se-pre-con").fadeOut("slow");
         }
     });
 
@@ -200,6 +205,8 @@ function submitAnswer(event, id, type) {
 
     var postArray = JSON.stringify(answers);
 
+    $(".se-pre-con").fadeIn("fast");
+
     $.ajax({
         url: "/answer/check/" + id,
         type: "post",
@@ -209,6 +216,7 @@ function submitAnswer(event, id, type) {
             'answers': postArray
         },
         success: function (data) {
+            $(".se-pre-con").fadeOut("slow");
             if (data.response) {
                 var points = document.getElementById('user-points');
                 toastr.success('Te vastasite õigesti!');
@@ -234,7 +242,7 @@ function submitAnswer(event, id, type) {
             }
         },
         error: function (xhr) {
-            console.log(xhr.status);
+            $(".se-pre-con").fadeOut("slow");
             if (xhr.status == 401) {
                 toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
             } else {

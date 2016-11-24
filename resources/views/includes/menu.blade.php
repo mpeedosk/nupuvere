@@ -92,11 +92,11 @@
                 @endif
 
                 <li class="hidden-md hidden-lg">
-                    <a href=""> Edetabel</a>
+                    <a href="/edetabel"> Edetabel</a>
                 </li>
-                <div class="leaderboard pull-right visible-md visible-lg">
-                    <a class="center-block" href="#" title="Leaderboard"></a>
-                </div>
+                <a href="/edetabel" title="Edetabel" class="leaderboard pull-right visible-md visible-lg">
+                    <span class="center-block"></span>
+                </a>
 
                 <div class="search-container">
                     <div class="search">

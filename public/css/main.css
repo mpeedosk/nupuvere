@@ -15,6 +15,7 @@ TABLE OF CONTENTS
 	- Font Awesome
 	- Glyphicons
 	- Exercise
+	- Leaderboard
 	- Accordions
 	- Progress Bars
 	- Social Icons
@@ -129,11 +130,11 @@ html {
 }
 
 .logo img:hover {
-    -webkit-transform: scale(1.25); /* Safari and Chrome */
-    -moz-transform: scale(1.25); /* Firefox */
-    -ms-transform: scale(1.25); /* IE 9 */
-    -o-transform: scale(1.25); /* Opera */
-    transform: scale(1.25);
+    -webkit-transform: scale(1.15); /* Safari and Chrome */
+    -moz-transform: scale(1.15); /* Firefox */
+    -ms-transform: scale(1.15); /* IE 9 */
+    -o-transform: scale(1.15); /* Opera */
+    transform: scale(1.15);
 }
 
 
@@ -1163,7 +1164,7 @@ footer, .push {
 /*-----------------------------------------------------------------------------------*/
 /* Leaderboard Icons */
 /*-----------------------------------------------------------------------------------*/
-.leaderboard a {
+.leaderboard span {
     background: url(../img/social_icons/lb.png) no-repeat;
     background-size: contain;
     width: 56px;
@@ -1880,6 +1881,74 @@ a.slicknav_item [class*=" fa-"] {
     display: inline-block !important;
     position: inherit !important;
 }
+
+/*-----------------------------------------------------------------------------------*/
+/* Leaderboard */
+/*-----------------------------------------------------------------------------------*/
+
+
+table {
+    background-color: #616161;
+    color: #EEEEEE;;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: #2a2d2d !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #444444;
+}
+
+td .btn {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+td input {
+    color: #313131;
+    border: 2px solid #313131;
+}
+
+.table th {
+    text-align: center;
+    background-color: #313131;
+}
+
+tr a {
+    text-decoration: none;
+    color: inherit;
+}
+
+tr a:hover {
+    color: #b6beec;
+}
+
+@media (min-width: 763px) {
+
+    .table-title {
+        margin-bottom: -40px;
+    }
+}
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    color: #fff;
+    cursor: default;
+    background-color: #5e70d4;
+    border-color: #5e70d4;
+}
+
+.pagination>li>a, .pagination>li>span {
+    color: #eeeeee;
+    background-color: #444444;
+    border: 1px solid #b3aeae;
+}
+
+.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+    color: #5e70d4;
+}
+
+
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */
 /*-----------------------------------------------------------------------------------*/
@@ -2311,6 +2380,7 @@ a.slicknav_item [class*=" fa-"] {
     height: 100%;
 }
 
+
 .no-js #loader {
     display: none;
 }
@@ -2324,10 +2394,9 @@ a.slicknav_item [class*=" fa-"] {
 
 .se-pre-con {
     position: fixed;
-    left: 120px;
     top: 0px;
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(../img/gears.gif) center no-repeat #eee;
+    background: url(../img/gears.gif) center no-repeat ;
 }
