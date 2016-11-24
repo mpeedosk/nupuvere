@@ -31,7 +31,11 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="current">
-                            <h2 class="margin-top-20">Jooksev aasta</h2>
+                            <h2 class="margin-top-20 inline-block">Jooksev aasta</h2>
+                            <button class="btn btn-primary btn-raised pull-right" type="submit"
+                                    onclick='$("#reset-dialog").modal()'>Lähtesta punktid
+                                <div class="ripple-container"></div>
+                            </button>
                             <hr>
                             <table id="table"
                                    data-toggle="table"
@@ -63,7 +67,8 @@
                                                     class="btn btn-danger btn-raised btn-sm" data-toggle="tooltip"
                                                     title="Kustuta"
                                                     onclick="showUserConfirm('{{$user->id}}', '{{$user->username}}')">
-                                                <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-remove pull-right"
+                                                      aria-hidden="true"></span>
                                             </button>
                                         </td>
                                     </tr>
@@ -104,7 +109,8 @@
                                                     class="btn btn-danger btn-raised btn-sm" data-toggle="tooltip"
                                                     title="Kustuta"
                                                     onclick="showUserConfirm('{{$user->id}}', '{{$user->username}}')">
-                                                <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
+                                                <span class="glyphicon glyphicon-remove pull-right"
+                                                      aria-hidden="true"></span>
                                             </button>
                                         </td>
                                     </tr>
@@ -137,6 +143,29 @@
                     <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right"
                             data-dismiss="modal" onclick="deleteUser()">Kustuta
                     </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="reset-dialog" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content  panel panel-danger">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <span class="modal-img glyphicon glyphicon-alert" aria-hidden="true"></span>
+                    <h4 class="panel-title">Kinnitus</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Olete kindel, et tahate kõik viimase aasta punktid lähtestada?</p>
+                    <p>Seda tegevust ei saa hiljem tagasi võtta</p>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
+                    <form class="inline" method="POST" action="/admin/highscore/reset">
+                        {{ csrf_field() }}
+                        <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right">Lähtesta
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

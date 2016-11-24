@@ -256,6 +256,10 @@ footer, .push {
     display: inline-block;
 }
 
+.inline{
+    display: inline;
+}
+
 .color-default {
     color: #555555 !important;
 }

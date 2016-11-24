@@ -307,6 +307,15 @@ class AdminController extends Controller
 
     }
 
+    public function reset(){
+
+        DB::table('users')->update(['points_this_year' => 0]);
+
+        Session::flash('toast', 'Punktid edukalt lähtestatud!');
+        return redirect()->back();
+
+    }
+
     /**
      * Update the partner logos in storage.
      *

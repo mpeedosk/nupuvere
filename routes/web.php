@@ -25,6 +25,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/exercise', 'AdminController@exercise');
     Route::get('admin/highscore', 'AdminController@highscore');
 
+    Route::post('admin/highscore/reset', 'AdminController@reset');
+
     Route::post('admin/upload/gallery', 'AdminController@updateGallery');
     Route::post('admin/upload/logo', 'AdminController@updateLogos');
     Route::post('admin/upload', 'AdminController@upload');

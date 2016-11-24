@@ -355,3 +355,8 @@ $(document).on('keypress', 'input,select', function (e) {
         $canfocus.eq(index).focus();
     }
 });
+
+function confirmReset() {
+    $("#reset-dialog").modal()
+}
+
