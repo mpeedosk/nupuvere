@@ -107,11 +107,14 @@
                                   method="POST">
                                 {{ csrf_field() }}
                                 <div class="row text-center">
+
                                     <div class="bottom-border user-bar pull-right">
                                         <div class="col-xs-4">
                                             <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
+                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
+
                                         </div>
 
                                         <div class="col-xs-4">
