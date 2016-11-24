@@ -88,10 +88,10 @@ function deleteUser() {
         },
         success: function (data) {
             toastr.success(name + " edukalt kustutatud!");
-            document.getElementById('ex-' + id).style.display = 'none';
+            location.reload();
         },
         error: function (xhr) {
-            if (xhr.status == 403)
+            if (xhr.status == 420)
                 toastr.error("Iseennast ei saa kustutada");
             else
                 toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");

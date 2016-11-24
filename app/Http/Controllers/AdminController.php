@@ -193,6 +193,20 @@ class AdminController extends Controller
 
     }
 
+    public function destroyRegular($id)
+    {
+        if (intval($id) === Auth::user()->id){
+            Session::flash('error', 'Iseennast ei saa kustutada');
+            return($id);
+            abort(420);
+        }
+        DB::table('users')->where('id', $id)->delete();
+
+        Session::flash('user-delete', 'Kasutaja edukalt kustutatud');
+
+        return redirect('/admin/admins');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -201,15 +215,26 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
+
         if (intval($id) === Auth::user()->id){
             Session::flash('error', 'Iseennast ei saa kustutada');
+            abort(420);
+        }
+
+        if(Auth::user()->role === User::SUPERADMIN){
+            DB::table('users')->where('id', $id)->delete();
+        }else if(Auth::user()->role === User::ADMIN){
+            if(User::find($id)->role === 1)
+                DB::table('users')->where('id', $id)->delete();
+            else
+                abort(403);
+        }else{
             abort(403);
         }
-        DB::table('users')->where('id', $id)->delete();
 
         Session::flash('user-delete', 'Kasutaja edukalt kustutatud');
 
-        return redirect('/admin/admins');
+        return redirect()->back();
     }
 
     public function updateContact(Request $request)
@@ -261,6 +286,25 @@ class AdminController extends Controller
         Page::changed();
 
         return redirect()->back();
+    }
+
+
+    public function highscore(){
+
+        $all_time = DB::table('users')
+            ->where([['role', 1],['points', '>', 0]])
+            ->orderBy('points', 'desc')
+            ->take(100)
+            ->get();
+
+        $current_year = DB::table('users')
+            ->where([['role', 1], ['points_this_year', '>', 0]])
+            ->orderBy('points_this_year', 'desc')
+            ->take(100)
+            ->get();
+
+        return view('admin.highscore', ['all_time' => $all_time, 'this_year' => $current_year]);
+
     }
 
     /**

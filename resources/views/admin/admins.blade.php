@@ -42,7 +42,7 @@
                         <th class="col-md-2" data-sortable="true">Kasutajanimi</th>
                         <th>Eesnimi</th>
                         <th>Perenimi</th>
-                        <th>E-post</th>
+                        <th>Meiliaadress</th>
                         <th data-sortable="true">Roll</th>
                         <th class="col-md-3">Tegevus</th>
                     </tr>

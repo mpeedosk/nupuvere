@@ -2400,3 +2400,28 @@ tr a:hover {
     z-index: 9999;
     background: url(../img/gears.gif) center no-repeat ;
 }
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Tabs */
+/*-----------------------------------------------------------------------------------*/
+
+
+
+.tabs .nav-tabs li a {
+    border-radius: 5px 5px 0 0;
+    font-size: 14px;
+    margin-right: 1px;
+}
+
+.tabs .tab-content {
+    padding: 15px;
+}
+.tab-nav{
+    max-width: 209px;
+    background-color: #313131;
+}
+.tab-nav .active{
+    border-bottom: 3px solid #ffba57;
+}
+

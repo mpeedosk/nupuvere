@@ -1,20 +1,19 @@
+<!-- sidebar menu start-->
 <div id="sidebar">
-    <!-- sidebar menu start-->
     <a href="/" class="sidebar-logo withripple padding-10">
         <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif"
              alt="Logo"/></a>
 
     <header class="sidebar-header text-center" id="nav-accordion">
         <span class="fa fa-cogs fa-10x color-yellow" aria-hidden="true"></span>
-        <span class="font-size-md">Martin Peedosk</span>
+        <span class="font-size-md">{{ucfirst(Auth::user()->first_name)." ".ucfirst(Auth::user()->last_name)}}</span>
     </header>
 
     <div class="sidebar-nav">
-
         <a href="/" class="sidebar-item withripple">
             <span class="fa fa-fw fa-long-arrow-left "></span> Tagasi pealehele
-
         </a>
+
         <a href="/admin/home" class="sidebar-item withripple
             @if(Route::getCurrentRoute()->getPath() == 'admin/home') sidebar-item-active @endif">
             <span class="fa fa-fw fa-picture-o"></span> Nupuvere
@@ -44,3 +43,4 @@
         @endif
     </div>
 </div>
+<!-- sidebar menu end-->
