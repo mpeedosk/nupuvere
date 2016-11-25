@@ -14,7 +14,6 @@
 Auth::routes();
 
 Route::get('/', 'PagesController@index');
-Route::get('/home', 'PagesController@back');
 Route::get('/edetabel', 'PagesController@highscore');
 
 Route::group(['middleware' => 'admin'], function () {

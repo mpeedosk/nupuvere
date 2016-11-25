@@ -13,10 +13,26 @@
                         toastr.success('Ülesanne "{{session('exercise-create')}}" edukalt lisatud');
                     });
                 </script>
-            @elseif(session('toast'))
+            @endif
+
+            @if(session('toast'))
                 <script>
                     $(function () {
                         toastr.success('{{session('toast')}}');
+                    });
+                </script>
+            @endif
+            @if(session('info'))
+                <script>
+                    $(function () {
+                        toastr.info('{{session('info')}}');
+                    });
+                </script>
+            @endif
+            @if(session('error'))
+                <script>
+                    $(function () {
+                        toastr.error('{{session('error')}}');
                     });
                 </script>
             @endif
@@ -51,26 +67,22 @@
                 </div>
 
                 <h2 class="table-title">Ülesanded</h2>
-
-                <form class="inline" method="POST" action="/admin/exercise/export">
+                <form class="inline pull-right" method="POST" action="/admin/exercise/export">
                     {{ csrf_field() }}
                     <button id="showAnswer" type="submit" class="btn btn-primary btn-raised pull-right">Ekspordi
                     </button>
                 </form>
 
-                <form class="inline" method="POST" action="/admin/exercise/import" enctype="multipart/form-data">
+                <form id="import-form" class="inline pull-right" method="POST"
+                      action="/admin/exercise/import"
+                      enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <div class="form-group has-feedback">
-                        <label for="inputLogos" class="visuallyhidden"> Laadige uued logod</label>
-                        <input type="file" id="import" multiple="" name="import">
-                        <span class="glyphicon glyphicon-open upload-icon"
-                              aria-hidden="true"></span>
-                        <label for="inputLogos2" class="visuallyhidden"> Input with placeholder</label>
-                        <input id="inputLogos2" type="text" readonly="" class="form-control upload-input"
-                               placeholder="Logod">
+                    <div class="form-group hidden">
+                        <input hidden class="form-control upload-input"
+                               type="file" id="import" multiple="" name="import">
                     </div>
-
-                    <button class="btn btn-primary btn-raised" type="submit">Impordi
+                    <button type="button" class="inline btn btn-primary btn-raised" onclick='$("#import").click()'>
+                        Impordi
                     </button>
                 </form>
 
@@ -79,13 +91,13 @@
                        data-search="true"
                        data-show-columns="true"
                        data-pagination="true"
-                       data-id-field="id"
+                       data-unique-id="id"
                        data-striped="true"
                        class="hidden-start"
                 >
                     <thead>
                     <tr>
-                        <th data-sortable="true">ID</th>
+                        <th data-sortable="true" data-field="id">ID</th>
                         <th class="col-md-2" data-sortable="true">Peakiri</th>
                         <th data-sortable="true">Kategooria</th>
                         <th data-sortable="true">Vanuserühm</th>

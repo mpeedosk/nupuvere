@@ -25,11 +25,6 @@ class PagesController extends Controller
         return view('home', ['updated' => strtotime($page->updated_at), 'contact' => $page->content]);
     }
 
-    public function back()
-    {
-            return redirect()->back();
-    }
-
     public function highscore()
     {
         $all_time = DB::table('users')

@@ -336,3 +336,6 @@ h4 {
     z-index: 9999;
     background: url(../img/gears.gif) center no-repeat #eee;
 }
+#import-form{
+    margin-right: 10px;
+}

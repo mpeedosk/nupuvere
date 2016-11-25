@@ -425,33 +425,57 @@ class ExerciseController extends Controller
 
     public function export()
     {
-        Excel::create('exercises_answers', function($excel){
-            $excel->sheet('exercises', function($sheet){
+        Excel::create('exercises_answers_'.date('dmYHis'), function ($excel) {
+            $excel->sheet('exercises', function ($sheet) {
                 $sheet->fromModel(Exercise::all(), null, 'A1', true);
             });
-            $excel->sheet('answers', function($sheet){
+            $excel->sheet('answers', function ($sheet) {
                 $sheet->fromModel(Answer::all(), null, 'A1', true);
             });
-        })->download('xls');
+        })->export('xls');
     }
 
-    public function import(){
-        Excel::load(Input::file('import'), function ($reader) {
-            $reader->each(function($sheet) {
+    public function import()
+    {
+        $total_ex = 0;
+        $total_ans = 0;
+        $suc_ex = 0;
+        $suc_ans = 0;
+
+        Excel::load(Input::file('import'), function ($reader) use (&$total_ex, &$total_ans, &$suc_ex, &$suc_ans) {
+            $reader->each(function ($sheet) use (&$total_ex, &$total_ans, &$suc_ex, &$suc_ans) {
                 $sheetTitle = $sheet->getTitle();
-                if($sheetTitle === "exercises"){
+                if ($sheetTitle === "exercises") {
                     foreach ($sheet->toArray() as $row) {
-                        Exercise::firstOrCreate($row);
+                        $id = Exercise::where('id', $row["id"])->first();
+                        $title = Exercise::where('title', $row["title"])->first();
+                        if (!isset($id) && !isset($title)) {
+                            Exercise::create($row);
+                            $suc_ex++;
+                        }
+                        $total_ex++;
                     }
-                } else if ($sheetTitle == "answers"){
+                } else if ($sheetTitle == "answers") {
                     foreach ($sheet->toArray() as $row) {
-                        Answer::firstOrCreate($row);
+                        $id = Answer::where('id', $row["id"])->first();
+                        $ex = Exercise::where('id', $row["ex_id"])->first();
+                        if (!isset($id) && isset($ex)) {
+                            Answer::create($row);
+                            $suc_ans++;
+                        }
+                        $total_ans++;
                     }
                 }
             });
         });
 
-        Session::flash('toast', 'Ülesanded edukalt imporditud!');
+        if ($suc_ex / $total_ex == 1 && $suc_ans / $total_ans == 1)
+            Session::flash('toast', 'Import - Ülesanded: ' . $suc_ex . '/' . $total_ex . ', Vastused: ' . $suc_ans . '/' . $total_ans);
+        else {
+            Session::flash('info', 'Import - Ülesanded: ' . $suc_ex . '/' . $total_ex . ', Vastused: ' . $suc_ans . '/' . $total_ans);
+            Session::flash('error', 'ID ja Pealkiri ei tohi kattuda olemasoleva ülesandega');
+
+        }
         return redirect('/admin/exercise');
     }
 }

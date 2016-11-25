@@ -31,7 +31,7 @@ function deleteCategory() {
         },
         success: function (data) {
             toastr.success('Kategooria ' + name + " edukalt kustutatud!");
-            document.getElementById('cat-' + id).style.display = 'none';
+            $table.bootstrapTable('removeByUniqueId', id);
         },
         error: function (xhr) {
             toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
@@ -59,7 +59,7 @@ function deleteExercise() {
         },
         success: function (data) {
             toastr.success(name + " edukalt kustutatud!");
-            document.getElementById('ex-' + id).style.display = 'none';
+            $table.bootstrapTable('removeByUniqueId', id);
         },
         error: function (xhr) {
             toastr.error('Viga kustutamisel ( kood ' + xhr.status + ")");
@@ -192,7 +192,8 @@ $(document).on('click', '.btn_remove', function () {
 });
 
 /* initializing bootstrap table*/
-$('#table').bootstrapTable({
+$table = $('#table');
+$table.bootstrapTable({
     onPostBody: function (data) {
         $('.color').colorPicker({
             opacity: false,
@@ -359,4 +360,18 @@ $(document).on('keypress', 'input,select', function (e) {
 function confirmReset() {
     $("#reset-dialog").modal()
 }
+
+document.getElementById("import-form").onchange = function() {
+    var filename = document.getElementById('import').value;
+    console.log(filename);
+    if(filename != ""){
+        var fileParts = filename.split('.');
+        var extention = fileParts[fileParts.length-1].toLowerCase();
+        if(extention != "xls")
+            toastr.info("Faili laiend peab olema xls");
+        else{
+            document.getElementById("import-form").submit();
+        }
+    }
+};
 
