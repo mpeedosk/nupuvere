@@ -20,6 +20,8 @@ class ResetPasswordController extends Controller
 
     use ResetsPasswords;
 
+    protected $redirectTo = '/matemaatika/uurija';
+
     /**
      * Create a new controller instance.
      *

@@ -16,6 +16,10 @@ class PagesController extends Controller
      */
     public function index()
     {
+        $level = 1;
+        $intro = ['You are receiving this email because we received a password reset request for your account.'];
+        $outro = ['You are receiving this email because we received a password reset request for your account.'];
+        return view('vendor.notifications.email', ['level' => $level, 'introLines' => $intro, 'outroLines' => $outro]);
         $page = Page::first();
         if ($page == null){
             $page = new Page;

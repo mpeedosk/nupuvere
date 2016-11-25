@@ -2,8 +2,8 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <style type="text/css" rel="stylesheet" media="all">
         /* Media Queries */
@@ -20,8 +20,8 @@
 $style = [
     /* Layout ------------------------------ */
 
-    'body' => 'margin: 0; padding: 0; width: 100%; background-color: #F2F4F6;',
-    'email-wrapper' => 'width: 100%; margin: 0; padding: 0; background-color: #F2F4F6;',
+    'body' => 'margin: 0; padding: 0; width: 100%; background-color: #fff;',
+    'email-wrapper' => 'width: 100%; margin: 0; padding: 0; background-color: #fff;',
 
     /* Masthead ----------------------- */
 
@@ -63,130 +63,112 @@ $style = [
 <?php $fontFamily = 'font-family: Arial, \'Helvetica Neue\', Helvetica, sans-serif;'; ?>
 
 <body style="{{ $style['body'] }}">
-    <table width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <td style="{{ $style['email-wrapper'] }}" align="center">
-                <table width="100%" cellpadding="0" cellspacing="0">
-                    <!-- Logo -->
-                    <tr>
-                        <td style="{{ $style['email-masthead'] }}">
-                            <a style="{{ $fontFamily }} {{ $style['email-masthead_name'] }}" href="{{ url('/') }}" target="_blank">
-                                {{ config('app.name') }}
-                            </a>
-                        </td>
-                    </tr>
+<table width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+        <td style="{{ $style['email-wrapper'] }}" align="center">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <!-- Logo -->
+                <tr>
+                    <td style="{{ $style['email-masthead'] }}">
+                        <a href="@if (App::isLocal()){{url('/')}} @else {{secure_url('/')}} @endif" target="_blank">
+                            <img src="{{asset('/img/logo.png')}}" width="300px"
+                                 aria-hidden="true">
+                        </a>
+                    </td>
+                </tr>
 
-                    <!-- Email Body -->
-                    <tr>
-                        <td style="{{ $style['email-body'] }}" width="100%">
-                            <table style="{{ $style['email-body_inner'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
-                                        <!-- Greeting -->
-                                        <h1 style="{{ $style['header-1'] }}">
-                                            @if (! empty($greeting))
-                                                {{ $greeting }}
+                <!-- Email Body -->
+                <tr>
+                    <td style="{{ $style['email-body'] }}" width="100%">
+                        <table style="{{ $style['email-body_inner'] }}" align="center" width="570" cellpadding="0"
+                               cellspacing="0">
+                            <tr>
+                                <td style="{{ $fontFamily }} {{ $style['email-body_cell'] }}">
+                                    <!-- Greeting -->
+                                    <h1 style="{{ $style['header-1'] }}">
+                                        @if (! empty($greeting))
+                                            {{ $greeting }}
+                                        @else
+                                            @if ($level == 'error')
+                                                Oihh!
                                             @else
-                                                @if ($level == 'error')
-                                                    Whoops!
-                                                @else
-                                                    Hello!
-                                                @endif
+                                                Tere!
                                             @endif
-                                        </h1>
-
-                                        <!-- Intro -->
-                                        @foreach ($introLines as $line)
-                                            <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Action Button -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_action'] }}" align="center" width="100%" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center">
-                                                        <?php
-                                                            switch ($level) {
-                                                                case 'success':
-                                                                    $actionColor = 'button--green';
-                                                                    break;
-                                                                case 'error':
-                                                                    $actionColor = 'button--red';
-                                                                    break;
-                                                                default:
-                                                                    $actionColor = 'button--blue';
-                                                            }
-                                                        ?>
-
-                                                        <a href="{{ $actionUrl }}"
-                                                            style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
-                                                            class="button"
-                                                            target="_blank">
-                                                            {{ $actionText }}
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            </table>
                                         @endif
+                                    </h1>
 
-                                        <!-- Outro -->
-                                        @foreach ($outroLines as $line)
-                                            <p style="{{ $style['paragraph'] }}">
-                                                {{ $line }}
-                                            </p>
-                                        @endforeach
-
-                                        <!-- Salutation -->
+                                    <!-- Intro -->
+                                    @foreach ($introLines as $line)
                                         <p style="{{ $style['paragraph'] }}">
-                                            Regards,<br>{{ config('app.name') }}
+                                            {{ $line }}
                                         </p>
+                                    @endforeach
 
-                                        <!-- Sub Copy -->
-                                        @if (isset($actionText))
-                                            <table style="{{ $style['body_sub'] }}">
-                                                <tr>
-                                                    <td style="{{ $fontFamily }}">
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            If you’re having trouble clicking the "{{ $actionText }}" button,
-                                                            copy and paste the URL below into your web browser:
-                                                        </p>
+                                <!-- Action Button -->
+                                    @if (isset($actionText))
+                                        <table style="{{ $style['body_action'] }}" align="center" width="100%"
+                                               cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td align="center">
+                                                    <?php
+                                                    switch ($level) {
+                                                        case 'success':
+                                                            $actionColor = 'button--green';
+                                                            break;
+                                                        case 'error':
+                                                            $actionColor = 'button--red';
+                                                            break;
+                                                        default:
+                                                            $actionColor = 'button--blue';
+                                                    }
+                                                    ?>
 
-                                                        <p style="{{ $style['paragraph-sub'] }}">
-                                                            <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}" target="_blank">
-                                                                {{ $actionUrl }}
-                                                            </a>
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        @endif
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+                                                    <a href="{{ $actionUrl }}"
+                                                       style="{{ $fontFamily }} {{ $style['button'] }} {{ $style[$actionColor] }}"
+                                                       class="button"
+                                                       target="_blank">
+                                                        {{ $actionText }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @endif
 
-                    <!-- Footer -->
-                    <tr>
-                        <td>
-                            <table style="{{ $style['email-footer'] }}" align="center" width="570" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="{{ $fontFamily }} {{ $style['email-footer_cell'] }}">
-                                        <p style="{{ $style['paragraph-sub'] }}">
-                                            &copy; {{ date('Y') }}
-                                            <a style="{{ $style['anchor'] }}" href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a>.
-                                            All rights reserved.
+                                <!-- Outro -->
+                                    @foreach ($outroLines as $line)
+                                        <p style="{{ $style['paragraph'] }}">
+                                            {{ $line }}
                                         </p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table>
+                                    @endforeach
+
+                                <!-- Sub Copy -->
+                                    @if (isset($actionText))
+                                        <table style="{{ $style['body_sub'] }}">
+                                            <tr>
+                                                <td style="{{ $fontFamily }}">
+                                                    <p style="{{ $style['paragraph-sub'] }}">
+                                                        Kui nupu "{{ $actionText }}" vajutamisega tekib probleeme,
+                                                        võite alloleva aadressi otse lehitsejasse kopeerida:
+                                                    </p>
+
+                                                    <p style="{{ $style['paragraph-sub'] }}">
+                                                        <a style="{{ $style['anchor'] }}" href="{{ $actionUrl }}"
+                                                           target="_blank">
+                                                            {{ $actionUrl }}
+                                                        </a>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    @endif
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
 </body>
 </html>
