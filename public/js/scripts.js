@@ -205,7 +205,8 @@ function submitAnswer(event, id, type) {
 
     var postArray = JSON.stringify(answers);
 
-    $(".se-pre-con").fadeIn("fast");
+    $("#md-spinner").fadeIn("fast").css("display","block");
+    $("#submit-text").hide();
 
     $.ajax({
         url: "/answer/check/" + id,
@@ -216,7 +217,6 @@ function submitAnswer(event, id, type) {
             'answers': postArray
         },
         success: function (data) {
-            $(".se-pre-con").fadeOut("slow");
             if (data.response) {
                 var points = document.getElementById('user-points');
                 toastr.success('Te vastasite õigesti!');
@@ -240,16 +240,23 @@ function submitAnswer(event, id, type) {
                     backdrop: 'static'
                 })
             }
+            $("#md-spinner").fadeOut("slow", function () {
+                $("#submit-text").show();
+            });
         },
         error: function (xhr) {
-            $(".se-pre-con").fadeOut("slow");
+
             if (xhr.status == 401) {
                 toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
             } else {
                 toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
             }
+            $("#md-spinner").fadeOut("slow", function () {
+                $("#submit-text").show();
+            });
         }
     });
+
 }
 
 /* image zoom on click*/

@@ -102,7 +102,8 @@
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success btn-default fix-margin-right pull-right button-disabled"
                                                 onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
-                                            Vasta
+                                            <span class="spinner"><span id="md-spinner" ></span></span>
+                                            <span id="submit-text">Vasta</span>
                                         </button>
                                     @endif
 

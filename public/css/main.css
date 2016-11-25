@@ -2405,6 +2405,12 @@ tr a:hover {
     background: url(../img/gears.gif) center no-repeat ;
 }
 
+#md-spinner {
+    width: 37px;
+    height: 20px;
+    background: url(../img/ring-alt.svg) center no-repeat ;
+}
+
 
 /*-----------------------------------------------------------------------------------*/
 /* Tabs */
