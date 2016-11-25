@@ -47,7 +47,7 @@
                                             @endif
                                         </div>
                                         <a id="forgot-password" class="small pull-right"
-                                           href="{{ url('/password/reset') }}" tabindex="-1">Unustasid parooli?</a>
+                                           href="{{ secure_url('/password/reset') }}" tabindex="-1">Unustasid parooli?</a>
                                     </div>
 
                                     <div class="form-group hidden">

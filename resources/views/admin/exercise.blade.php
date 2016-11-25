@@ -92,9 +92,7 @@
                        data-show-columns="true"
                        data-pagination="true"
                        data-unique-id="id"
-                       data-striped="true"
-                       class="hidden-start"
-                >
+                       data-striped="true">
                     <thead>
                     <tr>
                         <th data-sortable="true" data-field="id">ID</th>

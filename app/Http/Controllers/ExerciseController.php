@@ -425,7 +425,7 @@ class ExerciseController extends Controller
 
     public function export()
     {
-        Excel::create('exercises_answers_'.date('dmYHis'), function ($excel) {
+        Excel::create('exercises_answers_' . date('dmYHis'), function ($excel) {
             $excel->sheet('exercises', function ($sheet) {
                 $sheet->fromModel(Exercise::all(), null, 'A1', true);
             });
