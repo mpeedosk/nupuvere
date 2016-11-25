@@ -165,15 +165,13 @@ class AnswerController extends Controller
     private function hasCorrect($answers, $user_answer)
     {
         // remove whitespaces and convert to lowercase
-        $user_answer = mb_strtolower(preg_replace('/\s*/', '', $user_answer));
         foreach ($answers as $answer) {
-
-            $answer_str = mb_strtolower(preg_replace('/\s*/', '', $answer->content));
-            if ($answer->is_correct && $answer_str == $user_answer)
+            if ($answer->is_correct && formatInput($answer->content) == formatInput($user_answer))
                 return True;
         }
         return False;
     }
+
 
     /** For multiple choice with one correct we compare the first correct to the users answer
      *

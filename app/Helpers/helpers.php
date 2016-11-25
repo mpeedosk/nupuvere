@@ -38,3 +38,7 @@ function different_shade($hex, $percentageChange)
     return '#' . sprintf('%02x', $newShade[0]) . sprintf('%02x', $newShade[1]) . sprintf('%02x', $newShade[2]);
 }
 
+function formatInput($string){
+    return preg_replace('/,/', '.' ,mb_strtolower(preg_replace('/\s*/', '', $string)));
+}
+

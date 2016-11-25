@@ -31,15 +31,16 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="current">
-                            <h2 class="margin-top-20 inline-block">Jooksev aasta</h2>
-                            <button class="btn btn-primary btn-raised pull-right" type="submit"
+                            <h2 class="table-title margin-top-20">Jooksev aasta</h2>
+                            <button class="btn btn-primary btn-raised inline-block pull-right" type="submit"
                                     onclick='$("#reset-dialog").modal()'>Lähtesta punktid
                                 <div class="ripple-container"></div>
                             </button>
-                            <hr>
                             <table id="table"
                                    data-toggle="table"
-                                   data-striped="true">
+                                   data-show-columns="true"
+                                   data-striped="true"
+                                   data-search="true">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -77,11 +78,12 @@
                             </table>
                         </div>
                         <div class="tab-pane" id="all-time">
-                            <h2 class="margin-top-20">Läbi aegade</h2>
-                            <hr>
+                            <h2 class="table-title margin-top-20">Läbi aegade</h2>
                             <table id="table"
                                    data-toggle="table"
-                                   data-striped="true">
+                                   data-show-columns="true"
+                                   data-striped="true"
+                                   data-search="true">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
