@@ -72,7 +72,7 @@ class UITest extends TestCase
     public function testSolvExerciseAvastajadEasy()//Kontrollib kas ülesande lahendamine kuvatakse õigesti.
     {
         $this->visit('/')
-             ->type('martinliba','username')
+             ->type('martinliba','login')
              ->type('parool','password')
              ->press('Logi sisse')
              ->visit('/matemaatika/avastaja')
@@ -86,7 +86,7 @@ class UITest extends TestCase
    public function testAdminAddExercise() // Kontrolliba, kui admin lisab ülesandeid, kas kõik kuvatakse õigesti.
     {
         $this->visit('/')
-             ->type('admin','username')
+             ->type('admin','login')
              ->type('parool','password')
              ->press('Logi sisse')
              ->see('Admin')
@@ -109,7 +109,7 @@ class UITest extends TestCase
     public function testAdminAddExerciseEmptyTitle()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel pealikiri jääb tühjaks.
     {
         $this->visit('/')
-             ->type('admin','username')
+             ->type('admin','login')
              ->type('parool','password')
              ->press('Logi sisse')
              ->see('Admin')
@@ -131,7 +131,7 @@ class UITest extends TestCase
     public function testAdminAddExerciseEmptyContent()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel sisu jääb tühjaks.
     {
         $this->visit('/')
-             ->type('admin','username')
+             ->type('admin','login')
              ->type('parool','password')
              ->press('Logi sisse')
              ->see('Admin')
