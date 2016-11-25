@@ -23,12 +23,12 @@
                                 <div class="row inputs">
                                     <div class="col-md-4">
                                         <div class="form-group form-group-sm label-floating">
-                                            <label for="username" class="control-label">Kasutajanimi</label>
-                                            <input id="username" class="form-control" type="text" name="username"
-                                                   value="{{ old('username') }}" required>
-                                            @if($errors->has('username'))
+                                            <label for="login" class="control-label">Kasutajanimi või email</label>
+                                            <input id="login" class="form-control" type="text" name="login"
+                                                   value="{{ old('login') }}" required>
+                                            @if($errors->has('login'))
                                                 <span class="help-block">
-                                                         <strong>{{ $errors->first('username') }}</strong>
+                                                         <strong>{{ $errors->first('login') }}</strong>
                                                     </span>
                                             @endif
                                         </div>
