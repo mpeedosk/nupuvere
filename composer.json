@@ -10,7 +10,8 @@
         "intervention/image": "^2.3",
         "ext-gd": " *",
 		"maatwebsite/excel": "~2.1.0",
-        "fzaninotto/faker": "~1.4"
+        "fzaninotto/faker": "~1.4",
+        "nicolaslopezj/searchable": "1.*"
 
     },
     "require-dev": {

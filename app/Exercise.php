@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Nicolaslopezj\Searchable\SearchableTrait;
 
 class Exercise extends Model
 {
+    use SearchableTrait;
+
     const TEXTUAL          = 1;
     const MULTIPLE_ONE     = 2;
     const MULTIPLE_MANY    = 3;
@@ -21,6 +24,28 @@ class Exercise extends Model
     protected $fillable = [
         'id', 'created_at', 'updated_at', 'title', 'content', 'type', 'hint',
         'solution','author','category','age_group', 'difficulty', 'solved', 'attempted' , 'licence', 'hidden'
+    ];
+
+    /**
+     * Searchable rules.
+     *
+     * @var array
+     */
+    protected $searchable = [
+        /**
+         * Columns and their priority in search results.
+         * Columns with higher values are more important.
+         * Columns with equal values have equal importance.
+         *
+         * @var array
+         */
+        'columns' => [
+            'title' => 10,
+            'content' => 7,
+            'hint' => 5,
+            'author' => 8,
+            'category' => 3,
+        ],
     ];
 
     /**

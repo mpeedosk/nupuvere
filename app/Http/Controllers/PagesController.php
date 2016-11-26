@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Exercise;
 use App\Page;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
@@ -45,9 +46,22 @@ class PagesController extends Controller
 
     public function search(Request $request){
 
-        $exercises = Exercise::search('1234')->get();
-        return $exercises;
+        $query = $request->search;
+        $exercises = Exercise::search($query, null, false, true)->get();
 
-        return $request->search;
+        if($exercises->count() === 0){
+            $exercises = Exercise::search($query, null, true, true)->get();
+        }
+
+        if($exercises->count() === 0){
+            $exercises = Exercise::search($query, null)->get();
+        }
+
+        if (Auth::guest()) {
+            return view('search', ['exercises' => $exercises, 'query' => $query]);
+
+        }
+
+        return view('search', ['exercises' => $exercises, 'query' => $query, 'solved' => Auth::user()->getSolvedEx()]);
     }
 }
