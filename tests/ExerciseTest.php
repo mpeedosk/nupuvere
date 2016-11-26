@@ -268,7 +268,7 @@ class ExerciseTest extends TestCase
         $this->asAdmin();
 
         $input = [
-            'ex_title' => 'This title is too long (>20)',
+            'ex_title' => 'This title is too long This title is too long This title is too long(>37)',
             'ex_content' => 'Test content',
             'ex_author' => 'Test author',
             'ex_hint' => 'Test hint',
