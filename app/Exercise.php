@@ -13,6 +13,9 @@ class Exercise extends Model
 
     const POINTS_PER_EX = 1;
 
+    const age_groups = array("avastaja", "uurija", "teadja", "ekspert");
+    const difficulties = array("lihtne", "keskmine", "raske");
+
     protected $table = 'exercises';
 
     protected $fillable = [

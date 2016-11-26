@@ -102,7 +102,7 @@ class UITest extends TestCase
              ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->click('Ülesanded')
+             ->visit('/matemaatika/avastaja')
              ->see('testülesanne');
         }
 

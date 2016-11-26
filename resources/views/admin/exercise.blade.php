@@ -67,7 +67,7 @@
                 </div>
 
                 <h2 class="table-title">Ülesanded</h2>
-                <form class="inline pull-right" method="POST" action="/admin/exercise/export">
+                <form class="inline pull-right" method="POST" action="/admin/exercise/export" onsubmit="exportStart()">
                     {{ csrf_field() }}
                     <button id="showAnswer" type="submit" class="btn btn-primary btn-raised pull-right">Ekspordi
                     </button>
@@ -91,70 +91,21 @@
                        data-search="true"
                        data-show-columns="true"
                        data-pagination="true"
+                       data-page-size="25"
                        data-unique-id="id"
                        data-striped="true">
                     <thead>
                     <tr>
-                        <th data-sortable="true" data-field="id">ID</th>
-                        <th class="col-md-2" data-sortable="true">Peakiri</th>
-                        <th data-sortable="true">Kategooria</th>
-                        <th data-sortable="true">Vanuserühm</th>
-                        <th data-sortable="true">Raskusaste</th>
-                        <th data-sortable="true">Lahendatud</th>
-                        <th data-sortable="true">Proovitud</th>
-                        <th data-sortable="true">%</th>
-                        <th class="col-md-3">Tegevus</th>
-                    </tr>
+                        <th data-field="id" data-sortable="true">ID</th>
+                        <th class="col-md-2" data-field="title" data-sortable="true">Peakiri</th>
+                        <th data-field="category" data-sortable="true">Kategooria</th>
+                        <th data-field="age_group" data-sortable="true">Vanuserühm</th>
+                        <th data-field="difficulty" data-sortable="true">Raskusaste</th>
+                        <th data-field="solved" data-sortable="true">Lahendatud</th>
+                        <th data-field="attempted" data-sortable="true">Proovitud</th>
+                        <th data-field="percent" data-sortable="true">%</th>
+                        <th data-field="action" class="col-md-3 text-center">Tegevus</th>
                     </thead>
-                    <tbody>
-
-                    @foreach($exercises as $exercise)
-                        <tr id="ex-{{$exercise->id}}">
-                            <td>{{$exercise -> id}}</td>
-                            <td>
-                                <a href="/{{$exercise->category.'/'.$exercise->age_group.'/'.$exercise->difficulty.'/'.$exercise->id}}"
-                                   target="_blank"> {{$exercise -> title}}</a></td>
-                            <td>{{$exercise -> category}}</td>
-                            <td>{{$exercise -> age_group}}</td>
-                            <td>{{$exercise -> difficulty}}</td>
-                            <td>{{$exercise -> solved}}</td>
-                            <td>{{$exercise -> attempted}}</td>
-                            <td>{{$exercise -> attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}</td>
-                            <td class="text-center">
-                                <a href="/admin/exercise/edit/{{$exercise->id}}" class="btn btn-info btn-raised btn-sm"
-                                   type="button" data-toggle="tooltip"
-                                   title="Muuda">
-                                    <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>
-                                </a>
-
-                                <button
-                                        class="btn btn-danger btn-raised btn-sm" data-toggle="tooltip"
-                                        title="Kustuta"
-                                        onclick="showExerciseConfirm('{{$exercise->id}}', '{{$exercise->title}}')">
-                                    <span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>
-                                </button>
-
-                                <form class="inline-block" method="POST"
-                                      action="/admin/exercise/hide/{{$exercise->id}}">
-                                    {{ csrf_field() }}
-                                    @if(!$exercise->hidden)
-                                        <button class="btn btn-success btn-raised btn-sm" type="submit"
-                                                data-toggle="tooltip" title="Peida">
-                                            <span class="glyphicon glyphicon-eye-close pull-right color-black"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    @else
-                                        <button class="btn btn-default btn-raised btn-sm" type="submit"
-                                                data-toggle="tooltip" title="Tee nähtavaks">
-                                            <span class="glyphicon glyphicon-eye-open pull-right"
-                                                  aria-hidden="true"></span>
-                                        </button>
-                                    @endif
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
                 </table>
             </div>
         </div>
@@ -183,5 +134,39 @@
         </div>
     </div>
 
+    <script>
+        var data = [
+                @foreach($exercises as $exercise)
+            {
+                "id": "{{$exercise -> id}}",
+                "title": '<a href="/{{$exercise->category}}/{{$exercise->age_group}}/{{$exercise->difficulty}}/{{$exercise->id}}" target="_blank">{{$exercise -> title}}</a>',
+                "category": "{{$exercise -> category}}",
+                "age_group": "{{$exercise -> age_group}}",
+                "difficulty": "{{$exercise -> difficulty}}",
+                "solved": "{{$exercise -> solved}}",
+                "attempted": "{{$exercise -> attempted}}",
+                "percent": "{{$exercise -> attempted == 0 ? 0 : ceil(($exercise -> solved)/($exercise -> attempted)*100)}}",
+                'action': '<a href="/admin/exercise/edit/{{$exercise->id}}" class="btn btn-info btn-raised btn-sm" type="button" data-toggle="tooltip" title="Muuda">' +
+                '<span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span></a>   ' +
+                '<button class="btn btn-danger btn-raised btn-sm" data-toggle="tooltip" title="Kustuta" onclick="showExerciseConfirm(\'{{$exercise->id}}\', \'{{$exercise->title}}\')">' +
+                '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span></button>   ' +
+                '<form class="inline-block" method="POST" action="/admin/exercise/hide/{{$exercise->id}}">{{ csrf_field() }}' +
+                @if(!$exercise->hidden)
+                    '<button class="btn btn-success btn-raised btn-sm" type="submit" data-toggle="tooltip" title="Peida"><span class="glyphicon glyphicon-eye-close pull-right color-black" aria-hidden="true"></span></button>' +
+                @else
+                    '<button class="btn btn-default btn-raised btn-sm" type="submit" data-toggle="tooltip" title="Tee nähtavaks"><span class="glyphicon glyphicon-eye-open pull-right" aria-hidden="true"></span></button>' +
+                @endif
+                    '</form>'
+
+            },
+                @endforeach
+        ];
+
+        $(function () {
+            $('#table').bootstrapTable({
+                data: data
+            });
+        });
+    </script>
 
 @endsection

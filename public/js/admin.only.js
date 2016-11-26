@@ -2,15 +2,59 @@
  * Created by Martin on 28.10.2016.
  */
 
+
 /* Fade loader icon away after page has loaded*/
 $(document).ready(function () {
-    var pathname = window.location.pathname;
-    if(!(pathname == "/admin/home" || pathname.startsWith("/admin/exercise/")))
-        // $(".se-pre-con").delay(100).fadeOut("slow");
+    if (!(pathname == "/admin/home" || pathname.startsWith("/admin/exercise/")))
+    // $(".se-pre-con").delay(100).fadeOut("slow");
     // else
         $(".se-pre-con").fadeOut("slow");
 });
 
+var pathname = window.location.pathname;
+$table = $('#table');
+
+if (window.location.pathname == "/admin/category") {
+    $table.bootstrapTable({
+        onPostBody: function (data) {
+            $('.color').colorPicker({
+                opacity: false,
+
+                buildCallback: function ($elm) {
+                    this.$colorPatch = $elm.prepend('<div class="cp-disp">').find('.cp-disp');
+                },
+                cssAddon: '.cp-disp {padding:10px; margin-bottom:6px; font-size:16px; height:25px; line-height:6px}' +
+                '.cp-xy-slider {width:150px; height:150px;}' +
+                '.cp-xy-cursor {width:16px; height:16px; border-width:2px; margin:-8px}' +
+                '.cp-z-slider {height:150px; width:25px;}' +
+                '.cp-z-cursor {border-width:8px; margin-top:-8px;}',
+
+                renderCallback: function ($elm, toggled) {
+                    var colors = this.color.colors;
+
+                    this.$colorPatch.css({
+                        backgroundColor: '#' + colors.HEX,
+                        color: colors.RGBLuminance > 0.22 ? '#222' : '#ddd'
+                    }).text(this.color.toString($elm._colorMode)); // $elm.val();
+                }
+            });
+        }
+    });
+} else if (pathname == "/admin/exercise") {
+    document.getElementById("import-form").onchange = function () {
+        var filename = document.getElementById('import').value;
+        console.log(filename);
+        if (filename != "") {
+            var fileParts = filename.split('.');
+            var extention = fileParts[fileParts.length - 1].toLowerCase();
+            if (extention != "xls")
+                toastr.info("Faili laiend peab olema xls");
+            else {
+                document.getElementById("import-form").submit();
+            }
+        }
+    };
+}
 
 function showCategoryConfirm(id, name) {
     $("#confirm-category-name").html(name);
@@ -191,33 +235,8 @@ $(document).on('click', '.btn_remove', function () {
     $(this).parent().remove();
 });
 
-/* initializing bootstrap table*/
-$table = $('#table');
-$table.bootstrapTable({
-    onPostBody: function (data) {
-        $('.color').colorPicker({
-            opacity: false,
-
-            buildCallback: function ($elm) {
-                this.$colorPatch = $elm.prepend('<div class="cp-disp">').find('.cp-disp');
-            },
-            cssAddon: '.cp-disp {padding:10px; margin-bottom:6px; font-size:16px; height:25px; line-height:6px}' +
-            '.cp-xy-slider {width:150px; height:150px;}' +
-            '.cp-xy-cursor {width:16px; height:16px; border-width:2px; margin:-8px}' +
-            '.cp-z-slider {height:150px; width:25px;}' +
-            '.cp-z-cursor {border-width:8px; margin-top:-8px;}',
-
-            renderCallback: function ($elm, toggled) {
-                var colors = this.color.colors;
-
-                this.$colorPatch.css({
-                    backgroundColor: '#' + colors.HEX,
-                    color: colors.RGBLuminance > 0.22 ? '#222' : '#ddd'
-                }).text(this.color.toString($elm._colorMode)); // $elm.val();
-            }
-        });
-    }
-});
+/* initializing bootstrap -*/
+/**/
 
 /* adding answers for backend processing for multiple choice exercises */
 function getCheckedValue() {
@@ -306,37 +325,57 @@ $('#inputGallery4').on('change', function () {
 $('#inputGallery5').on('change', function () {
     resizeImages(this.files[0], 5);
 });
-
+$('#inputLogos').on('change', function () {
+    resizeImages(this.files[0], 6);
+});
 /* gallary image upload preview */
 
 function resizeImages(file, id) {
+    console.log(file);
     if (file == null) {
-        $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
-        return;
+        if (id == 6) {
+            return $('.sponsors').attr('src', '/img/logo/footer.png');
+        }
+        return $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
     }
     var reader = new FileReader();
     reader.onload = function (e) {
-
         var img = new Image();
         img.onload = function () {
-            $('#gallery' + id + '-preview').attr('src', resizeInCanvas(img));
+            if (id == 6) {
+                $('.sponsors').attr('src', resizeInCanvas(img, id));
+            }else{
+                $('#gallery' + id + '-preview').attr('src', resizeInCanvas(img, id));
+            }
         };
+
+        if (e.target.result.substring(5, 10) != "image") {
+            return toastr.error("Viga pildi lugemisel, kontrollige faili laiendit! (jpeg, jpg, png või gif)")
+        }
 
         img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
 
-function resizeInCanvas(img) {
+function resizeInCanvas(img, id) {
     var canvas = $("<canvas>")[0];
 
-    canvas.width = 1080;
-    canvas.height = 422;
+    if(id == 6){
+        canvas.width = 810;
+        canvas.height = 140;
+    }else{
+        canvas.width = 1080;
+        canvas.height = 422;
+    }
+
 
     canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
 
     return canvas.toDataURL();
 }
+
+
 /* Move to next input on enter http://stackoverflow.com/questions/24209588/how-to-move-focus-on-next-field-when-enter-is-pressed  */
 
 // register jQuery extension
@@ -361,17 +400,10 @@ function confirmReset() {
     $("#reset-dialog").modal()
 }
 
-document.getElementById("import-form").onchange = function() {
-    var filename = document.getElementById('import').value;
-    console.log(filename);
-    if(filename != ""){
-        var fileParts = filename.split('.');
-        var extention = fileParts[fileParts.length-1].toLowerCase();
-        if(extention != "xls")
-            toastr.info("Faili laiend peab olema xls");
-        else{
-            document.getElementById("import-form").submit();
-        }
-    }
-};
+function exportStart() {
+    toastr.info("Eksportimine alustatud - palun oota");
+    return true;
+}
+
+
 

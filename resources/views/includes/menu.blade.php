@@ -100,7 +100,7 @@
 
                 <div class="search-container">
                     <div class="search">
-                        <form id="search-form">
+                        <form id="search-form" action="/search" method="POST">
                             {{ csrf_field() }}
                             <input class="search-input" placeholder="Otsi..."
                                    type="search" value="" name="search" id="search">

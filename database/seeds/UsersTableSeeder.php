@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -77,5 +78,22 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'points' => 76
         ]]);
+
+
+        $faker = Faker\Factory::create();
+
+        // Generate some dummy data
+        for($i=0; $i<250; $i++) {
+            User::create([
+                'username' => $faker->unique()->userName(),
+                'first_name' => $faker->firstName(),
+                'last_name' => $faker->lastName(),
+                'email' => $faker->unique()->email(),
+                'password' => bcrypt("parool"),
+                'role' => $faker->numberBetween(1,3),
+                'points' => $faker->numberBetween(0, 200),
+                'points_this_year' => $faker->numberBetween(0, 100)
+            ]);
+        }
     }
 }

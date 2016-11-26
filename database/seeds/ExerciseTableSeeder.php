@@ -103,5 +103,30 @@ class ExerciseTableSeeder extends Seeder
             'solved' => 0,
             'attempted' => 0
         ]]);
+        // Generate some dummy data
+
+        $faker = Faker\Factory::create();
+
+        foreach (\App\Category::getCategories() as $category){
+            foreach (\App\Exercise::age_groups as $age_group){
+                foreach (\App\Exercise::difficulties as $difficulty){
+                    for($i=0; $i < $faker->numberBetween(6,30); $i++) {
+                        \App\Exercise::create([
+                            'title' => $faker->unique()->sentence(3),
+                            'content' => $faker->text($maxNbChars = 1000),
+                            'hint' =>  $faker->text($maxNbChars = 200),
+                            'solution' => $faker->text($maxNbChars = 500),
+                            'type' => $faker->numberBetween(1,4),
+                            'category' => $category->name,
+                            'age_group' => $age_group,
+                            'difficulty' => $difficulty,
+                            'solved' => $faker->numberBetween(10,200),
+                            'attempted' => $faker->numberBetween(200,2000),
+                        ]);
+                    }
+                }
+            }
+        }
+
     }
 }

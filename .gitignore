@@ -1,5 +1,6 @@
 /node_modules
 /public/storage
+/public/img/gallery
 /vendor
 Homestead.json
 Homestead.yaml

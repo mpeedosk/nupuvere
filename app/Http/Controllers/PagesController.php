@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exercise;
 use App\Page;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,5 +41,13 @@ class PagesController extends Controller
             ->get();
 
         return view('highscore', ['all_time' => $all_time, 'this_year' => $current_year]);
+    }
+
+    public function search(Request $request){
+
+        $exercises = Exercise::search('1234')->get();
+        return $exercises;
+
+        return $request->search;
     }
 }
