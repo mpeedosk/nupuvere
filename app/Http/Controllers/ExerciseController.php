@@ -257,6 +257,7 @@ class ExerciseController extends Controller
 
         $this->validate(request(), [
             'ex_title' => 'required | max:37 |unique:exercises,title' . $validId,
+            'ex_author' => 'max:30',
             'ex_content' => 'required',
             'category' => 'required',
             'age_group' => 'required',
@@ -475,5 +476,26 @@ class ExerciseController extends Controller
 
         }
         return redirect('/admin/exercise');
+    }
+
+    public function checkTitle(Request $request, $id)
+    {
+        if ($id == -1) {
+            $count = DB::table('exercises')->select('title')->where('title', '=', $request->title)->count();
+            if ($count > 0) {
+                return response()->json(['response' => 'false']);
+            } else {
+                return response()->json(['response' => 'true']);
+            }
+        } else {
+            $ex = DB::table('exercises')->select('title', 'id')->where('title', "=", $request->title)->first();
+            if (!isset($ex) || $ex->id == $id)
+                return response()->json(['response' => 'true']);
+            else
+                return response()->json(['response' => 'false']);
+
+        }
+
+
     }
 }

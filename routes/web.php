@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/', 'PagesController@index');
@@ -56,6 +58,11 @@ Route::group(['middleware' => 'admin'], function () {
         Route::get('admin/admins/edit/{id}', 'AdminController@getAdminForEdit');
         Route::patch('admin/admins/edit/{id}', 'AdminController@update');
     });
+
+
+    // check availability
+
+    Route::post('admin/exercise/checkTitle/{id}', "ExerciseController@checkTitle");
 });
 
 Route::group(['middleware' => 'auth'], function () {

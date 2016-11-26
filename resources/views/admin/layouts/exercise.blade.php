@@ -102,22 +102,23 @@
                         @endif
 
                         {{ csrf_field() }}
-                        <div class="form-group label-floating short-input">
+                        <div id="ex_title-group" class="form-group label-floating short-input">
                             <label for="ex_title" class="control-label "><span class="fa fa-fw fa-asterisk"
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
-                            <input class="form-control" id="ex_title" name="ex_title" required
+                            <input class="form-control" id="ex_title" name="ex_title" required maxlength="37"
+                                   @if(!isset($exercise)) onblur="checkTitleAvailability(-1)" @else onblur="checkTitleAvailability({{$exercise->id}})"@endif
                                    value="@if(isset($exercise->title)){{ $exercise->title }}@else{{old('ex_title')}}@endif">
-                            <span class="help-block color-default">Pealkirjad ei tohi korduda</span>
+                            <span class="help-block" >Pealkirjad ei tohi korduda</span>
                         </div>
 
                         <div class="form-group label-floating short-input">
                             <label for="ex_author" class="control-label"><span class="fa fa-fw"
                                                                                aria-hidden="true"></span>
                                 Ülesande autor</label>
-                            <input class="form-control" id="ex_author" name="ex_author"
+                            <input class="form-control" id="ex_author" name="ex_author" maxlength="30"
                                    value="@if(isset($exercise->author)){{ $exercise->author }}@else{{old('ex_author') }}@endif">
-                            <span class="help-block color-default">See väli ei ole kohustuslik</span>
+                            <span class="help-block color-default"></span>
                         </div>
 
                         <div class="form-group">

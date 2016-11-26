@@ -16,7 +16,7 @@
 
         <a href="/admin/home" class="sidebar-item withripple
             @if(Route::getCurrentRoute()->getPath() == 'admin/home') sidebar-item-active @endif">
-            <span class="fa fa-fw fa-picture-o"></span> Nupuvere
+            <span class="fa fa-fw fa-picture-o"></span> Esileht
         </a>
 
         <a href="/admin/category" class="sidebar-item withripple

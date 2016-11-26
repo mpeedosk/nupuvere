@@ -130,7 +130,7 @@ class AnswersTableSeeder extends Seeder
         ]]);
 
 
-        /*$count = DB::table('exercises')->get()->count();
+        $count = DB::table('exercises')->get()->count();
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < $count * 3; $i++) {
@@ -141,6 +141,6 @@ class AnswersTableSeeder extends Seeder
                 'is_correct' => $faker->boolean($chanceOfGettingTrue = 50),
                 'order' => $faker->numberBetween(1,3)
             ]);
-        }*/
+        }
     }
 }

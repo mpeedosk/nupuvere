@@ -27,9 +27,9 @@
                                             <input id="login" class="form-control" type="text" name="login"
                                                    value="{{ old('login') }}" required>
                                             @if($errors->has('login'))
-                                                <span class="help-block">
-                                                         <strong>{{ $errors->first('login') }}</strong>
-                                                    </span>
+                                                <span class="help-block" style="display: inline-block !important;">
+                                                    <strong>{{ $errors->first('login') }}</strong>
+                                                </span>
                                             @endif
                                         </div>
                                     </div>
@@ -55,7 +55,8 @@
                                             <div class="checkbox">
                                                 <label for="remember" class="visuallyhidden">Hoia mind
                                                     sisselogituna</label>
-                                                <input tabindex="-1" id="remember" type="checkbox" name="remember" checked> Mäleta
+                                                <input tabindex="-1" id="remember" type="checkbox" name="remember"
+                                                       checked> Mäleta
                                                 mind
                                             </div>
                                         </div>
@@ -63,7 +64,8 @@
 
                                     <div class="col-md-4 margin-top-10 no-padding">
                                         <div class="col-md-6">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi sisse</button>
+                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi sisse
+                                            </button>
                                         </div>
                                         <div class="col-md-6">
                                             <a class="btn btn-sm btn-primary pull-right" href="/register">Loo konto</a>
@@ -87,7 +89,9 @@
                                             <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
-                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
+                                            <span id="points-increase"
+                                                  class="fa fa-arrow-up points-icon points-increase"
+                                                  aria-hidden="true"></span>
                                         </div>
                                         <h2 style="display:inline-block;">{{Auth::user() -> username }}</h2>
 
@@ -113,7 +117,9 @@
                                             <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
-                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
+                                            <span id="points-increase"
+                                                  class="fa fa-arrow-up points-icon points-increase"
+                                                  aria-hidden="true"></span>
 
                                         </div>
 

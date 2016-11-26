@@ -65,7 +65,7 @@ function showCategoryConfirm(id, name) {
 
 function deleteCategory() {
     var name = document.getElementById('confirm-category-name').innerHTML;
-    var id = document.getElementById('confirm-category-id').innerHTML;
+    var id = parseInt(document.getElementById('confirm-category-id').innerHTML);
 
     $.ajax({
         url: "/categories/delete/" + id,
@@ -93,7 +93,7 @@ function showExerciseConfirm(id, name) {
 
 function deleteExercise() {
     var name = document.getElementById('confirm-exercise-name').innerHTML;
-    var id = document.getElementById('confirm-exercise-id').innerHTML;
+    var id = parseInt(document.getElementById('confirm-exercise-id').innerHTML);
 
     $.ajax({
         url: "/admin/exercise/delete/" + id,
@@ -122,7 +122,7 @@ function showUserConfirm(id, name) {
 
 function deleteUser() {
     var name = document.getElementById('confirm-user-name').innerHTML;
-    var id = document.getElementById('confirm-user-id').innerHTML;
+    var id = parseInt(document.getElementById('confirm-user-id').innerHTML);
 
     $.ajax({
         url: "/admin/admins/delete/" + id,
@@ -312,33 +312,46 @@ function getCheckedValueT() {
 // http://stackoverflow.com/questions/35182800/image-resize-before-upload-without-preview-javascript
 
 $('#inputGallery1').on('change', function () {
-    resizeImages(this.files[0], 1);
+    resizeImages(this.files[0], 1, 'inputGallery1');
 });
 $('#inputGallery2').on('change', function () {
-    resizeImages(this.files[0], 2);
+    resizeImages(this.files[0], 2, 'inputGallery2');
 });
 $('#inputGallery3').on('change', function () {
-    resizeImages(this.files[0], 3);
+    resizeImages(this.files[0], 3, 'inputGallery3');
 });
 $('#inputGallery4').on('change', function () {
-    resizeImages(this.files[0], 4);
+    resizeImages(this.files[0], 4, 'inputGallery4');
 });
 $('#inputGallery5').on('change', function () {
-    resizeImages(this.files[0], 5);
+    resizeImages(this.files[0], 5, 'inputGallery5');
 });
 $('#inputLogos').on('change', function () {
-    resizeImages(this.files[0], 6);
+    resizeImages(this.files[0], 6, 'inputLogos');
 });
+function clearInput(div_id) {
+    document.getElementById(div_id).form.reset();
+
+}
 /* gallary image upload preview */
 
-function resizeImages(file, id) {
-    console.log(file);
+function resizeImages(file, id, div_id) {
+    console.log("LOL");
     if (file == null) {
         if (id == 6) {
-            return $('.sponsors').attr('src', '/img/logo/footer.png');
+            $('.sponsors').attr('src', '/img/logo/footer.png');
+            return false;
         }
-        return $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
+        $('#gallery' + id + '-preview').attr('src', '/img/gallery/gallery' + id + '.png');
+        return false;
     }
+
+    if(file.size/1024/1024 > 5){
+        toastr.error("Fail on liiga suur, kontrolli et see ei ületaks 5MB!");
+        clearInput(div_id);
+        return false;
+    }
+
     var reader = new FileReader();
     reader.onload = function (e) {
         var img = new Image();
@@ -351,12 +364,15 @@ function resizeImages(file, id) {
         };
 
         if (e.target.result.substring(5, 10) != "image") {
-            return toastr.error("Viga pildi lugemisel, kontrollige faili laiendit! (jpeg, jpg, png või gif)")
+            toastr.error("Viga pildi lugemisel, kontrollige faili laiendit! (jpeg, jpg, png või gif)");
+            clearInput(div_id);
+            return false;
         }
 
         img.src = e.target.result;
     };
     reader.readAsDataURL(file);
+    return true;
 }
 
 function resizeInCanvas(img, id) {
@@ -369,7 +385,6 @@ function resizeInCanvas(img, id) {
         canvas.width = 1080;
         canvas.height = 422;
     }
-
 
     canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
 
@@ -407,4 +422,35 @@ function exportStart() {
 }
 
 
+function checkTitleAvailability(id) {
+    id = parseInt(id);
 
+    var title = $("#ex_title").val();
+
+    if (title.length > 0) {
+        $.ajax({
+            url: "/admin/exercise/checkTitle/" + id,
+            data: {
+                _token: $('input[name="_token"]').val(),
+                title: title
+            },
+            type: "POST",
+            success: function (data) {
+                var status = $("#ex_title-group");
+                status.removeClass("has-success");
+                status.removeClass("has-error");
+
+                if (data.response == "true") {
+                    status.addClass("has-success");
+                    status.find(".help-block").fadeOut("fast");
+                }
+                else {
+                    status.addClass("has-error");
+                    status.find(".help-block").fadeIn("fast");
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+}

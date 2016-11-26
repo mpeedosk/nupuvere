@@ -63,7 +63,7 @@ html {
     }
 }
 
-#slideshow .container{
+#slideshow .container {
     max-width: 1080px;
 }
 
@@ -75,10 +75,10 @@ html {
 /*-----------------------------------------------------------------------------------*/
 /* Header */
 /*-----------------------------------------------------------------------------------*/
-
+/*
 .form-group .help-block {
     display: block;
-}
+}*/
 
 #pre-header {
     color: rgba(0, 0, 0, 0.4);
@@ -136,7 +136,6 @@ html {
     -o-transform: scale(1.15); /* Opera */
     transform: scale(1.15);
 }
-
 
 .user-bar {
     width: 100%;
@@ -252,11 +251,11 @@ footer, .push {
     width: 1px
 }
 
-.inline-block{
+.inline-block {
     display: inline-block;
 }
 
-.inline{
+.inline {
     display: inline;
 }
 
@@ -331,7 +330,6 @@ footer, .push {
 .color-black[class*=" fa-"]:before {
     color: #333;
 }
-
 
 .color-green {
     color: #649f2b !important;
@@ -1785,7 +1783,7 @@ a.slicknav_item [class*=" fa-"] {
 /* Exercise */
 /*-----------------------------------------------------------------------------------*/
 
-.ex-title h2{
+.ex-title h2 {
     overflow: hidden;
 }
 
@@ -1845,54 +1843,65 @@ a.slicknav_item [class*=" fa-"] {
     clear: left;
     float: left;
 }
+
 .sortable-ghost {
     opacity: 0;
 }
-.form-group .checkbox{
+
+.form-group .checkbox {
     margin-left: 20px;
 }
-.checkbox-material{
+
+.checkbox-material {
     margin-right: 10px;
 }
-.pre-formatted{
+
+.pre-formatted {
     display: inline-block !important;
     position: inherit !important;
     top: 0 !important;
 }
-.pre-formatted span{
+
+.pre-formatted span {
     display: inline-block !important;
     position: inherit !important;
 }
+
 .correct-answer {
     border: none !important;
     box-shadow: 0 0 5px 2px #4ba44f !important;
 }
+
 #solution {
     display: none;
 }
+
 #solution .ex-text-area {
     border: 2px solid #000;
     margin-top: 0;
 }
+
 #next-ex {
     margin-right: 20px
 }
+
 .answer-no-js {
     margin-left: 20px;
     margin-bottom: 20px;
 }
-#submit-answer{
+
+#submit-answer {
     width: 93px;
 }
+
 #md-spinner {
     height: 20px;
-    background: url(../img/ring-alt.svg) center no-repeat ;
+    background: url(../img/ring-alt.svg) center no-repeat;
 }
 
 /*-----------------------------------------------------------------------------------*/
 /* Leaderboard */
 /*-----------------------------------------------------------------------------------*/
-
 
 table {
     background-color: #616161;
@@ -1905,6 +1914,12 @@ table {
 
 .table-striped > tbody > tr:nth-of-type(odd) {
     background-color: #444444;
+}
+
+td {
+    white-space: nowrap;
+    /* text-overflow: clip; */
+    overflow: hidden;
 }
 
 td .btn {
@@ -1945,23 +1960,22 @@ tr a:hover {
     border-color: #5e70d4;
 }
 
-.pagination>li>a, .pagination>li>span {
+.pagination > li > a, .pagination > li > span {
     color: #eeeeee;
     background-color: #444444;
     border: 1px solid #b3aeae;
 }
 
-.pagination>li>a:focus, .pagination>li>a:hover, .pagination>li>span:focus, .pagination>li>span:hover {
+.pagination > li > a:focus, .pagination > li > a:hover, .pagination > li > span:focus, .pagination > li > span:hover {
     color: #5e70d4;
 }
 
-.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+.pagination > .disabled > a, .pagination > .disabled > a:focus, .pagination > .disabled > a:hover, .pagination > .disabled > span, .pagination > .disabled > span:focus, .pagination > .disabled > span:hover {
     color: #eeeeee;
     cursor: not-allowed;
     background-color: #444;
     border-color: #ddd;
 }
-
 
 /*-----------------------------------------------------------------------------------*/
 /* Accordions */
@@ -2310,7 +2324,7 @@ tr a:hover {
     border-bottom: 2px solid #5e70d4;
 }
 
-.registration .form-group label.control-label{
+.registration .form-group label.control-label {
     font-size: 15px;
     margin: 6px 0 0 0;
 }
@@ -2394,7 +2408,6 @@ tr a:hover {
     height: 100%;
 }
 
-
 .no-js #loader {
     display: none;
 }
@@ -2412,16 +2425,12 @@ tr a:hover {
     width: 100%;
     height: 100%;
     z-index: 9999;
-    background: url(../img/gears.gif) center no-repeat ;
+    background: url(../img/gears.gif) center no-repeat;
 }
-
-
 
 /*-----------------------------------------------------------------------------------*/
 /* Tabs */
 /*-----------------------------------------------------------------------------------*/
-
-
 
 .tabs .nav-tabs li a {
     border-radius: 5px 5px 0 0;
@@ -2432,11 +2441,13 @@ tr a:hover {
 .tabs .tab-content {
     padding: 15px;
 }
-.tab-nav{
+
+.tab-nav {
     max-width: 209px;
     background-color: #313131;
 }
-.tab-nav .active{
+
+.tab-nav .active {
     border-bottom: 3px solid #ffba57;
 }
 
