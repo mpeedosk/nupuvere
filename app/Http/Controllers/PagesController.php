@@ -47,6 +47,9 @@ class PagesController extends Controller
     public function search(Request $request){
 
         $query = $request->search;
+        if (trim($query) == "")
+            return view('search', ['exercises' => [], 'query' => $query]);
+
         $exercises = Exercise::search($query, null, false, true)->get();
 
         if($exercises->count() === 0){

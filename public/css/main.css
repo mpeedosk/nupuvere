@@ -1166,6 +1166,31 @@ footer, .push {
     }
 }
 
+.search-input-slicknav{
+    min-height: 56px;
+    width:100%;
+    margin-right: 56px;
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    color: #EEEEEE;
+    padding-left: 10px;
+    overflow:hidden;
+}
+
+.search-icon-slicknav, .search-btn-slicknav {
+    width: 56px;
+    height: 56px;
+    float:right;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background-color: #313131;
+}
+.search-input-wrapper{
+    display: block;
+    overflow: hidden;
+}
+
 /*-----------------------------------------------------------------------------------*/
 /* Leaderboard Icons */
 /*-----------------------------------------------------------------------------------*/
@@ -1282,7 +1307,7 @@ footer, .push {
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #333;
 }
 
 /* Button Text */
@@ -1297,7 +1322,6 @@ footer, .push {
 }
 
 .slicknav_menu {
-    background: #27595d;
     padding: 5px;
 }
 
@@ -1331,7 +1355,7 @@ footer, .push {
 }
 
 .slicknav_nav li {
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: #373737;
     border-radius: 4px;
     color: #ffffff;
 }
@@ -2020,57 +2044,8 @@ tr a:hover {
 /* Progress Bars */
 /*-----------------------------------------------------------------------------------*/
 .progress {
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 0);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.3);
-}
-
-.progress-label {
-    font-size: 18px;
-    padding: 8px 0;
-}
-
-.progress-xxs {
-    height: 3px;
-}
-
-.progress-xs {
-    height: 8px;
-}
-
-.progress-sm {
-    height: 12px;
-}
-
-.progress-bar-red {
-    background: #8b2626;
-}
-
-.progress-bar-blue {
-    background: #43668c;
-}
-
-.progress-bar-green {
-    background: #649f2b;
-}
-
-.progress-bar-aqua {
-    background: #86b998;
-}
-
-.progress-bar-yellow {
-    background: #d0b426;
-}
-
-.progress-bar-brown {
-    background: #6f6f55;
-}
-
-.progress-bar-violet {
-    background: #8270a4;
-}
-
-.progress-bar-orange {
-    background: #ae6926;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -2363,12 +2338,18 @@ tr a:hover {
     opacity: 0;
 }
 
-@media (min-width: 992px) {
-    .vertical-lines {
+@media (min-width: 767px) {
+    .vertical-line-left {
         padding-right: 20px;
+        border-right: 1px solid #ccc;
+    }
+    .vertical-line-right {
         padding-left: 20px;
         border-left: 1px solid #ccc;
-        border-right: 1px solid #ccc;
+    }
+    .vertical-line-center{
+        padding-left: 18px;
+        padding-right: 18px;
     }
 }
 

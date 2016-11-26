@@ -1,7 +1,7 @@
 <header id="header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 padding-vert-5 hidden-xs no-padding-left-lg">
+            <div class="col-sm-5 padding-vert-5 hidden-xs hidden-sm no-padding-left-lg">
 
                 <!-- Logo -->
                 <div class="logo">

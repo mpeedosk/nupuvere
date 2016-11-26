@@ -98,7 +98,7 @@
                     <span class="center-block"></span>
                 </a>
 
-                <div class="search-container">
+                <div class="search-container visible-md visible-lg">
                     <div class="search">
                         <form id="search-form" action="/search" method="POST">
                             {{ csrf_field() }}
@@ -109,6 +109,19 @@
                         </form>
                     </div>
                 </div>
+
+                <li class="hidden-md hidden-lg">
+                    <div class="search-slicknav">
+                        <form id="search-form" action="/search" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit" class="search-icon-slicknav">
+                                <span class="glyphicon glyphicon-search"></span></button>
+                            <span class="search-input-wrapper"><input class="search-input-slicknav"
+                                                                      placeholder="Otsi..."
+                                                                      type="search" value="" name="search" id="search"></span>
+                        </form>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

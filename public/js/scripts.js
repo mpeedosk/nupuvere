@@ -36,7 +36,9 @@ if (el != null) {
 
 // Mobile Menu
 $(function () {
-    $('#navmenu').slicknav();
+    $('#navmenu').slicknav({
+        label: 'MENÜÜ'
+    });
     $("div.slicknav_menu").addClass("hidden-lg hidden-md");
     $('.slicknav_menu').prepend('<a href="/" title=""><img class="logo-menu padding-5" src="/img/logo.png" alt="Logo"/></a>');
 });
@@ -129,7 +131,7 @@ function showAnswer(id, type) {
                     break;
                 case 4 :
                     listElements = document.getElementsByClassName("drag-item");
-                    console.log(answers.length);
+                    c
                     for (var i = 0; i < answers.length; i++) {
                         listElements[i].innerText = "";
                         listElements[i].insertAdjacentHTML('beforeend', answers[i]);
@@ -228,7 +230,6 @@ function submitAnswer(event, id, type) {
                 if (data.solution != null && data.solution != "") {
                     document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                     document.getElementById('solution').style.display = "block";
-                    reloadWiris();
                 }
                 points.innerText = data.points;
 
