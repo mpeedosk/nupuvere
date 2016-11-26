@@ -467,7 +467,7 @@ class ExerciseController extends Controller
             });
         });
 
-        if ($suc_ex / $total_ex == 1 && $suc_ans / $total_ans == 1)
+        if ($total_ans > 0 && $total_ex > 0 && $suc_ex / $total_ex == 1 && $suc_ans / $total_ans == 1)
             Session::flash('toast', 'Import - Ülesanded: ' . $suc_ex . '/' . $total_ex . ', Vastused: ' . $suc_ans . '/' . $total_ans);
         else {
             Session::flash('info', 'Import - Ülesanded: ' . $suc_ex . '/' . $total_ex . ', Vastused: ' . $suc_ans . '/' . $total_ans);
