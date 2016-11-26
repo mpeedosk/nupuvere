@@ -228,6 +228,7 @@ function submitAnswer(event, id, type) {
                 if (data.solution != null && data.solution != "") {
                     document.getElementById('solution-text').insertAdjacentHTML('beforeend', data.solution);
                     document.getElementById('solution').style.display = "block";
+                    reloadWiris();
                 }
                 points.innerText = data.points;
 

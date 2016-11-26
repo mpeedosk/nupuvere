@@ -105,7 +105,7 @@ class ExerciseTableSeeder extends Seeder
         ]]);
         // Generate some dummy data
 
-        $faker = Faker\Factory::create();
+        /*$faker = Faker\Factory::create();
 
         foreach (\App\Category::getCategories() as $category){
             foreach (\App\Exercise::age_groups as $age_group){
@@ -126,7 +126,7 @@ class ExerciseTableSeeder extends Seeder
                     }
                 }
             }
-        }
+        }*/
 
     }
 }
