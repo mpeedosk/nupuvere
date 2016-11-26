@@ -129,6 +129,7 @@ function showAnswer(id, type) {
                     break;
                 case 4 :
                     listElements = document.getElementsByClassName("drag-item");
+                    console.log(answers.length);
                     for (var i = 0; i < answers.length; i++) {
                         listElements[i].innerText = "";
                         listElements[i].insertAdjacentHTML('beforeend', answers[i]);

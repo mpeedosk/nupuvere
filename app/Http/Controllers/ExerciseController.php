@@ -256,7 +256,7 @@ class ExerciseController extends Controller
         $validId = (isset($ex_id)) ? ',' . $ex_id : '';
 
         $this->validate(request(), [
-            'ex_title' => 'required | max:20 |unique:exercises,title' . $validId,
+            'ex_title' => 'required | max:37 |unique:exercises,title' . $validId,
             'ex_content' => 'required',
             'category' => 'required',
             'age_group' => 'required',
@@ -390,9 +390,7 @@ class ExerciseController extends Controller
      */
     public function destroy($id)
     {
-
         DB::table('exercises')->where('id', $id)->delete();
-
 
         Session::flash('exercise-delete', 'Ülesanne edukalt kustutatud');
 

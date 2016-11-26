@@ -11,13 +11,13 @@
                         @if ($ex->id == $exercise->id)
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{$ex -> title}}
+                                {{strlen($ex -> title) > 12 ? substr($ex -> title,0, 12)."..." : $ex -> title}}
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                             </a>
                         @else
                             <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{$ex -> title}}
+                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
                             </a>
                         @endif
                     @endforeach
@@ -25,14 +25,14 @@
                         @if ($loop->first)
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{$ex -> title}}
+                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
 
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                             </a>
                         @else
                             <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{$ex -> title}}
+                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
                             </a>
                         @endif
                     @endforeach
@@ -88,19 +88,19 @@
                             <div class="col-xs-12">
                                 <div class="row">
                                     <a href="/{{$category}}/{{$age_group}}"
-                                       class="btn btn-raised btn-blue btn-default fix-margin-left pull-left">
+                                       class="btn btn-raised btn-blue fix-margin-left pull-left">
                                         <span class="hidden-xs">Nimekiri</span>
                                         <span class="visible-xs">&larr;</span>
 
                                     </a>
 
                                     @if(Auth::guest() )
-                                        <span class="btn btn-raised btn-success btn-default fix-margin-right pull-right"
+                                        <span class="btn btn-raised btn-success fix-margin-right pull-right"
                                               disabled
                                               onclick="loginRequired()">Vasta</span>
                                     @else
                                         <button id="submit-answer" type="submit"
-                                                class="btn btn-raised btn-success btn-default fix-margin-right pull-right button-disabled"
+                                                class="btn btn-raised btn-success fix-margin-right pull-right"
                                                 onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
                                             <span class="spinner"><span id="md-spinner" ></span></span>
                                             <span id="submit-text">Vasta</span>
@@ -124,14 +124,14 @@
                 <div class="col-md-2 margin-50-lg text-center">
 
                     @if(!trim($exercise -> hint) == "")
-                        <button type="button" class="btn btn-success btn-default btn-lg" data-toggle="modal"
+                        <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
                                 data-target="#hint-dialog">
                             <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                         </button>
                     @endif
 
                     @if(!Auth::guest() )
-                        <button type="button" class="btn btn-danger btn-default" data-toggle="modal"
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
                                 data-target="#confirm-dialog" data-backdrop="static" data-keyboard="false">
                             <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
                         </button>

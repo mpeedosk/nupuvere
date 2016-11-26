@@ -51,6 +51,7 @@ if (window.location.pathname == "/admin/category") {
                 toastr.info("Faili laiend peab olema xls");
             else {
                 document.getElementById("import-form").submit();
+                toastr.info("Importimine alustatud - palun oota");
             }
         }
     };

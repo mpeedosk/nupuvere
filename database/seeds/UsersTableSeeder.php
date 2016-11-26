@@ -80,7 +80,7 @@ class UsersTableSeeder extends Seeder
         ]]);
 
 
-        $faker = Faker\Factory::create();
+        /*$faker = Faker\Factory::create();
 
         // Generate some dummy data
         for($i=0; $i<250; $i++) {
@@ -94,6 +94,6 @@ class UsersTableSeeder extends Seeder
                 'points' => $faker->numberBetween(0, 200),
                 'points_this_year' => $faker->numberBetween(0, 100)
             ]);
-        }
+        }*/
     }
 }

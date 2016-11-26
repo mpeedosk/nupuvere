@@ -18,7 +18,7 @@
 
                             @foreach($easyEx as $exercise)
                                 <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                                   class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                   class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
                             @endforeach
                         @else
                             <div class="progress">
@@ -31,12 +31,12 @@
                                 @if( in_array($exercise-> id, $solved))
                                     <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
                                        class="btn center-block btn-solved">
-                                        {{$exercise -> title}}
+                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
                                     <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                                       class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                       class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
                                 @endif
                             @endforeach
                         @endif
@@ -52,7 +52,7 @@
                                 @foreach($mediumEx as $exercise)
                                     <a class="btn center-block btn-not-solved"
                                        href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}">
-                                        {{$exercise -> title}}
+                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
                                     </a>
                                 @endforeach
                             @else
@@ -67,12 +67,12 @@
                                     @if( in_array($exercise-> id, $solved))
                                         <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
                                            class="btn center-block btn-solved">
-                                            {{$exercise -> title}}
+                                            {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
                                             <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                         </a>
                                     @else
                                         <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
-                                           class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                           class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
                                     @endif
                                 @endforeach
                             @endif
@@ -87,7 +87,7 @@
                         @if(Auth::guest())
                             @foreach($hardEx as $exercise)
                                 <a class="btn center-block btn-not-solved"
-                                   href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{$exercise -> title}}</a>
+                                   href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
                             @endforeach
                         @else
                             <div class="progress">
@@ -101,12 +101,12 @@
                                 @if( in_array($exercise-> id, $solved))
                                     <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
                                        class="btn center-block btn-solved">
-                                        {{$exercise -> title}}
+                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
                                     <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
-                                       class="btn center-block btn-not-solved">{{$exercise -> title}}</a>
+                                       class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
                                 @endif
                             @endforeach
                         @endif
