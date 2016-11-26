@@ -292,6 +292,7 @@ class ExerciseController extends Controller
         $exercise->hint = $request->ex_hint;
         $exercise->solution = $request->ex_solution;
 
+        $exercise->keywords = $request->keywords;
         $exercise->category = $request->category;
         $exercise->age_group = $request->age_group;
         $exercise->difficulty = $request->difficulty;

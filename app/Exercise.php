@@ -23,7 +23,7 @@ class Exercise extends Model
 
     protected $fillable = [
         'id', 'created_at', 'updated_at', 'title', 'content', 'type', 'hint',
-        'solution','author','category','age_group', 'difficulty', 'solved', 'attempted' , 'licence', 'hidden'
+        'solution','author','category','age_group', 'difficulty', 'solved', 'attempted' , 'licence', 'hidden', 'keywords'
     ];
 
     /**
@@ -40,10 +40,11 @@ class Exercise extends Model
          * @var array
          */
         'columns' => [
-            'title' => 10,
-            'content' => 7,
-            'hint' => 5,
-            'author' => 8,
+            'keywords' => 10,
+            'title' => 9,
+            'content' => 6,
+            'hint' => 4,
+            'author' => 7,
             'category' => 3,
         ],
     ];

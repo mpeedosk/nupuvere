@@ -26,6 +26,8 @@ class CreateExercisesTable extends Migration
             $table->text('solution')->nullable();
             $table->string('author')->nullable();
 
+            $table->string('keywords')->nullable();
+
             // categorization
             $table->string('category');
             $table->string('age_group');

@@ -39,30 +39,30 @@
                 image_advtab: true,
                 content_css: '/css/main.css',
                 wirisformulaeditorlang: 'et',
-                init_instance_callback : "afterInit",
+                init_instance_callback: "afterInit",
                 setup: function (editor) {
                     editor.addButton('preview',
-                            {
-                                title: "Preview",
-                                onclick: function () {
-                                    var modal = $("#modal-view");
-                                    modal.removeClass("modal-sm");
+                        {
+                            title: "Preview",
+                            onclick: function () {
+                                var modal = $("#modal-view");
+                                modal.removeClass("modal-sm");
 
-                                    var preview = document.getElementById('preview');
-                                    preview.innerHTML = "";
-                                    preview.insertAdjacentHTML('beforeend', editor.getContent());
+                                var preview = document.getElementById('preview');
+                                preview.innerHTML = "";
+                                preview.insertAdjacentHTML('beforeend', editor.getContent());
 
-                                    if (editor.id == 'ex_hint') {
-                                        modal.addClass("modal-sm");
-                                        modal.removeClass('font-size-md');
-                                    }
-                                    else {
-                                        modal.addClass('font-size-md')
-                                    }
-                                    $("#preview-modal").modal();
-                                    reloadWiris();
+                                if (editor.id == 'ex_hint') {
+                                    modal.addClass("modal-sm");
+                                    modal.removeClass('font-size-md');
                                 }
-                            });
+                                else {
+                                    modal.addClass('font-size-md')
+                                }
+                                $("#preview-modal").modal();
+                                reloadWiris();
+                            }
+                        });
                     editor.addMenuItem("preview", {
                         text: "Preview",
                         cmd: "mcePreview",
@@ -107,9 +107,10 @@
                                                                                aria-hidden="true"></span> Ülesande
                                 pealkiri</label>
                             <input class="form-control" id="ex_title" name="ex_title" required maxlength="37"
-                                   @if(!isset($exercise)) onblur="checkTitleAvailability(-1)" @else onblur="checkTitleAvailability({{$exercise->id}})"@endif
+                                   @if(!isset($exercise)) onblur="checkTitleAvailability(-1)"
+                                   @else onblur="checkTitleAvailability({{$exercise->id}})" @endif
                                    value="@if(isset($exercise->title)){{ $exercise->title }}@else{{old('ex_title')}}@endif">
-                            <span class="help-block" >Pealkirjad ei tohi korduda</span>
+                            <span class="help-block">Pealkirjad ei tohi korduda</span>
                         </div>
 
                         <div class="form-group label-floating short-input">
@@ -166,6 +167,13 @@
                         </div>
 
                         @yield('answer-content')
+
+                        <div class="form-group">
+                            <label for="keywords">Märksõnad</label>
+                            <input class="form-control" name="keywords"
+                                   value="@if(isset($exercise->keywords)){{$exercise->keywords }}@else{{old('keywords')}}@endif" id="keywords">
+                        </div>
+
                         <div class="form-group">
                             <label for="category-select"><span class="fa fa-fw fa-asterisk"
                                                                aria-hidden="true"></span>Kategooria: </label>
@@ -180,6 +188,7 @@
                                 @endforeach
                             </select>
                         </div>
+
 
                         <div class="form-group">
                             <label for="age_group-select"><span class="fa fa-fw fa-asterisk"
