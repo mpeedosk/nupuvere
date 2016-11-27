@@ -101,22 +101,25 @@
 
                 <div class="search-container visible-md visible-lg">
                     <div class="search">
-                        <form id="search-form" action="/search" method="POST">
+                        <form id="search-form" action="/search" method="POST" onsubmit="startLoader(this)">
                             {{ csrf_field() }}
                             <input class="search-input" placeholder="Otsi..."
                                    type="search" value="" name="search" id="search">
                             <input class="search-btn" type="submit" value="">
-                            <span class="search-icon"><span class="glyphicon glyphicon-search"></span></span>
+                            <span class="search-icon">
+                                <span class="spinner" ><span class="md-spinner md-spinner-white"></span></span>
+                                <span class="md-spinner-text glyphicon glyphicon-search"></span></span>
                         </form>
                     </div>
                 </div>
 
                 <li class="hidden-md hidden-lg">
                     <div class="search-slicknav">
-                        <form id="search-form" action="/search" method="POST">
+                        <form id="search-form" action="/search" method="POST" onsubmit="startLoader(this)">
                             {{ csrf_field() }}
                             <button type="submit" class="search-icon-slicknav">
-                                <span class="glyphicon glyphicon-search"></span></button>
+                                <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                <span class="md-spinner-text glyphicon glyphicon-search"></span></button>
                             <span class="search-input-wrapper"><input class="search-input-slicknav"
                                                                       placeholder="Otsi..."
                                                                       type="search" value="" name="search" id="search"></span>

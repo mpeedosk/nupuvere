@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding-lg">
                         @if (Auth::guest() )
-                            <form class="login-page" method="POST" onsubmit="startLoader()"
+                            <form class="login-page" method="POST" onsubmit="startLoader(this)"
                                   action="@if (App::isLocal()) {{ url('/login') }} @else{{ secure_url('/login') }} @endif ">
                                 {{ csrf_field() }}
                                 <div class="row inputs">
@@ -66,8 +66,7 @@
                                         <div class="col-md-6">
                                             <button class="btn btn-sm btn-primary pull-right spinner-button"
                                                     type="submit">
-                                                <span class="spinner"><span class="md-spinner-blue"
-                                                                            id="md-spinner"></span></span>
+                                                <span class="spinner"><span class="md-spinner md-spinner-blue"></span></span>
                                                 <span class="md-spinner-text">Logi sisse</span>
                                             </button>
                                         </div>
@@ -110,7 +109,7 @@
                                 </div>
                             </form>
                         @else
-                            <form style="padding-right: 30px;padding-left: 30px" id="logout-form"
+                            <form style="padding-right: 30px;padding-left: 30px" id="logout-form" onsubmit="startLoader(this)"
                                   action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
                                   method="POST">
                                 {{ csrf_field() }}
@@ -132,7 +131,10 @@
                                         </div>
 
                                         <div class="col-xs-3">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
+
+                                            <button class="btn btn-sm btn-primary pull-right spinner-button" type="submit">
+                                                <span class="spinner"><span class="md-spinner md-spinner-blue"></span></span>
+                                                <span class="md-spinner-text">Logi välja</span>
                                             </button>
                                         </div>
                                     </div>

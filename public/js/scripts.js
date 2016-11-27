@@ -131,7 +131,6 @@ function showAnswer(id, type) {
                     break;
                 case 4 :
                     listElements = document.getElementsByClassName("drag-item");
-                    c
                     for (var i = 0; i < answers.length; i++) {
                         listElements[i].innerText = "";
                         listElements[i].insertAdjacentHTML('beforeend', answers[i]);
@@ -157,8 +156,8 @@ function showAnswer(id, type) {
 
         },
         error: function (xhr) {
-            if (xhr.status == 401) {
-                toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
+            if (xhr.status == 420) {
+                toastr.error("Sessioon on aegunud. Palun värskendage lehte (F5)!")
             } else {
                 toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
             }
@@ -208,8 +207,8 @@ function submitAnswer(event, id, type) {
 
     var postArray = JSON.stringify(answers);
 
-    $("#md-spinner").fadeIn("fast").css("display","block");
-    $("#submit-text").hide();
+    var form = document.getElementById('submit-answer').form;
+    startLoader(form);
 
     $.ajax({
         url: "/answer/check/" + id,
@@ -243,20 +242,16 @@ function submitAnswer(event, id, type) {
                     backdrop: 'static'
                 })
             }
-            $("#md-spinner").fadeOut("slow", function () {
-                $("#submit-text").show();
-            });
+            endLoader(form);
         },
         error: function (xhr) {
 
-            if (xhr.status == 401) {
-                toastr.error("Sessioon on aegunud. Loggige uuesti sisse!")
+            if (xhr.status == 420) {
+                toastr.error("Sessioon on aegunud. Palun värskendage lehte (F5)")
             } else {
                 toastr.error('Viga ühendusega ( kood ' + xhr.status + ")");
             }
-            $("#md-spinner").fadeOut("slow", function () {
-                $("#submit-text").show();
-            });
+            endLoader(form);
         }
     });
 
@@ -272,9 +267,14 @@ $(function () {
     });
 });
 
-function startLoader() {
-    $("#md-spinner").fadeIn("fast").css("display","block");
-    $(".md-spinner-text").hide();
+function startLoader(form) {
+    $(form).find('.md-spinner').fadeIn("fast").css("display","block");
+    $(form).find(".md-spinner-text").hide();
+}
+function endLoader(form){
+    $(form).find('.md-spinner').fadeOut("slow", function () {
+        $(form).find(".md-spinner-text").show();
+    });
 }
 
 /* search bar*/
@@ -307,8 +307,11 @@ $(document).ready(function () {
             searchBox.addClass('search-open');
             isOpen = true;
         } else {
-            if ($("#search").val() != "")
-                document.getElementById("search-form").submit();
+            if ($("#search").val() != ""){
+                var form = document.getElementById("search-form");
+                startLoader(form);
+                form.submit();
+            }
             else {
                 searchBox.removeClass('search-open');
                 isOpen = false;

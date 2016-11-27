@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof TokenMismatchException) {
             // Catch it here and do what you want. For example...
             if ($request->ajax())
-                return abort(401);
+                return abort(420);
             return redirect()->back()->with('expired', 'Teie sessioon on aegunud.');
         }
         return parent::render($request, $exception);

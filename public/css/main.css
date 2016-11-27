@@ -1925,10 +1925,12 @@ a.slicknav_item [class*=" fa-"] {
     width: 93px;
 }
 
-#md-spinner{
-    height: 20px;
+.md-spinner{
+    min-height: 20px;
 }
-
+.search-container .md-spinner{
+    min-height: 56px;
+}
 .md-spinner-white {
     background: url(../img/spinner-w.svg) center no-repeat;
 }
@@ -1937,6 +1939,11 @@ a.slicknav_item [class*=" fa-"] {
 }
 .spinner-button{
     min-width:93px;
+}
+#logout-form .md-spinner,
+#login .md-spinner{
+    margin-bottom: -2px;
+    min-width: 57px;
 }
 
 /*-----------------------------------------------------------------------------------*/
