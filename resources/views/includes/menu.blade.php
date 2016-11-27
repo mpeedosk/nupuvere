@@ -45,7 +45,8 @@
 
                 @if(count(App\Category::getCategories()) > 6)
                     <li class="menu-expand">
-                        <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+                        <span class="hidden-md hidden-lg">Muu</span>
+                        <i class="fa fa-bars fa-2x visible-md visible-lg" aria-hidden="true"></i>
                         <ul>
                             @foreach(App\Category::getCategories() as $cat )
                                 @if($loop->iteration <= 6)

@@ -272,6 +272,10 @@ $(function () {
     });
 });
 
+function startLoader() {
+    $("#md-spinner").fadeIn("fast").css("display","block");
+    $(".md-spinner-text").hide();
+}
 
 /* search bar*/
 // modified from http://codeconvey.com/expanding-search-bar-with-jquery/

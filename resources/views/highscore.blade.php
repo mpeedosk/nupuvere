@@ -7,7 +7,7 @@
         <div class="se-pre-con"></div>
         <div class="container">
             <div id="leaderboard" class="row text-center" style="display: none">
-                <div class="col-md-6">
+                <div class="col-md-6 margin-bottom-30">
                     <h2>Jooksev aasta</h2>
                     <hr>
                     <table id="table"

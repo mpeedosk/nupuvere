@@ -32,7 +32,7 @@
 
         <a href="/admin/highscore" class="sidebar-item withripple
             @if(Route::getCurrentRoute()->getPath() == 'admin/highscore') sidebar-item-active @endif">
-            <span class="fa fa-fw fa-trophy"></span> Edetabel
+            <span class="fa fa-fw fa-trophy"></span> Edetabelid
         </a>
 
         @if(Auth::user()->isSuperAdmin())

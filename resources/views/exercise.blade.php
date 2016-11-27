@@ -102,7 +102,7 @@
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success fix-margin-right pull-right"
                                                 onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
-                                            <span class="spinner"><span id="md-spinner" ></span></span>
+                                            <span class="spinner"><span id="md-spinner" class="md-spinner-white"></span></span>
                                             <span id="submit-text">Vasta</span>
                                         </button>
                                     @endif
@@ -136,15 +136,15 @@
                             <span class="glyphicon glyphicon-alert" aria-hidden="true"></span> vastus
                         </button>
                     @endif
-
                     @if(!trim($exercise -> author) == "")
-
-                        <p class="font-size-sm">
-                            Koostanud:
-                        </p>
-                        <p class="font-size-sm">
-                            {{$exercise -> author}}
-                        </p>
+                        <div>
+                            <p class="font-size-sm">
+                                Koostanud:
+                            </p>
+                            <p class="font-size-sm">
+                                {{$exercise -> author}}
+                            </p>
+                        </div>
                     @endif
 
                     @if($exercise->licence)

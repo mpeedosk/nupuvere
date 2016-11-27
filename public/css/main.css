@@ -46,7 +46,17 @@ html {
 }
 
 #body-bg {
-    background: #e9f1f7 url("../img/asfalt-dark.png");
+    /*background: #e9f1f7 url("../img/asfalt-dark.png");*/
+    /*background: #ffffff url(https://www.transparenttextures.com/patterns/purty-wood.png);*/
+    /*background: #ffffff url(https://www.transparenttextures.com/patterns/brick-wall-dark.png);*/
+    /*background: #ffffff url(https://www.transparenttextures.com/patterns/crissxcross.png);*/
+    /*background: #ffffff url("https://subtlepatterns.com/patterns/old_mathematics.png");*/
+    /*background: #eeeeee url("https://www.transparenttextures.com/patterns/gplay.png");*/
+    /*background: #ffffff url("https://www.transparenttextures.com/patterns/grid-me.png");*/
+    /*background: #ffffff url("https://www.transparenttextures.com/patterns/type.png");*/
+    /*background: #EEEEEE url("https://www.transparenttextures.com/patterns/white-diamond-dark.png");*/
+    background: #EEEEEE url("https://www.transparenttextures.com/patterns/stardust.png");
+    /*background: #EEEEEE url("https://www.transparenttextures.com/patterns/skulls.png");*/
 }
 
 .container {
@@ -120,7 +130,7 @@ html {
 .logo img {
     margin-top: 27px;
     margin-bottom: 27px;
-    width: 80%;
+    width: 65%;
     max-width: 100%;
     -webkit-transition: all 1s ease; /* Safari and Chrome */
     -moz-transition: all 1s ease; /* Firefox */
@@ -142,6 +152,7 @@ html {
     padding-top: 10px;
     margin-top: 35px;
     display: inline-block;
+    position: relative;
 }
 
 .user-bar-name {
@@ -153,28 +164,25 @@ html {
     font-size: 2.5em;
 }
 
-.user-bar-item {
-    font-size: 16px;
-    color: inherit;
-}
+
 
 .user-bar button {
-    top: -5px;
+    top: -4px;
 }
 
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
     .user-bar {
-        font-size: 7px;
+        font-size: 9px;
     }
 
     .user-bar-name {
-        top: 5px;
+        top: 10px;
     }
 
-    .btn.btn-sm {
-        font-size: 10px;
-    }
+/*    .btn.btn-sm {
+        font-size: 12px;
+    }*/
 }
 
 /* Small devices (tablets, 768px and up) */
@@ -187,8 +195,12 @@ html {
 /* Medium devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .user-bar {
-        width: 80%;
         font-size: 14px;
+    }
+}
+@media (max-width: 992px) {
+    .user-bar-item {
+        top: 8px;
     }
 }
 
@@ -1268,12 +1280,10 @@ footer, .push {
     font-size: 0.8em;
     margin: 0 0 0 0.4em;
 }
-
 .slicknav_nav .slicknav_item {
     display: block;
     cursor: pointer;
 }
-
 .slicknav_nav a {
     display: block;
 }
@@ -1292,10 +1302,7 @@ footer, .push {
     clear: both;
 }
 
-/*
-    User Default Style
-    Change the following styles to modify the appearance of the menu.
-*/
+
 .slicknav_menu {
     font-size: 18px;
 }
@@ -1918,9 +1925,18 @@ a.slicknav_item [class*=" fa-"] {
     width: 93px;
 }
 
-#md-spinner {
+#md-spinner{
     height: 20px;
-    background: url(../img/ring-alt.svg) center no-repeat;
+}
+
+.md-spinner-white {
+    background: url(../img/spinner-w.svg) center no-repeat;
+}
+.md-spinner-blue {
+    background: url(../img/spinner-b.svg) center no-repeat;
+}
+.spinner-button{
+    min-width:93px;
 }
 
 /*-----------------------------------------------------------------------------------*/

@@ -127,7 +127,7 @@
                                 <label>
                                     <input type="checkbox" name="licence"
                                            @if(isset($exercise) && $exercise->licence) checked=""@endif>
-                                    CC BY-NC 4.0 Litsents
+                                    CC BY-NC 4.0 litsents
                                 </label>
                             </div>
                         </div>

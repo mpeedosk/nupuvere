@@ -1,7 +1,7 @@
 <header id="header">
     <div class="container">
         <div class="row">
-            <div class="col-sm-5 padding-vert-5 hidden-xs hidden-sm no-padding-left-lg">
+            <div class="col-md-5 padding-vert-5 hidden-xs hidden-sm no-padding-left-lg">
 
                 <!-- Logo -->
                 <div class="logo">
@@ -12,12 +12,12 @@
                 </div>
             </div>
 
-            <div class="col-sm-7 padding-vert-5">
+            <div class="col-md-7 padding-vert-5 no-padding">
                 <!-- Login Box -->
                 <div class="row">
                     <div class="col-md-12 no-padding-lg">
                         @if (Auth::guest() )
-                            <form class="login-page" method="POST"
+                            <form class="login-page" method="POST" onsubmit="startLoader()"
                                   action="@if (App::isLocal()) {{ url('/login') }} @else{{ secure_url('/login') }} @endif ">
                                 {{ csrf_field() }}
                                 <div class="row inputs">
@@ -64,7 +64,11 @@
 
                                     <div class="col-md-4 margin-top-10 no-padding">
                                         <div class="col-md-6">
-                                            <button class="btn btn-sm btn-primary pull-right" type="submit">Logi sisse
+                                            <button class="btn btn-sm btn-primary pull-right spinner-button"
+                                                    type="submit">
+                                                <span class="spinner"><span class="md-spinner-blue"
+                                                                            id="md-spinner"></span></span>
+                                                <span class="md-spinner-text">Logi sisse</span>
                                             </button>
                                         </div>
                                         <div class="col-md-6">
@@ -113,7 +117,7 @@
                                 <div class="row text-center">
 
                                     <div class="bottom-border user-bar pull-right">
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-3 user-bar-item">
                                             <span class="fa fa-trophy points-icon"
                                                   aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
@@ -123,11 +127,11 @@
 
                                         </div>
 
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-6 user-bar-item">
                                             <div class="user-bar-name">{{Auth::user() -> username }}</div>
                                         </div>
 
-                                        <div class="col-xs-4">
+                                        <div class="col-xs-3">
                                             <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
                                             </button>
                                         </div>
