@@ -2316,7 +2316,7 @@ tr a:hover {
     border-bottom: 2px solid #5e70d4;
 }
 
-.registration .form-group label.control-label {
+.form-horizontal .form-group label.control-label {
     font-size: 15px;
     margin: 6px 0 0 0;
 }
@@ -2462,6 +2462,14 @@ tr a:hover {
 .row .panel {
     border: 2px solid #414141;
 }
+.mainpage .panel {
+    border: none;
+}
+.mainpage .panel .panel-heading {
+    background: #333;
+    color: #eee;
+}
+
 @media (max-width: 569px) {
     .row .panel-title{
         overflow: hidden;

@@ -334,9 +334,7 @@ function reloadWiris() {
 
 /* registration */
 function checkAvailabilityUser() {
-
     var username = $("#username").val();
-
     if (username.length > 0) {
         var form = document.getElementById('username-form');
         jQuery.ajax({
@@ -368,7 +366,6 @@ function checkAvailabilityUser() {
 
 
 function checkAvailabilityEmail() {
-
     var email = $("#email").val();
     var icon = document.getElementById('email-status');
     var form = document.getElementById('email-form');
@@ -444,8 +441,6 @@ function validatePasswordMatching() {
     var errorBlock = document.getElementById('password-confirm-error');
     var icon = document.getElementById('password-confirm-status');
     form.className = "form-group has-error";
-
-    console.log(form);
 
     if ($("#password").val() == $("#password-confirm").val()) {
         form.className = "form-group has-success";

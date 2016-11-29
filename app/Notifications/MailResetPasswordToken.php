@@ -43,8 +43,8 @@ class MailResetPasswordToken extends Notification
     {
         return (new MailMessage)
             ->subject("Parooli taastamine")
-            ->greeting("Tere " . $notifiable->first_name. " " . $notifiable->last_name . '!')
-            ->line('Olete taotlenud oma konto "'. $notifiable->username.'" salasõna taastamist')
+            ->greeting("Tere " . ucfirst($notifiable->first_name). " " . ucfirst($notifiable->last_name . '!'))
+            ->line('Olete taotlenud oma konto "'. $notifiable->username.'" salasõna taastamist. Selle tegemiseks palun vajutage allolevat nuppu ')
             ->action('Salasõna taastamine', url('password/reset', $this->token))
             ->line('Kui te ei ole sellist teenust taotlenud, siis ei pea te midagi tegema.');
     }
