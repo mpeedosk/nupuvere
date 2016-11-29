@@ -78,7 +78,7 @@
             Lehekülge ei leitud
         </div>
 
-        <a href="/" class="bu"> Tagasi pealehele</a>
+        <a href="/" > Tagasi pealehele</a>
     </div>
 </div>
 </body>

@@ -4,6 +4,10 @@ use Illuminate\Database\Seeder;
 
 class ExerciseTableSeeder extends Seeder
 {
+
+    const age_groups = array("avastaja", "uurija", "teadja", "ekspert");
+    const difficulties = array("lihtne", "keskmine", "raske");
+
     /**
      * Run the database seeds.
      *
@@ -105,12 +109,12 @@ class ExerciseTableSeeder extends Seeder
         ]]);
         // Generate some dummy data
 
-        /*$faker = Faker\Factory::create();
+        $faker = Faker\Factory::create();
 
         foreach (\App\Category::getCategories() as $category){
-            foreach (\App\Exercise::age_groups as $age_group){
-                foreach (\App\Exercise::difficulties as $difficulty){
-                    for($i=0; $i < $faker->numberBetween(6,10); $i++) {
+            foreach (self::age_groups as $age_group){
+                foreach (self::difficulties as $difficulty){
+                    for($i=0; $i < $faker->numberBetween(6,25); $i++) {
                         \App\Exercise::create([
                             'title' => $faker->unique()->sentence(3),
                             'content' => $faker->text($maxNbChars = 1000),
@@ -126,7 +130,7 @@ class ExerciseTableSeeder extends Seeder
                     }
                 }
             }
-        }*/
+        }
 
     }
 }

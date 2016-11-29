@@ -80,7 +80,7 @@ class UsersTableSeeder extends Seeder
         ]]);
 
 
-        /*$faker = Faker\Factory::create();
+        $faker = Faker\Factory::create();
 
         // Generate some dummy data
         for($i=0; $i<250; $i++) {
@@ -90,10 +90,10 @@ class UsersTableSeeder extends Seeder
                 'last_name' => $faker->lastName(),
                 'email' => $faker->unique()->email(),
                 'password' => bcrypt("parool"),
-                'role' => $faker->numberBetween(1,3),
-                'points' => $faker->numberBetween(0, 200),
+                'role' => $faker->numberBetween(1,2),
+                'points' => $faker->numberBetween(100, 200),
                 'points_this_year' => $faker->numberBetween(0, 100)
             ]);
-        }*/
+        }
     }
 }

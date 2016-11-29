@@ -81,8 +81,9 @@
                         <input hidden class="form-control upload-input"
                                type="file" id="import" multiple="" name="import">
                     </div>
-                    <button type="button" class="inline btn btn-primary btn-raised" onclick='$("#import").click()'>
-                        Impordi
+                    <button type="submit" class="inline btn btn-primary btn-raised" onclick='event.preventDefault();$("#import").click()'>
+                        <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                        <span class="md-spinner-text">Impordi</span>
                     </button>
                 </form>
 

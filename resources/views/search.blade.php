@@ -1,14 +1,10 @@
 @extends('layouts.main')
 @section('title', 'Otsing')
-
-
 @section('content')
     <section class="content margin-vert-30">
         <div class="container">
             <div class="row text-center">
-
                 <div class="col-md-8 col-md-offset-2">
-
                     <H1>Otsingu {{$query}} tulemused:</H1>
                     <hr>
                     @if(count($exercises)==0)

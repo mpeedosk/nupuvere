@@ -44,9 +44,7 @@
                             </a>
                         @endif
                     @endforeach
-
                 </div>
-
                 <div class="col-md-7 content-bg">
                     <div class="row">
                         <div class="ex-title col-md-12 fadeInRight animated">
@@ -59,7 +57,6 @@
                                 </div>
                             </div>
                         </div>
-
                         @if(Session::has('answer-check'))
                             @if(Session::get('answer-check'))
                                 <div class="col-md-12 fadeInRightBig animated">
@@ -79,7 +76,6 @@
                                 </div>
                             </div>
                         @endif
-
                         @if(Session::has('answer-check'))
                             @if(Session::get('answer-check'))
                                 <p class="answer-no-js">Vastasite õigesti!</p>
@@ -87,7 +83,6 @@
                                 <p class="answer-no-js">Vastasite valesti!</p>
                             @endif
                         @endif
-
                         <form method="POST" action="{{ url('/answer/check/'.$exercise-> id)}}">
                             {{ csrf_field() }}
                             <div class="col-xs-12">
@@ -95,50 +90,39 @@
                             </div>
                             <div class="col-xs-12">
                                 <div class="row">
-                                    <a href="/{{$category}}/{{$age_group}}"
-                                       class="btn btn-raised btn-blue fix-margin-left pull-left">
+                                    <a href="/{{$category}}/{{$age_group}}" class="btn btn-raised btn-blue fix-margin-left pull-left">
                                         <span class="hidden-xs">Nimekiri</span>
                                         <span class="visible-xs">&larr;</span>
-
                                     </a>
 
                                     @if(Auth::guest() )
-                                        <span class="btn btn-raised btn-success fix-margin-right pull-right"
-                                              disabled
-                                              onclick="loginRequired()">Vasta</span>
+                                        <span class="btn btn-raised btn-success fix-margin-right pull-right" disabled onclick="loginRequired()">
+                                            Vasta</span>
                                     @else
-                                        <button id="submit-answer" type="submit"
-                                                class="btn btn-raised btn-success fix-margin-right pull-right"
+                                        <button id="submit-answer" type="submit" class="btn btn-raised btn-success fix-margin-right pull-right"
                                                 onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
-                                            <span class="spinner"><span
-                                                        class="md-spinner md-spinner-white"></span></span>
+                                            <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
                                             <span class="md-spinner-text">Vasta</span>
                                         </button>
                                     @endif
 
-                                    <a id="next-ex"
-                                       href="{{isset($exercises_after[1]) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$exercises_after[1]->id : '/'.$category.'/'.$age_group }}"
-
-                                       class="btn btn-raised btn-aqua pull-right">
+                                    <a id="next-ex" class="btn btn-raised btn-aqua pull-right"
+                                       href="{{isset($exercises_after[1]) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$exercises_after[1]->id : '/'.$category.'/'.$age_group }}">
                                         <span class="hidden-xs">Edasi</span>
                                         <span class="visible-xs">&rarr;</span>
                                     </a>
                                 </div>
                             </div>
                         </form>
-
                     </div>
                 </div>
-
                 <div class="col-md-2 margin-50-lg text-center">
-
                     @if(!trim($exercise -> hint) == "")
                         <button type="button" class="btn btn-success btn-lg" data-toggle="modal"
                                 data-target="#hint-dialog">
                             <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span> vihje
                         </button>
                     @endif
-
                     @if(!Auth::guest() )
                         <button type="button" class="btn btn-danger" data-toggle="modal"
                                 data-target="#confirm-dialog" data-backdrop="static" data-keyboard="false">
@@ -155,7 +139,6 @@
                             </p>
                         </div>
                     @endif
-
                     @if($exercise->licence)
                         <div>
                             <p class="font-size-sm"> Litsents: </p>
@@ -170,12 +153,10 @@
             </div>
         </div>
     </section>
-
     <div id="hint-dialog" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content  panel panel-primary">
                 <div class="panel-heading">
-
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                     <h4 class="panel-title">Vihjed</h4>
@@ -189,12 +170,10 @@
             </div>
         </div>
     </div>
-
     <div id="confirm-dialog" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content  panel panel-danger">
                 <div class="panel-heading">
-
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <span class="modal-img glyphicon glyphicon-alert" aria-hidden="true"></span>
                     <h4 class="panel-title">Vastus</h4>
@@ -213,7 +192,6 @@
             </div>
         </div>
     </div>
-
     <div id="wrong-answer" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content panel panel-warning">
@@ -233,7 +211,6 @@
             </div>
         </div>
     </div>
-
     <div id="enlargeImageModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="enlargeImageModal"
          aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

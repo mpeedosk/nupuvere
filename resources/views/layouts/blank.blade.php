@@ -11,10 +11,8 @@
     <title>@yield('title')</title>
 
     <!-- Favicon -->
-{{--<link href="favicon.ico" rel="shortcut icon">--}}
+    <link href="/favicon.ico" rel="shortcut icon">
 
-
-<!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.css">
     <link rel="stylesheet"
@@ -34,7 +32,6 @@
         <link rel="stylesheet" href="{{secure_asset('css/main.css')}}">
     @endif
 
-
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -49,7 +46,6 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>
 
-
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
 
@@ -59,14 +55,11 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
-
     @yield('css')
 
 </head>
 <body id="body-bg">
-
 @yield('page')
-
 @if (App::isLocal())
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>
     <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>

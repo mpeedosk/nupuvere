@@ -130,17 +130,17 @@ class AnswersTableSeeder extends Seeder
         ]]);
 
 
-        /*$count = DB::table('exercises')->get()->count();
+        $count = DB::table('exercises')->get()->count();
         $faker = Faker\Factory::create();
 
         for ($i = 0; $i < $count * 3; $i++) {
             \App\Answer::create([
-//                'ex_id' => floor($i/3)*10 + 2,
-                'ex_id' => floor($i/3) + 1,
+                'ex_id' => floor($i/3)*10 + 2,
+//                'ex_id' => floor($i/3) + 1,
                 'content' => $faker->sentence(3),
                 'is_correct' => $faker->boolean($chanceOfGettingTrue = 50),
                 'order' => $faker->numberBetween(1,3)
             ]);
-        }*/
+        }
     }
 }

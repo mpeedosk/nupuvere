@@ -43,7 +43,6 @@ if (window.location.pathname == "/admin/category") {
 } else if (pathname == "/admin/exercise") {
     document.getElementById("import-form").onchange = function () {
         var filename = document.getElementById('import').value;
-        console.log(filename);
         if (filename != "") {
             var fileParts = filename.split('.');
             var extention = fileParts[fileParts.length - 1].toLowerCase();
@@ -52,6 +51,7 @@ if (window.location.pathname == "/admin/category") {
             else {
                 document.getElementById("import-form").submit();
                 toastr.info("Importimine alustatud - palun oota");
+                startLoader(document.getElementById("import-form"));
             }
         }
     };
@@ -231,7 +231,6 @@ function addAnswerOrder() {
 /* removing an answer*/
 $(document).on('click', '.btn_remove', function () {
     /*    var button_id = $(this).attr("id");
-     console.log();
      $('#answer_group_' + button_id + '').remove();*/
     $(this).parent().remove();
 });
@@ -336,7 +335,6 @@ function clearInput(div_id) {
 /* gallary image upload preview */
 
 function resizeImages(file, id, div_id) {
-    console.log("LOL");
     if (file == null) {
         if (id == 6) {
             $('.sponsors').attr('src', '/img/logo/footer.png');

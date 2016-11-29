@@ -1,20 +1,15 @@
 @extends('layouts.main')
 @section('title', 'Ülesanded')
-
-
 @section('content')
     <section class="content margin-vert-30">
         <div class="container">
             <div class="row text-center">
                 <div class="col-sm-4 vertical-line-left">
-
                     <H1> Lihtne</H1>
-
                     @if(count($easyEx)==0)
                         <h3>Selles raskusastmes ülesanded puuduvad</h3>
                     @else
                         @if (Auth::guest() )
-
                             @foreach($easyEx as $exercise)
                                 <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
                                    class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
@@ -93,7 +88,6 @@
                                      aria-valuemin="0" aria-valuemax="100" style="width: {{$p_hard}}%">
                                 </div>
                             </div>
-
                             @foreach($hardEx as $exercise)
                                 @if( in_array($exercise-> id, $solved))
                                     <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
@@ -108,7 +102,6 @@
                             @endforeach
                         @endif
                     @endif
-
                 </div>
             </div>
         </div>

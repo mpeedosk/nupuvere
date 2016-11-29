@@ -1,13 +1,15 @@
 @extends('layouts.main')
 @section('title', 'Nupuvere')
 @section('content')
-    <script>
-        document.getElementById("slideshow").style.opacity = "0";
-        $(document).ready(function () {
-            $('#slideshow').fadeTo(400, 1);
-        });
-    </script>
-    <div id="slideshow" class="margin-vert-30">
+    @if(Session::has('register'))
+        <script>
+            $(function () {
+                toastr.success("{{Session::get('register')}}");
+            });
+        </script>
+    @endif
+
+    <div id="slideshow" class="margin-vert-30" style="opacity: 0">
         <div class="container bottom-border">
             <div class="row">
                 <!-- Carousel Slideshow -->
@@ -54,5 +56,10 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#slideshow').fadeTo(400, 1);
+        });
+    </script>
     @include('includes.footer')
 @endsection

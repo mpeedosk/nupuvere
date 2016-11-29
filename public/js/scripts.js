@@ -269,7 +269,6 @@ $(function () {
 
 function startLoader(form) {
     width = $(form).find("button, input[type='submit']").width();
-    console.log($(form).find("button, input[type='submit']").height());
     $(form).find('.md-spinner').fadeIn("fast").css({"display": "block", "min-width": width});
     $(form).find(".md-spinner-text").hide();
 }
@@ -406,7 +405,6 @@ function validateEmail(email) {
 }
 
 function validateField(fieldName) {
-    console.log(fieldName);
     var value = $("#" + fieldName).val();
     var form = document.getElementById(fieldName + '-form');
     var errorBlock = document.getElementById(fieldName + '-error');

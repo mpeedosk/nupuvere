@@ -1,7 +1,5 @@
 @extends('layouts.main')
 @section('title', 'Edetabel')
-
-
 @section('content')
     <section class="content margin-vert-30">
         <div class="se-pre-con"></div>
@@ -22,7 +20,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($this_year as $user)
                             <tr>
                                 <td>{{$loop -> iteration}}</td>
@@ -48,7 +45,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         @foreach($all_time as $user)
                             <tr>
                                 <td>{{$loop -> iteration}}</td>
@@ -63,7 +59,6 @@
         </div>
     </section>
 @endsection
-
 @section('css')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 @endsection
