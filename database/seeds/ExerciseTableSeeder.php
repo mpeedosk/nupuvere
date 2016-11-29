@@ -109,7 +109,7 @@ class ExerciseTableSeeder extends Seeder
         ]]);
         // Generate some dummy data
 
-        $faker = Faker\Factory::create();
+        /*$faker = Faker\Factory::create();
 
         $first = true;
         foreach (\App\Category::getCategories() as $category){
@@ -135,7 +135,7 @@ class ExerciseTableSeeder extends Seeder
                     }
                 }
             }
-        }
+        }*/
 
     }
 }

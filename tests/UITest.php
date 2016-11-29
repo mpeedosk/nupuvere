@@ -125,7 +125,7 @@ class UITest extends TestCase
              ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->see('The ex title field is required.');
+             ->see('See tunnus on kohustuslik.');
         }
 
     public function testAdminAddExerciseEmptyContent()//Kontrollib, kas veateade kuvatakse õigesti, kui ülesande lisamisel sisu jääb tühjaks.
@@ -147,6 +147,6 @@ class UITest extends TestCase
              ->type('test','answer')
              ->type('matemaatika','category')
              ->press('Lisa ülesanne')
-             ->see('The ex content field is required.');
+             ->see('See tunnus on kohustuslik.');
         }
 }
