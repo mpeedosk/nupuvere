@@ -23,24 +23,48 @@
                 selector: 'textarea',
                 language: 'et',
                 theme: 'modern',
+                plugins: 'advlist lists, autolink, link, contextmenu, tabfocus, image, code, youtube, print, paste, searchreplace, imagetools, charmap, textcolor colorpicker, hr, table, autoresize, tiny_mce_wiris',
+                contextmenu: "cut copy paste | link image | subscript superscript",
                 menubar: false,
                 relative_urls: false,
-                plugins: 'link, image, code, youtube, imagetools, charmap, media, textcolor, hr, table, autoresize, tiny_mce_wiris',
                 extended_valid_elements: 'input[onclick|value|style|type]',
                 file_browser_callback: function (field_name, url, type) {
                     if (type == 'image') {
                         $('#upload_file').trigger('click');
                     }
                 },
-                toolbar1: 'styleselect | fontselect fontsizeselect | bold italic underline forecolor  | alignleft aligncenter alignright alignjustify | ' +
-                'bullist numlist outdent indent | link image editimage youtube | table | hr | subscript superscript | preview | ' +
-                'charmap tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
+                toolbar1: 'styleselect  fontselect fontsizeselect | bold italic forecolor | bullist numlist indent outdent | ' +
+                'link image editimage youtube | superscript subscript tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry charmap '+
+                '| table hr pastetext searchreplace removeformat | print code | preview',
                 image_caption: true,
                 image_advtab: true,
-                content_css: '/css/main.css',
+                content_css: '/css/main.css,https://fonts.googleapis.com/css?family=Roboto',
                 wirisformulaeditorlang: 'et',
+                font_formats: 'Andale Mono=andale mono,times;' +
+                'Arial=arial,helvetica,sans-serif;' +
+                'Arial Black=arial black,avant garde;' +
+                'Book Antiqua=book antiqua,palatino;' +
+                'Calibri=calibri,sans-serif;' +
+                'Comic Sans MS=comic sans ms,sans-serif;' +
+                'Courier New=courier new,courier;' +
+                'Georgia=georgia,palatino;' +
+                'Helvetica=helvetica;' +
+                'Impact=impact,chicago;' +
+                'Roboto=Roboto, Arial, Helvetica, Tahoma, Verdana, sans-serif;' +
+                'Symbol=symbol;' +
+                'Tahoma=tahoma,arial,helvetica,sans-serif;' +
+                'Terminal=terminal,monaco;' +
+                'Times New Roman=times new roman,times;' +
+                'Trebuchet MS=trebuchet ms,geneva;' +
+                'Verdana=verdana,geneva;' +
+                'Webdings=webdings;' +
+                'Wingdings=wingdings,zapf dingbats',
                 init_instance_callback: "afterInit",
                 setup: function (editor) {
+                    editor.on('init', function () {
+                        this.getDoc().body.style.fontSize = '12pt';
+                        this.getDoc().body.style.fontFamily = 'Roboto';
+                    });
                     editor.addButton('preview',
                         {
                             title: "Preview",
@@ -67,9 +91,10 @@
                         text: "Preview",
                         cmd: "mcePreview",
                         context: "view"
-                    })
+                    });
                 }
             });
+
         });
     </script>
 @endsection
@@ -171,7 +196,8 @@
                         <div class="form-group">
                             <label for="keywords">Märksõnad</label>
                             <input class="form-control" name="keywords"
-                                   value="@if(isset($exercise->keywords)){{$exercise->keywords }}@else{{old('keywords')}}@endif" id="keywords">
+                                   value="@if(isset($exercise->keywords)){{$exercise->keywords }}@else{{old('keywords')}}@endif"
+                                   id="keywords">
                         </div>
 
                         <div class="form-group">

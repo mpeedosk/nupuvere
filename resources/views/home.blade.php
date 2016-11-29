@@ -1,10 +1,9 @@
-
 @extends('layouts.main')
 @section('title', 'Nupuvere')
 
 
 @section('content')
-    <div id="slideshow" class="margin-vert-30">
+   <div id="slideshow" class="margin-vert-30" style="opacity: 0">
         <div class="container bottom-border">
             <div class="row">
                 <!-- Carousel Slideshow -->
@@ -53,5 +52,9 @@
         </div>
     </div>
     @include('includes.footer')
-
+   <script>
+       $(document).ready(function () {
+           $('#slideshow').fadeTo(400, 1);
+       });
+   </script>
 @endsection

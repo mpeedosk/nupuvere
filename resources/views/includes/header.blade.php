@@ -2,16 +2,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-5 padding-vert-5 hidden-xs hidden-sm no-padding-left-lg">
-
                 <!-- Logo -->
                 <div class="logo">
                     <a href="/" title="">
-                        <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif"
-                             alt="Logo"/>
+                        <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif" alt="Logo"/>
                     </a>
                 </div>
+                <!-- Logo end -->
             </div>
-
             <div class="col-md-7 padding-vert-5 no-padding">
                 <!-- Login Box -->
                 <div class="row">
@@ -27,7 +25,7 @@
                                             <input id="login" class="form-control" type="text" name="login"
                                                    value="{{ old('login') }}" required>
                                             @if($errors->has('login'))
-                                                <span class="help-block" style="display: inline-block !important;">
+                                                <span class="help-block help-error">
                                                     <strong>{{ $errors->first('login') }}</strong>
                                                 </span>
                                             @endif
@@ -78,60 +76,44 @@
                                 </div>
 
                             </form>
-
                         @elseif(Auth::user()->isAdmin())
-                            <form style="padding-right: 29px" id="logout-form"
-                                  action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
-                                  method="POST">
+                            <form id="logout-form" method="POST" onsubmit="startLoader(this)" action='/logout'>
                                 {{ csrf_field() }}
                                 <div class="row text-center">
-                                    <div class="bottom-border user-bar pull-right"
-                                         style="display:inline-block; width: 80%; padding-top: 10px;">
-
-                                        <div class="pull-left">
-                                            <span class="fa fa-trophy points-icon"
-                                                  aria-hidden="true"></span>
+                                    <div class="bottom-border user-bar pull-right">
+                                        <div class="col-xs-3 user-bar-item">
+                                            <span class="fa fa-trophy points-icon" aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
-                                            <span id="points-increase"
-                                                  class="fa fa-arrow-up points-icon points-increase"
-                                                  aria-hidden="true"></span>
+                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
                                         </div>
-                                        <h2 style="display:inline-block;">{{Auth::user() -> username }}</h2>
 
-
-                                        <button class="btn btn-sm btn-primary pull-right" type="submit">Logi välja
-                                        </button>
-                                        <a href="@if (App::isLocal()) {{ url('/admin') }} @else{{ secure_url('/admin') }}
-                                        @endif " class="btn btn-sm btn-info pull-right">Admin
-                                        </a>
-                                        {{ csrf_field() }}
+                                        <div class="col-xs-5 user-bar-item">
+                                            <div class="user-bar-name">{{Auth::user() -> username }}</div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <a href='/admin' class="btn btn-sm btn-info">Admin</a>
+                                            <button class="btn btn-sm btn-primary pull-right spinner-button" type="submit">
+                                                <span class="spinner"><span class="md-spinner md-spinner-blue"></span></span>
+                                                <span class="md-spinner-text">Logi välja</span>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         @else
-                            <form style="padding-right: 30px;padding-left: 30px" id="logout-form" onsubmit="startLoader(this)"
-                                  action="@if (App::isLocal()) {{ url('/logout') }} @else{{ secure_url('/logout') }} @endif "
-                                  method="POST">
+                            <form id="logout-form" onsubmit="startLoader(this)" action="/logout" method="POST">
                                 {{ csrf_field() }}
                                 <div class="row text-center">
-
                                     <div class="bottom-border user-bar pull-right">
                                         <div class="col-xs-3 user-bar-item">
-                                            <span class="fa fa-trophy points-icon"
-                                                  aria-hidden="true"></span>
+                                            <span class="fa fa-trophy points-icon" aria-hidden="true"></span>
                                             <span id="user-points" class="points">{{Auth::user() -> points }}</span>
-                                            <span id="points-increase"
-                                                  class="fa fa-arrow-up points-icon points-increase"
-                                                  aria-hidden="true"></span>
-
+                                            <span id="points-increase" class="fa fa-arrow-up points-icon points-increase" aria-hidden="true"></span>
                                         </div>
-
                                         <div class="col-xs-6 user-bar-item">
                                             <div class="user-bar-name">{{Auth::user() -> username }}</div>
                                         </div>
-
                                         <div class="col-xs-3">
-
                                             <button class="btn btn-sm btn-primary pull-right spinner-button" type="submit">
                                                 <span class="spinner"><span class="md-spinner md-spinner-blue"></span></span>
                                                 <span class="md-spinner-text">Logi välja</span>
@@ -142,11 +124,9 @@
                             </form>
                         @endif
                     </div>
-                    <!-- End Login Box -->
                 </div>
+                <!-- End Login Box -->
             </div>
-
-            <!-- End Logo -->
         </div>
     </div>
 </header>

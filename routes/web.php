@@ -19,6 +19,9 @@ Route::get('/', 'PagesController@index');
 Route::post('/search', 'PagesController@search');
 Route::get('/edetabel', 'PagesController@highscore');
 
+Route::post('/availability/username', 'UserController@checkAvailableUser');
+Route::post('/availability/email', 'UserController@checkAvailableEmail');
+
 Route::group(['middleware' => 'admin'], function () {
 
     Route::get('admin', 'AdminController@index');

@@ -11,13 +11,17 @@
                         @if ($ex->id == $exercise->id)
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{strlen($ex -> title) > 12 ? substr($ex -> title,0, 12)."..." : $ex -> title}}
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                                <div class="ex-title-wrapper">
+                                    {{strlen($ex -> title) > 12 ? substr($ex -> title,0, 12)."..." : $ex -> title}}
+                                </div>
                             </a>
                         @else
                             <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                <div class="ex-title-wrapper">
+                                    {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                </div>
                             </a>
                         @endif
                     @endforeach
@@ -25,14 +29,18 @@
                         @if ($loop->first)
                             <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
-
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
+                                <div class="ex-title-wrapper">
+                                    <span>{{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}</span>
+                                </div>
+
                             </a>
                         @else
                             <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
-                                {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                <div class="ex-title-wrapper">
+                                    {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                </div>
                             </a>
                         @endif
                     @endforeach
@@ -102,7 +110,8 @@
                                         <button id="submit-answer" type="submit"
                                                 class="btn btn-raised btn-success fix-margin-right pull-right"
                                                 onclick="submitAnswer(event, '{{$exercise -> id}}', '{{$exercise -> type}}')">
-                                            <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                            <span class="spinner"><span
+                                                        class="md-spinner md-spinner-white"></span></span>
                                             <span class="md-spinner-text">Vasta</span>
                                         </button>
                                     @endif

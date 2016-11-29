@@ -148,7 +148,7 @@ function showAnswer(id, type) {
             document.getElementById('submit-answer').disabled = true;
             solutionSeen = true;
 
-            if (data.seenOrSolved == false){
+            if (data.seenOrSolved == false) {
                 toastr.warning('Selle ülesande eest ei ole enam võimalik punkte saada.');
             }
             $(".se-pre-con").fadeOut("slow");
@@ -268,10 +268,12 @@ $(function () {
 });
 
 function startLoader(form) {
-    $(form).find('.md-spinner').fadeIn("fast").css("display","block");
+    width = $(form).find("button, input[type='submit']").width();
+    console.log($(form).find("button, input[type='submit']").height());
+    $(form).find('.md-spinner').fadeIn("fast").css({"display": "block", "min-width": width});
     $(form).find(".md-spinner-text").hide();
 }
-function endLoader(form){
+function endLoader(form) {
     $(form).find('.md-spinner').fadeOut("slow", function () {
         $(form).find(".md-spinner-text").show();
     });
@@ -307,7 +309,7 @@ $(document).ready(function () {
             searchBox.addClass('search-open');
             isOpen = true;
         } else {
-            if ($("#search").val() != ""){
+            if ($("#search").val() != "") {
                 var form = document.getElementById("search-form");
                 startLoader(form);
                 form.submit();
@@ -328,3 +330,132 @@ function reloadWiris() {
     $('#wiris').remove();
     document.getElementsByTagName('head')[0].appendChild(script);
 }
+
+
+/* registration */
+function checkAvailabilityUser() {
+
+    var username = $("#username").val();
+
+    if (username.length > 0) {
+        var form = document.getElementById('username-form');
+        jQuery.ajax({
+            url: "/availability/username",
+            data: {
+                _token: $('input[name="_token"]').val(),
+                username: username
+            },
+            type: "POST",
+            success: function (data) {
+                var icon = document.getElementById('user-status');
+
+                if (data.response == "true") {
+                    form.className = "form-group has-success";
+                    icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
+                    document.getElementById('username-error').innerHTML = ""
+                }
+                else {
+                    form.className = "form-group has-error";
+                    icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+                    document.getElementById('username-error').innerHTML = '<span class="help-block help-error"><strong>Selline kasutajanimi on juba olemas</strong></span>';
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+}
+
+
+function checkAvailabilityEmail() {
+
+    var email = $("#email").val();
+    var icon = document.getElementById('email-status');
+    var form = document.getElementById('email-form');
+
+    if (validateEmail(email)) {
+        jQuery.ajax({
+            url: "/availability/email",
+            data: {
+                _token: $('input[name="_token"]').val(),
+                email: email
+            },
+            type: "POST",
+            success: function (data) {
+                if (data.response == "true") {
+                    form.className = "form-group has-success";
+                    icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
+                    document.getElementById('email-error').innerHTML = ""
+                }
+                else {
+                    form.className = "form-group has-error";
+                    icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+                    document.getElementById('email-error').innerHTML = '<span class="help-block help-error"><strong>Selline email on juba kasutuses</strong></span>';
+                }
+            },
+            error: function () {
+            }
+        });
+    } else {
+        form.className = "form-group has-error";
+        icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+        document.getElementById('email-error').innerHTML = '<span class="help-block help-error"><strong>See ei ole korrektne email</strong></span>';
+    }
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function validateField(fieldName) {
+    console.log(fieldName);
+    var value = $("#" + fieldName).val();
+    var form = document.getElementById(fieldName + '-form');
+    var errorBlock = document.getElementById(fieldName + '-error');
+    var icon = document.getElementById(fieldName + '-status');
+    var errorMsg = "See väli tuleb täita";
+    var minLength = 0;
+    if (fieldName == "password") {
+        errorMsg = "Salasõna peab olema vähemalt 6 tähemärki";
+        minLength = 5;
+    }
+    if (value.length > minLength) {
+        form.className = "form-group has-success";
+        icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
+        errorBlock.innerHTML = ""
+    }
+    else {
+        form.className = "form-group has-error";
+        icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+        errorBlock.innerHTML = '<span class="help-block help-error"><strong>' + errorMsg + '</strong></span>';
+    }
+
+
+}
+
+$(document).ready(function () {
+    $("#password-confirm").keyup(validatePasswordMatching);
+});
+
+
+function validatePasswordMatching() {
+    var form = document.getElementById('password-confirm-form');
+    var errorBlock = document.getElementById('password-confirm-error');
+    var icon = document.getElementById('password-confirm-status');
+    form.className = "form-group has-error";
+
+    console.log(form);
+
+    if ($("#password").val() == $("#password-confirm").val()) {
+        form.className = "form-group has-success";
+        icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
+        errorBlock.innerHTML = ""
+    } else {
+        form.className = "form-group has-error";
+        icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+        errorBlock.innerHTML = '<span class="help-block has-error help-error"><strong>Salasõnad ei klapi</strong></span>';
+    }
+
+}
+

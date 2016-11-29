@@ -14,14 +14,6 @@
 
 .primary-container-background .primary-container {width: 100%;}
 
-/* Disable CSS animations */
-.animated {
-    -webkit-animation-duration: 0;
-    animation-duration: 0;
-    -webkit-animation-delay: 0;
-    animation-delay: 0;
-}
-
 }
 
 /* #Tablet (Portrait)
