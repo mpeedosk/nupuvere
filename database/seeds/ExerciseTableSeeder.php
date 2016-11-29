@@ -113,11 +113,11 @@ class ExerciseTableSeeder extends Seeder
 
         $first = true;
         foreach (\App\Category::getCategories() as $category){
-            if($first){
-                $first = false;
-                continue;
-            }
             foreach (self::age_groups as $age_group){
+                if($first){
+                    $first = false;
+                    continue;
+                }
                 foreach (self::difficulties as $difficulty){
                     for($i=0; $i < $faker->numberBetween(6,25); $i++) {
                         \App\Exercise::create([
