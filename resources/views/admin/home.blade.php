@@ -1,30 +1,7 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
 @section('description', 'Pealehe haldus')
-
-
-
-@section('css')
-    <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
-
-@endsection
-
 @section('content')
-
-    @if(session('main-gallery'))
-        <script>
-            $(function () {
-                toastr.success('{{session('main-gallery')}}');
-            });
-        </script>
-    @elseif(session('wrong-ext'))
-        <script>
-            $(function () {
-                toastr.error('{{session('wrong-ext')}}');
-            });
-        </script>
-    @endif
-
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
@@ -36,12 +13,11 @@
                                   data-toggle="modal" data-target="#gallery-help"></span>
                         </h2>
                         <hr>
-                        <form id="uploadGallery"
+                        <form id="uploadGallery" onsubmit="startLoader(this)"
                               method="POST" action="/admin/upload/gallery" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 img-box">
-                                    <div id="progress"></div>
                                     <div class="form-group no-padding no-margin">
                                         <label for="inputGallery1" class="visuallyhidden">Esimene pilt</label>
                                         <input type="file" id="inputGallery1" multiple="" name="gallery1">
@@ -115,7 +91,9 @@
                                         <img id="gallery5-preview" src="/img/gallery/gallery5.png?cache={{$updated}}"
                                              alt="gallery5">
                                     </div>
-                                    <button class="btn btn-primary btn-raised" type="submit">Uuenda
+                                    <button class="btn btn-primary btn-raised" type="submit">
+                                        <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                        <span class="md-spinner-text">Uuenda</span>
                                     </button>
                                 </div>
                             </div>
@@ -128,7 +106,7 @@
                         <h2>Logod<span class="glyphicon glyphicon-question-sign icon-help" aria-hidden="true"
                                        data-toggle="modal" data-target="#logo-help"></span></h2>
                         <hr>
-                        <form method="POST" action="/admin/upload/logo" enctype="multipart/form-data">
+                        <form method="POST" action="/admin/upload/logo" enctype="multipart/form-data" onsubmit="startLoader(this)">
                             {{ csrf_field() }}
                             <div class="form-group no-padding no-margin has-feedback">
                                 <label for="inputLogos" class="visuallyhidden"> Laadige uued logod</label>
@@ -141,7 +119,9 @@
                                 <img class="sponsors" src="/img/logo/footer.png" alt="Logo"/>
                             </div>
 
-                            <button class="btn btn-primary btn-raised" type="submit">Uuenda
+                            <button class="btn btn-primary btn-raised" type="submit">
+                                <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                <span class="md-spinner-text">Uuenda</span>
                             </button>
                         </form>
 
@@ -149,11 +129,14 @@
                     <div class="col-md-12 vert-half text-center">
                         <h2>Kontakt</h2>
                         <hr>
-                        <form method="POST" action="/admin/contact">
+                        <form method="POST" action="/admin/contact" onsubmit="startLoader(this)">
                             {{ csrf_field() }}
                             <label for="contact" class="visuallyhidden"> Kontaktandmed</label>
                             <textarea id="contact" name="contact">{!! $contact !!}</textarea>
-                            <button class="btn btn-primary btn-raised" type="submit">Uuenda</button>
+                            <button class="btn btn-primary btn-raised spinner" type="submit">
+                                <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                <span class="md-spinner-text">Uuenda</span>
+                            </button>
                         </form>
                     </div>
 
@@ -224,6 +207,23 @@
 
 @endsection
 
+@section('css')
+    <script type="text/javascript" src="{{asset('lib/js/tinymce.min.js')}}"></script>
+    @if(session('main-gallery'))
+        <script>
+            $(function () {
+                toastr.success('{{session('main-gallery')}}');
+            });
+        </script>
+    @elseif(session('wrong-ext'))
+        <script>
+            $(function () {
+                toastr.error('{{session('wrong-ext')}}');
+            });
+        </script>
+    @endif
+@endsection
+
 @section('scripts')
     <script>
         function afterInit(inst) {
@@ -241,19 +241,19 @@
             toolbar1: 'fontselect fontsizeselect | bold italic underline forecolor |' +
             'link subscript superscript | preview',
             content_css: '/css/main.css',
-            init_instance_callback : "afterInit",
+            init_instance_callback: "afterInit",
             setup: function (editor) {
                 editor.addButton('preview',
-                        {
-                            title: "Preview",
-                            onclick: function () {
-                                var modal = $("#modal-view");
-                                var preview = document.getElementById('preview');
-                                preview.innerHTML = "";
-                                preview.insertAdjacentHTML('beforeend', editor.getContent());
-                                $("#preview-modal").modal();
-                            }
-                        });
+                    {
+                        title: "Preview",
+                        onclick: function () {
+                            var modal = $("#modal-view");
+                            var preview = document.getElementById('preview');
+                            preview.innerHTML = "";
+                            preview.insertAdjacentHTML('beforeend', editor.getContent());
+                            $("#preview-modal").modal();
+                        }
+                    });
                 editor.addMenuItem("preview", {
                     text: "Preview",
                     cmd: "mcePreview",
@@ -263,3 +263,4 @@
         });
     </script>
 @endsection
+

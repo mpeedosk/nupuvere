@@ -1,5 +1,9 @@
 /* Inspired by material design*/
 
+/*-----------------------------------------------------------------------------------*/
+/* Basic */
+/*-----------------------------------------------------------------------------------*/
+
 .admin-page-container {
     position: absolute;
     width: 100%;
@@ -21,10 +25,65 @@
     position: relative;
 }
 
-.fa-10x {
-    font-size: 10em;
-    margin-bottom: 10px;
+.admin-page-content {
+    height: 100%;
+    margin-left: 240px;
+    -ms-flex: 0 1 auto;
+    position: relative;
+    display: inline-block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    z-index: 1;
 }
+
+.container {
+    max-width: none;
+    padding: 20px 30px 15px 30px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* Loader  */
+/*-----------------------------------------------------------------------------------*/
+
+.se-pre-con {
+    display: inline-block;
+    position: fixed;
+    left: 120px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: url(../img/gears.gif) center no-repeat #eee;
+}
+
+/*-----------------------------------------------------------------------------------*/
+/* Miscellaneous */
+/*-----------------------------------------------------------------------------------*/
+
+.btn_remove{
+    margin-left: 10px;
+}
+
+h4 {
+    color: #000;
+}
+
+.drag-delete {
+    margin-top: -3px;
+    margin-right: -25px;
+}
+
+.help-block{
+    display: none;
+}
+/*-----------------------------------------------------------------------------------*/
+/* Sidebar */
+/*-----------------------------------------------------------------------------------*/
 
 #sidebar {
     position: absolute;
@@ -155,8 +214,6 @@
     padding: 0;
     border: none;
     min-height: 64px;
-    max-height: 1000px;
-    z-index: 3;
     background-color: #313131;
     color: #dadada;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
@@ -164,6 +221,16 @@
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-property: max-height, box-shadow;
 }
+
+.fa-10x {
+    font-size: 10em;
+    margin-bottom: 10px;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Header */
+/*-----------------------------------------------------------------------------------*/
 
 .admin-page-header-row {
     display: -webkit-flex;
@@ -190,20 +257,7 @@
     padding: 0 40px 0 40px;
 }
 
-.admin-page-content {
-    height: 100%;
-    margin-left: 240px;
-    -ms-flex: 0 1 auto;
-    position: relative;
-    display: inline-block;
-    overflow-y: auto;
-    overflow-x: hidden;
-    -webkit-flex-grow: 1;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
-    z-index: 1;
-}
-
+/* moves the log-out button to far right*/
 .empty-space {
     -webkit-flex-grow: 1;
     -ms-flex-positive: 1;
@@ -220,23 +274,13 @@
     box-sizing: border-box;
 }
 
-.container {
-    max-width: none;
-    padding: 20px 30px 15px 30px;
-    height: 100%;
-    overflow-y: auto;
-}
+
+/*-----------------------------------------------------------------------------------*/
+/* Image gallery */
+/*-----------------------------------------------------------------------------------*/
 
 .img-box {
     padding-bottom: 15px;
-}
-
-.btn_remove{
-    margin-left: 10px;
-}
-
-h4 {
-    color: #000;
 }
 
 .vert-half {
@@ -253,7 +297,6 @@ h4 {
 
 .upload-icon {
     top: 0.4em;
-    /*top: 8px;*/
     font-size: 1.5em;
     margin-right: 5px;
 }
@@ -269,7 +312,10 @@ h4 {
     color: #eea236;
 }
 
-/* TABLE */
+
+/*-----------------------------------------------------------------------------------*/
+/* Categories */
+/*-----------------------------------------------------------------------------------*/
 
 .category-table {
     padding: 40px 40px 0 40px;
@@ -298,50 +344,22 @@ h4 {
     z-index: 2;
 }
 
-.drag-delete {
-    margin-top: -3px;
-    margin-right: -25px;
-}
-/* exercise input length*/
 .short-input {
     max-width: 400px;
 }
 
-/* dropdown menu fix*/
+/*-----------------------------------------------------------------------------------*/
+/* Categories */
+/*-----------------------------------------------------------------------------------*/
+
 .dropdown-input {
     max-width: 200px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-
-
-.no-js #loader {
-    display: none;
-}
-
-.js #loader {
-    display: block;
-    position: absolute;
-    left: 100px;
-    top: 0;
-}
-
-.se-pre-con {
-    position: fixed;
-    left: 120px;
-    top: 0px;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    background: url(../img/gears.gif) center no-repeat #eee;
-}
 #import-form{
     margin-right: 10px;
-}
-
-.help-block{
-    display: none;
 }
 
 .list-group-item {

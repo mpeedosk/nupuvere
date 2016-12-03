@@ -29,7 +29,7 @@ TABLE OF CONTENTS
 body {
     padding-right: 0 !important;
     line-height: 1.7em;
-    font-family: Roboto Condensed, serif;
+    font-family: 'Roboto Condensed', 'Helvetica', 'Arial', sans-serif;
     font-size: 14px;
     font-weight: 400;
 }
@@ -116,7 +116,6 @@ header img:hover {
     line-height: 1em;
     margin: 0 0 10px;
     color: #555555;
-    font-family: 'Roboto Condensed', sans-serif;
     font-size: 2.5em;
 }
 
@@ -194,6 +193,7 @@ footer, .push {
 /* ---------- Loader icon 2 cogs -----------*/
 
 .se-pre-con {
+    display: none;
     position: fixed;
     top: 0;
     width: 100%;
@@ -619,7 +619,15 @@ footer, .push {
         background-color: #424242 !important;
     }
 }
+
+#search-menu{
+    height: 56px;
+    width: auto !important;
+    overflow: hidden;
+    float: none;
+}
 .search-container {
+    display: inline-block;
     height: 56px;
     width: auto;
     overflow: hidden;
@@ -714,6 +722,13 @@ footer, .push {
 }
 
 /* ---------- Leaderboard Icons ---------- */
+#lb-menu{
+    display: inline-block;
+    width: auto !important;
+}
+#lb-menu a{
+    padding: 0 !important;
+}
 
 .leaderboard span {
     background: url(../img/leaderboard.png) no-repeat;
@@ -914,7 +929,6 @@ h2 {
     line-height: 1em;
     margin: 0 0 10px;
     color: #555555;
-    font-family: 'Roboto Condensed', sans-serif;
     font-size: 32px;
 }
 
@@ -922,7 +936,6 @@ h3 {
     font-size: 20px;
     font-weight: 300;
     padding: 0;
-    font-family: 'Roboto Condensed', sans-serif;
     margin: 0;
     color: #555555;
 }
@@ -1021,6 +1034,13 @@ hr {
     color: #313131;
     border: 1px solid #313131;
     border-radius: 2px;
+}
+#ex-content{
+    overflow: hidden;
+    padding: 10px;
+}
+#solution-text{
+    padding: 10px;
 }
 
 .ex-text-area:focus {
@@ -1173,6 +1193,9 @@ hr {
 /* Leaderboard */
 /*-----------------------------------------------------------------------------------*/
 
+#leaderboard{
+    display: none;
+}
 /* --------- Table style ---------- */
 table {
     background-color: #616161;

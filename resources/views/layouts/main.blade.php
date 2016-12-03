@@ -1,5 +1,5 @@
 @extends('layouts.blank')
-@section('title', 'Nupuvere')
+@section('title', 'Nuppel')
 @section('page')
     <!-- Header -->
     @include('includes.header')

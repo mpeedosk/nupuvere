@@ -1,46 +1,28 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
 @section('description', 'Kategooria haldus')
-
-@section('css')
-
-
-@endsection
-
 @section('content')
-    @if(session('toast'))
-        <script>
-            $(function () {
-                toastr.success('{{session('toast')}}');
-            });
-        </script>
-    @endif
-
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
             <div class="row category-table">
                 <div class="tabs">
                     <ul class="nav nav-tabs tab-nav">
-                        <li class="active">
-                            <a href="#current" data-toggle="tab">Jooksev aasta</a>
-                        </li>
-                        <li>
-                            <a href="#all-time" data-toggle="tab">Läbi aegade</a>
-                        </li>
+                        <li class="active"><a href="#current" data-toggle="tab">Jooksev aasta</a></li>
+                        <li><a href="#all-time" data-toggle="tab">Läbi aegade</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="current">
                             <h2 class="table-title margin-top-20">Jooksev aasta</h2>
-                            <button class="btn btn-primary btn-raised inline-block pull-right" type="submit"
-                                    onclick='$("#reset-dialog").modal()'>Lähtesta punktid
-                                <div class="ripple-container"></div>
+                            <button class="btn btn-primary btn-raised inline-block pull-right"
+                                    onclick='$("#reset-dialog").modal()'>
+                                Lähtesta punktid
                             </button>
-                            <table id="table"
-                                   data-toggle="table"
-                                   data-show-columns="true"
-                                   data-striped="true"
-                                   data-search="true">
+                            <table
+                                    data-toggle="table"
+                                    data-show-columns="true"
+                                    data-striped="true"
+                                    data-search="true">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -79,11 +61,11 @@
                         </div>
                         <div class="tab-pane" id="all-time">
                             <h2 class="table-title margin-top-20">Läbi aegade</h2>
-                            <table id="table"
-                                   data-toggle="table"
-                                   data-show-columns="true"
-                                   data-striped="true"
-                                   data-search="true">
+                            <table
+                                    data-toggle="table"
+                                    data-show-columns="true"
+                                    data-striped="true"
+                                    data-search="true">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
@@ -142,7 +124,7 @@
                 <div class="panel-footer">
 
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
-                    <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right"
+                    <button type="submit" class="btn btn-danger btn-raised pull-right"
                             data-dismiss="modal" onclick="deleteUser()">Kustuta
                     </button>
                 </div>
@@ -165,11 +147,21 @@
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
                     <form class="inline" method="POST" action="/admin/highscore/reset">
                         {{ csrf_field() }}
-                        <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right">Lähtesta
+                        <button type="submit" class="btn btn-danger btn-raised pull-right">Lähtesta
                         </button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+
+@section('css')
+    @if(session('toast'))
+        <script>
+            $(function () {
+                toastr.success('{{session('toast')}}');
+            });
+        </script>
+    @endif
 @endsection

@@ -1,31 +1,19 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
 @section('description', 'Administraatorite ülevaade')
-
-
 @section('content')
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
-            @if(session('toast'))
-                <script>
-                    $(function () {
-                        toastr.success('{{session('toast')}}');
-                    });
-                </script>
-            @endif
             <div class="row">
                 <h2>Loo uus kasutaja: </h2>
-
                 <div class="list-group">
-
                     <div class="list-group-item">
                         <a href="/admin/admins/create" class="list-group-item-heading">
                             <span class="fa fa-fw fa-plus" aria-hidden="true"></span>
                             Admin/Moderaator</a>
                     </div>
                 </div>
-
                 <h2 class="table-title">Administraatorite andmed</h2>
                 <table id="table"
                        data-toggle="table"
@@ -34,8 +22,7 @@
                        data-pagination="true"
                        data-id-field="id"
                        data-striped="true"
-                       class="hidden-start"
-                >
+                       class="hidden-start">
                     <thead>
                     <tr>
                         <th data-sortable="true">ID</th>
@@ -59,8 +46,7 @@
                             <td>@if($admin -> role === 2) Moderaator @else Administraator @endif</td>
                             <td class="text-center">
                                 <a href="/admin/admins/edit/{{$admin->id}}" class="btn btn-info btn-raised btn-sm"
-                                   type="button" data-toggle="tooltip"
-                                   title="Muuda">
+                                   data-toggle="tooltip" title="Muuda">
                                     <span class="glyphicon glyphicon-pencil pull-right" aria-hidden="true"></span>
                                 </a>
                                 <button
@@ -77,7 +63,6 @@
             </div>
         </div>
     </section>
-
 
     <div id="confirm-dialog" class="modal fade" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -102,4 +87,14 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('css')
+    @if(session('toast'))
+        <script>
+            $(function () {
+                toastr.success('{{session('toast')}}');
+            });
+        </script>
+    @endif
 @endsection

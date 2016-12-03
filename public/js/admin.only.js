@@ -239,7 +239,7 @@ $(document).on('click', '.btn_remove', function () {
 /**/
 
 /* adding answers for backend processing for multiple choice exercises */
-function getCheckedValue() {
+function getCheckedValue(form) {
     var answers = document.getElementsByName('answer');
     var correct = false;
     // check if we have an correct answer chosen
@@ -266,13 +266,14 @@ function getCheckedValue() {
     }
     // update the answer_count for backend
     document.getElementById('answer_count').value = answers.length;
+    startLoader(form);
 
     return true;
 }
 
 
 /* adding answers for backend processing for ordering exercises */
-function getCheckedValueO() {
+function getCheckedValueO(form) {
 
 
     var listElements = document.getElementsByClassName("drag-input");
@@ -289,12 +290,13 @@ function getCheckedValueO() {
 
     // update the answer_count for backend
     document.getElementById('answer_count').value = listElements.length;
+    startLoader(form);
 
     return true;
 
 }
 
-function getCheckedValueT() {
+function getCheckedValueT(form) {
     var answers = document.getElementsByName('answer');
     var answerContainer = $('#answers');
     // add a new input for each non-correct answer with the value as value
@@ -304,6 +306,7 @@ function getCheckedValueT() {
     }
     // update the answer_count for backend
     document.getElementById('answer_count').value = answers.length;
+    startLoader(form);
 
     return true;
 }

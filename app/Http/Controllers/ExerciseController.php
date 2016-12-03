@@ -30,20 +30,23 @@ class ExerciseController extends Controller
             return abort(404);
         }
         // Get all the easy exercises for this category and age group
-        $easyList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'lihtne'], ['hidden', False]])
+        $easyList = Exercise::where('category', $category)
+            ->where('age_group', $age_group)
+            ->where('difficulty', 'lihtne')
+            ->where('hidden', False)
             ->get();
-
         // Get all the medium exercises for this category and age group
-        $mediumList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'keskmine'], ['hidden', False]])
+        $mediumList = Exercise::where('category', $category)
+            ->where('age_group', $age_group)
+            ->where('difficulty', 'keskmine')
+            ->where('hidden', False)
             ->get();
-
         // Get all the hard exercises for this category and age group
-        $hardList = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', 'raske'], ['hidden', False]])
+        $hardList = Exercise::where('category', $category)
+            ->where('age_group', $age_group)
+            ->where('difficulty', 'raske')
+            ->where('hidden', False)
             ->get();
-
         // If user is not logged in, we can't calculate the progress or show solved exercises
         if (Auth::guest()) {
             return view('list', ['category' => $category, 'age_group' => $age_group, 'easyEx' => $easyList,
@@ -147,14 +150,18 @@ class ExerciseController extends Controller
 
         // fetch all the exercises in this category, age_group and difficulty for the sidebar
 
-        $exercise_list_after = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty], ['hidden', False]])
+        $exercise_list_after = Exercise::where('category', $category)
+            ->where('age_group', $age_group)
+            ->where('difficulty', $difficulty)
+            ->where('hidden', False)
             ->where('id', '>=', $ex_id)
             ->take(5)
             ->get();
 
-        $exercise_list_before = DB::table('exercises')
-            ->where([['category', $category], ['age_group', $age_group], ['difficulty', $difficulty], ['hidden', False]])
+        $exercise_list_before = Exercise::where('category', $category)
+            ->where('age_group', $age_group)
+            ->where('difficulty', $difficulty)
+            ->where('hidden', False)
             ->where('id', '<', $ex_id)
             ->orderBy('id', 'desc')
             ->take(4)

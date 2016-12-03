@@ -273,7 +273,8 @@ $(function () {
 });
 
 function startLoader(form) {
-    width = $(form).find("button, input[type='submit']").width();
+    width = $(form).find("button, input[type='submit']").find(".md-spinner-text").width();
+    console.log(width);
     $(form).find('.md-spinner').fadeIn("fast").css({"display": "block", "min-width": width});
     $(form).find(".md-spinner-text").hide();
 }

@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('content')
 <div class="container mainpage margin-top-30">
     <div class="row">

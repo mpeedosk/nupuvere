@@ -1,78 +1,40 @@
 @extends('admin.layouts.dashboard')
 @section('title', 'Administraator')
 @section('description', 'Ülesannete haldus')
-
-
 @section('content')
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
         <div class="container">
-            @if(session('exercise-create'))
-                <script>
-                    $(function () {
-                        toastr.success('Ülesanne "{{session('exercise-create')}}" edukalt lisatud');
-                    });
-                </script>
-            @endif
-
-            @if(session('toast'))
-                <script>
-                    $(function () {
-                        toastr.success('{{session('toast')}}');
-                    });
-                </script>
-            @endif
-            @if(session('info'))
-                <script>
-                    $(function () {
-                        toastr.info('{{session('info')}}');
-                    });
-                </script>
-            @endif
-            @if(session('error'))
-                <script>
-                    $(function () {
-                        toastr.error('{{session('error')}}');
-                    });
-                </script>
-            @endif
             <div class="row">
                 <h2>Lisa uus: </h2>
-
                 <div class="list-group">
-
                     <div class="list-group-item">
                         <a href="/admin/exercise/create/1" class="list-group-item-heading">
                             <span class="fa fa-fw fa-quote-left" aria-hidden="true"></span>
                             Tekstiline/numbriline</a>
                     </div>
-
                     <div class="list-group-item">
                         <a href="/admin/exercise/create/2" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-circle-o" aria-hidden="true"></span>
                             Valikvastusega - üks õige</a>
                     </div>
-
                     <div class="list-group-item">
                         <a href="/admin/exercise/create/3" class="list-group-item-heading">
                             <span class="fa fa-fw fa-check-square" aria-hidden="true"></span>
                             Valikvastusega - mitu õiget</a>
                     </div>
-
                     <div class="list-group-item botto">
                         <a href="/admin/exercise/create/4" class="list-group-item-heading">
                             <span class="fa fa-fw fa-sort-amount-asc" aria-hidden="true"></span>
                             Järjestamine</a>
                     </div>
                 </div>
-
                 <h2 class="table-title">Ülesanded</h2>
                 <form class="inline pull-right" method="POST" action="/admin/exercise/export" onsubmit="exportStart()">
                     {{ csrf_field() }}
-                    <button id="showAnswer" type="submit" class="btn btn-primary btn-raised pull-right">Ekspordi
+                    <button type="submit" class="btn btn-primary btn-raised pull-right">Ekspordi
                     </button>
                 </form>
-
                 <form id="import-form" class="inline pull-right" method="POST"
                       action="/admin/exercise/import"
                       enctype="multipart/form-data">
@@ -86,7 +48,6 @@
                         <span class="md-spinner-text">Impordi</span>
                     </button>
                 </form>
-
                 <table id="table"
                        data-toggle="table"
                        data-search="true"
@@ -127,14 +88,45 @@
                 </div>
                 <div class="panel-footer">
                     <button type="button" class="btn btn-blue btn-raised" data-dismiss="modal">Tühista</button>
-                    <button id="showAnswer" type="submit" class="btn btn-danger btn-raised pull-right"
+                    <button type="submit" class="btn btn-danger btn-raised pull-right"
                             data-dismiss="modal" onclick="deleteExercise()">Kustuta
                     </button>
                 </div>
             </div>
         </div>
     </div>
+@endsection
 
+@section('css')
+    @if(session('exercise-create'))
+        <script>
+            $(function () {
+                toastr.success('Ülesanne "{{session('exercise-create')}}" edukalt lisatud');
+            });
+        </script>
+    @endif
+
+    @if(session('toast'))
+        <script>
+            $(function () {
+                toastr.success('{{session('toast')}}');
+            });
+        </script>
+    @endif
+    @if(session('info'))
+        <script>
+            $(function () {
+                toastr.info('{{session('info')}}');
+            });
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            $(function () {
+                toastr.error('{{session('error')}}');
+            });
+        </script>
+    @endif
     <script>
         var data = [
                 @foreach($exercises as $exercise)
@@ -160,7 +152,7 @@
                     '</form>'
 
             },
-                @endforeach
+            @endforeach
         ];
 
         $(function () {
@@ -169,5 +161,4 @@
             });
         });
     </script>
-
 @endsection

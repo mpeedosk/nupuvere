@@ -95,34 +95,38 @@
                 <li class="hidden-md hidden-lg">
                     <a href="/edetabel"> Edetabel</a>
                 </li>
-                <a href="/edetabel" title="Edetabel" class="leaderboard pull-right visible-md visible-lg">
-                    <span class="center-block"></span>
-                </a>
+                <li id="lb-menu" class="pull-right">
+                    <a href="/edetabel" title="Edetabel" class="leaderboard visible-md visible-lg">
+                        <span class="center-block"></span>
+                    </a>
+                </li>
 
-                <div class="search-container visible-md visible-lg">
-                    <div class="search">
-                        <form id="search-form" action="/search" method="POST" onsubmit="startLoader(this)">
-                            {{ csrf_field() }}
-                            <input class="search-input" placeholder="Otsi..."
-                                   type="search" value="" name="search" id="search">
-                            <input class="search-btn" type="submit" value="">
-                            <span class="search-icon">
-                                <span class="spinner" ><span class="md-spinner md-spinner-white"></span></span>
+                <li id="search-menu">
+                    <div class="search-container visible-md visible-lg">
+                        <div class="search">
+                            <form id="search-form" action="/search" method="POST" onsubmit="startLoader(this)">
+                                {{ csrf_field() }}
+                                <input class="search-input" placeholder="Otsi..."
+                                       type="search" value="" name="search" id="search">
+                                <input class="search-btn" type="submit" value="">
+                                <span class="search-icon">
+                                <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
                                 <span class="md-spinner-text glyphicon glyphicon-search"></span></span>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-
+                </li>
+                {{-- Search button for the mobile menu --}}
                 <li class="hidden-md hidden-lg">
                     <div class="search-slicknav">
-                        <form id="search-form" action="/search" method="POST" onsubmit="startLoader(this)">
+                        <form id="search-form-slicknav" action="/search" method="POST" onsubmit="startLoader(this)">
                             {{ csrf_field() }}
                             <button type="submit" class="search-icon-slicknav">
                                 <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
                                 <span class="md-spinner-text glyphicon glyphicon-search"></span></button>
-                            <span class="search-input-wrapper"><input class="search-input-slicknav"
-                                                                      placeholder="Otsi..."
-                                                                      type="search" value="" name="search" id="search"></span>
+                            <span class="search-input-wrapper">
+                                <input class="search-input-slicknav" placeholder="Otsi..."
+                                       type="search" value="" name="search" id="search-slicknav"></span>
                         </form>
                     </div>
                 </li>

@@ -77,4 +77,19 @@ class Exercise extends Model
         return 'unknown-type ' . $type;
     }
 
+    /** Return the URL path to the exercise
+     * @return String
+     */
+    public function getPath(){
+        return "/".$this->category."/". $this->age_group . "/". $this->difficulty. "/". $this->id;
+    }
+
+
+    /** Return the title with overflow cut off
+     * @return String
+     */
+    public function cutTitle($length){
+        return strlen($this->title) > $length ? substr($this -> title,0, $length+1)."..." : $this -> title;
+    }
+
 }

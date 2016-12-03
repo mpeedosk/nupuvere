@@ -1,6 +1,7 @@
 @extends('layouts.main')
-@section('title', 'Nupuvere')
+@section('title', 'Nuppel')
 @section('content')
+    {{-- Simple greeting after registering  --}}
     @if(Session::has('register'))
         <script>
             $(function () {
@@ -9,12 +10,15 @@
         </script>
     @endif
 
-    <div id="slideshow" class="margin-vert-30" style="opacity: 0">
+    <div id="slideshow" class="margin-vert-30">
+        {{-- Make the loading smoother by first hiding the gallery then fading it in --}}
+        <script>
+            document.getElementById('slideshow').style.opacity = 0;
+        </script>
         <div class="container bottom-border">
             <div class="row">
                 <!-- Carousel Slideshow -->
                 <div id="gallery" class="carousel slide" data-ride="carousel">
-                    <!-- Carousel Indicators -->
                     <ol class="carousel-indicators">
                         <li data-target="#gallery" data-slide-to="0"></li>
                         <li data-target="#gallery" data-slide-to="1"></li>
@@ -23,7 +27,6 @@
                         <li data-target="#gallery" data-slide-to="4"></li>
                     </ol>
                     <div class="clearfix"></div>
-                    <!-- End Carousel Indicators -->
                     <!-- Carousel Images -->
                     <div class="carousel-inner">
                         <div class="item">
@@ -43,23 +46,28 @@
                         </div>
                     </div>
                     <!-- End Carousel Images -->
-                    <!-- Carousel Controls -->
                     <a class="left carousel-control" href="#gallery" data-slide="prev">
                         <span class="glyphicon glyphicon-chevron-left"></span>
                     </a>
                     <a class="right carousel-control" href="#gallery" data-slide="next">
                         <span class="glyphicon glyphicon-chevron-right"></span>
                     </a>
-                    <!-- End Carousel Controls -->
                 </div>
                 <!-- End Carousel Slideshow -->
             </div>
         </div>
     </div>
+
+    @include('includes.footer')
+@endsection
+
+@section('css')
     <script>
         $(document).ready(function () {
             $('#slideshow').fadeTo(400, 1);
+            $('.carousel').carousel({
+                interval: 1000 * 10
+            });
         });
     </script>
-    @include('includes.footer')
 @endsection

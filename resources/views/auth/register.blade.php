@@ -1,5 +1,5 @@
 @extends('layouts.blank')
-
+@section('title', 'Konto loomine')
 @section('page')
     <section class="container margin-top-30">
         <div class="row">
@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal registration" role="form" method="POST"
+                        <form class="form-horizontal registration" method="POST"
                               onsubmit="startLoader(this)"
                               action="{{ url('/register') }}">
                             {{ csrf_field() }}
@@ -53,7 +53,7 @@
                                 <div class="col-md-6">
                                     <input id="first-name" type="text" class="form-control" name="first_name"
                                            value="{{old('first_name')}}" onBlur="validateField('first-name')"
-                                           required autofocus>
+                                           required>
                                     <span id="first-name-error">
                                     @if ($errors->has('first_name'))
                                             <span class="help-block help-error">
@@ -71,7 +71,7 @@
                                 <div class="col-md-6">
                                     <input id="last-name" type="text" class="form-control" name="last_name"
                                            value="{{old('last_name')}}" onBlur="validateField('last-name')"
-                                           required autofocus>
+                                           required>
                                     <span id="last-name-error">
                                     @if ($errors->has('last_name'))
                                             <span class="help-block help-error">

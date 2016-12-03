@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', 'PagesController@index');
+Route::get('/search', 'PagesController@index');
 Route::post('/search', 'PagesController@search');
 Route::get('/edetabel', 'PagesController@highscore');
 

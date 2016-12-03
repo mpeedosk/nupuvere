@@ -1,6 +1,4 @@
 @extends('layouts.main')
-
-<!-- Main Content -->
 @section('content')
 <div class="container mainpage margin-top-30">
     <div class="row">
@@ -14,7 +12,7 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" role="form" method="POST" onsubmit="startLoader(this)"
+                    <form class="form-horizontal" method="POST" onsubmit="startLoader(this)"
                           action="{{ url('/password/email') }}">
                         {{ csrf_field() }}
 

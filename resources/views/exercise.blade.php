@@ -1,58 +1,57 @@
 @extends('layouts.main')
 @section('title', $exercise->title)
 @section('content')
-    <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
     <section class="margin-vert-30">
-        <div class="se-pre-con" style="display: none;"></div>
+        <div class="se-pre-con"></div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3 visible-lg visible-md">
                     @foreach($exercises_before as $ex)
                         @if ($ex->id == $exercise->id)
-                            <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                            <a id="active" href="{{$ex->getPath()}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                                 <div class="ex-title-wrapper">
-                                    {{strlen($ex -> title) > 12 ? substr($ex -> title,0, 12)."..." : $ex -> title}}
+                                    {{$ex->cutTitle(11)}}
                                 </div>
                             </a>
                         @else
-                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                            <a href="{{$ex->getPath()}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 <div class="ex-title-wrapper">
-                                    {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                    {{$ex->cutTitle(19)}}
                                 </div>
                             </a>
                         @endif
                     @endforeach
                     @foreach($exercises_after as $ex)
                         @if ($loop->first)
-                            <a id="active" href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                            <a id="active" href="{{$ex->getPath()}}"
                                class="btn center-block @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 <span class="glyphicon glyphicon-arrow-right pull-right text-icon"></span>
                                 <div class="ex-title-wrapper">
-                                    <span>{{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}</span>
+                                    <span>{{$ex->cutTitle(19)}}</span>
                                 </div>
 
                             </a>
                         @else
-                            <a href="/{{$category}}/{{$age_group}}/{{$difficulty}}/{{$ex -> id}}"
+                            <a href="{{$ex->getPath()}}"
                                class="btn center-block  @if( in_array($ex -> id, $solved)) btn-solved @else btn-not-solved @endif ">
                                 <div class="ex-title-wrapper">
-                                    {{strlen($ex -> title) > 20 ? substr($ex -> title,0, 20)."..." : $ex -> title}}
+                                    {{$ex->cutTitle(19)}}
                                 </div>
                             </a>
                         @endif
                     @endforeach
                 </div>
-                <div class="col-md-7 content-bg">
+                <div class="col-md-7">
                     <div class="row">
                         <div class="ex-title col-md-12 fadeInRight animated">
-                            <H2 class="text-left no-margin">{{$exercise -> title}}</H2>
+                            <H2 class="text-left">{{$exercise -> title}}</H2>
                         </div>
                         <div class="col-md-12 animate fadeInLeft animated">
                             <div class="ex-text-area font-size-md">
-                                <div id="ex-content" class="padding-10" style=" overflow: hidden ">
+                                <div id="ex-content">
                                     {!! $exercise -> content !!}
                                 </div>
                             </div>
@@ -70,8 +69,7 @@
                         @else
                             <div id="solution" class="col-md-12 fadeInRightBig animated">
                                 <div class="ex-text-area font-size-md">
-                                    <div id="solution-text" class="padding-10">
-
+                                    <div id="solution-text">
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +92,6 @@
                                         <span class="hidden-xs">Nimekiri</span>
                                         <span class="visible-xs">&larr;</span>
                                     </a>
-
                                     @if(Auth::guest() )
                                         <span class="btn btn-raised btn-success fix-margin-right pull-right" disabled onclick="loginRequired()">
                                             Vasta</span>
@@ -107,7 +104,7 @@
                                     @endif
 
                                     <a id="next-ex" class="btn btn-raised btn-aqua pull-right"
-                                       href="{{isset($exercises_after[1]) ? '/' . $category.'/'.$age_group.'/'.$difficulty.'/'.$exercises_after[1]->id : '/'.$category.'/'.$age_group }}">
+                                       href="{{isset($exercises_after[1]) ? $exercises_after[1]->getPath() : '/'.$category.'/'.$age_group }}">
                                         <span class="hidden-xs">Edasi</span>
                                         <span class="visible-xs">&rarr;</span>
                                     </a>
@@ -146,7 +143,7 @@
                                         alt="Creative Commons License"
                                         src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png"
                                         data-toggle="tooltip" data-placement="bottom"
-                                        title="This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License"/></a>
+                                        title="See töö on kaitstud Creative Commons Attribution-NonCommercial 4.0 International litsentsiga"/></a>
                         </div>
                     @endif
                 </div>
@@ -196,7 +193,6 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content panel panel-warning">
                 <div class="panel-heading">
-
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <span class="modal-img glyphicon glyphicon-remove" aria-hidden="true"></span>
                     <h4 class="panel-title">Vale vastus</h4>
@@ -219,9 +215,12 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="" class="enlargeImageModalSource">
+                    <img src="#" class="enlargeImageModalSource" alt="enlarged-image">
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('css')
+    <script src="{{asset('lib/js/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image')}}"></script>
 @endsection

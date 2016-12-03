@@ -2,10 +2,9 @@
 @section('title', 'Administraator')
 @section('description', 'Järjestamine')
 @section('action')
-    onSubmit="return getCheckedValueO()"
+    onSubmit="return getCheckedValueO(this)"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/4' }}@endif"
 @endsection
-
 @section('answer-content')
     <div id="answers">
         <div id="draggable" class="drag-panel">

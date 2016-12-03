@@ -2,13 +2,12 @@
 @section('title', 'Edetabel')
 @section('content')
     <section class="content margin-vert-30">
-        <div class="se-pre-con"></div>
         <div class="container">
-            <div id="leaderboard" class="row text-center" style="display: none">
+            <div id="leaderboard" class="row text-center">
                 <div class="col-md-6 margin-bottom-30">
                     <h2>Jooksev aasta</h2>
                     <hr>
-                    <table id="table"
+                    <table
                            data-toggle="table"
                            data-striped="true"
                            class="hidden-start">
@@ -33,7 +32,7 @@
                 <div class="col-md-6">
                     <h2>Läbi aegade</h2>
                     <hr>
-                    <table id="table"
+                    <table
                            data-toggle="table"
                            data-striped="true"
                            class="hidden-start">

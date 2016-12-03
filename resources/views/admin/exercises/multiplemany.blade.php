@@ -1,12 +1,10 @@
 @extends('admin.layouts.exercise')
 @section('title', 'Administraator')
 @section('description', 'Valikvastustega - mitu õiget')
-
 @section('action')
-    onSubmit="return getCheckedValue()"
+    onSubmit="return getCheckedValue(this)"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/3' }}@endif"
 @endsection
-
 @section('answer-content')
     <div id="answers">
         @if(isset($answers))
@@ -34,7 +32,7 @@
             <textarea id="answer-title" class="form-control"></textarea>
             <div class="text-center">
                 <button type="button" id="add" tabindex="-1" class="btn btn-sm btn-aqua" onclick="addAnswerChoiceM()">
-                    <span class="glyphicon glyphicon-plus"></span>&nbspLisa vastus
+                    <span class="glyphicon glyphicon-plus"></span>&nbsp;Lisa vastus
                 </button>
             </div>
         </div>

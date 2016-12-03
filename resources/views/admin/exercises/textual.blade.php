@@ -2,10 +2,9 @@
 @section('title', 'Administraator')
 @section('description', 'Tekstiline/numbriline')
 @section('action')
-    onSubmit="return getCheckedValueT()"
+    onSubmit="return getCheckedValueT(this)"
     action="@if(isset($exercise->id)){{ '/admin/exercise/edit/' . $exercise->id }}@else{{ '/admin/exercise/create/1' }}@endif"
 @endsection
-
 @section('answer-content')
     <div id="answers">
         @if(isset($answers))

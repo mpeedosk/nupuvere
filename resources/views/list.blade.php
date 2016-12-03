@@ -11,8 +11,8 @@
                     @else
                         @if (Auth::guest() )
                             @foreach($easyEx as $exercise)
-                                <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                                   class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
+                                <a href="{{$exercise->getPath()}}"
+                                   class="btn center-block btn-not-solved">{{$exercise->cutTitle(25)}}</a>
                             @endforeach
                         @else
                             <div class="progress progress-striped">
@@ -23,14 +23,14 @@
                             </div>
                             @foreach($easyEx as $exercise)
                                 @if( in_array($exercise-> id, $solved))
-                                    <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
+                                    <a href="{{$exercise->getPath()}}"
                                        class="btn center-block btn-solved">
-                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
+                                        {{$exercise->cutTitle(25)}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
-                                    <a href="/{{$category}}/{{$age_group}}/lihtne/{{$exercise -> id}}"
-                                       class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
+                                    <a href="{{$exercise->getPath()}}"
+                                       class="btn center-block btn-not-solved">{{$exercise->cutTitle(25)}}</a>
                                 @endif
                             @endforeach
                         @endif
@@ -44,8 +44,8 @@
                         @if (Auth::guest() )
                             @foreach($mediumEx as $exercise)
                                 <a class="btn center-block btn-not-solved"
-                                   href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}">
-                                    {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
+                                   href="{{$exercise->getPath()}}">
+                                    {{$exercise->cutTitle(25)}}
                                 </a>
                             @endforeach
                         @else
@@ -58,14 +58,14 @@
 
                             @foreach($mediumEx as $exercise)
                                 @if( in_array($exercise-> id, $solved))
-                                    <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
+                                    <a href="{{$exercise->getPath()}}"
                                        class="btn center-block btn-solved">
-                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
+                                        {{$exercise->cutTitle(25)}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
-                                    <a href="/{{$category}}/{{$age_group}}/keskmine/{{$exercise -> id}}"
-                                       class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
+                                    <a href="{{$exercise->getPath()}}"
+                                       class="btn center-block btn-not-solved">{{$exercise->cutTitle(25)}}</a>
                                 @endif
                             @endforeach
                         @endif
@@ -79,7 +79,8 @@
                         @if(Auth::guest())
                             @foreach($hardEx as $exercise)
                                 <a class="btn center-block btn-not-solved"
-                                   href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
+                                   href="{{$exercise->getPath()}}">{{$exercise->cutTitle(25)}}
+                                </a>
                             @endforeach
                         @else
                             <div class="progress progress-striped">
@@ -90,14 +91,14 @@
                             </div>
                             @foreach($hardEx as $exercise)
                                 @if( in_array($exercise-> id, $solved))
-                                    <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
+                                    <a href="{{$exercise->getPath()}}"
                                        class="btn center-block btn-solved">
-                                        {{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}
+                                        {{$exercise->cutTitle(25)}}
                                         <span class="glyphicon glyphicon-ok pull-right text-icon"></span>
                                     </a>
                                 @else
-                                    <a href="/{{$category}}/{{$age_group}}/raske/{{$exercise -> id}}"
-                                       class="btn center-block btn-not-solved">{{strlen($exercise -> title) > 24 ? substr($exercise -> title,0, 25)."..." : $exercise -> title}}</a>
+                                    <a href="{{$exercise->getPath()}}"
+                                       class="btn center-block btn-not-solved">{{$exercise->cutTitle(25)}}</a>
                                 @endif
                             @endforeach
                         @endif

@@ -65,9 +65,11 @@
                         <div class="row text-center">
                             <div class="bottom-border user-bar no-padding-lg">
                                 <div class="col-xs-3 user-bar-item">
-                                    <span class="fa fa-trophy points-icon" aria-hidden="true"></span>
+                                    <span id="points-increase" class="fa fa-fw points-icon" aria-hidden="true">
+                                        <span class="fa-trophy"></span>
+                                        <span class="fa-arrow-up"></span>
+                                    </span>
                                     <span id="user-points">{{Auth::user() -> points }}</span>
-                                    <span id="points-increase" class="fa fa-arrow-up points-icon" aria-hidden="true"></span>
                                 </div>
                                 <div class="col-xs-5 user-bar-item">
                                     <div class="user-bar-name">{{Auth::user() -> username }}</div>

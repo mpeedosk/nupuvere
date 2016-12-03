@@ -1,9 +1,7 @@
-<!-- sidebar menu start-->
 <div id="sidebar">
     <a href="/" class="sidebar-logo withripple padding-10">
         <img src="@if (App::isLocal()) {{asset('img/logo.png')}} @else {{secure_asset('img/logo.png')}} @endif"
              alt="Logo"/></a>
-
     <header class="sidebar-header text-center" id="nav-accordion">
         <span class="fa fa-cogs fa-10x color-yellow" aria-hidden="true"></span>
         <span class="font-size-md">{{ucfirst(Auth::user()->first_name)." ".ucfirst(Auth::user()->last_name)}}</span>
@@ -43,4 +41,3 @@
         @endif
     </div>
 </div>
-<!-- sidebar menu end-->
