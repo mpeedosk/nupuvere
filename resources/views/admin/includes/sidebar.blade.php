@@ -9,7 +9,7 @@
 
     <div class="sidebar-nav">
         <a href="/" class="sidebar-item withripple">
-            <span class="fa fa-fw fa-long-arrow-left "></span> Tagasi pealehele
+            <span class="fa fa-fw fa-long-arrow-left"></span> Tagasi pealehele
         </a>
 
         <a href="/admin/home" class="sidebar-item withripple

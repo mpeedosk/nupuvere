@@ -116,7 +116,7 @@
                                 <label for="inputLogos2" class="visuallyhidden"> Input with placeholder</label>
                                 <input id="inputLogos2" type="text" readonly="" class="form-control upload-input"
                                        placeholder="Logod">
-                                <img class="sponsors" src="/img/logo/footer.png" alt="Logo"/>
+                                <img class="sponsors" src="/img/logo/footer.png?cache={{$updated}}" alt="Logo"/>
                             </div>
 
                             <button class="btn btn-primary btn-raised" type="submit">

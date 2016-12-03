@@ -1,5 +1,4 @@
 @extends('admin.layouts.dashboard')
-
 @section('content')
     <section class="admin-page-content">
         <div class="se-pre-con"></div>
