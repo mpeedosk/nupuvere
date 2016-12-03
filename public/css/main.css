@@ -72,6 +72,7 @@ header {
     position: relative;
     height: auto;
     top: 0;
+    -webkit-transition: all 0.2s ease 0s;
     transition: all 0.2s ease 0s;
     width: 100%;
 }
@@ -87,18 +88,12 @@ header img {
     margin-bottom: 27px;
     width: 65%;
     max-width: 100%;
-    -webkit-transition: all 1s ease; /* Safari and Chrome */
-    -moz-transition: all 1s ease; /* Firefox */
-    -ms-transition: all 1s ease; /* IE 9 */
-    -o-transition: all 1s ease; /* Opera */
+    -webkit-transition: all 1s ease; /* Safari and Chrome */ /* Firefox */ /* IE 9 */ /* Opera */
     transition: all 1s ease;
 }
 
 header img:hover {
-    -webkit-transform: scale(1.15); /* Safari and Chrome */
-    -moz-transform: scale(1.15); /* Firefox */
-    -ms-transform: scale(1.15); /* IE 9 */
-    -o-transform: scale(1.15); /* Opera */
+    -webkit-transform: scale(1.15); /* Safari and Chrome */ /* Firefox */ /* IE 9 */ /* Opera */
     transform: scale(1.15);
 }
 
@@ -220,8 +215,6 @@ footer, .push {
         width: auto;
         opacity: 0.9;
         font-size: 1.3em;
-        -moz-border-radius: 2px;
-        -webkit-border-radius: 2px;
         border-radius: 2px;
     }
 
@@ -392,11 +385,8 @@ footer, .push {
 .btn-blue {
     background-color: #386685 !important;
     background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, #40769a, #376685);
-    background-image: -ms-linear-gradient(top, #40769a, #376685);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #40769a), color-stop(100%, #376685));
     background-image: -webkit-linear-gradient(top, #40769a, #376685);
-    background-image: -o-linear-gradient(top, #40769a, #376685);
     background-image: linear-gradient(#40769a, #376685);
     border-color: #376685 #376685 #356280;
     color: #fff !important;
@@ -407,11 +397,8 @@ footer, .push {
 .btn-aqua {
     background-color: #388582 !important;
     background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, #409a97, #378582);
-    background-image: -ms-linear-gradient(top, #409a97, #378582);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #409a97), color-stop(100%, #378582));
     background-image: -webkit-linear-gradient(top, #409a97, #378582);
-    background-image: -o-linear-gradient(top, #409a97, #378582);
     background-image: linear-gradient(#409a97, #378582);
     border-color: #378582 #378582 #35807d;
     color: #fff !important;
@@ -423,11 +410,8 @@ footer, .push {
     overflow: hidden;
     background-color: #4ba14f !important;
     background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, #4caf50, #4ba14f);
-    background-image: -ms-linear-gradient(top, #4caf50, #4ba14f);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4caf50), color-stop(100%, #4ba14f));
     background-image: -webkit-linear-gradient(top, #4caf50, #4ba14f);
-    background-image: -o-linear-gradient(top, #4caf50, #4ba14f);
     background-image: linear-gradient(#4caf50, #4ba14f);
     border-color: #4ba14f #4ba14f #4ba14f;
     color: #fff !important;
@@ -440,11 +424,8 @@ footer, .push {
     overflow: hidden;
     background-color: #3f51b5 !important;
     background-repeat: repeat-x;
-    background-image: -moz-linear-gradient(top, #465ecd, #3f51b5);
-    background-image: -ms-linear-gradient(top, #465ecd, #3f51b5);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #465ecd), color-stop(100%, #3f51b5));
     background-image: -webkit-linear-gradient(top, #465ecd, #3f51b5);
-    background-image: -o-linear-gradient(top, #465ecd, #3f51b5);
     background-image: linear-gradient(#465ecd, #3f51b5);
     border-color: #465ecd #465ecd #3f51b5;
     color: #fff !important;
@@ -535,14 +516,12 @@ footer, .push {
     background: #424242;
     border: 2px solid #313131;
     position: relative;
-    -webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     -ms-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     -o-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     display: block;
     list-style: none;
-    margin: 0px;
+    margin: 0;
     padding: 0 0 !important;
     min-width: 200px;
     z-index: 30;
@@ -654,7 +633,6 @@ footer, .push {
     float: right;
     overflow: hidden;
     -webkit-transition: width 0.3s;
-    -moz-transition: width 0.3s;
     transition: width 0.3s;
 }
 
@@ -786,11 +764,7 @@ footer, .push {
     display: block;
     width: 1.125em;
     height: 0.125em;
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
     border-radius: 1px;
-    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
     box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
 }
 
@@ -843,8 +817,6 @@ footer, .push {
 .slicknav_btn {
     margin: 5px 5px 6px;
     text-decoration: none;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
     border-radius: 4px;
     background-color: #333;
 }
@@ -878,12 +850,12 @@ footer, .push {
 
 .slicknav_nav .slicknav_item {
     padding: 14px;
-    margin: 2px 0px;
+    margin: 2px 0;
 }
 
 .slicknav_nav a {
     padding: 14px;
-    margin: 2px 0px;
+    margin: 2px 0;
     text-decoration: none;
     color: #fff;
 }
@@ -981,13 +953,11 @@ a {
     text-decoration: none;
     color: #3f51b5;
     -webkit-transition: color 0.15s ease-in;
-    -moz-transition: color 0.15s ease-in;
-    -o-transition: color 0.15s ease-in;
     transition: color 0.15s ease-in;
 }
 
 p {
-    margin: 0px 0 0px;
+    margin: 0 0 0;
 }
 
 a,
@@ -1088,6 +1058,7 @@ hr {
     margin: 10px 1px;
     font-size: 14px;
     font-weight: 500;
+    -webkit-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     outline: 0;
     cursor: pointer;
@@ -1115,6 +1086,7 @@ hr {
     margin: 10px 1px;
     font-size: 14px;
     font-weight: 600;
+    -webkit-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1.42857143;
     text-align: center;
@@ -1288,7 +1260,6 @@ tr a:hover {
 .progress {
     height: 10px;
     border-radius: 0;
-    -webkit-box-shadow: none;
     box-shadow: none;
 }
 
@@ -1477,4 +1448,3 @@ tr a:hover {
     background: #333;
     color: #eee;
 }
-
