@@ -47,7 +47,7 @@
     @yield('css')
 
 </head>
-<body id="body-bg">
+<body class="pattern">
 
 <section class="admin-page-container">
     <div class="admin-page-layout">

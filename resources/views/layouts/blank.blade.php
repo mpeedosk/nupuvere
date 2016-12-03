@@ -58,7 +58,7 @@
     @yield('css')
 
 </head>
-<body id="body-bg">
+<body class="pattern">
 @yield('page')
 @if (App::isLocal())
     <script type="text/javascript" src="{{asset('js/modernizr.custom.js')}}"></script>

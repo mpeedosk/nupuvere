@@ -343,3 +343,13 @@ h4 {
 .help-block{
     display: none;
 }
+
+.list-group-item {
+    margin-top: 1em;
+    border-radius: 2px;
+    padding: 0 30px;
+}
+
+.list-group-item a {
+    border-bottom: 2px solid #5e70d4;
+}

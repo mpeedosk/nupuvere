@@ -223,7 +223,11 @@ function submitAnswer(event, id, type) {
                 var points = document.getElementById('user-points');
                 toastr.success('Te vastasite õigesti!');
                 if (data.points != points.innerHTML) {
-                    $('#points-increase').fadeTo('slow', 1).delay(2000).fadeTo('slow', 0);
+                    $('.user-bar .fa-trophy').fadeOut(0).hide(function () {
+                        $('.user-bar .fa-arrow-up').fadeIn(800).delay(3000).fadeOut(800).queue(function () {
+                            $('.user-bar .fa-trophy').fadeIn(0);
+                        })
+                    });
                 }
 
                 if (data.solution != null && data.solution != "") {

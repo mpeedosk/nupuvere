@@ -191,7 +191,7 @@
                     <span class="modal-img glyphicon glyphicon-question-sign" aria-hidden="true"></span>
                     <h4 class="panel-title">Logo uuendamine</h4>
                 </div>
-                <div class="modal-body font-size-lg justyfy">
+                <div class="modal-body font-size-lg justify">
                     <p>Logo suurus peaks olema 810 x 140. Pärast faili üleslaadimist süsteem
                         automaatselt muudab dimensioone. Seega, kui laadida üles pilt, mille mõõtmed ei ole vastavad,
                         võib see esilehel näha teistmoodi välja.</p>
