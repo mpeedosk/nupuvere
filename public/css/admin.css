@@ -109,7 +109,6 @@ h4 {
     overflow: visible;
     overflow-y: auto;
     z-index: 5;
-
 }
 
 .sidebar-logo {
@@ -231,6 +230,20 @@ h4 {
 /*-----------------------------------------------------------------------------------*/
 /* Header */
 /*-----------------------------------------------------------------------------------*/
+
+.admin-page-header .glyphicon{
+    margin-left: -15px;
+    margin-right: 15px;
+    width: 19px;
+    cursor: pointer;
+    font-size: 1.3em;
+    transition:transform 400ms ease-in;
+}
+.admin-page-header .glyphicon.rotate-180{
+    transform: rotate(180deg);
+    transition:transform 400ms ease-in;
+}
+
 
 .admin-page-header-row {
     display: -webkit-flex;

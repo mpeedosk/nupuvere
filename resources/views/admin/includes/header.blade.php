@@ -1,5 +1,6 @@
 <header class="admin-page-header">
     <div class="admin-page-header-row">
+        <span class="glyphicon glyphicon-arrow-left" onclick="hide()"></span>
         <span class="header-title hidden-sm hidden-xs">@yield('description')</span>
         <div class="empty-space"></div>
         <form id="logout-form" onsubmit="startLoader(this)"
