@@ -400,6 +400,7 @@ class ExerciseController extends Controller
     public function destroy($id)
     {
         DB::table('exercises')->where('id', $id)->delete();
+        DB::table('answers')->where('ex_id', $id)->delete();
 
         Session::flash('exercise-delete', 'Ülesanne edukalt kustutatud');
 

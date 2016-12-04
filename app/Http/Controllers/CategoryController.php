@@ -18,7 +18,8 @@ class CategoryController extends Controller
     public function create(Request $request)
     {
         $this-> validate(request(), [
-            'name' => 'required | unique:categories,name'
+            'name' => 'required|max:14|unique:categories,name',
+            'color' => 'size:7',
         ]);
 
 
