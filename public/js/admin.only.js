@@ -11,18 +11,17 @@ $(document).ready(function () {
         $(".se-pre-con").fadeOut("slow");
 });
 
-var isHidden = false;
 function hide() {
+    var sidebar = $("#sidebar");
     var duration = 400;
-    if(isHidden){
-        isHidden = false;
-        $("#sidebar").animate({left:0}, {duration: duration, queue:false});
+    console.log(sidebar.css("left"));
+    if(sidebar.css("left") == '-240px'){
+        sidebar.animate({left:0}, {duration: duration, queue:false});
         $(".admin-page-content").animate({'margin-left':240},{duration: duration, queue:false});
         $(".admin-page-header").animate({'margin-left':240, 'width': '-=240px'},{duration: duration, queue:false});
         $(".admin-page-header .glyphicon").toggleClass('rotate-180');
     }else{
-        isHidden = true;
-        $("#sidebar").animate({left:-240}, {duration: duration , queue:false});
+        sidebar.animate({left:-240}, {duration: duration , queue:false});
         $(".admin-page-content").animate({'margin-left':0},{duration: duration, queue:false});
         $(".admin-page-header").animate({'margin-left':0, 'width': '100%'},{duration: duration, queue:false});
         $(".admin-page-header .glyphicon").toggleClass('rotate-180');

@@ -384,3 +384,20 @@ h4 {
 .list-group-item a {
     border-bottom: 2px solid #5e70d4;
 }
+
+
+/*-----------------------------------------------------------------------------------*/
+/* Menu automatic toggle on small screens */
+/*-----------------------------------------------------------------------------------*/
+@media (max-width: 767px) {
+    #sidebar{
+        left: -240px;
+    }
+    .admin-page-content{
+        margin-left: 0;
+    }
+    .admin-page-header{
+        margin-left: 0;
+        width: 100%;
+    }
+}
