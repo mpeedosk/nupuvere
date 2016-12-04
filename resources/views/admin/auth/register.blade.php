@@ -126,7 +126,7 @@
                                 <div class="radio radio-primary">
                                     <label>
                                         <input type="radio" name="role" value="mod"
-                                               @if(isset($admin)) @if($admin->role === 2) @endif @else checked="" @endif>
+                                               @if(isset($admin)) @if($admin->role === 2) checked="" @endif @else checked="" @endif>
                                         Moderaator
                                     </label>
                                 </div>
