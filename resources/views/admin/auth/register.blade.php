@@ -140,7 +140,8 @@
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <button type="submit" class="btn btn-primary btn-raised">
-                                    @if(isset($admin)) Muuda @else Loo kasutaja @endif
+                                    <span class="spinner"><span class="md-spinner md-spinner-white"></span></span>
+                                    <span class="md-spinner-text">@if(isset($admin)) Muuda @else Loo kasutaja @endif</span>
                                 </button>
                             </div>
                         </div>

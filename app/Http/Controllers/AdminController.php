@@ -161,7 +161,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'username' => 'required|max:255',
+            'username' => 'required|max:255|unique:users,username,'.$id,
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|max:255|unique:users,email,'.$id,
