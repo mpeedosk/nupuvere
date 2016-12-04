@@ -116,7 +116,7 @@
                             <div class="col-md-10">
                                 <div class="radio radio-primary">
                                     <label>
-                                        <input type="radio" name="role" value="admin"
+                                        <input type="radio" name="role" value="normal"
                                                @if(isset($admin)) @if($admin->role === 1) checked="" @endif @else checked="" @endif>
                                         Tavakasutaja
                                     </label>
