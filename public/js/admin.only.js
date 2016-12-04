@@ -62,8 +62,8 @@ if (window.location.pathname == "/admin/category") {
         var filename = document.getElementById('import').value;
         if (filename != "") {
             var fileParts = filename.split('.');
-            var extention = fileParts[fileParts.length - 1].toLowerCase();
-            if (extention != "xls")
+            var extension = fileParts[fileParts.length - 1].toLowerCase();
+            if (extension != "xls")
                 toastr.info("Faili laiend peab olema xls");
             else {
                 document.getElementById("import-form").submit();
@@ -183,7 +183,7 @@ function addAnswerChoice() {
     var content = tinyMCE.get('answer-title').getContent();
     tinyMCE.get('answer-title').setContent("");
 
-    var answer_group =
+    var answerGroup =
         '<div class="form-group margin-top-10">' +
         '<div class="radio radio-inline">' +
         '<label>' +
@@ -198,7 +198,7 @@ function addAnswerChoice() {
         '</button>' +
         '</div>';
 
-    $('#answers').append(answer_group);
+    $('#answers').append(answerGroup);
     reloadWiris();
 }
 
@@ -208,7 +208,7 @@ function addAnswerChoiceM() {
     var content = tinyMCE.get('answer-title').getContent();
     tinyMCE.get('answer-title').setContent("");
 
-    var answer_group =
+    var answerGroup =
         '<div class="form-group margin-top-10">' +
         '<div class="checkbox checkbox-inline">' +
         '<label>' +
@@ -223,7 +223,7 @@ function addAnswerChoiceM() {
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button>' +
         '</div>';
-    $('#answers').append(answer_group);
+    $('#answers').append(answerGroup);
     reloadWiris();
 
 }
@@ -233,7 +233,7 @@ function addAnswerOrder() {
     var content = tinyMCE.get('answer-title').getContent();
     tinyMCE.get('answer-title').setContent("");
 
-    var answer_group = '<div class="drag-item drag"><div class="drag-content inline-block">' + content + '</div>' +
+    var answerGroup = '<div class="drag-item drag"><div class="drag-content inline-block">' + content + '</div>' +
         '<div class="visuallyhidden"><input hidden class="drag-input"  value=\'' + content + '\'>' +
         '</div>' +
         '<button class="btn btn-danger btn-sm btn_remove margin-bottom-0 drag-delete" type="button" ' +
@@ -241,7 +241,7 @@ function addAnswerOrder() {
         '<span class="glyphicon glyphicon-remove pull-right" aria-hidden="true"></span>' +
         '</button></div>';
 
-    $('#draggable').append(answer_group);
+    $('#draggable').append(answerGroup);
     reloadWiris();
 }
 
@@ -471,4 +471,13 @@ function checkTitleAvailability(id) {
             }
         });
     }
+}
+
+/* polyfill http://stackoverflow.com/questions/30867172/code-not-running-in-ie-11-works-fine-in-chrome */
+
+if (!String.prototype.startsWith) {
+    String.prototype.startsWith = function(searchString, position) {
+        position = position || 0;
+        return this.indexOf(searchString, position) === position;
+    };
 }

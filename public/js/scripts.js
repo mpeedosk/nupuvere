@@ -97,7 +97,7 @@ function showAnswer(id, type) {
         success: function (data) {
 
             var answers = JSON.parse(data.answers);
-            var answers_id = JSON.parse(data.answers_id);
+            var answersId = JSON.parse(data.answers_id);
             var listElements = null;
 
             switch (type) {
@@ -112,7 +112,7 @@ function showAnswer(id, type) {
                     listElements = document.querySelectorAll('input[name = "answer"]');
                     for (var i = 0; i < listElements.length; i++) {
                         listElements[i].disabled = true;
-                        if (listElements[i].id == answers_id[0]) {
+                        if (listElements[i].id == answersId[0]) {
                             listElements[i].checked = true;
                         } else
                             listElements[i].checked = false;
@@ -122,7 +122,7 @@ function showAnswer(id, type) {
                     listElements = document.querySelectorAll('input[name = "answer"]');
                     for (var i = 0; i < listElements.length; i++) {
                         listElements[i].disabled = true;
-                        if (answers_id.indexOf(parseInt(listElements[i].id)) >= 0) {
+                        if (answersId.indexOf(parseInt(listElements[i].id)) >= 0) {
                             listElements[i].checked = true;
                         } else {
                             listElements[i].checked = false;
@@ -184,7 +184,7 @@ function submitAnswer(event, id, type) {
             if (input != null)
                 answers.push(input.id);
             else {
-                toastr.info('Te peate midagi valima!');
+                toastr.info('Vastamiseks on tarvis sisestada vastus.');
                 return;
             }
             break;
@@ -272,7 +272,6 @@ $(function () {
 
 function startLoader(form) {
     width = $(form).find("button, input[type='submit']").find(".md-spinner-text").width();
-    console.log(width);
     $(form).find('.md-spinner').fadeIn("fast").css({"display": "block", "min-width": width});
     $(form).find(".md-spinner-text").hide();
 }

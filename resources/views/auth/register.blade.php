@@ -8,7 +8,7 @@
                     <div class="panel-heading text-center bottom-border">
                         <div class="row">
                             <div class="col-xs-4">
-                                <div class="logo">
+                                <div class="logo margin-top-20">
                                     <a href="/">
                                         <img src="/img/logo.png " alt="Logo">
                                     </a>
@@ -34,7 +34,7 @@
                                 <div class="col-md-6">
                                     <input id="username" type="text" class="form-control" name="username"
                                            value="{{old('username')}}" onBlur="checkAvailabilityUser(-1)"
-                                           required autofocus>
+                                           required autofocus maxlength="20">
                                     <span id="username-error">
                                         @if ($errors->has('username'))
                                             <span class="help-block help-error">
