@@ -114,17 +114,19 @@
                         <div class="form-group">
                             <label class="col-md-2 control-label">Roll</label>
                             <div class="col-md-10">
-                                <div class="radio radio-primary">
-                                    <label>
-                                        <input type="radio" name="role" value="normal"
-                                               @if(isset($admin)) @if($admin->role === 1) checked="" @endif @else checked="" @endif>
-                                        Tavakasutaja
-                                    </label>
-                                </div>
+                                @if(isset($admin))
+                                    <div class="radio radio-primary">
+                                        <label>
+                                            <input type="radio" name="role" value="normal"
+                                                    @if($admin->role === 1) checked="" @endif>
+                                            Tavakasutaja
+                                        </label>
+                                    </div>
+                                @endif
                                 <div class="radio radio-primary">
                                     <label>
                                         <input type="radio" name="role" value="mod"
-                                               @if(isset($admin) && $admin->role === 2)checked="" @endif>
+                                               @if(isset($admin)) @if($admin->role === 2) @endif @else checked="" @endif>
                                         Moderaator
                                     </label>
                                 </div>
