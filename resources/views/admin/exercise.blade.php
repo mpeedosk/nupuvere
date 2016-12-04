@@ -59,7 +59,7 @@
                     <thead>
                     <tr>
                         <th data-field="id" data-sortable="true">ID</th>
-                        <th class="col-md-2" data-field="title" data-sortable="true">Peakiri</th>
+                        <th class="col-md-2" data-field="title" data-sortable="true">Pealkiri</th>
                         <th data-field="category" data-sortable="true">Kategooria</th>
                         <th data-field="age_group" data-sortable="true">Vanuserühm</th>
                         <th data-field="difficulty" data-sortable="true">Raskusaste</th>

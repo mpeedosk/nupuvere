@@ -31,10 +31,9 @@
                             <div id="username-form"
                                  class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
                                 <label for="username" class="col-md-4 control-label">Kasutajanimi</label>
-
                                 <div class="col-md-6">
                                     <input id="username" type="text" class="form-control" name="username"
-                                           value="{{old('username')}}" onBlur="checkAvailabilityUser()"
+                                           value="{{old('username')}}" onBlur="checkAvailabilityUser(-1)"
                                            required autofocus>
                                     <span id="username-error">
                                         @if ($errors->has('username'))
@@ -55,10 +54,10 @@
                                            value="{{old('first_name')}}" onBlur="validateField('first-name')"
                                            required>
                                     <span id="first-name-error">
-                                    @if ($errors->has('first_name'))
+                                        @if ($errors->has('first_name'))
                                             <span class="help-block help-error">
-                                        <strong>{{ $errors->first('first_name') }}</strong>
-                                    </span>
+                                                <strong>{{ $errors->first('first_name') }}</strong>
+                                            </span>
                                         @endif
                                     </span>
                                 </div>
@@ -76,7 +75,7 @@
                                     @if ($errors->has('last_name'))
                                             <span class="help-block help-error">
                                         <strong>{{ $errors->first('last_name') }}</strong>
-                                    </span>
+                                        </span>
                                         @endif
                                     </span>
                                 </div>
@@ -87,7 +86,7 @@
                                 <label for="email" class="col-md-4 control-label">Meiliaadress</label>
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email"
-                                           value="{{old('email')}}" onblur="checkAvailabilityEmail()"
+                                           value="{{old('email')}}" onblur="checkAvailabilityEmail(-1)"
                                            required>
                                     <span id="email-error">
                                     @if ($errors->has('email'))

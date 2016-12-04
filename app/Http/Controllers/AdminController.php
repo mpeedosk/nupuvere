@@ -83,7 +83,7 @@ class AdminController extends Controller
     public function create(Request $request)
     {
         $this->validate(request(), [
-            'username' => 'required|max:255',
+            'username' => 'required|max:255|unique:users',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|email|max:255|unique:users',

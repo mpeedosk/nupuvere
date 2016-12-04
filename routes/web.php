@@ -20,8 +20,8 @@ Route::get('/search', 'PagesController@index');
 Route::post('/search', 'PagesController@search');
 Route::get('/edetabel', 'PagesController@highscore');
 
-Route::post('/availability/username', 'UserController@checkAvailableUser');
-Route::post('/availability/email', 'UserController@checkAvailableEmail');
+Route::post('/availability/username/{id}', 'UserController@checkAvailableUser');
+Route::post('/availability/email/{id}', 'UserController@checkAvailableEmail');
 
 Route::group(['middleware' => 'admin'], function () {
 

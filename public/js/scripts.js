@@ -183,8 +183,10 @@ function submitAnswer(event, id, type) {
             var input = document.querySelector('input[name = "answer"]:checked');
             if (input != null)
                 answers.push(input.id);
-            else
+            else {
+                toastr.info('Te peate midagi valima!');
                 return;
+            }
             break;
         case 3 :
             var listElements = document.querySelectorAll('input[name = "answer"]:checked');
@@ -197,10 +199,6 @@ function submitAnswer(event, id, type) {
             for (var i = 0; i < listElements.length; i++) {
                 answers.push(listElements[i].id);
             }
-            /*
-             document.getElementById("draggable").id = "not-draggable";
-             */
-
             break;
     }
 
@@ -338,12 +336,12 @@ function reloadWiris() {
 
 
 /* registration */
-function checkAvailabilityUser() {
+function checkAvailabilityUser(id) {
     var username = $("#username").val();
     if (username.length > 0) {
         var form = document.getElementById('username-form');
         jQuery.ajax({
-            url: "/availability/username",
+            url: "/availability/username/"+id,
             data: {
                 _token: $('input[name="_token"]').val(),
                 username: username
@@ -370,14 +368,14 @@ function checkAvailabilityUser() {
 }
 
 
-function checkAvailabilityEmail() {
+function checkAvailabilityEmail(id) {
     var email = $("#email").val();
     var icon = document.getElementById('email-status');
     var form = document.getElementById('email-form');
 
     if (validateEmail(email)) {
         jQuery.ajax({
-            url: "/availability/email",
+            url: "/availability/email/"+id,
             data: {
                 _token: $('input[name="_token"]').val(),
                 email: email
@@ -445,16 +443,22 @@ function validatePasswordMatching() {
     var errorBlock = document.getElementById('password-confirm-error');
     var icon = document.getElementById('password-confirm-status');
     form.className = "form-group has-error";
+    var pw1 = $("#password-confirm").val();
 
-    if ($("#password").val() == $("#password-confirm").val()) {
-        form.className = "form-group has-success";
-        icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
-        errorBlock.innerHTML = ""
+    if (pw1.length >= 6) {
+        if ($("#password").val() == pw1) {
+            form.className = "form-group has-success";
+            icon.innerHTML = "<span class='glyphicon glyphicon-ok' style='margin-top: 15px'></span>";
+            errorBlock.innerHTML = ""
+        } else {
+            form.className = "form-group has-error";
+            icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
+            errorBlock.innerHTML = '<span class="help-block has-error help-error"><strong>Salasõnad ei klapi</strong></span>';
+        }
     } else {
         form.className = "form-group has-error";
         icon.innerHTML = "<span class='glyphicon glyphicon-remove' style='margin-top: 15px'></span>";
-        errorBlock.innerHTML = '<span class="help-block has-error help-error"><strong>Salasõnad ei klapi</strong></span>';
+        errorBlock.innerHTML = '<span class="help-block help-error"><strong>Salasõna peab olema vähemalt 6 tähemärki</strong></span>';
     }
-
 }
 
