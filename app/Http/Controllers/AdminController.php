@@ -34,7 +34,7 @@ class AdminController extends Controller
     public function home()
     {
         $page = Page::first();
-        if ($page == null){
+        if ($page == null) {
             $page = new Page;
             $page->content = "";
 
@@ -45,7 +45,7 @@ class AdminController extends Controller
     public function admins()
     {
 
-        $admins =DB::table('users')->where('role','>',1)->get();
+        $admins = DB::table('users')->where('role', '>', 1)->get();
         return view('admin.admins', ['admins' => $admins]);
     }
 
@@ -93,7 +93,7 @@ class AdminController extends Controller
         $role = 0;
         if ($request->role === "mod")
             $role = 2;
-        else if($request->role === "admin")
+        else if ($request->role === "admin")
             $role = 3;
         else
             abort(501);
@@ -108,12 +108,13 @@ class AdminController extends Controller
             'points' => 0
         ]);
 
-        Session::flash('toast', 'Kasutaja '. $request->username . " edukalt loodud!");
+        Session::flash('toast', 'Kasutaja ' . $request->username . " edukalt loodud!");
 
         return redirect('/admin/admins');
     }
 
-    public function getAdminForEdit($a_id){
+    public function getAdminForEdit($a_id)
+    {
         $admin = User::find($a_id);
         return view('admin.auth.register', ['admin' => $admin]);
     }
@@ -161,19 +162,20 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'username' => 'required|max:255|unique:users,username,'.$id,
+            'username' => 'required|max:255|unique:users,username,' . $id,
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|email|max:255|unique:users,email,'.$id,
-            'password' => 'required|min:6|confirmed',
+            'email' => 'required|email|max:255|unique:users,email,' . $id,
+            'password' => 'min:6|confirmed',
         ]);
+
 
         $role = 0;
         if ($request->role === "normal")
             $role = 1;
         else if ($request->role === "mod")
             $role = 2;
-        else if($request->role === "admin")
+        else if ($request->role === "admin")
             $role = 3;
         else
             abort(501);
@@ -181,13 +183,14 @@ class AdminController extends Controller
         $user = User::find($id);
         $user->username = $request->username;
         $user->email = $request->email;
-        $user->password = bcrypt($request->password);
+        if (isset($request->password) && $request->password != "")
+            $user->password = bcrypt($request->password);
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->role = $role;
         $user->save();
 
-        Session::flash('toast', 'Kasutaja '. $request->username . " edukalt uuendatud!");
+        Session::flash('toast', 'Kasutaja ' . $request->username . " edukalt uuendatud!");
 
         return redirect()->back();
 
@@ -195,9 +198,9 @@ class AdminController extends Controller
 
     public function destroyRegular($id)
     {
-        if (intval($id) === Auth::user()->id){
+        if (intval($id) === Auth::user()->id) {
             Session::flash('error', 'Iseennast ei saa kustutada');
-            return($id);
+            return ($id);
             abort(420);
         }
         DB::table('users')->where('id', $id)->delete();
@@ -216,19 +219,19 @@ class AdminController extends Controller
     public function destroy($id)
     {
 
-        if (intval($id) === Auth::user()->id){
+        if (intval($id) === Auth::user()->id) {
             Session::flash('error', 'Iseennast ei saa kustutada');
             abort(420);
         }
 
-        if(Auth::user()->role === User::SUPERADMIN){
+        if (Auth::user()->role === User::SUPERADMIN) {
             DB::table('users')->where('id', $id)->delete();
-        }else if(Auth::user()->role === User::ADMIN){
-            if(User::find($id)->role === 1)
+        } else if (Auth::user()->role === User::ADMIN) {
+            if (User::find($id)->role === 1)
                 DB::table('users')->where('id', $id)->delete();
             else
                 abort(403);
-        }else{
+        } else {
             abort(403);
         }
 
@@ -240,7 +243,7 @@ class AdminController extends Controller
     public function updateContact(Request $request)
     {
         $page = Page::first();
-        if ($page == null){
+        if ($page == null) {
             $page = new Page;
         }
         $page->content = $request->contact;
@@ -249,6 +252,7 @@ class AdminController extends Controller
 
         return redirect()->back();
     }
+
     /**
      * Update the gallery resources in storage.
      *
@@ -271,7 +275,7 @@ class AdminController extends Controller
             if ($file != null) {
 
                 $ext = $file->guessClientExtension();
-                if (!in_array($ext, $valid_exts)){
+                if (!in_array($ext, $valid_exts)) {
                     Session::flash('wrong-ext', 'Viga! Lubatud pildi formaadid on jpeg, jpg, png ja gif');
                     return redirect()->back();
 
@@ -289,10 +293,11 @@ class AdminController extends Controller
     }
 
 
-    public function highscore(){
+    public function highscore()
+    {
 
         $all_time = DB::table('users')
-            ->where([['role', 1],['points', '>', 0]])
+            ->where([['role', 1], ['points', '>', 0]])
             ->orderBy('points', 'desc')
             ->take(100)
             ->get();
@@ -307,7 +312,8 @@ class AdminController extends Controller
 
     }
 
-    public function reset(){
+    public function reset()
+    {
 
         DB::table('users')->update(['points_this_year' => 0]);
 
@@ -335,7 +341,8 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function upload(Request $request){
+    public function upload(Request $request)
+    {
 
         $valid_exts = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
         $full_filename = NULL;
@@ -343,7 +350,7 @@ class AdminController extends Controller
         $file = $request->file('image');
         $filename = str_random(20);
 
-        $path =  'img/ex_images/';
+        $path = 'img/ex_images/';
         $full_path = $path . $filename . '.' . $file->getClientOriginalExtension();
 
         $ext = $file->guessClientExtension();
@@ -351,24 +358,21 @@ class AdminController extends Controller
         $resize_width = 1800;
         $resize_height = null;
 
-        if (in_array($ext, $valid_exts))
-        {
-            $image = Image::make($file)->resize($resize_width, $resize_height, function($constraint){
+        if (in_array($ext, $valid_exts)) {
+            $image = Image::make($file)->resize($resize_width, $resize_height, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->encode($file->getClientOriginalExtension(), 75);
 
             // move uploaded file from temp to uploads directory
-            try{
+            try {
                 $image->save($full_path);
                 $status = 'Image successfully uploaded!';
                 $full_filename = $full_path;
-            }
-            catch (Exception $e){
+            } catch (Exception $e) {
                 $status = 'Upload Fail: Unknown error occurred!';
             }
-        }
-        else {
+        } else {
 
             $status = 'Upload Fail: Unsupported file format or It is too large to upload!';
         }

@@ -85,7 +85,8 @@
                         <div id="password-form" class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-2 control-label">Salasõna</label>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required onblur="validateField('password')">
+                                <input id="password" type="password" class="form-control" name="password"
+                                       @if(!isset($admin)) required @endif onblur="validateField('password')">
                                 <span id="password-error">
                                     @if ($errors->has('password'))
                                         <span class="help-block help-error">
@@ -100,7 +101,7 @@
                             <label for="password-confirm" class="col-md-2 control-label">Kinnita Salasõna</label>
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control"
-                                       name="password_confirmation" required onblur="validatePasswordMatching()">
+                                       name="password_confirmation" @if(!isset($admin)) required @endif onblur="validatePasswordMatching()">
                                 <span id="password-confirm-error">
                                     @if ($errors->has('password_confirmation'))
                                         <span class="help-block help-error">
