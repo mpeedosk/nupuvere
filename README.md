@@ -48,6 +48,7 @@ Follow these steps, if you have an existing copy locally
 6. Populate the database `php artisan migrate:refresh --seed`
 7. Launch the website `php artisan serve`
 8. Open in your browser `http://localhost:8000`
+9. Press ctr + f5 to clear cache
 
 ###
 * You can log in with the username `user` and password `parool`
