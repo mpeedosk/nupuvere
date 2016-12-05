@@ -114,6 +114,7 @@ h4 {
 .sidebar-logo {
     max-width: 240px;
     height: 64px;
+    min-height: 64px;
     line-height: 1;
     display: -ms-flexbox;
     display: flex;
@@ -121,7 +122,7 @@ h4 {
     justify-content: center;
     -ms-flex-align: center;
     align-items: center;
-    background-color: #5e70d4;
+    background-color: #eeeeee;
     overflow: hidden;
 }
 .sidebar-logo img{
