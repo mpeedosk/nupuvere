@@ -63,7 +63,7 @@
                                                spellcheck=false maxlength="7"/>
                                     </div>
                                 </td>
-                                <td><input type="number" min="1" max="{{$count}}"
+                                <td><input type="number" min="1" max="{{2*$count}}"
                                            value="{{$category->order}}" name="{{$category->name}}"></td>
                                 <td class="text-center">
                                     <button class="btn btn-danger btn-raised btn-sm" type="button"
