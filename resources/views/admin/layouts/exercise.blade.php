@@ -225,7 +225,7 @@
                 selector: 'textarea',
                 language: 'et',
                 theme: 'modern',
-                plugins: 'advlist lists, autolink, link, contextmenu, tabfocus, image, code, youtube, print, paste, searchreplace, imagetools, charmap, textcolor colorpicker, hr, table, autoresize, tiny_mce_wiris',
+                plugins: 'advlist lists autolink link contextmenu tabfocus image imagetools code youtube print paste searchreplace charmap textcolor colorpicker hr table autoresize tiny_mce_wiris',
                 contextmenu: "cut copy paste | link image | subscript superscript",
                 menubar: false,
                 relative_urls: false,
@@ -236,7 +236,7 @@
                     }
                 },
                 toolbar1: 'styleselect  fontselect fontsizeselect | bold italic forecolor | bullist numlist indent outdent | ' +
-                'link image editimage youtube | superscript subscript tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry charmap ' +
+                'link image youtube | superscript subscript tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry charmap ' +
                 '| table hr pastetext searchreplace removeformat | print code | preview',
                 image_caption: true,
                 image_advtab: true,
