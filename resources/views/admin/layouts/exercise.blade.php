@@ -225,7 +225,7 @@
                 selector: 'textarea',
                 language: 'et',
                 theme: 'modern',
-                plugins: 'advlist lists autolink link contextmenu tabfocus image imagetools code youtube print paste searchreplace charmap textcolor colorpicker hr table autoresize tiny_mce_wiris',
+                plugins: 'advlist anchor lists autolink link image imagetools contextmenu tabfocus  code youtube print paste searchreplace charmap textcolor colorpicker hr table autoresize tiny_mce_wiris',
                 contextmenu: "cut copy paste | link image | subscript superscript",
                 menubar: false,
                 relative_urls: false,
@@ -240,6 +240,7 @@
                 '| table hr pastetext searchreplace removeformat | print code | preview',
                 image_caption: true,
                 image_advtab: true,
+                automatic_uploads: true,
                 content_css: '/css/main.css,https://fonts.googleapis.com/css?family=Roboto',
                 wirisformulaeditorlang: 'et',
                 font_formats: 'Andale Mono=andale mono,times;' +

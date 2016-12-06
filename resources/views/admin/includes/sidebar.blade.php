@@ -23,7 +23,7 @@
         </a>
 
         <a href="/admin/exercise" class="sidebar-item withripple
-            @if(Route::getCurrentRoute()->getPath() == 'admin/exercise') sidebar-item-active @endif">
+            @if(substr(Route::getCurrentRoute()->getPath(),0,14) == 'admin/exercise') sidebar-item-active @endif">
             <span class="fa fa-fw fa-list-alt"></span> Ülesanded
         </a>
 
@@ -35,7 +35,7 @@
 
         @if(Auth::user()->isSuperAdmin())
             <a href="/admin/admins" class="sidebar-item withripple
-            @if(Route::getCurrentRoute()->getPath() == 'admin/admins') sidebar-item-active @endif">
+            @if(substr(Route::getCurrentRoute()->getPath(),0,12) === 'admin/admins') sidebar-item-active @endif">
                 <span class="fa fa-fw fa-users"></span> Administraatorid
             </a>
         @endif
