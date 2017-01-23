@@ -1,4 +1,4 @@
-##Prerequisites
+## Prerequisites
 
 - [MySQL] (http://dev.mysql.com/downloads/file/?id=466291)
 Click the "No thanks, just start my download." link. Install MySQL with the developer default settings.
