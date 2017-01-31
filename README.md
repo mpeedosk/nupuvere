@@ -1,3 +1,10 @@
+##Live Demo
+https://nupuvere-test.herokuapp.com/
+
+###
+* You can log in with the username `user` and password `parool`
+* You can log in as admin with the username `admin` and password `parool`
+
 ## Prerequisites
 
 - [MySQL] (http://dev.mysql.com/downloads/file/?id=466291)
@@ -49,10 +56,6 @@ Follow these steps, if you have an existing copy locally
 7. Launch the website `php artisan serve`
 8. Open in your browser `http://localhost:8000`
 9. Press ctr + f5 to clear cache
-
-###
-* You can log in with the username `user` and password `parool`
-* You can log in as admin with the username `admin` and password `parool`
  
 ## Testing
 * Test can be run with the command `phpunit`
@@ -68,5 +71,4 @@ See LICENSE for details.
 - Martin Peedosk
 - Helbe-Laura Nikitkina
 
-##Live Demo
-https://nupuvere-test.herokuapp.com/
+
